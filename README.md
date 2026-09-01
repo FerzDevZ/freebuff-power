@@ -43,7 +43,7 @@
 ### Opsi 1: One-Line Installer (Linux & macOS)
 
 ```bash
-git clone https://github.com/firman/freebuff-power.git ~/.freebuff-power-repo
+curl -fsSL https://raw.githubusercontent.com/FerzDevZ/freebuff-power/main/install.sh | bash
 cd ~/.freebuff-power-repo && ./install.sh
 ```
 
