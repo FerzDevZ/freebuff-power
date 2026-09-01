@@ -276,8 +276,22 @@ function compose_prompt() {
   fi
 
   # Deduplicate arrays
-  local unique_agents=($(echo "${agents[@]}" | tr ' ' '\n' | sort -u | tr '\n' ' '))
-  local unique_skills=($(echo "${skills[@]}" | tr ' ' '\n' | sort -u | tr '\n' ' '))
+  local -A seen_agents seen_skills
+  local unique_agents=()
+  for a in "${agents[@]}"; do
+    if [[ -z "${seen_agents[$a]:-}" ]]; then
+      seen_agents[$a]=1
+      unique_agents+=("$a")
+    fi
+  done
+
+  local unique_skills=()
+  for s in "${skills[@]}"; do
+    if [[ -z "${seen_skills[$s]:-}" ]]; then
+      seen_skills[$s]=1
+      unique_skills+=("$s")
+    fi
+  done
 
   echo -e "${C_GREEN}${C_BOLD}👥 Recommended Sub-Agents:${C_RESET} ${unique_agents[*]}"
   echo -e "${C_PURPLE}${C_BOLD}🧰 Recommended Skills    :${C_RESET} ${unique_skills[*]}"
