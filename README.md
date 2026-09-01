@@ -5,9 +5,9 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Sub-Agents: 29](https://img.shields.io/badge/Sub--Agents-29%20Elite-blueviolet.svg)](#-specialized-sub-agents-roster)
-[![Modular Skills: 1025](https://img.shields.io/badge/Modular%20Skills-1025%20Clean-emerald.svg)](#-modular-skills-catalog)
-[![Anti-Ban: Active](https://img.shields.io/badge/Anti--Ban%20Shield-Active%20v3.6-brightgreen.svg)](#-enterprise-anti-ban--anti-suspend-shield)
-[![Platform: Linux & macOS](https://img.shields.io/badge/Platform-Linux%20%7C%20macOS-informational.svg)](#-quick-installation)
+[![Modular Skills: 1,025](https://img.shields.io/badge/Modular%20Skills-1%2C025%20Clean-emerald.svg)](#-modular-skills-catalog)
+[![Anti-Ban: Active](https://img.shields.io/badge/Anti--Ban%20Shield-Active%20v3.7-brightgreen.svg)](#-enterprise-anti-ban--anti-suspend-shield)
+[![Platform: Linux & macOS](https://img.shields.io/badge/Platform-Linux%20%7C%20macOS-informational.svg)](#-quick-installation-1-line-installer)
 
 ```
   ______ _____  ______ ______ ____  _    _ ______ ______   _____   ______          ________ _____  
@@ -18,45 +18,45 @@
  |_|    |_|  \_\______|______|____/ \____/|_|    |_|      |_|     \____/   \/  \/   |______|_|  \_\
 ```
 
-**Freebuff-Power** transforms Freebuff from a single chatbot into an autonomous **29-Agent Engineering Swarm** armed with **1025 Modular Skills**, zero-bloat on-demand loading, and enterprise-grade anti-ban safety.
+**Freebuff-Power** transforms Freebuff from a single chatbot into an autonomous **29-Agent Engineering Swarm** armed with **1,025 Modular Skills**, zero-bloat on-demand loading, and enterprise-grade anti-ban safety.
 
-[Fitur Utama](#-fitur-utama) • [Instalasi](#-quick-installation) • [Panduan CLI](#-cli-command-palette) • [Roster Sub-Agents](#-specialized-sub-agents-roster) • [Katalog Skills](#-modular-skills-catalog)
+[Instalasi 1 Baris](#-quick-installation-1-line-installer) • [Fitur Utama](#-fitur-utama) • [Panduan CLI](#-cli-command-palette) • [Roster Sub-Agents](#-specialized-sub-agents-roster) • [Katalog Skills](#-modular-skills-catalog)
 
 </div>
+
+---
+
+## ⚡ Quick Installation (1-Line Universal Installer)
+
+Cukup salin dan jalankan **satu baris perintah** ini di terminal Linux atau macOS kamu:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/FerzDevZ/freebuff-power/main/install.sh | bash
+```
+
+*(Atau jika menggunakan Wget)*:
+```bash
+wget -qO- https://raw.githubusercontent.com/FerzDevZ/freebuff-power/main/install.sh | bash
+```
+
+> 💡 **Apa yang dilakukan installer ini secara otomatis?**
+> 1. Mengunduh seluruh pustaka **29 Sub-Agents** dan **1,025 Modular Skills**.
+> 2. Memasang executable CLI `freebuff-power` ke `~/.local/bin/` dan mengonfigurasi `$PATH`.
+> 3. Menyiapkan master template di `~/.freebuff-superpower/`.
+> 4. Selesai dalam 2 detik tanpa perlu clone atau `cd` manual!
 
 ---
 
 ## 🌟 Fitur Utama
 
 - 👥 **29 Specialized Sub-Agents**: Persona ahli dari `@architect`, `@programmer`, `@design-engineer`, `@backend`, `@database`, `@tddmaster`, `@security`, hingga `@sre`.
-- 🧰 **1025 Modular Engineering Skills**: Pustaka lengkap mencakup arsitektur bersih, Next.js 15, FastAPI, Go concurrency, Rust, PostgreSQL internals, Playwright E2E, OWASP security, hingga WebGL.
+- 🧰 **1,025 Modular Engineering Skills**: Pustaka lengkap mencakup arsitektur bersih, Next.js 15, FastAPI, Go concurrency, Rust, PostgreSQL internals, Playwright E2E, OWASP security, hingga WebGL.
 - 🛡️ **Enterprise Anti-Ban & Anti-Suspend Shield**: Sanitasi identitas virtual dinamis (`anon_<uuid_v4>`), reset residual lockfiles, dan proteksi telemetry otomatis.
 - ⚡ **Tiered On-Demand Loading**: `AGENTS.md` bertindak sebagai Master Index tipis & cepat; detail modul dibaca on-demand sehingga **bebas dari payload 413 / context blowout**.
 - 🔄 **Self-Healing Auto-Verify Loop**: Otomatis menjalankan compiler/test checks dan memperbaiki regresi secara otonom tanpa intervensi manual.
 - 🧠 **Persistent Project Memory**: Sinkronisasi otomatis file `MEMORY.md` untuk menjaga keputusan arsitektur dan status tugas antar sesi.
 - 💬 **Session & Chat Switcher**: Pindah dan lanjutkan percakapan coding kapan saja dengan `freebuff-power continue` atau `freebuff-power session resume`.
-
----
-
-## 🚀 Quick Installation
-
-### Opsi 1: One-Line Installer (Linux & macOS)
-
-```bash
-curl -fsSL https://raw.githubusercontent.com/FerzDevZ/freebuff-power/main/install.sh | bash
-cd ~/.freebuff-power-repo && ./install.sh
-```
-
-### Opsi 2: Manual Link
-
-```bash
-git clone https://github.com/firman/freebuff-power.git
-cd freebuff-power
-mkdir -p ~/.local/bin ~/.freebuff-superpower
-cp bin/freebuff-power ~/.local/bin/
-cp -rf superpower/* ~/.freebuff-superpower/
-chmod +x ~/.local/bin/freebuff-power
-```
+- 🪄 **Prompt Composer**: Menganalisis kebutuhan tugas dan merekomendasikan kombo sub-agent & skill terbaik via `freebuff-power compose`.
 
 ---
 
@@ -64,7 +64,7 @@ chmod +x ~/.local/bin/freebuff-power
 
 ```text
 ========================================================================================
-⚡ FREEBUFF-POWER — Supreme Multi-Agent, Skills & Anti-Ban Controller
+⚡ FREEBUFF-POWER — Supreme Multi-Agent, Skills & Anti-Ban Controller (v3.7)
 ========================================================================================
 
 🔥 PERINTAH UTAMA:
@@ -73,19 +73,20 @@ chmod +x ~/.local/bin/freebuff-power
   freebuff-power init [dir]        Injeksi AGENTS.md & .freebuff/ ke folder tanpa membuka sesi
   freebuff-power run               Jalankan sesi Freebuff dengan Anti-Ban aktif
 
-💬 MANAJEMEN SESI & CHAT:
+💬 MANAJEMEN SESI & PROMPT COMPOSER:
+  freebuff-power compose <task>    Analisis & buatkan prompt kombo agent + skill terbaik
   freebuff-power continue          Lanjutkan sesi percakapan/coding terakhir
-  freebuff-power session list      Daftar histori proyek dan sesi chat sebelumnya
-  freebuff-power session resume    Lanjutkan sesi spesifik berdasarkan ID
+  freebuff-power session list      Daftar histori proyek dan riwayat sesi chat
 
-🛡️ PEMELIHARAAN & ANTI-BAN:
+🛡️ PEMELIHARAAN, UPDATE & ANTI-BAN:
   freebuff-power clean             Reset UUID telemetry & residual lock (Anti-Ban Fresh)
-  freebuff-power doctor            Pemeriksaan kesehatan sistem (template & permissions)
+  freebuff-power doctor            Pemeriksaan kesehatan sistem (integritas template)
+  freebuff-power update            Update pustaka Skills & Agents ke versi rilis terbaru
 
-🔍 EKSPLORASI:
+🔍 EKSPLORASI & PANDUAN:
   freebuff-power search <keyword>  Cari Sub-Agent atau Modular Skills
   freebuff-power info <name>       Lihat SOP & dokumentasi lengkap Agent atau Skill
-  freebuff-power list              Daftar seluruh 29 Sub-Agents & 8 Kategori Skills
+  freebuff-power list              Daftar seluruh 29 Sub-Agents & 1,025 Skills
 ========================================================================================
 ```
 
@@ -116,21 +117,21 @@ chmod +x ~/.local/bin/freebuff-power
 | `@refactor-expert` | Legacy code modernization, clean architecture, zero behavioral regressions |
 | `@seo-growth` | Programmatic SEO (pSEO), Schema JSON-LD, Core Web Vitals (INP/LCP) |
 
-*(Dan 9 sub-agent spesialis lainnya di `superpower/agents/`)*
+*(Serta 9 sub-agent spesialis lainnya di `superpower/agents/`)*
 
 ---
 
-## 🧰 Modular Skills Catalog (1025 Skills)
+## 🧰 Modular Skills Catalog (1,025 Skills)
 
 Skills dikelompokkan ke dalam 8 pilar rekayasa perangkat lunak:
-1. **Architecture & Design (35+ skills)**: Clean Architecture, CQRS, Event Sourcing, Domain-Driven Design, API Design (REST/gRPC/GraphQL).
-2. **Backend Polyglot (50+ skills)**: FastAPI, NestJS, Go Concurrency & Channels, Rust Tokio/Axum, Spring Boot, Deno 2.0, Bun runtime.
-3. **Frontend & Mobile (60+ skills)**: Next.js 15, React 19, Vue/Nuxt 3, Tailwind Fluid Typography, Bento Grid, Radix UI, Framer Motion, SwiftUI, Jetpack Compose.
-4. **Database & OLAP (30+ skills)**: PostgreSQL Internals & Indexing, ClickHouse, DuckDB, Redis Streams, MongoDB, SQLite Edge WAL.
-5. **Testing & QA (40+ skills)**: Vitest TDD, Playwright E2E & Visual Regression, k6 Load & Soak Testing, Stryker Mutation Testing, Pact.
-6. **Security & AppSec (45+ skills)**: OWASP Top 10, Authflow PKCE, Passkeys WebAuthn, Prompt Injection Guardrails, SBOM Provenance.
-7. **AI & Machine Learning (40+ skills)**: RAG Pipelines, Vector DB (pgvector/Qdrant), LLM Evals, vLLM / Ollama Local Deploy, AI Observability.
-8. **Anti-Slop & Performance (55+ skills)**: Anti-Waffle Writing, Anti-Slop AI, Cognitive Load Minimizer, Core Web Vitals (INP/LCP), DevTools Heap Profiler.
+1. **Architecture & Design (110+ skills)**: Clean Architecture, CQRS, Event Sourcing, Domain-Driven Design, API Design (REST/gRPC/GraphQL).
+2. **Backend Polyglot (180+ skills)**: FastAPI, NestJS, Go Concurrency & Channels, Rust Tokio/Axum, Spring Boot, Deno 2.0, Bun runtime.
+3. **Frontend & Mobile (220+ skills)**: Next.js 15, React 19, Vue/Nuxt 3, Tailwind Fluid Typography, Bento Grid, Radix UI, Framer Motion, SwiftUI, Jetpack Compose.
+4. **Database & OLAP (120+ skills)**: PostgreSQL Internals & Indexing, ClickHouse, DuckDB, Redis Streams, MongoDB, SQLite Edge WAL.
+5. **Testing & QA (130+ skills)**: Vitest TDD, Playwright E2E & Visual Regression, k6 Load & Soak Testing, Stryker Mutation Testing, Pact.
+6. **Security & AppSec (115+ skills)**: OWASP Top 10, Authflow PKCE, Passkeys WebAuthn, Prompt Injection Guardrails, SBOM Provenance.
+7. **AI & Machine Learning (90+ skills)**: RAG Pipelines, Vector DB (pgvector/Qdrant), LLM Evals, vLLM / Ollama Local Deploy, AI Observability.
+8. **Anti-Slop & Performance (60+ skills)**: Anti-Waffle Writing, Anti-Slop AI, Cognitive Load Minimizer, Core Web Vitals (INP/LCP), DevTools Heap Profiler.
 
 ---
 

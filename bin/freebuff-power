@@ -1,14 +1,9 @@
 #!/usr/bin/env bash
 # ==============================================================================
-# ⚡ FREEBUFF-POWER — SUPREME MULTI-AGENT, SKILLS & ANTI-BAN CLI CONTROLLER
-# ==============================================================================
-# Author: Freebuff Superpower Open-Source Community
-# Version: 3.6.0-Enterprise
-# License: MIT
+# ⚡ FREEBUFF-POWER SUPREME — ULTRA MULTI-AGENT, SKILLS & ANTI-BAN SUITE (v3.7)
 # ==============================================================================
 set -euo pipefail
 
-# Determine script root directory for self-contained execution
 SOURCE="${BASH_SOURCE[0]}"
 while [ -h "$SOURCE" ]; do
   DIR="$( cd -P "$( dirname "$SOURCE" )" >/dev/null 2>&1 && pwd )"
@@ -18,9 +13,6 @@ done
 SCRIPT_DIR="$( cd -P "$( dirname "$SOURCE" )" >/dev/null 2>&1 && pwd )"
 REPO_ROOT="$(dirname "$SCRIPT_DIR")"
 
-# Priority for template directory:
-# 1. Bundled repo directory (`superpower/`)
-# 2. User home directory (`~/.freebuff-superpower/`)
 if [ -d "$REPO_ROOT/superpower/agents" ]; then
   TEMPLATE_DIR="$REPO_ROOT/superpower"
 else
@@ -30,8 +22,8 @@ fi
 MANICODE_DIR="$HOME/.config/manicode"
 ANALYTICS_FILE="$MANICODE_DIR/analytics-id.json"
 OWNER_FILE="$MANICODE_DIR/freebuff-instance-owner.json"
-HISTORY_FILE="$MANICODE_DIR/message-history.json"
 PROJECTS_DIR="$MANICODE_DIR/projects"
+REPO_URL="https://github.com/FerzDevZ/freebuff-power.git"
 
 # ANSI Colors
 C_CYAN='\033[0;36m'
@@ -47,67 +39,50 @@ C_RESET='\033[0m'
 function show_help() {
   cat << 'HELP_EOF'
 ========================================================================================
-⚡ FREEBUFF-POWER — Supreme Multi-Agent, Skills & Anti-Ban Controller (v3.6)
+⚡ FREEBUFF-POWER SUPREME — Ultra Multi-Agent, Skills & Anti-Ban Suite (v3.7)
 ========================================================================================
-
-DESKRIPSI:
-  Tools manajemen open-source untuk menyuntikkan 29 Sub-Agents & 363 Modular Skills
-  ke dalam sesi Freebuff, dilengkapi perisai Anti-Ban, session/chat switcher,
-  dan otomatisasi workflow engineering end-to-end.
 
 PENGGUNAAN:
   freebuff-power <command> [arguments] [options]
 
 🔥 PERINTAH UTAMA:
-  start / go / full     [SANGAT DIREKOMENDASIKAN] One-Shot All-in-One:
-                        Reset Telemetry (Anti-Ban) + Injeksi 29 Agents & 363 Skills
+  start / go / full     [REKOMENDASI] One-Shot All-in-One:
+                        Reset Telemetry (Anti-Ban) + Injeksi 29 Agents & 1,025 Skills
                         + Langsung buka sesi interaktif Freebuff siap koding!
 
-  spawn <agent> [task]  Luncurkan Freebuff langsung dengan fokus persona sub-agent
+  spawn <agent> [task]  Luncurkan Freebuff dengan persona sub-agent spesifik
                         (Contoh: freebuff-power spawn architect "Rancang API warkop")
 
   init [dir]            Injeksi file AGENTS.md dan katalog .freebuff/ ke folder aktif
-                        atau direktori target tanpa membuka Freebuff.
 
   run [args]            Jalankan sesi Freebuff biasa dengan proteksi Anti-Ban aktif.
 
-💬 MANAJEMEN SESI & CHAT:
+💬 MANAJEMEN SESI & PROMPT COMPOSER:
   continue / resume     Lanjutkan sesi percakapan/coding terakhir tanpa kehilangan konteks.
-  session list          Tampilkan daftar histori sesi dan project chat sebelumnya.
-  session resume <id>   Lanjutkan sesi percakapan tertentu berdasarkan ID sesi.
+  session list          Tampilkan daftar histori proyek dan riwayat sesi chat.
+  compose <task>        Rekomendasikan kombinasi Agent & Skill terbaik untuk tugasmu.
 
-🛡️ PERINTAH ANTI-BAN & PEMELIHARAAN:
-  clean                 Reset total anonymous UUID telemetry, hapus residual lockfile,
-                        dan buat profil identitas virtual baru (100% Anti-Ban safe).
+🛡️ ANTI-BAN, UPDATE & PEMELIHARAAN:
+  clean                 Reset total anonymous UUID telemetry & lockfile (100% Anti-Ban).
+  doctor                Pemeriksaan kesehatan sistem (integritas 1,025 skills, permissions).
+  update                Perbarui pustaka Skills & Agents ke versi rilis terbaru dari GitHub.
 
-  doctor                Pemeriksaan kesehatan sistem (integritas template, telemetry,
-                        permissions, dan kesiapan direktori).
-
-🔍 PERINTAH EKSPLORASI & DISCOVERY:
-  search <keyword>      Cari Sub-Agent atau Modular Skills berdasarkan kata kunci
-                        (Contoh: freebuff-power search postgres)
-
-  info <name>           Buka dan baca dokumentasi lengkap / SOP dari Agent atau Skill
-                        (Contoh: freebuff-power info hallmark)
-
-  list                  Tampilkan rekapitulasi seluruh 29 Sub-Agents & 8 Kategori Skills.
-
+🔍 EKSPLORASI & PANDUAN:
+  search <keyword>      Cari Sub-Agent atau Modular Skills berdasarkan kata kunci.
+  info <name>           Buka dan baca SOP / instruksi lengkap dari Agent atau Skill.
+  list                  Tampilkan rekapitulasi 29 Sub-Agents & 1,025 Modular Skills.
   help / --help / -h    Tampilkan panduan bantuan ini.
 
 ----------------------------------------------------------------------------------------
-💡 CONTOH PENGGUNAAN NYATA:
-  $ freebuff-power start                             # Mulai koding instan di folder aktif
-  $ freebuff-power spawn frontend "Buat UI warkop"   # Spawn spesifik frontend agent
-  $ freebuff-power continue                          # Lanjutkan sesi coding sebelumnya
-  $ freebuff-power search hallmark                   # Cari skill anti-slop
-  $ freebuff-power info clean-architecture           # Baca SOP Clean Architecture
+💡 CONTOH CEPAT:
+  $ freebuff-power start                             # Mulai koding instan 1 detik
+  $ freebuff-power compose "Bikin web e-commerce"    # Cari combo agen & skill terbaik
+  $ freebuff-power spawn frontend "Buat UI modern"   # Spawn langsung spesifik agen
+  $ freebuff-power update                            # Update skill & agent terbaru
 ========================================================================================
 HELP_EOF
 }
 
-# ==============================================================================
-# 🛡️ ANTI-BAN & ANTI-SUSPEND SHIELD
-# ==============================================================================
 function apply_anti_ban_shield() {
   mkdir -p "$MANICODE_DIR"
   local new_uuid
@@ -122,9 +97,6 @@ function apply_anti_ban_shield() {
   chmod 600 "$ANALYTICS_FILE" 2>/dev/null || true
 }
 
-# ==============================================================================
-# 🚀 INJECTION & WORKSPACE SYNC
-# ==============================================================================
 function inject_superpower() {
   local target_dir="${1:-$(pwd)}"
   
@@ -139,68 +111,10 @@ function inject_superpower() {
   cp -rf "$TEMPLATE_DIR/skills/"* "$target_dir/.freebuff/skills/"
 }
 
-# ==============================================================================
-# 💬 SESSION & CHAT MANAGER
-# ==============================================================================
-function manage_sessions() {
-  local subcmd="${1:-list}"
-  shift || true
-
-  case "$subcmd" in
-    list)
-      echo -e "${C_CYAN}${C_BOLD}========================================================================${C_RESET}"
-      echo -e "${C_YELLOW}${C_BOLD}📋 [FREEBUFF-POWER] DAFTAR SESI & RIWAYAT CHAT PROYEK${C_RESET}"
-      echo -e "${C_CYAN}${C_BOLD}========================================================================${C_RESET}\n"
-      
-      if [ -d "$PROJECTS_DIR" ]; then
-        echo -e "${C_GREEN}${C_BOLD}📁 Proyek yang Tersedia:${C_RESET}"
-        for p in "$PROJECTS_DIR"/*; do
-          if [ -d "$p" ]; then
-            local pname
-            pname="$(basename "$p")"
-            local chat_count
-            chat_count=$(find "$p/chats" -mindepth 1 -maxdepth 1 -type d 2>/dev/null | wc -l || echo "0")
-            echo -e "  - ${C_BOLD}$pname${C_RESET} ${C_DIM}($chat_count riwayat sesi chat)${C_RESET}"
-          fi
-        done
-        echo ""
-      else
-        echo -e "${C_DIM}Belum ada riwayat proyek.${C_RESET}\n"
-      fi
-
-      echo -e "${C_CYAN}👉 Untuk melanjutkan sesi terakhir: ${C_BOLD}freebuff-power continue${C_RESET}"
-      echo -e "${C_CYAN}👉 Untuk melanjutkan ID sesi tertentu: ${C_BOLD}freebuff-power session resume <id>${C_RESET}\n"
-      ;;
-
-    resume|continue)
-      local session_id="${1:-}"
-      apply_anti_ban_shield
-      if [ -z "$session_id" ]; then
-        echo -e "${C_GREEN}🚀 Melanjutkan sesi Freebuff percakapan sebelumnya...${C_RESET}"
-        export NODE_NO_WARNINGS=1
-        exec freebuff --continue
-      else
-        echo -e "${C_GREEN}🚀 Melanjutkan sesi Freebuff [ID: $session_id]...${C_RESET}"
-        export NODE_NO_WARNINGS=1
-        exec freebuff --continue "$session_id"
-      fi
-      ;;
-
-    *)
-      echo -e "${C_RED}Perintah session tidak dikenal: $subcmd${C_RESET}"
-      echo -e "Pilihan: freebuff-power session list | freebuff-power session resume [id]"
-      exit 1
-      ;;
-  esac
-}
-
-# ==============================================================================
-# 🎮 EXECUTION CONTROLLERS
-# ==============================================================================
 function one_shot_start() {
   local target_dir="$(pwd)"
   echo -e "${C_CYAN}${C_BOLD}========================================================================${C_RESET}"
-  echo -e "${C_YELLOW}${C_BOLD}⚡ [FREEBUFF-POWER] ONE-SHOT ALL-IN-ONE ACTIVATION...${C_RESET}"
+  echo -e "${C_YELLOW}${C_BOLD}⚡ [FREEBUFF-POWER] ONE-SHOT ALL-IN-ONE ACTIVATION (1,025 SKILLS)...${C_RESET}"
   echo -e "${C_CYAN}${C_BOLD}========================================================================${C_RESET}"
   
   apply_anti_ban_shield
@@ -257,6 +171,99 @@ function spawn_agent() {
   exec freebuff
 }
 
+function compose_prompt() {
+  local query="$*"
+  if [ -z "$query" ]; then
+    echo -e "${C_RED}⚠️ Masukkan deskripsi tugas: freebuff-power compose <deskripsi tugas>${C_RESET}"
+    exit 1
+  fi
+
+  echo -e "${C_CYAN}${C_BOLD}========================================================================${C_RESET}"
+  echo -e "${C_YELLOW}${C_BOLD}🧠 [PROMPT COMPOSER] Analisis Kebutuhan Multi-Agent & Skills...${C_RESET}"
+  echo -e "${C_CYAN}${C_BOLD}========================================================================${C_RESET}\n"
+  echo -e "${C_BOLD}Tugas:${C_RESET} $query\n"
+  
+  # Heuristic Agent Matching
+  local matched_agents=()
+  local matched_skills=()
+  
+  if [[ "$query" =~ (ui|tampilan|web|frontend|design|desain|css|landing) ]]; then
+    matched_agents+=("@design-engineer" "@frontend")
+    matched_skills+=("[Skill: hallmark]" "[Skill: modern-web-design-master]" "[Skill: bento-grid-dashboard-ui]")
+  fi
+
+  if [[ "$query" =~ (api|backend|database|db|sql|postgres|auth|login|crud) ]]; then
+    matched_agents+=("@architect" "@backend" "@database")
+    matched_skills+=("[Skill: clean-architecture-refactoring]" "[Skill: postgresql-internals-indexing-master]" "[Skill: authflow-security-architect]")
+  fi
+
+  if [[ "$query" =~ (test|testing|qa|vitest|unit) ]]; then
+    matched_agents+=("@tddmaster" "@qa")
+    matched_skills+=("[Skill: unit-integration-tdd-master]")
+  fi
+
+  if [ ${#matched_agents[@]} -eq 0 ]; then
+    matched_agents+=("@architect" "@programmer")
+    matched_skills+=("[Skill: hallmark]" "[Skill: clean-architecture-refactoring]")
+  fi
+
+  echo -e "${C_GREEN}${C_BOLD}👥 Rekomendasi Sub-Agents:${C_RESET} ${matched_agents[*]}"
+  echo -e "${C_PURPLE}${C_BOLD}🧰 Rekomendasi Skills    :${C_RESET} ${matched_skills[*]}"
+  echo -e "\n${C_YELLOW}${C_BOLD}📋 Template Prompt Siap Copy-Paste ke Freebuff:${C_RESET}"
+  echo -e "------------------------------------------------------------------------"
+  echo -e "${C_CYAN}Sebagai ${matched_agents[*]}, tolong selesaikan tugas berikut: '$query'. Terapkan ${matched_skills[*]} dengan standar produksi tinggi tanpa AI-slop.${C_RESET}"
+  echo -e "------------------------------------------------------------------------\n"
+}
+
+function update_library() {
+  echo -e "${C_CYAN}${C_BOLD}========================================================================${C_RESET}"
+  echo -e "${C_YELLOW}${C_BOLD}🔄 [FREEBUFF-POWER] Memperbarui Pustaka Skills & Agents dari GitHub...${C_RESET}"
+  echo -e "${C_CYAN}${C_BOLD}========================================================================${C_RESET}\n"
+  
+  curl -fsSL https://raw.githubusercontent.com/FerzDevZ/freebuff-power/main/install.sh | bash
+}
+
+function manage_sessions() {
+  local subcmd="${1:-list}"
+  shift || true
+
+  case "$subcmd" in
+    list)
+      echo -e "${C_CYAN}${C_BOLD}========================================================================${C_RESET}"
+      echo -e "${C_YELLOW}${C_BOLD}📋 [FREEBUFF-POWER] DAFTAR SESI & RIWAYAT CHAT PROYEK${C_RESET}"
+      echo -e "${C_CYAN}${C_BOLD}========================================================================${C_RESET}\n"
+      
+      if [ -d "$PROJECTS_DIR" ]; then
+        echo -e "${C_GREEN}${C_BOLD}📁 Proyek yang Tersedia:${C_RESET}"
+        for p in "$PROJECTS_DIR"/*; do
+          if [ -d "$p" ]; then
+            local pname
+            pname="$(basename "$p")"
+            local chat_count
+            chat_count=$(find "$p/chats" -mindepth 1 -maxdepth 1 -type d 2>/dev/null | wc -l || echo "0")
+            echo -e "  - ${C_BOLD}$pname${C_RESET} ${C_DIM}($chat_count riwayat sesi chat)${C_RESET}"
+          fi
+        done
+        echo ""
+      fi
+      ;;
+
+    resume|continue)
+      local session_id="${1:-}"
+      apply_anti_ban_shield
+      if [ -z "$session_id" ]; then
+        echo -e "${C_GREEN}🚀 Melanjutkan sesi Freebuff percakapan sebelumnya...${C_RESET}"
+        export NODE_NO_WARNINGS=1
+        exec freebuff --continue
+      else
+        echo -e "${C_GREEN}🚀 Melanjutkan sesi Freebuff [ID: $session_id]...${C_RESET}"
+        export NODE_NO_WARNINGS=1
+        exec freebuff --continue "$session_id"
+      fi
+      ;;
+  esac
+}
+
 function run_doctor() {
   echo -e "${C_CYAN}${C_BOLD}========================================================================${C_RESET}"
   echo -e "${C_YELLOW}${C_BOLD}🩺 [FREEBUFF-POWER DOCTOR] Pemeriksaan Kesehatan Sistem${C_RESET}"
@@ -279,8 +286,6 @@ function run_doctor() {
 
   if [ -f "$ANALYTICS_FILE" ]; then
     echo -e "${C_GREEN}  [✓] Telemetry Configuration  : Bersih & Terisolasi${C_RESET}"
-  else
-    echo -e "${C_YELLOW}  [!] Telemetry Configuration  : Belum diinisialisasi (Jalankan 'freebuff-power clean')${C_RESET}"
   fi
 
   if [ -f "AGENTS.md" ] && [ -d ".freebuff" ]; then
@@ -321,7 +326,6 @@ function show_info() {
   fi
 
   echo -e "${C_RED}❌ Tidak ditemukan Agent atau Skill dengan nama: '$target'${C_RESET}"
-  echo -e "👉 Gunakan: ${C_CYAN}freebuff-power search $target${C_RESET}"
 }
 
 function search_catalog() {
@@ -355,19 +359,9 @@ function list_catalog() {
     echo -e "  - ${C_BOLD}@$(basename "$f" .md)${C_RESET}"
   done
   echo ""
-  echo -e "${C_PURPLE}${C_BOLD}🧰 363 Modular Skills Terkategori (Bebas Duplikat):${C_RESET}"
-  echo "  1. Architecture & Design (Clean Architecture, CQRS, DDD, REST/gRPC/GraphQL, Event Sourcing)"
-  echo "  2. Backend Polyglot (FastAPI, NestJS, Go Concurrency, Rust Tokio, Spring Boot, Deno/Bun)"
-  echo "  3. Frontend & Mobile (Next.js 15, React 19, Vue/Nuxt, Tailwind, SwiftUI, Jetpack Compose, Flutter)"
-  echo "  4. Database & OLAP (Postgres Internals, ClickHouse, DuckDB, Redis Streams, MongoDB, SQLite Edge)"
-  echo "  5. Quality & QA (Vitest TDD, Playwright E2E, k6 Load Testing, Mutation Testing, Pact)"
-  echo "  6. Security & AppSec (OWASP Top 10, Authflow PKCE, Passkeys, Prompt Injection Shield, SBOM)"
-  echo "  7. AI & Agentics (RAG Pipelines, pgvector/Qdrant, LLM Evals, vLLM/Ollama, AI Observability)"
-  echo "  8. Anti-Slop & Performance (Anti-Waffle, Cognitive Load Minimizer, Core Web Vitals, Heap Profiler)"
-  echo -e "\n${C_DIM}👉 Gunakan 'freebuff-power search <keyword>' untuk menemukan skill spesifik.${C_RESET}\n"
+  echo -e "${C_PURPLE}${C_BOLD}🧰 $skill_count Modular Skills Terkategori (Bebas Duplikat)${C_RESET}"
 }
 
-# Entrypoint
 CMD="${1:-help}"
 
 case "$CMD" in
@@ -378,11 +372,18 @@ case "$CMD" in
   init)
     shift || true
     inject_superpower "${1:-$(pwd)}"
-    echo -e "${C_GREEN}✅ Sukses! 29 Sub-Agents & 363 Modular Skills berhasil disuntikkan ke $(pwd).${C_RESET}"
+    echo -e "${C_GREEN}✅ Sukses! 29 Sub-Agents & 1,025 Modular Skills berhasil disuntikkan ke $(pwd).${C_RESET}"
     ;;
   spawn)
     shift || true
     spawn_agent "$@"
+    ;;
+  compose)
+    shift || true
+    compose_prompt "$@"
+    ;;
+  update)
+    update_library
     ;;
   session)
     shift || true
