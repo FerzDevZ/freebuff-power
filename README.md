@@ -5,7 +5,7 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Sub-Agents: 29](https://img.shields.io/badge/Sub--Agents-29%20Elite-blueviolet.svg)](#-specialized-sub-agents-roster)
-[![Modular Skills: 363](https://img.shields.io/badge/Modular%20Skills-363%20Clean-emerald.svg)](#-modular-skills-catalog)
+[![Modular Skills: 1025](https://img.shields.io/badge/Modular%20Skills-1025%20Clean-emerald.svg)](#-modular-skills-catalog)
 [![Anti-Ban: Active](https://img.shields.io/badge/Anti--Ban%20Shield-Active%20v3.6-brightgreen.svg)](#-enterprise-anti-ban--anti-suspend-shield)
 [![Platform: Linux & macOS](https://img.shields.io/badge/Platform-Linux%20%7C%20macOS-informational.svg)](#-quick-installation)
 
@@ -18,7 +18,7 @@
  |_|    |_|  \_\______|______|____/ \____/|_|    |_|      |_|     \____/   \/  \/   |______|_|  \_\
 ```
 
-**Freebuff-Power** transforms Freebuff from a single chatbot into an autonomous **29-Agent Engineering Swarm** armed with **363 Modular Skills**, zero-bloat on-demand loading, and enterprise-grade anti-ban safety.
+**Freebuff-Power** transforms Freebuff from a single chatbot into an autonomous **29-Agent Engineering Swarm** armed with **1025 Modular Skills**, zero-bloat on-demand loading, and enterprise-grade anti-ban safety.
 
 [Fitur Utama](#-fitur-utama) • [Instalasi](#-quick-installation) • [Panduan CLI](#-cli-command-palette) • [Roster Sub-Agents](#-specialized-sub-agents-roster) • [Katalog Skills](#-modular-skills-catalog)
 
@@ -29,7 +29,7 @@
 ## 🌟 Fitur Utama
 
 - 👥 **29 Specialized Sub-Agents**: Persona ahli dari `@architect`, `@programmer`, `@design-engineer`, `@backend`, `@database`, `@tddmaster`, `@security`, hingga `@sre`.
-- 🧰 **363 Modular Engineering Skills**: Pustaka lengkap mencakup arsitektur bersih, Next.js 15, FastAPI, Go concurrency, Rust, PostgreSQL internals, Playwright E2E, OWASP security, hingga WebGL.
+- 🧰 **1025 Modular Engineering Skills**: Pustaka lengkap mencakup arsitektur bersih, Next.js 15, FastAPI, Go concurrency, Rust, PostgreSQL internals, Playwright E2E, OWASP security, hingga WebGL.
 - 🛡️ **Enterprise Anti-Ban & Anti-Suspend Shield**: Sanitasi identitas virtual dinamis (`anon_<uuid_v4>`), reset residual lockfiles, dan proteksi telemetry otomatis.
 - ⚡ **Tiered On-Demand Loading**: `AGENTS.md` bertindak sebagai Master Index tipis & cepat; detail modul dibaca on-demand sehingga **bebas dari payload 413 / context blowout**.
 - 🔄 **Self-Healing Auto-Verify Loop**: Otomatis menjalankan compiler/test checks dan memperbaiki regresi secara otonom tanpa intervensi manual.
@@ -120,7 +120,7 @@ chmod +x ~/.local/bin/freebuff-power
 
 ---
 
-## 🧰 Modular Skills Catalog (363 Skills)
+## 🧰 Modular Skills Catalog (1025 Skills)
 
 Skills dikelompokkan ke dalam 8 pilar rekayasa perangkat lunak:
 1. **Architecture & Design (35+ skills)**: Clean Architecture, CQRS, Event Sourcing, Domain-Driven Design, API Design (REST/gRPC/GraphQL).
