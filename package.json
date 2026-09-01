@@ -1,0 +1,32 @@
+{
+  "name": "freebuff-power",
+  "version": "3.6.0",
+  "description": "Supreme Multi-Agent, Modular Skills & Anti-Ban Controller for Freebuff AI Coding Assistant",
+  "main": "bin/freebuff-power",
+  "bin": {
+    "freebuff-power": "./bin/freebuff-power"
+  },
+  "scripts": {
+    "install:local": "./install.sh",
+    "doctor": "./bin/freebuff-power doctor",
+    "test": "./bin/freebuff-power doctor"
+  },
+  "keywords": [
+    "freebuff",
+    "ai-agent",
+    "multi-agent",
+    "coding-agent",
+    "subagents",
+    "skills",
+    "hallmark",
+    "anti-slop",
+    "anti-ban",
+    "tdd"
+  ],
+  "author": "Firman <firman@local>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/firman/freebuff-power.git"
+  }
+}
