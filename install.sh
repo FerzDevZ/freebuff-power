@@ -5,7 +5,7 @@
 # Usage:
 #   curl -fsSL https://raw.githubusercontent.com/FerzDevZ/freebuff-power/main/install.sh | bash
 # ==============================================================================
-set -euo pipefail
+set -eo pipefail
 
 C_CYAN='\033[0;36m'
 C_GREEN='\033[0;32m'
@@ -69,5 +69,5 @@ echo -e "${C_GREEN}${C_BOLD}====================================================
 echo -e "${C_GREEN}${C_BOLD}🎉 INSTALASI SELESAI & SUKSES 100%!${C_RESET}"
 echo -e "${C_GREEN}${C_BOLD}========================================================================${C_RESET}"
 echo -e "\n🔥 Sekarang di folder mana pun kamu bisa langsung ketik:"
-echo -e "  ${C_CYAN}${C_BOLD}freebuff-power start${C_RESET}   ${C_DIM}# Injeksi instan & langsung koding${C_RESET}"
-echo -e "  ${C_CYAN}${C_BOLD}freebuff-power --help${C_RESET}  ${C_DIM}# Lihat semua fitur${C_RESET}\n"
+echo -e "  \033[0;36m\033[1mfreebuff-power start\033[0m   \033[2m# Injeksi instan & langsung koding\033[0m"
+echo -e "  \033[0;36m\033[1mfreebuff-power --help\033[0m  \033[2m# Lihat semua fitur\033[0m\n"
