@@ -1,6 +1,10 @@
 #!/usr/bin/env bash
 # ==============================================================================
-# ⚡ FREEBUFF-POWER SUPREME — ULTRA MULTI-AGENT, SKILLS & ANTI-BAN SUITE (v3.7)
+# ⚡ FREEBUFF-POWER SUPREME — ULTRA MULTI-AGENT, SKILLS & ANTI-BAN SUITE (v3.8)
+# ==============================================================================
+# Author: Freebuff Superpower Open-Source Community
+# Version: 3.8.0-Enterprise
+# License: MIT
 # ==============================================================================
 set -euo pipefail
 
@@ -39,7 +43,7 @@ C_RESET='\033[0m'
 function show_help() {
   cat << 'HELP_EOF'
 ========================================================================================
-⚡ FREEBUFF-POWER SUPREME — Ultra Multi-Agent, Skills & Anti-Ban Suite (v3.7)
+⚡ FREEBUFF-POWER SUPREME — Ultra Multi-Agent, Skills & Anti-Ban Suite (v3.8)
 ========================================================================================
 
 PENGGUNAAN:
@@ -47,8 +51,13 @@ PENGGUNAAN:
 
 🔥 PERINTAH UTAMA:
   start / go / full     [REKOMENDASI] One-Shot All-in-One:
-                        Reset Telemetry (Anti-Ban) + Injeksi 29 Agents & 1,025 Skills
+                        Reset Telemetry (Anti-Ban) + Injeksi 38 Agents & 1,025 Skills
                         + Langsung buka sesi interaktif Freebuff siap koding!
+
+  compose <task> [-r]   [POWER COMPOSER 2.0] Menganalisis kebutuhan arsitektur dan
+                        meracik kombinasi Agen & Skills terbaik.
+                        Tambahkan flag -r / --run untuk LANGSUNG MELUNCURKAN Freebuff!
+                        (Contoh: freebuff-power compose "Bikin web warkop Next.js" --run)
 
   spawn <agent> [task]  Luncurkan Freebuff dengan persona sub-agent spesifik
                         (Contoh: freebuff-power spawn architect "Rancang API warkop")
@@ -57,10 +66,9 @@ PENGGUNAAN:
 
   run [args]            Jalankan sesi Freebuff biasa dengan proteksi Anti-Ban aktif.
 
-💬 MANAJEMEN SESI & PROMPT COMPOSER:
+💬 MANAJEMEN SESI & CHAT:
   continue / resume     Lanjutkan sesi percakapan/coding terakhir tanpa kehilangan konteks.
   session list          Tampilkan daftar histori proyek dan riwayat sesi chat.
-  compose <task>        Rekomendasikan kombinasi Agent & Skill terbaik untuk tugasmu.
 
 🛡️ ANTI-BAN, UPDATE & PEMELIHARAAN:
   clean                 Reset total anonymous UUID telemetry & lockfile (100% Anti-Ban).
@@ -70,13 +78,13 @@ PENGGUNAAN:
 🔍 EKSPLORASI & PANDUAN:
   search <keyword>      Cari Sub-Agent atau Modular Skills berdasarkan kata kunci.
   info <name>           Buka dan baca SOP / instruksi lengkap dari Agent atau Skill.
-  list                  Tampilkan rekapitulasi 29 Sub-Agents & 1,025 Modular Skills.
+  list                  Tampilkan rekapitulasi 38 Sub-Agents & 1,025 Modular Skills.
   help / --help / -h    Tampilkan panduan bantuan ini.
 
 ----------------------------------------------------------------------------------------
-💡 CONTOH CEPAT:
+💡 CONTOH PENGGUNAAN CEPAT:
   $ freebuff-power start                             # Mulai koding instan 1 detik
-  $ freebuff-power compose "Bikin web e-commerce"    # Cari combo agen & skill terbaik
+  $ freebuff-power compose "Bikin web e-commerce" -r # Compose prompt & langsung jalankan
   $ freebuff-power spawn frontend "Buat UI modern"   # Spawn langsung spesifik agen
   $ freebuff-power update                            # Update skill & agent terbaru
 ========================================================================================
@@ -114,7 +122,7 @@ function inject_superpower() {
 function one_shot_start() {
   local target_dir="$(pwd)"
   echo -e "${C_CYAN}${C_BOLD}========================================================================${C_RESET}"
-  echo -e "${C_YELLOW}${C_BOLD}⚡ [FREEBUFF-POWER] ONE-SHOT ALL-IN-ONE ACTIVATION (1,025 SKILLS)...${C_RESET}"
+  echo -e "${C_YELLOW}${C_BOLD}⚡ [FREEBUFF-POWER] ONE-SHOT ALL-IN-ONE (38 AGENTS & 1,025 SKILLS)...${C_RESET}"
   echo -e "${C_CYAN}${C_BOLD}========================================================================${C_RESET}"
   
   apply_anti_ban_shield
@@ -171,48 +179,125 @@ function spawn_agent() {
   exec freebuff
 }
 
+# ==============================================================================
+# 🧠 POWER COMPOSER 2.0 ENGINE
+# ==============================================================================
 function compose_prompt() {
-  local query="$*"
+  local should_run=0
+  local task_args=()
+  
+  for arg in "$@"; do
+    if [[ "$arg" == "-r" || "$arg" == "--run" ]]; then
+      should_run=1
+    else
+      task_args+=("$arg")
+    fi
+  done
+
+  local query="${task_args[*]:-}"
   if [ -z "$query" ]; then
-    echo -e "${C_RED}⚠️ Masukkan deskripsi tugas: freebuff-power compose <deskripsi tugas>${C_RESET}"
+    echo -e "${C_RED}⚠️ Masukkan deskripsi tugas: freebuff-power compose \"<deskripsi tugas>\" [-r]${C_RESET}"
     exit 1
   fi
 
+  local lower_q
+  lower_q="$(echo "$query" | tr '[:upper:]' '[:lower:]')"
+
   echo -e "${C_CYAN}${C_BOLD}========================================================================${C_RESET}"
-  echo -e "${C_YELLOW}${C_BOLD}🧠 [PROMPT COMPOSER] Analisis Kebutuhan Multi-Agent & Skills...${C_RESET}"
+  echo -e "${C_YELLOW}${C_BOLD}🧠 [POWER COMPOSER 2.0] Semantic Intent & Swarm Architecture Analyzer${C_RESET}"
   echo -e "${C_CYAN}${C_BOLD}========================================================================${C_RESET}\n"
-  echo -e "${C_BOLD}Tugas:${C_RESET} $query\n"
+  echo -e "${C_BOLD}Tugas Target:${C_RESET} \"$query\"\n"
   
-  # Heuristic Agent Matching
-  local matched_agents=()
-  local matched_skills=()
+  local agents=()
+  local skills=()
   
-  if [[ "$query" =~ (ui|tampilan|web|frontend|design|desain|css|landing) ]]; then
-    matched_agents+=("@design-engineer" "@frontend")
-    matched_skills+=("[Skill: hallmark]" "[Skill: modern-web-design-master]" "[Skill: bento-grid-dashboard-ui]")
+  # 1. Frontend & Visual Design
+  if [[ "$lower_q" =~ (ui|tampilan|web|frontend|design|desain|css|landing|porto|warkop|html|page|dashboard) ]]; then
+    agents+=("@design-engineer" "@frontend")
+    skills+=("[Skill: hallmark]" "[Skill: modern-web-design-master]")
+    if [[ "$lower_q" =~ (bento|grid|card) ]]; then
+      skills+=("[Skill: bento-grid-dashboard-ui]")
+    fi
+    if [[ "$lower_q" =~ (animasi|motion|framer|interaktif) ]]; then
+      skills+=("[Skill: framer-motion-animation-wizard]")
+    fi
+    if [[ "$lower_q" =~ (3d|three|webgl|game) ]]; then
+      agents+=("@game-dev-3d")
+      skills+=("[Skill: threejs-webgl-3d-experience]")
+    fi
   fi
 
-  if [[ "$query" =~ (api|backend|database|db|sql|postgres|auth|login|crud) ]]; then
-    matched_agents+=("@architect" "@backend" "@database")
-    matched_skills+=("[Skill: clean-architecture-refactoring]" "[Skill: postgresql-internals-indexing-master]" "[Skill: authflow-security-architect]")
+  # 2. Backend & APIs
+  if [[ "$lower_q" =~ (api|backend|rest|grpc|graphql|auth|login|jwt|server|endpoint|crud|oauth) ]]; then
+    agents+=("@architect" "@backend")
+    skills+=("[Skill: clean-architecture-refactoring]" "[Skill: authflow-security-architect]" "[Skill: api-design-rest-grpc-graphql]")
   fi
 
-  if [[ "$query" =~ (test|testing|qa|vitest|unit) ]]; then
-    matched_agents+=("@tddmaster" "@qa")
-    matched_skills+=("[Skill: unit-integration-tdd-master]")
+  # 3. Database & Big Data
+  if [[ "$lower_q" =~ (db|database|sql|postgres|clickhouse|redis|mongo|query|tabel|schema) ]]; then
+    agents+=("@database")
+    if [[ "$lower_q" =~ (postgres|postgresql|index) ]]; then
+      skills+=("[Skill: postgresql-internals-indexing-master]")
+    fi
+    if [[ "$lower_q" =~ (clickhouse|olap|analytic) ]]; then
+      agents+=("@data-engineer-olap")
+      skills+=("[Skill: clickhouse-analytics-engineer]")
+    fi
   fi
 
-  if [ ${#matched_agents[@]} -eq 0 ]; then
-    matched_agents+=("@architect" "@programmer")
-    matched_skills+=("[Skill: hallmark]" "[Skill: clean-architecture-refactoring]")
+  # 4. Web3 / Smart Contract
+  if [[ "$lower_q" =~ (web3|solidity|contract|smart contract|crypto|defi|token|eth|erc) ]]; then
+    agents+=("@smart-contract-auditor")
+    skills+=("[Skill: smart-contract-web3-security]" "[Skill: solidity-foundry-gas-optimizer]")
   fi
 
-  echo -e "${C_GREEN}${C_BOLD}👥 Rekomendasi Sub-Agents:${C_RESET} ${matched_agents[*]}"
-  echo -e "${C_PURPLE}${C_BOLD}🧰 Rekomendasi Skills    :${C_RESET} ${matched_skills[*]}"
-  echo -e "\n${C_YELLOW}${C_BOLD}📋 Template Prompt Siap Copy-Paste ke Freebuff:${C_RESET}"
-  echo -e "------------------------------------------------------------------------"
-  echo -e "${C_CYAN}Sebagai ${matched_agents[*]}, tolong selesaikan tugas berikut: '$query'. Terapkan ${matched_skills[*]} dengan standar produksi tinggi tanpa AI-slop.${C_RESET}"
-  echo -e "------------------------------------------------------------------------\n"
+  # 5. AI / RAG / Machine Learning
+  if [[ "$lower_q" =~ (ai|rag|llm|vector|embedding|qdrant|ollama|vllm|gpt|claude|chat) ]]; then
+    agents+=("@ai-engineer" "@nlp-rag-specialist")
+    skills+=("[Skill: rag-llm-integrator]" "[Skill: vector-db-pgvector-qdrant-master]" "[Skill: prompt-injection-defense-guardrails]")
+  fi
+
+  # 6. Mobile & Cross-platform
+  if [[ "$lower_q" =~ (mobile|android|ios|flutter|react native|swiftui|app) ]]; then
+    agents+=("@mobile-engineer")
+    skills+=("[Skill: crossplatform-mobile-flutter-rn]")
+  fi
+
+  # 7. Testing & Quality Assurance
+  if [[ "$lower_q" =~ (test|testing|qa|vitest|unit|e2e|playwright) ]]; then
+    agents+=("@tddmaster" "@qa")
+    skills+=("[Skill: unit-integration-tdd-master]" "[Skill: e2e-playwright-automation]")
+  fi
+
+  # Fallback Defaults
+  if [ ${#agents[@]} -eq 0 ]; then
+    agents+=("@architect" "@programmer")
+    skills+=("[Skill: hallmark]" "[Skill: clean-architecture-refactoring]")
+  fi
+
+  # Deduplicate arrays
+  local unique_agents=($(echo "${agents[@]}" | tr ' ' '\n' | sort -u | tr '\n' ' '))
+  local unique_skills=($(echo "${skills[@]}" | tr ' ' '\n' | sort -u | tr '\n' ' '))
+
+  echo -e "${C_GREEN}${C_BOLD}👥 Recommended Sub-Agents:${C_RESET} ${unique_agents[*]}"
+  echo -e "${C_PURPLE}${C_BOLD}🧰 Recommended Skills    :${C_RESET} ${unique_skills[*]}"
+  
+  local generated_prompt="Sebagai ${unique_agents[*]}, tolong kerjakan tugas berikut secara menyeluruh: '${query}'. Terapkan ${unique_skills[*]} dengan standar Hallmark craftsmanship, zero AI-slop, dan sertakan unit tests."
+
+  echo -e "\n${C_YELLOW}${C_BOLD}📋 Master Prompt (Siap Eksekusi):${C_RESET}"
+  echo -e "${C_CYAN}------------------------------------------------------------------------${C_RESET}"
+  echo -e "${C_BOLD}$generated_prompt${C_RESET}"
+  echo -e "${C_CYAN}------------------------------------------------------------------------${C_RESET}\n"
+
+  if [ "$should_run" -eq 1 ]; then
+    echo -e "${C_GREEN}🚀 Auto-Run Flag Terdeteksi (-r)! Meluncurkan Freebuff sekarang...${C_RESET}\n"
+    apply_anti_ban_shield
+    inject_superpower "$(pwd)"
+    export NODE_NO_WARNINGS=1
+    exec freebuff
+  else
+    echo -e "${C_DIM}👉 Tips: Jalankan 'freebuff-power compose \"$query\" --run' untuk langsung eksekusi!${C_RESET}\n"
+  fi
 }
 
 function update_library() {
@@ -354,7 +439,7 @@ function list_catalog() {
   echo -e "${C_YELLOW}${C_BOLD}⚡ TOTAL ARMADA: $agent_count SUB-AGENTS & $skill_count MODULAR SKILLS${C_RESET}"
   echo -e "${C_CYAN}${C_BOLD}========================================================================${C_RESET}\n"
   
-  echo -e "${C_GREEN}${C_BOLD}👥 29 Sub-Agents Available:${C_RESET}"
+  echo -e "${C_GREEN}${C_BOLD}👥 $agent_count Sub-Agents Available:${C_RESET}"
   for f in "$TEMPLATE_DIR/agents"/*.md; do
     echo -e "  - ${C_BOLD}@$(basename "$f" .md)${C_RESET}"
   done
@@ -372,7 +457,7 @@ case "$CMD" in
   init)
     shift || true
     inject_superpower "${1:-$(pwd)}"
-    echo -e "${C_GREEN}✅ Sukses! 29 Sub-Agents & 1,025 Modular Skills berhasil disuntikkan ke $(pwd).${C_RESET}"
+    echo -e "${C_GREEN}✅ Sukses! 38 Sub-Agents & 1,025 Modular Skills berhasil disuntikkan ke $(pwd).${C_RESET}"
     ;;
   spawn)
     shift || true

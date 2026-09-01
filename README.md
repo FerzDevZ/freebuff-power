@@ -4,9 +4,9 @@
 ### The World's Most Advanced Multi-Agent Swarm, Skills Engine & Anti-Ban Shield for Freebuff
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Sub-Agents: 29](https://img.shields.io/badge/Sub--Agents-29%20Elite-blueviolet.svg)](#-specialized-sub-agents-roster)
+[![Sub-Agents: 38](https://img.shields.io/badge/Sub--Agents-38%20Elite-blueviolet.svg)](#-specialized-sub-agents-roster)
 [![Modular Skills: 1,025](https://img.shields.io/badge/Modular%20Skills-1%2C025%20Clean-emerald.svg)](#-modular-skills-catalog)
-[![Anti-Ban: Active](https://img.shields.io/badge/Anti--Ban%20Shield-Active%20v3.7-brightgreen.svg)](#-enterprise-anti-ban--anti-suspend-shield)
+[![Anti-Ban: Active](https://img.shields.io/badge/Anti--Ban%20Shield-Active%20v3.8-brightgreen.svg)](#-enterprise-anti-ban--anti-suspend-shield)
 [![Platform: Linux & macOS](https://img.shields.io/badge/Platform-Linux%20%7C%20macOS-informational.svg)](#-quick-installation-1-line-installer)
 
 ```
@@ -18,7 +18,7 @@
  |_|    |_|  \_\______|______|____/ \____/|_|    |_|      |_|     \____/   \/  \/   |______|_|  \_\
 ```
 
-**Freebuff-Power** transforms Freebuff from a single chatbot into an autonomous **29-Agent Engineering Swarm** armed with **1,025 Modular Skills**, zero-bloat on-demand loading, and enterprise-grade anti-ban safety.
+**Freebuff-Power** transforms Freebuff from a single chatbot into an autonomous **38-Agent Engineering Swarm** armed with **1,025 Modular Skills**, zero-bloat on-demand loading, and enterprise-grade anti-ban safety.
 
 [Instalasi 1 Baris](#-quick-installation-1-line-installer) • [Fitur Utama](#-fitur-utama) • [Panduan CLI](#-cli-command-palette) • [Roster Sub-Agents](#-specialized-sub-agents-roster) • [Katalog Skills](#-modular-skills-catalog)
 
@@ -40,7 +40,7 @@ wget -qO- https://raw.githubusercontent.com/FerzDevZ/freebuff-power/main/install
 ```
 
 > 💡 **Apa yang dilakukan installer ini secara otomatis?**
-> 1. Mengunduh seluruh pustaka **29 Sub-Agents** dan **1,025 Modular Skills**.
+> 1. Mengunduh seluruh pustaka **38 Sub-Agents** dan **1,025 Modular Skills**.
 > 2. Memasang executable CLI `freebuff-power` ke `~/.local/bin/` dan mengonfigurasi `$PATH`.
 > 3. Menyiapkan master template di `~/.freebuff-superpower/`.
 > 4. Selesai dalam 2 detik tanpa perlu clone atau `cd` manual!
@@ -49,7 +49,7 @@ wget -qO- https://raw.githubusercontent.com/FerzDevZ/freebuff-power/main/install
 
 ## 🌟 Fitur Utama
 
-- 👥 **29 Specialized Sub-Agents**: Persona ahli dari `@architect`, `@programmer`, `@design-engineer`, `@backend`, `@database`, `@tddmaster`, `@security`, hingga `@sre`.
+- 👥 **38 Specialized Sub-Agents**: Persona ahli dari `@architect`, `@programmer`, `@design-engineer`, `@backend`, `@database`, `@tddmaster`, `@security`, hingga `@sre`.
 - 🧰 **1,025 Modular Engineering Skills**: Pustaka lengkap mencakup arsitektur bersih, Next.js 15, FastAPI, Go concurrency, Rust, PostgreSQL internals, Playwright E2E, OWASP security, hingga WebGL.
 - 🛡️ **Enterprise Anti-Ban & Anti-Suspend Shield**: Sanitasi identitas virtual dinamis (`anon_<uuid_v4>`), reset residual lockfiles, dan proteksi telemetry otomatis.
 - ⚡ **Tiered On-Demand Loading**: `AGENTS.md` bertindak sebagai Master Index tipis & cepat; detail modul dibaca on-demand sehingga **bebas dari payload 413 / context blowout**.
@@ -64,7 +64,7 @@ wget -qO- https://raw.githubusercontent.com/FerzDevZ/freebuff-power/main/install
 
 ```text
 ========================================================================================
-⚡ FREEBUFF-POWER — Supreme Multi-Agent, Skills & Anti-Ban Controller (v3.7)
+⚡ FREEBUFF-POWER — Supreme Multi-Agent, Skills & Anti-Ban Controller (v3.8)
 ========================================================================================
 
 🔥 PERINTAH UTAMA:
@@ -86,13 +86,13 @@ wget -qO- https://raw.githubusercontent.com/FerzDevZ/freebuff-power/main/install
 🔍 EKSPLORASI & PANDUAN:
   freebuff-power search <keyword>  Cari Sub-Agent atau Modular Skills
   freebuff-power info <name>       Lihat SOP & dokumentasi lengkap Agent atau Skill
-  freebuff-power list              Daftar seluruh 29 Sub-Agents & 1,025 Skills
+  freebuff-power list              Daftar seluruh 38 Sub-Agents & 1,025 Skills
 ========================================================================================
 ```
 
 ---
 
-## 👥 Specialized Sub-Agents Roster (29 Elite Agents)
+## 👥 Specialized Sub-Agents Roster (38 Elite Agents)
 
 | Sub-Agent | Focus & Responsibility |
 |---|---|
