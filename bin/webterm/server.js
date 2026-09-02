@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 // ==============================================================================
-// ⚡ FREEBUFF-POWER TEAM COLLABORATIVE WEB TERMINAL (AUTO-CLEAN INSTANCE)
+// ⚡ FREEBUFF-POWER TURBO FULL-DUPLEX WEB TERMINAL (SSE STREAMING ZERO-DELAY)
 // ==============================================================================
 const http = require("http");
 const { spawn } = require("child_process");
@@ -10,7 +10,7 @@ const path = require("path");
 const port = process.env.PORT || 7681;
 const manicodeDir = path.join(process.env.HOME, ".config/manicode");
 
-// 1. Clean stale locks & residual processes before spawning
+// 1. Clean stale locks & residual processes
 try {
   if (fs.existsSync(manicodeDir)) {
     const files = fs.readdirSync(manicodeDir);
@@ -22,64 +22,66 @@ try {
   }
 } catch (e) {}
 
-// Kill any zombie freebuff processes
 try {
   const { execSync } = require("child_process");
   execSync("pkill -9 -f freebuff 2>/dev/null || true");
 } catch (e) {}
 
-// Spawn fresh interactive bash session
+// Spawn bash process with PTY pipe
 const bash = spawn("bash", ["-l"], {
-  env: process.env,
+  env: { ...process.env, TERM: "xterm-256color" },
   stdio: ["pipe", "pipe", "pipe"]
 });
 
 let bashOutput = "";
 let activeMembers = new Map();
+let sseClients = [];
+
+function broadcastToClients(data) {
+  for (const client of sseClients) {
+    client.write(`data: ${JSON.stringify({ chunk: data })}\n\n`);
+  }
+}
 
 bash.stdout.on("data", (data) => {
-  bashOutput += data.toString();
+  const str = data.toString();
+  bashOutput += str;
   if (bashOutput.length > 60000) bashOutput = bashOutput.slice(-60000);
+  broadcastToClients(str);
 });
 
 bash.stderr.on("data", (data) => {
-  bashOutput += data.toString();
+  const str = data.toString();
+  bashOutput += str;
   if (bashOutput.length > 60000) bashOutput = bashOutput.slice(-60000);
+  broadcastToClients(str);
 });
 
-// Auto launch freebuff with auto-takeover / start
 setTimeout(() => {
   bash.stdin.write("freebuff-power start\n");
-}, 500);
+}, 300);
 
 const server = http.createServer((req, res) => {
   const url = new URL(req.url, `http://${req.headers.host}`);
 
-  // 1. API: Join Team & Register Member Name
-  if (url.pathname === "/api/join" && req.method === "POST") {
-    let body = "";
-    req.on("data", chunk => body += chunk);
-    req.on("end", () => {
-      try {
-        const json = JSON.parse(body);
-        const name = (json.name || "Member").trim().slice(0, 25);
-        const token = json.token || Math.random().toString(36).slice(2);
-        activeMembers.set(token, { name: name, joinedAt: new Date() });
-        
-        const joinBanner = `\r\n\x1b[32;1m👋 [TEAM COLLAB] ${name} bergabung ke sesi pair programming!\x1b[0m\r\n`;
-        bashOutput += joinBanner;
+  // 1. SSE Real-Time Stream (0ms latency push)
+  if (url.pathname === "/api/stream") {
+    res.writeHead(200, {
+      "Content-Type": "text/event-stream",
+      "Cache-Control": "no-cache",
+      "Connection": "keep-alive",
+      "Access-Control-Allow-Origin": "*"
+    });
+    res.write(`data: ${JSON.stringify({ chunk: bashOutput })}\n\n`);
+    sseClients.push(res);
 
-        res.writeHead(200, { "Content-Type": "application/json" });
-        res.end(JSON.stringify({ ok: true, token: token, name: name }));
-      } catch (e) {
-        res.writeHead(400, { "Content-Type": "application/json" });
-        res.end(JSON.stringify({ error: "Invalid payload" }));
-      }
+    req.on("close", () => {
+      sseClients = sseClients.filter(c => c !== res);
     });
     return;
   }
 
-  // 2. API: Keystrokes & Commands
+  // 2. Instant Zero-Latency Keystroke Input
   if (url.pathname === "/api/input" && req.method === "POST") {
     let body = "";
     req.on("data", chunk => body += chunk);
@@ -98,21 +100,32 @@ const server = http.createServer((req, res) => {
     return;
   }
 
-  // 3. API: Output & Members
-  if (url.pathname === "/api/output") {
-    res.writeHead(200, {
-      "Content-Type": "application/json",
-      "Cache-Control": "no-cache"
+  // 3. Team Member Join
+  if (url.pathname === "/api/join" && req.method === "POST") {
+    let body = "";
+    req.on("data", chunk => body += chunk);
+    req.on("end", () => {
+      try {
+        const json = JSON.parse(body);
+        const name = (json.name || "Member").trim().slice(0, 25);
+        const token = json.token || Math.random().toString(36).slice(2);
+        activeMembers.set(token, { name: name, joinedAt: new Date() });
+        
+        const joinBanner = `\r\n\x1b[32;1m👋 [TEAM COLLAB] ${name} bergabung ke sesi pair programming!\x1b[0m\r\n`;
+        bashOutput += joinBanner;
+        broadcastToClients(joinBanner);
+
+        res.writeHead(200, { "Content-Type": "application/json" });
+        res.end(JSON.stringify({ ok: true, token: token, name: name }));
+      } catch (e) {
+        res.writeHead(400, { "Content-Type": "application/json" });
+        res.end(JSON.stringify({ error: "Invalid payload" }));
+      }
     });
-    const membersList = Array.from(activeMembers.values()).map(m => m.name);
-    res.end(JSON.stringify({
-      output: bashOutput,
-      members: membersList
-    }));
     return;
   }
 
-  // 4. Serve UI
+  // 4. Serve Turbo UI
   res.writeHead(200, {
     "Content-Type": "text/html; charset=utf-8",
     "Access-Control-Allow-Origin": "*"
@@ -123,7 +136,7 @@ const server = http.createServer((req, res) => {
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Freebuff-Power Live Team Pair-Programming</title>
+  <title>Freebuff-Power Live Interactive Terminal</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/xterm@5.3.0/css/xterm.css" />
   <script src="https://cdn.jsdelivr.net/npm/xterm@5.3.0/lib/xterm.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/xterm-addon-fit@0.8.0/lib/xterm-addon-fit.js"></script>
@@ -159,9 +172,9 @@ const server = http.createServer((req, res) => {
   </div>
 
   <div id="header">
-    <h1>⚡ FREEBUFF-POWER — LIVE TEAM COLLABORATION</h1>
+    <h1>⚡ FREEBUFF-POWER — LIVE ULTRA-FAST TERMINAL</h1>
     <div id="team-roster">
-      <span>👥 Anggota Tim:</span>
+      <span>👥 Anggota:</span>
       <div id="members-list"><span class="member-tag">● Connecting...</span></div>
     </div>
   </div>
@@ -223,7 +236,7 @@ const server = http.createServer((req, res) => {
     fitAddon.fit();
     window.addEventListener('resize', () => fitAddon.fit());
 
-    // Send keystrokes
+    // Instant Keystroke Delivery (0ms delay)
     term.onData(data => {
       if (modal.style.display !== 'none') return;
       fetch('/api/input', {
@@ -233,31 +246,23 @@ const server = http.createServer((req, res) => {
       });
     });
 
-    // Handle interactive clicks on terminal canvas to focus
     document.getElementById('terminal-container').addEventListener('click', () => {
       term.focus();
     });
 
-    // Poll output & roster
-    let lastLength = 0;
-    setInterval(() => {
-      fetch('/api/output')
-        .then(res => res.json())
-        .then(data => {
-          if (data.output && data.output.length > lastLength) {
-            term.write(data.output.slice(lastLength));
-            lastLength = data.output.length;
-          }
-          if (data.members && data.members.length > 0) {
-            membersList.innerHTML = data.members.map(m => '<span class="member-tag">● ' + m + '</span>').join(' ');
-          }
-        });
-    }, 150);
+    // Real-Time Push Streaming via SSE (Server-Sent Events) - Zero Polling Lag
+    const evtSource = new EventSource('/api/stream');
+    evtSource.onmessage = (event) => {
+      const data = JSON.parse(event.data);
+      if (data.chunk) {
+        term.write(data.chunk);
+      }
+    };
   </script>
 </body>
 </html>`);
 });
 
 server.listen(port, "0.0.0.0", () => {
-  console.log("Team Collab Server running on 0.0.0.0:" + port);
+  console.log("Turbo Web Terminal Server running on 0.0.0.0:" + port);
 });
