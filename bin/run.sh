@@ -40,16 +40,25 @@ for arg in "$@"; do
   fi
 done
 
+PROXY_PID=""
 if [ "$USE_FULL_TUNNEL" = true ]; then
-  echo -e "\033[0;32m\033[1m[🌐 FULL ACCESS TUNNEL ACTIVE]\033[0m Routing Freebuff via Tier-1 Global SOCKS5..."
-  export HTTPS_PROXY="socks5h://127.0.0.1:9050"
-  export HTTP_PROXY="socks5h://127.0.0.1:9050"
-  export ALL_PROXY="socks5h://127.0.0.1:9050"
+  # Pastikan background HTTP bridge aktif
+  pkill -f "httpproxy.js" 2>/dev/null || true
+  node "$SCRIPT_DIR/httpproxy.js" >/dev/null 2>&1 &
+  PROXY_PID=$!
+  sleep 0.2
+
+  trap 'if [ -n "$PROXY_PID" ]; then kill "$PROXY_PID" 2>/dev/null || true; fi' EXIT INT TERM
+
+  echo -e "\033[0;32m\033[1m[🌐 FULL ACCESS TUNNEL ACTIVE]\033[0m Routing Freebuff via Tier-1 HTTP Bridge (127.0.0.1:8118)..."
+  export HTTPS_PROXY="http://127.0.0.1:8118"
+  export HTTP_PROXY="http://127.0.0.1:8118"
+  export ALL_PROXY="http://127.0.0.1:8118"
 fi
 
 # 4. Jalankan Freebuff dengan filter Anti-Hang
 if [ ${#CLEAN_ARGS[@]} -eq 0 ]; then
-  exec freebuff
+  freebuff
 else
-  exec freebuff "${CLEAN_ARGS[@]}"
+  freebuff "${CLEAN_ARGS[@]}"
 fi
