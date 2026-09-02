@@ -74,7 +74,14 @@ PENGGUNAAN:
   account rotate        Putar ke akun berikutnya secara otomatis (Round-Robin).
   reset-full / logout   Reset TOTAL seluruh token login, sesi, dan device fingerprint.
 
-🛠️ SECURITY, DEVOPS & PROJECT TOOLING:
+🛠️ SECURITY, DEVOPS & PRO-TOOLING SUITE:
+  release               Otomasi Semantic Versioning, update CHANGELOG.md & rilis.
+  seed [count] [file]   Hasilkan data dummy realistis Indonesia (nama, alamat, IDR).
+  bench [url]           Uji throughput (RPS) & latency response time API lokal.
+  theme [name]          Generate OKLCH color palette & token Tailwind CSS v4.
+  env                   Verifikasi kelengkapan variabel .env vs .env.example.
+  clean-code            Pindai file mati (dead-code) & dependensi yang tidak terpakai.
+  readme                Generate README.md standar internasional + diagram Mermaid.js.
   audit / review        Pindai kebocoran secret API Key, celah OWASP & hapus AI-slop.
   commit                AI Conventional Commit Assistant otomatis berdasarkan git diff.
   explain <file>        Bedah arsitektur kode file target & beri rekomendasi swarm persona.
@@ -525,6 +532,30 @@ case "$CMD" in
   docs|doc)
     shift || true
     exec node "$SCRIPT_DIR/docs.js" "$@"
+    ;;
+  release)
+    exec "$SCRIPT_DIR/release.sh"
+    ;;
+  seed)
+    shift || true
+    exec node "$SCRIPT_DIR/seed.js" "$@"
+    ;;
+  bench)
+    shift || true
+    exec node "$SCRIPT_DIR/bench.js" "$@"
+    ;;
+  theme)
+    shift || true
+    exec node "$SCRIPT_DIR/theme.js" "$@"
+    ;;
+  env)
+    exec node "$SCRIPT_DIR/envcheck.js"
+    ;;
+  clean-code)
+    exec node "$SCRIPT_DIR/cleancode.js"
+    ;;
+  readme)
+    exec node "$SCRIPT_DIR/readme-gen.js"
     ;;
   explain)
     shift || true
