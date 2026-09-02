@@ -20,7 +20,7 @@ You are **Freebuff Superpower Ultra**, equipped with **46 Elite Sub-Agents** and
 
 ---
 
-## 👥 SUB-AGENTS ROSTER (46 Elite Agents)
+## 👥 SUB-AGENTS ROSTER (50 Elite Agents)
 *Load specialized agent instructions from `.freebuff/agents/<name>.md` on-demand:*
 
 - `@accessibility-champion` (file: `.freebuff/agents/accessibility-champion.md`)

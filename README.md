@@ -21,7 +21,7 @@
 
 **Freebuff-Power v4.5** transforms Freebuff into an autonomous **46-Agent Swarm** powered by **1,055 Modular Skills**, Multi-Account Quota Rotation, an interactive **Terminal TUI Dashboard**, Time-Travel Snapshots, Live Mobile Tunneling, Dual-Gate QA Invariants, and Enterprise Anti-Ban Safety.
 
-[Instalasi 1 Baris](#-quick-installation-1-line-installer) • [Fitur Utama v4.5](#-fitur-utama-v45) • [Panduan CLI Lengkap](#-cli-command-palette-v45) • [Multi-Account Vault](#-multi-account-vault--quota-rotation) • [Roster 46 Sub-Agents](#-specialized-sub-agents-roster-46-elite-agents) • [Katalog 1,055 Skills](#-modular-skills-catalog-1055-skills)
+[Instalasi 1 Baris](#-quick-installation-1-line-installer) • [Fitur Utama v4.5](#-fitur-utama-v45) • [Panduan CLI Lengkap](#-cli-command-palette-v45) • [Multi-Account Vault](#-multi-account-vault--quota-rotation) • [Roster 50 Sub-Agents](#-specialized-sub-agents-roster-46-elite-agents) • [Katalog 1,055 Skills](#-modular-skills-catalog-1055-skills)
 
 </div>
 
@@ -51,7 +51,7 @@ wget -qO- https://raw.githubusercontent.com/FerzDevZ/freebuff-power/main/install
 
 ### 2. 🖥️ Interactive Terminal TUI Dashboard (`freebuff-power ui`)
 - Dashboard visual keyboard-driven di terminal (ala `lazygit`).
-- Jelajahi **46 Sub-Agents & 1,055 Skills** dengan preview SOP instan.
+- Jelajahi **50 Sub-Agents & 1,055 Skills** dengan preview SOP instan.
 - Centang kombinasi agen/skill dengan `[Spacebar]`, lalu tekan `[Enter]` untuk meluncurkan Freebuff!
 - Filter pencarian instan dengan menekan tombol `/`.
 
@@ -102,7 +102,7 @@ wget -qO- https://raw.githubusercontent.com/FerzDevZ/freebuff-power/main/install
   freebuff-power snapshot save     Simpan checkpoint snapshot proyek
   freebuff-power snapshot list     Daftar riwayat checkpoint proyek
   freebuff-power rollback          Pulihkan seluruh kode ke snapshot terakhir
-  freebuff-power export --all      Ekspor 46 Agents & 1,055 Skills ke Cursor/Claude/Windsurf
+  freebuff-power export --all      Ekspor 50 Agents & 1,055 Skills ke Cursor/Claude/Windsurf
   freebuff-power eval              Jalankan Swarm Benchmark Evaluator (Skor 100/100)
 
 💬 MANAJEMEN SESI & CHAT:
@@ -118,7 +118,7 @@ wget -qO- https://raw.githubusercontent.com/FerzDevZ/freebuff-power/main/install
 
 ---
 
-## 👥 Specialized Sub-Agents Roster (46 Elite Agents)
+## 👥 Specialized Sub-Agents Roster (50 Elite Agents)
 
 | Sub-Agent | Focus & Responsibility |
 |---|---|
