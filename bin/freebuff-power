@@ -74,6 +74,12 @@ PENGGUNAAN:
   account rotate        Putar ke akun berikutnya secara otomatis (Round-Robin).
   reset-full / logout   Reset TOTAL seluruh token login, sesi, dan device fingerprint.
 
+🛠️ SECURITY, GIT & PROJECT TOOLING (NEW):
+  audit / review        Pindai kebocoran secret API Key, celah OWASP & hapus AI-slop.
+  commit                AI Conventional Commit Assistant otomatis berdasarkan git diff.
+  docs <library>        Ingest dokumentasi resmi framework terbaru ke dalam konteks AI.
+  new <preset> [name]   Scaffold proyek baru instan (saas / flutter / go) + injeksi 1,055 skills.
+
 🌐 LIVE PREVIEW, TIME-TRAVEL & EXPORTER:
   share [port]          Buka HTTPS Public Tunnel & Live Preview ke HP (via Cloudflare).
   snapshot save <label> Buat checkpoint snapshot proyek sebelum AI melakukan refactor.
@@ -502,6 +508,20 @@ case "$CMD" in
     ;;
   eval|benchmark)
     exec node "$SCRIPT_DIR/eval.js"
+    ;;
+  audit|review)
+    exec node "$SCRIPT_DIR/audit.js"
+    ;;
+  commit)
+    exec "$SCRIPT_DIR/commit.sh"
+    ;;
+  docs|doc)
+    shift || true
+    exec node "$SCRIPT_DIR/docs.js" "$@"
+    ;;
+  new|scaffold)
+    shift || true
+    exec "$SCRIPT_DIR/scaffolder.sh" "$@"
     ;;
   export)
     shift || true
