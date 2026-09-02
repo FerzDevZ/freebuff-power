@@ -529,11 +529,11 @@ case "$CMD" in
     ;;
   session)
     shift || true
-    manage_sessions "$@"
+    exec node "$SCRIPT_DIR/session.js" "$@"
     ;;
   continue|resume)
     shift || true
-    manage_sessions "continue" "$@"
+    exec node "$SCRIPT_DIR/session.js" continue "$@"
     ;;
   clean)
     apply_anti_ban_shield
