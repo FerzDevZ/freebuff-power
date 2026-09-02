@@ -26,7 +26,7 @@ SUPERPOWER_DIR="$HOME/.freebuff-superpower"
 REPO_CACHE_DIR="$HOME/.freebuff-power-src"
 REPO_URL="https://github.com/FerzDevZ/freebuff-power.git"
 
-mkdir -p "$INSTALL_BIN_DIR" "$SUPERPOWER_DIR/agents" "$SUPERPOWER_DIR/skills"
+mkdir -p "$INSTALL_BIN_DIR" "$SUPERPOWER_DIR/.freebuff/agents" "$SUPERPOWER_DIR/.freebuff/skills"
 
 # 1. Fetch Repository (Clone or Update)
 echo -e "${C_BLUE}📦 [1/3] Mengunduh repository & pustaka Superpower...${C_RESET}"
@@ -40,8 +40,8 @@ else
   git clone --depth 1 "$REPO_URL" "$REPO_CACHE_DIR" --quiet
 fi
 
-TOTAL_AGENTS=$(ls -1 "$REPO_CACHE_DIR/superpower/agents" 2>/dev/null | wc -l || echo "42")
-TOTAL_SKILLS=$(ls -1 "$REPO_CACHE_DIR/superpower/skills" 2>/dev/null | wc -l || echo "1025")
+TOTAL_AGENTS=$(ls -1 "$REPO_CACHE_DIR/superpower/.freebuff/agents" 2>/dev/null | wc -l || echo "60")
+TOTAL_SKILLS="1,061"
 
 # 2. Install All CLI binaries and helpers
 echo -e "${C_BLUE}⚙️  [2/3] Memasang seluruh suite CLI binary ke $INSTALL_BIN_DIR...${C_RESET}"
@@ -50,9 +50,7 @@ chmod +x "$INSTALL_BIN_DIR"/freebuff-power "$INSTALL_BIN_DIR"/*.sh "$INSTALL_BIN
 
 # 3. Install Superpower templates
 echo -e "${C_BLUE}🧰 [3/3] Menyinkronkan ${TOTAL_AGENTS} Sub-Agents & ${TOTAL_SKILLS} Modular Skills ke $SUPERPOWER_DIR...${C_RESET}"
-cp -f "$REPO_CACHE_DIR/superpower/AGENTS.md" "$SUPERPOWER_DIR/AGENTS.md"
-cp -rf "$REPO_CACHE_DIR/superpower/agents/"* "$SUPERPOWER_DIR/agents/"
-cp -rf "$REPO_CACHE_DIR/superpower/skills/"* "$SUPERPOWER_DIR/skills/"
+cp -rf "$REPO_CACHE_DIR/superpower/"* "$SUPERPOWER_DIR/"
 
 # 4. Check Shell PATH
 CURRENT_SHELL="$(basename "$SHELL" 2>/dev/null || echo "bash")"
