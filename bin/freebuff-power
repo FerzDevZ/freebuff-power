@@ -1,10 +1,6 @@
 #!/usr/bin/env bash
 # ==============================================================================
-# ⚡ FREEBUFF-POWER SUPREME — ULTRA MULTI-AGENT, SKILLS & ANTI-BAN SUITE (v4.5)
-# ==============================================================================
-# Author: Freebuff Superpower Open-Source Community
-# Version: 4.5.0-Omnipotent Edition
-# License: MIT
+# ⚡ FREEBUFF-POWER SUPREME — Omnipotent Multi-Agent & Modular Skills Suite (v4.5)
 # ==============================================================================
 set -euo pipefail
 
@@ -15,620 +11,281 @@ while [ -h "$SOURCE" ]; do
   [[ $SOURCE != /* ]] && SOURCE="$DIR/$SOURCE"
 done
 SCRIPT_DIR="$( cd -P "$( dirname "$SOURCE" )" >/dev/null 2>&1 && pwd )"
-REPO_ROOT="$(dirname "$SCRIPT_DIR")"
 
-if [ -d "$REPO_ROOT/superpower/agents" ]; then
-  TEMPLATE_DIR="$REPO_ROOT/superpower"
-else
-  TEMPLATE_DIR="$HOME/.freebuff-superpower"
+GLOBAL_SUPERPOWER_DIR="$HOME/.freebuff-superpower"
+if [ ! -d "$GLOBAL_SUPERPOWER_DIR" ]; then
+  mkdir -p "$GLOBAL_SUPERPOWER_DIR"
+  if [ -d "$SCRIPT_DIR/../superpower" ]; then
+    cp -rf "$SCRIPT_DIR/../superpower/"* "$GLOBAL_SUPERPOWER_DIR/"
+  fi
 fi
 
-MANICODE_DIR="$HOME/.config/manicode"
-ANALYTICS_FILE="$MANICODE_DIR/analytics-id.json"
-OWNER_FILE="$MANICODE_DIR/freebuff-instance-owner.json"
-PROJECTS_DIR="$MANICODE_DIR/projects"
-REPO_URL="https://github.com/FerzDevZ/freebuff-power.git"
-
-# ANSI Colors
 C_CYAN='\033[0;36m'
 C_GREEN='\033[0;32m'
 C_YELLOW='\033[0;33m'
-C_RED='\033[0;31m'
 C_PURPLE='\033[0;35m'
+C_RED='\033[0;31m'
 C_BLUE='\033[0;34m'
 C_BOLD='\033[1m'
 C_DIM='\033[2m'
 C_RESET='\033[0m'
 
-function show_help() {
-  cat << 'HELP_EOF'
-========================================================================================
-⚡ FREEBUFF-POWER SUPREME — Omnipotent Multi-Agent & Skills Suite (v4.5)
-========================================================================================
+show_help() {
+  echo -e "${C_CYAN}${C_BOLD}========================================================================================${C_RESET}"
+  echo -e "${C_YELLOW}${C_BOLD}⚡ FREEBUFF-POWER SUPREME — Omnipotent Multi-Agent & Skills Suite (v4.5-Titanium)${C_RESET}"
+  echo -e "${C_CYAN}${C_BOLD}========================================================================================${C_RESET}\n"
+  echo -e "${C_BOLD}PENGGUNAAN:${C_RESET}"
+  echo -e "  ${C_GREEN}freebuff-power${C_RESET} ${C_YELLOW}<command>${C_RESET} [arguments] [options]\n"
 
-PENGGUNAAN:
-  freebuff-power <command> [arguments] [options]
+  echo -e "${C_PURPLE}${C_BOLD}🔥 PERINTAH UTAMA & PELUNCURAN KODING:${C_RESET}"
+  echo -e "  ${C_GREEN}start / go / full${C_RESET}     ${C_BOLD}[REKOMENDASI] One-Shot Launch:${C_RESET}"
+  echo -e "                        Reset Telemetry (Anti-Ban) + Injeksi 50 Agents & 1,055 Skills"
+  echo -e "                        + Langsung buka sesi interaktif Freebuff siap koding!"
+  echo -e "  ${C_GREEN}ui / tui${C_RESET}              Buka Interactive Terminal TUI Dashboard (pilih agen/skill visual)."
+  echo -e "  ${C_GREEN}compose <task> [-r]${C_RESET}   ${C_BOLD}[POWER COMPOSER 2.0]${C_RESET} Analisis arsitektur & racik agen/skills terbaik."
+  echo -e "  ${C_GREEN}spawn <agent> [task]${C_RESET}  Luncurkan Freebuff dengan persona spesifik (Contoh: spawn architect)."
+  echo -e "  ${C_GREEN}init [dir]${C_RESET}            Injeksi AGENTS.md & katalog .freebuff/ ke folder aktif tanpa buka sesi."
+  echo -e "  ${C_GREEN}run [args]${C_RESET}            Jalankan sesi Freebuff biasa dengan proteksi Anti-Ban aktif.\n"
 
-🔥 PERINTAH UTAMA & PELUNCURAN:
-  start / go / full     [REKOMENDASI] One-Shot All-in-One:
-                        Reset Telemetry (Anti-Ban) + Injeksi 50 Agents & 1,055 Skills
-                        + Langsung buka sesi interaktif Freebuff siap koding!
+  echo -e "${C_PURPLE}${C_BOLD}👥 MULTI-ACCOUNT VAULT & QUOTA ROTATION:${C_RESET}"
+  echo -e "  ${C_GREEN}account save <nama>${C_RESET}   Simpan sesi login akun aktif ke dalam vault aman."
+  echo -e "  ${C_GREEN}account list${C_RESET}          Lihat daftar akun tersimpan di vault beserta status aktif."
+  echo -e "  ${C_GREEN}account switch <nama>${C_RESET} Beralih ke akun lain dalam 0.1 detik (Instant Quota Swap)."
+  echo -e "  ${C_GREEN}account rotate${C_RESET}        Putar ke akun berikutnya secara otomatis (Round-Robin Rotator)."
+  echo -e "  ${C_GREEN}reset-full / logout${C_RESET}   Reset TOTAL seluruh token login, sesi, dan device fingerprint.\n"
 
-  ui / tui              Buka Interactive Terminal TUI Dashboard (pilih agen/skill visual).
+  echo -e "${C_PURPLE}${C_BOLD}🛠️ ENTERPRISE DEVOPS, SECURITY & PRO-TOOLING:${C_RESET}"
+  echo -e "  ${C_GREEN}release${C_RESET}               Otomasi Semantic Versioning, update CHANGELOG.md & siapkan tag."
+  echo -e "  ${C_GREEN}seed [count] [file]${C_RESET}   Hasilkan ribuan data dummy realistis Indonesia (nama, alamat, IDR)."
+  echo -e "  ${C_GREEN}bench [url]${C_RESET}           Uji throughput (RPS), p95 latency & response time API backend."
+  echo -e "  ${C_GREEN}theme [name]${C_RESET}          Generate OKLCH modern color palette & token Tailwind CSS v4."
+  echo -e "  ${C_GREEN}env${C_RESET}                   Verifikasi kelengkapan variabel .env vs .env.example."
+  echo -e "  ${C_GREEN}clean-code${C_RESET}            Pindai file mati (dead-code) & dependensi yang tidak terpakai."
+  echo -e "  ${C_GREEN}readme${C_RESET}                Generate README.md standar internasional + diagram Mermaid.js."
+  echo -e "  ${C_GREEN}audit / review${C_RESET}        Pindai kebocoran secret API Key, celah OWASP & hapus AI-slop."
+  echo -e "  ${C_GREEN}commit${C_RESET}                AI Conventional Commit Assistant otomatis berdasarkan git diff."
+  echo -e "  ${C_GREEN}explain <file>${C_RESET}        Bedah arsitektur kode file target & beri rekomendasi swarm persona."
+  echo -e "  ${C_GREEN}docker${C_RESET}                Buat Dockerfile multi-stage (< 50MB) & docker-compose.yml siap pakai."
+  echo -e "  ${C_GREEN}docs <library>${C_RESET}        Ingest dokumentasi resmi framework terbaru ke dalam konteks AI."
+  echo -e "  ${C_GREEN}new <preset> [name]${C_RESET}   Scaffold proyek baru instan (saas / flutter / go) + injeksi 1,055 skills.\n"
 
-  compose <task> [-r]   [POWER COMPOSER 2.0] Menganalisis kebutuhan arsitektur dan
-                        meracik kombinasi Agen & Skills terbaik (-r untuk auto-run).
+  echo -e "${C_PURPLE}${C_BOLD}🌐 LIVE COLLABORATION, PREVIEW & SAFETY:${C_RESET}"
+  echo -e "  ${C_GREEN}pair [port]${C_RESET}           Buka Sesi Live Pair-Programming Real-Time (Bagikan link ke tim)."
+  echo -e "  ${C_GREEN}share [port]${C_RESET}          Buka HTTPS Public Tunnel & Live Preview ke HP (via Cloudflare)."
+  echo -e "  ${C_GREEN}snapshot save <label>${C_RESET} Buat checkpoint snapshot proyek sebelum AI melakukan refactor."
+  echo -e "  ${C_GREEN}snapshot list${C_RESET}         Tampilkan seluruh riwayat snapshot checkpoint proyek."
+  echo -e "  ${C_GREEN}snapshot restore [id]${C_RESET} Pulihkan seluruh file proyek ke checkpoint snapshot pilihan."
+  echo -e "  ${C_GREEN}rollback${C_RESET}              Shortcut instan: Pulihkan proyek ke snapshot terakhir (1 detik)."
+  echo -e "  ${C_GREEN}export [--cursor|--claude|--windsurf|--all]${C_RESET}"
+  echo -e "                        Ekspor 50 Agents & 1,055 Skills ke semua format AI IDE."
+  echo -e "  ${C_GREEN}eval${C_RESET}                  Jalankan Autonomous SWE-Bench Swarm Evaluator (Scorecard A+).\n"
 
-  spawn <agent> [task]  Luncurkan Freebuff dengan persona sub-agent spesifik
-                        (Contoh: freebuff-power spawn architect "Rancang API warkop").
+  echo -e "${C_PURPLE}${C_BOLD}💬 MANAJEMEN SESI & CHAT:${C_RESET}"
+  echo -e "  ${C_GREEN}continue / resume${C_RESET}     Lanjutkan sesi percakapan/coding terakhir tanpa kehilangan konteks."
+  echo -e "  ${C_GREEN}session list${C_RESET}          Tampilkan daftar histori proyek dan riwayat sesi chat.\n"
 
-  init [dir]            Injeksi file AGENTS.md dan katalog .freebuff/ ke folder aktif
-                        tanpa membuka sesi Freebuff.
+  echo -e "${C_PURPLE}${C_BOLD}🛡️ ANTI-BAN, UPDATE & PEMELIHARAAN:${C_RESET}"
+  echo -e "  ${C_GREEN}clean${C_RESET}                 Reset total anonymous UUID telemetry & lockfile (100% Anti-Ban)."
+  echo -e "  ${C_GREEN}doctor${C_RESET}                Pemeriksaan kesehatan sistem (integritas 50 agents & 1,055 skills)."
+  echo -e "  ${C_GREEN}update${C_RESET}                Perbarui pustaka Skills & Agents ke versi rilis terbaru dari GitHub.\n"
 
-  run [args]            Jalankan sesi Freebuff biasa dengan proteksi Anti-Ban aktif.
+  echo -e "${C_PURPLE}${C_BOLD}🔍 EKSPLORASI & PANDUAN:${C_RESET}"
+  echo -e "  ${C_GREEN}search <keyword>${C_RESET}      Cari Sub-Agent atau Modular Skills berdasarkan kata kunci."
+  echo -e "  ${C_GREEN}info <name>${C_RESET}           Buka dan baca SOP / instruksi lengkap dari Agent atau Skill."
+  echo -e "  ${C_GREEN}list${C_RESET}                  Tampilkan rekapitulasi 50 Sub-Agents & 1,055 Modular Skills."
+  echo -e "  ${C_GREEN}help / --help / -h${C_RESET}    Tampilkan panduan bantuan lengkap ini.\n"
 
-👥 MULTI-ACCOUNT VAULT & QUOTA ROTATION (NEW):
-  account save <nama>   Simpan sesi login akun aktif ke dalam vault aman.
-  account list          Lihat daftar akun tersimpan di vault beserta status aktif.
-  account switch <nama> Beralih ke akun lain dalam 0.1 detik (Instant Quota Swap).
-  account rotate        Putar ke akun berikutnya secara otomatis (Round-Robin).
-  reset-full / logout   Reset TOTAL seluruh token login, sesi, dan device fingerprint.
-
-🛠️ SECURITY, DEVOPS & PRO-TOOLING SUITE:
-  release               Otomasi Semantic Versioning, update CHANGELOG.md & rilis.
-  seed [count] [file]   Hasilkan data dummy realistis Indonesia (nama, alamat, IDR).
-  bench [url]           Uji throughput (RPS) & latency response time API lokal.
-  theme [name]          Generate OKLCH color palette & token Tailwind CSS v4.
-  env                   Verifikasi kelengkapan variabel .env vs .env.example.
-  clean-code            Pindai file mati (dead-code) & dependensi yang tidak terpakai.
-  readme                Generate README.md standar internasional + diagram Mermaid.js.
-  audit / review        Pindai kebocoran secret API Key, celah OWASP & hapus AI-slop.
-  commit                AI Conventional Commit Assistant otomatis berdasarkan git diff.
-  explain <file>        Bedah arsitektur kode file target & beri rekomendasi swarm persona.
-  docker                Buat Dockerfile multi-stage (< 50MB) & docker-compose.yml siap pakai.
-  docs <library>        Ingest dokumentasi resmi framework terbaru ke dalam konteks AI.
-  new <preset> [name]   Scaffold proyek baru instan (saas / flutter / go) + injeksi 1,055 skills.
-
-🌐 LIVE COLLABORATION, PREVIEW & SAFETY:
-  pair [port]           Buka Sesi Terminal Kolaboratif Real-Time (Bagikan link ke tim).
-  share [port]          Buka HTTPS Public Tunnel & Live Preview ke HP (via Cloudflare).
-  snapshot save <label> Buat checkpoint snapshot proyek sebelum AI melakukan refactor.
-  snapshot list         Tampilkan seluruh riwayat snapshot checkpoint proyek.
-  snapshot restore [id] Pulihkan seluruh file proyek ke checkpoint snapshot pilihan.
-  rollback              Shortcut instan: Pulihkan proyek ke snapshot terakhir (1 detik).
-  export [--cursor|--claude|--windsurf|--all]
-                        Ekspor 50 Agents & 1,055 Skills ke semua format AI IDE.
-  eval                  Jalankan Autonomous SWE-Bench Swarm Evaluator (Scorecard A+).
-
-💬 MANAJEMEN SESI & CHAT:
-  continue / resume     Lanjutkan sesi percakapan/coding terakhir tanpa kehilangan konteks.
-  session list          Tampilkan daftar histori proyek dan riwayat sesi chat.
-
-🛡️ ANTI-BAN, UPDATE & PEMELIHARAAN:
-  clean                 Reset total anonymous UUID telemetry & lockfile (100% Anti-Ban).
-  doctor                Pemeriksaan kesehatan sistem (integritas 1,055 skills & templates).
-  update                Perbarui pustaka Skills & Agents ke versi rilis terbaru dari GitHub.
-
-🔍 EKSPLORASI & PANDUAN:
-  search <keyword>      Cari Sub-Agent atau Modular Skills berdasarkan kata kunci.
-  info <name>           Buka dan baca SOP / instruksi lengkap dari Agent atau Skill.
-  list                  Tampilkan rekapitulasi 50 Sub-Agents & 1,055 Modular Skills.
-  help / --help / -h    Tampilkan panduan bantuan lengkap ini.
-
-----------------------------------------------------------------------------------------
-💡 CONTOH SKENARIO PENGGUNAAN NYATA:
-  1. Mulai Koding Instan      : $ freebuff-power start
-  2. Buka Visual Dashboard    : $ freebuff-power ui
-  3. Racik & Jalankan Prompt  : $ freebuff-power compose "Buat landing page 3D" -r
-  4. Preview Web ke HP        : $ freebuff-power share
-  5. Checkpoint Sebelum AI    : $ freebuff-power snapshot save "sebelum refactor"
-  6. Batalkan Kesalahan AI    : $ freebuff-power rollback
-  7. Simpan Akun ke Vault     : $ freebuff-power account save akun_utama
-  8. Putar Akun saat Limit    : $ freebuff-power rotate
-  9. Ekspor ke Cursor/Claude  : $ freebuff-power export --all
- 10. Reset Identitas Total    : $ freebuff-power reset-full
-========================================================================================
-HELP_EOF
+  echo -e "${C_CYAN}----------------------------------------------------------------------------------------${C_RESET}"
+  echo -e "${C_BOLD}💡 CONTOH SKENARIO PENGGUNAAN NYATA:${C_RESET}"
+  echo -e "  1. Mulai Koding Instan      : ${C_CYAN}$ freebuff-power start${C_RESET}"
+  echo -e "  2. Buka Visual Dashboard    : ${C_CYAN}$ freebuff-power ui${C_RESET}"
+  echo -e "  3. Live Terminal di Browser : ${C_CYAN}$ freebuff-power pair${C_RESET}"
+  echo -e "  4. Buat 20 Data Dummy       : ${C_CYAN}$ freebuff-power seed 20${C_RESET}"
+  echo -e "  5. Benchmark API Backend    : ${C_CYAN}$ freebuff-power bench http://localhost:3000${C_RESET}"
+  echo -e "  6. Cek Kelengkapan .env     : ${C_CYAN}$ freebuff-power env${C_RESET}"
+  echo -e "  7. Bersihkan Kode Mati      : ${C_CYAN}$ freebuff-power clean-code${C_RESET}"
+  echo -e "  8. Otomasi Semantic Release : ${C_CYAN}$ freebuff-power release${C_RESET}"
+  echo -e "  9. Checkpoint Sebelum AI    : ${C_CYAN}$ freebuff-power snapshot save 'sebelum refactor'${C_RESET}"
+  echo -e " 10. Batalkan Kesalahan AI    : ${C_CYAN}$ freebuff-power rollback${C_RESET}"
+  echo -e " 11. Putar Akun saat Limit    : ${C_CYAN}$ freebuff-power rotate${C_RESET}"
+  echo -e "${C_CYAN}========================================================================================${C_RESET}\n"
 }
 
-function apply_anti_ban_shield() {
-  mkdir -p "$MANICODE_DIR"
-  local new_uuid
-  new_uuid="anon_$(cat /proc/sys/kernel/random/uuid 2>/dev/null || python3 -c 'import uuid; print(uuid.uuid4())')"
-  echo "{\"anonymousId\": \"$new_uuid\"}" > "$ANALYTICS_FILE"
-  
-  if [ -f "$OWNER_FILE" ]; then
-    rm -f "$OWNER_FILE"
-  fi
-  
-  rm -f "$MANICODE_DIR"/*.lock "$MANICODE_DIR"/*.sock "$MANICODE_DIR"/session-state.json 2>/dev/null || true
-  chmod 600 "$ANALYTICS_FILE" 2>/dev/null || true
-}
+COMMAND="${1:-}"
 
-function inject_superpower() {
-  local target_dir="${1:-$(pwd)}"
-  
-  if [ ! -d "$TEMPLATE_DIR" ]; then
-    echo -e "${C_RED}❌ Error: Template library $TEMPLATE_DIR tidak ditemukan!${C_RESET}"
-    exit 1
-  fi
+case "$COMMAND" in
+  ""|help|--help|-h)
+    show_help
+    ;;
 
-  cp -f "$TEMPLATE_DIR/AGENTS.md" "$target_dir/AGENTS.md"
-  mkdir -p "$target_dir/.freebuff/agents" "$target_dir/.freebuff/skills"
-  cp -rf "$TEMPLATE_DIR/agents/"* "$target_dir/.freebuff/agents/"
-  cp -rf "$TEMPLATE_DIR/skills/"* "$target_dir/.freebuff/skills/"
-}
+  start|go|full)
+    "$SCRIPT_DIR/clean.sh" >/dev/null 2>&1 || true
+    "$SCRIPT_DIR/init.sh" . >/dev/null 2>&1 || true
+    exec "$SCRIPT_DIR/run.sh"
+    ;;
 
-function one_shot_start() {
-  local target_dir="$(pwd)"
-  echo -e "${C_CYAN}${C_BOLD}========================================================================${C_RESET}"
-  echo -e "${C_YELLOW}${C_BOLD}⚡ [FREEBUFF-POWER] ONE-SHOT ALL-IN-ONE (46 AGENTS & 1,055 SKILLS)...${C_RESET}"
-  echo -e "${C_CYAN}${C_BOLD}========================================================================${C_RESET}"
-  
-  apply_anti_ban_shield
-  echo -e "${C_GREEN}🛡️  1. Anti-Ban Telemetry Shield : ${C_BOLD}ACTIVE (Fresh Identity)${C_RESET}"
-  
-  inject_superpower "$target_dir"
-  local a_cnt s_cnt
-  a_cnt=$(ls -1 "$target_dir/.freebuff/agents" | wc -l)
-  s_cnt=$(ls -1 "$target_dir/.freebuff/skills" | wc -l)
-  echo -e "${C_GREEN}👥 2. Injeksi Superpower Suite   : ${C_BOLD}$a_cnt Sub-Agents & $s_cnt Skills${C_RESET}"
-  echo -e "${C_BLUE}🚀 3. Membuka Sesi Interaktif Freebuff...${C_RESET}"
-  echo -e "${C_CYAN}${C_BOLD}========================================================================${C_RESET}\n"
-  
-  export NODE_NO_WARNINGS=1
-  exec freebuff "$@"
-}
-
-function spawn_agent() {
-  local agent="${1:-}"
-  shift || true
-  local task="$*"
-  
-  if [ -z "$agent" ]; then
-    echo -e "${C_RED}⚠️ Harap sebutkan nama agent! Contoh: freebuff-power spawn architect 'rancang sistem'${C_RESET}"
-    echo -e "👉 Jalankan ${C_CYAN}freebuff-power list${C_RESET} untuk melihat daftar agent."
-    exit 1
-  fi
-
-  agent="${agent#@}"
-  local agent_file="$TEMPLATE_DIR/agents/${agent}.md"
-  
-  if [ ! -f "$agent_file" ]; then
-    local matched
-    matched=$(find "$TEMPLATE_DIR/agents" -iname "*${agent}*.md" | head -n 1)
-    if [ -n "$matched" ]; then
-      agent_file="$matched"
-      agent=$(basename "$agent_file" .md)
-    else
-      echo -e "${C_RED}❌ Agent '@$agent' tidak ditemukan.${C_RESET}"
-      exit 1
-    fi
-  fi
-
-  apply_anti_ban_shield
-  inject_superpower "$(pwd)"
-
-  echo -e "${C_YELLOW}⚡ [Freebuff-Power] Spawn Sub-Agent: ${C_BOLD}@$agent${C_RESET}"
-  if [ -n "$task" ]; then
-    echo -e "${C_CYAN}💡 Target Task : $task${C_RESET}"
-  fi
-  echo -e "${C_GREEN}🚀 Meluncurkan sesi Freebuff...${C_RESET}\n"
-  
-  export NODE_NO_WARNINGS=1
-  exec freebuff
-}
-
-function compose_prompt() {
-  local should_run=0
-  local task_args=()
-  
-  for arg in "$@"; do
-    if [[ "$arg" == "-r" || "$arg" == "--run" ]]; then
-      should_run=1
-    else
-      task_args+=("$arg")
-    fi
-  done
-
-  local query="${task_args[*]:-}"
-  if [ -z "$query" ]; then
-    echo -e "${C_RED}⚠️ Masukkan deskripsi tugas: freebuff-power compose \"<deskripsi tugas>\" [-r]${C_RESET}"
-    exit 1
-  fi
-
-  local lower_q
-  lower_q="$(echo "$query" | tr '[:upper:]' '[:lower:]')"
-
-  echo -e "${C_CYAN}${C_BOLD}========================================================================${C_RESET}"
-  echo -e "${C_YELLOW}${C_BOLD}🧠 [POWER COMPOSER 2.0] Semantic Intent & Swarm Architecture Analyzer${C_RESET}"
-  echo -e "${C_CYAN}${C_BOLD}========================================================================${C_RESET}\n"
-  echo -e "${C_BOLD}Tugas Target:${C_RESET} \"$query\"\n"
-  
-  local agents=()
-  local skills=()
-  
-  if [[ "$lower_q" =~ (ui|tampilan|web|frontend|design|desain|css|landing|porto|warkop|html|page|dashboard) ]]; then
-    agents+=("@design-engineer" "@frontend")
-    skills+=("[Skill: hallmark]" "[Skill: modern-web-design-master]")
-    if [[ "$lower_q" =~ (bento|grid|card) ]]; then
-      skills+=("[Skill: bento-grid-dashboard-ui]")
-    fi
-    if [[ "$lower_q" =~ (animasi|motion|framer|interaktif) ]]; then
-      skills+=("[Skill: framer-motion-animation-wizard]")
-    fi
-    if [[ "$lower_q" =~ (3d|three|webgl|game) ]]; then
-      agents+=("@game-dev-3d")
-      skills+=("[Skill: threejs-webgl-3d-experience]")
-    fi
-  fi
-
-  if [[ "$lower_q" =~ (api|backend|rest|grpc|graphql|auth|login|jwt|server|endpoint|crud|oauth) ]]; then
-    agents+=("@architect" "@backend")
-    skills+=("[Skill: clean-architecture-refactoring]" "[Skill: authflow-security-architect]" "[Skill: api-design-rest-grpc-graphql]")
-  fi
-
-  if [[ "$lower_q" =~ (db|database|sql|postgres|clickhouse|redis|mongo|query|tabel|schema) ]]; then
-    agents+=("@database")
-    if [[ "$lower_q" =~ (postgres|postgresql|index) ]]; then
-      skills+=("[Skill: postgresql-internals-indexing-master]")
-    fi
-    if [[ "$lower_q" =~ (clickhouse|olap|analytic) ]]; then
-      agents+=("@data-engineer-olap")
-      skills+=("[Skill: clickhouse-analytics-engineer]")
-    fi
-  fi
-
-  if [[ "$lower_q" =~ (web3|solidity|contract|smart contract|crypto|defi|token|eth|erc) ]]; then
-    agents+=("@smart-contract-auditor")
-    skills+=("[Skill: smart-contract-web3-security]" "[Skill: solidity-foundry-gas-optimizer]")
-  fi
-
-  if [[ "$lower_q" =~ (ai|rag|llm|vector|embedding|qdrant|ollama|vllm|gpt|claude|chat) ]]; then
-    agents+=("@ai-engineer" "@nlp-rag-specialist")
-    skills+=("[Skill: rag-llm-integrator]" "[Skill: vector-db-pgvector-qdrant-master]" "[Skill: prompt-injection-defense-guardrails]")
-  fi
-
-  if [[ "$lower_q" =~ (mobile|android|ios|flutter|react native|swiftui|app) ]]; then
-    agents+=("@mobile-engineer" "@flutter-specialist")
-    skills+=("[Skill: crossplatform-mobile-flutter-rn]" "[Skill: flutter-bloc-riverpod-clean-architecture]")
-  fi
-
-  if [[ "$lower_q" =~ (test|testing|qa|vitest|unit|e2e|playwright) ]]; then
-    agents+=("@tddmaster" "@qa")
-    skills+=("[Skill: unit-integration-tdd-master]" "[Skill: e2e-playwright-automation]")
-  fi
-
-  if [ ${#agents[@]} -eq 0 ]; then
-    agents+=("@architect" "@programmer")
-    skills+=("[Skill: hallmark]" "[Skill: clean-architecture-refactoring]")
-  fi
-
-  local -A seen_agents seen_skills
-  local unique_agents=()
-  for a in "${agents[@]}"; do
-    if [[ -z "${seen_agents[$a]:-}" ]]; then
-      seen_agents[$a]=1
-      unique_agents+=("$a")
-    fi
-  done
-
-  local unique_skills=()
-  for s in "${skills[@]}"; do
-    if [[ -z "${seen_skills[$s]:-}" ]]; then
-      seen_skills[$s]=1
-      unique_skills+=("$s")
-    fi
-  done
-
-  echo -e "${C_GREEN}${C_BOLD}👥 Recommended Sub-Agents:${C_RESET} ${unique_agents[*]}"
-  echo -e "${C_PURPLE}${C_BOLD}🧰 Recommended Skills    :${C_RESET} ${unique_skills[*]}"
-  
-  local generated_prompt="Sebagai ${unique_agents[*]}, tolong kerjakan tugas berikut secara menyeluruh: '${query}'. Terapkan ${unique_skills[*]} dengan standar Hallmark craftsmanship, zero AI-slop, dan sertakan unit tests."
-
-  echo -e "\n${C_YELLOW}${C_BOLD}📋 Master Prompt (Siap Eksekusi):${C_RESET}"
-  echo -e "${C_CYAN}------------------------------------------------------------------------${C_RESET}"
-  echo -e "${C_BOLD}$generated_prompt${C_RESET}"
-  echo -e "${C_CYAN}------------------------------------------------------------------------${C_RESET}\n"
-
-  if [ "$should_run" -eq 1 ]; then
-    echo -e "${C_GREEN}🚀 Auto-Run Flag Terdeteksi (-r)! Meluncurkan Freebuff sekarang...${C_RESET}\n"
-    apply_anti_ban_shield
-    inject_superpower "$(pwd)"
-    export NODE_NO_WARNINGS=1
-    exec freebuff
-  else
-    echo -e "${C_DIM}👉 Tips: Jalankan 'freebuff-power compose \"$query\" --run' untuk langsung eksekusi!${C_RESET}\n"
-  fi
-}
-
-function update_library() {
-  echo -e "${C_CYAN}${C_BOLD}========================================================================${C_RESET}"
-  echo -e "${C_YELLOW}${C_BOLD}🔄 [FREEBUFF-POWER] Memperbarui Pustaka Skills & Agents dari GitHub...${C_RESET}"
-  echo -e "${C_CYAN}${C_BOLD}========================================================================${C_RESET}\n"
-  
-  curl -fsSL https://raw.githubusercontent.com/FerzDevZ/freebuff-power/main/install.sh | bash
-}
-
-function manage_sessions() {
-  local subcmd="${1:-list}"
-  shift || true
-
-  case "$subcmd" in
-    list)
-      echo -e "${C_CYAN}${C_BOLD}========================================================================${C_RESET}"
-      echo -e "${C_YELLOW}${C_BOLD}📋 [FREEBUFF-POWER] DAFTAR SESI & RIWAYAT CHAT PROYEK${C_RESET}"
-      echo -e "${C_CYAN}${C_BOLD}========================================================================${C_RESET}\n"
-      
-      if [ -d "$PROJECTS_DIR" ]; then
-        echo -e "${C_GREEN}${C_BOLD}📁 Proyek yang Tersedia:${C_RESET}"
-        for p in "$PROJECTS_DIR"/*; do
-          if [ -d "$p" ]; then
-            local pname
-            pname="$(basename "$p")"
-            local chat_count
-            chat_count=$(find "$p/chats" -mindepth 1 -maxdepth 1 -type d 2>/dev/null | wc -l || echo "0")
-            echo -e "  - ${C_BOLD}$pname${C_RESET} ${C_DIM}($chat_count riwayat sesi chat)${C_RESET}"
-          fi
-        done
-        echo ""
-      fi
-      ;;
-
-    resume|continue)
-      local session_id="${1:-}"
-      apply_anti_ban_shield
-      if [ -z "$session_id" ]; then
-        echo -e "${C_GREEN}🚀 Melanjutkan sesi Freebuff percakapan sebelumnya...${C_RESET}"
-        export NODE_NO_WARNINGS=1
-        exec freebuff --continue
-      else
-        echo -e "${C_GREEN}🚀 Melanjutkan sesi Freebuff [ID: $session_id]...${C_RESET}"
-        export NODE_NO_WARNINGS=1
-        exec freebuff --continue "$session_id"
-      fi
-      ;;
-  esac
-}
-
-function run_doctor() {
-  echo -e "${C_CYAN}${C_BOLD}========================================================================${C_RESET}"
-  echo -e "${C_YELLOW}${C_BOLD}🩺 [FREEBUFF-POWER DOCTOR] Pemeriksaan Kesehatan Sistem${C_RESET}"
-  echo -e "${C_CYAN}${C_BOLD}========================================================================${C_RESET}"
-  
-  if which freebuff >/dev/null 2>&1; then
-    echo -e "${C_GREEN}  [✓] Binary Freebuff CLI      : Terpasang ($(which freebuff))${C_RESET}"
-  else
-    echo -e "${C_RED}  [✗] Binary Freebuff CLI      : TIDAK DITEMUKAN${C_RESET}"
-  fi
-
-  if [ -d "$TEMPLATE_DIR/agents" ] && [ -d "$TEMPLATE_DIR/skills" ]; then
-    local ac sc
-    ac=$(ls -1 "$TEMPLATE_DIR/agents" | wc -l)
-    sc=$(ls -1 "$TEMPLATE_DIR/skills" | wc -l)
-    echo -e "${C_GREEN}  [✓] Template Library Superpower: Siap ($ac Agents, $sc Skills)${C_RESET}"
-  else
-    echo -e "${C_RED}  [✗] Template Library Superpower: Direktori Rusak / Hilang${C_RESET}"
-  fi
-
-  if [ -f "$ANALYTICS_FILE" ]; then
-    echo -e "${C_GREEN}  [✓] Telemetry Configuration  : Bersih & Terisolasi${C_RESET}"
-  fi
-
-  if [ -f "AGENTS.md" ] && [ -d ".freebuff" ]; then
-    echo -e "${C_GREEN}  [✓] Folder Aktif ($(pwd)) : Telah Terinjeksi Superpower${C_RESET}"
-  else
-    echo -e "${C_YELLOW}  [!] Folder Aktif ($(pwd)) : Belum Terinjeksi (Gunakan 'freebuff-power init')${C_RESET}"
-  fi
-
-  echo -e "${C_CYAN}${C_BOLD}========================================================================${C_RESET}"
-  echo -e "${C_GREEN}${C_BOLD}🎉 Status Keseluruhan: SEHAT & SIAP TEMPUR!${C_RESET}\n"
-}
-
-function show_info() {
-  local target="${1:-}"
-  if [ -z "$target" ]; then
-    echo -e "${C_RED}⚠️ Harap masukkan nama agent atau skill: freebuff-power info <nama>${C_RESET}"
-    exit 1
-  fi
-  
-  target="${target#@}"
-  
-  local found_agent
-  found_agent=$(find "$TEMPLATE_DIR/agents" -iname "*${target}*.md" | head -n 1)
-  if [ -n "$found_agent" ]; then
-    echo -e "${C_CYAN}👥 ================= [ Sub-Agent: @$(basename "$found_agent" .md) ] =================${C_RESET}"
-    cat "$found_agent"
-    echo ""
-    return 0
-  fi
-
-  local found_skill
-  found_skill=$(find "$TEMPLATE_DIR/skills" -iname "*${target}*.md" | head -n 1)
-  if [ -n "$found_skill" ]; then
-    echo -e "${C_PURPLE}🧰 ================= [ Modular Skill: $(basename "$found_skill" .md) ] =================${C_RESET}"
-    cat "$found_skill"
-    echo ""
-    return 0
-  fi
-
-  echo -e "${C_RED}❌ Tidak ditemukan Agent atau Skill dengan nama: '$target'${C_RESET}"
-}
-
-function search_catalog() {
-  local query="${1:-}"
-  if [ -z "$query" ]; then
-    echo -e "${C_RED}⚠️ Harap masukkan keyword: freebuff-power search <keyword>${C_RESET}"
-    exit 1
-  fi
-  echo -e "${C_CYAN}🔍 Mencari Agents & Skills dengan keyword: '${C_BOLD}$query${C_RESET}${C_CYAN}'...${C_RESET}\n"
-  
-  echo -e "${C_YELLOW}--- 👥 Sub-Agents Matching: ---${C_RESET}"
-  find "$TEMPLATE_DIR/agents" -iname "*$query*.md" -exec basename {} .md \; | sed 's/^/  @/' || true
-  
-  echo -e "\n${C_PURPLE}--- 🧰 Modular Skills Matching: ---${C_RESET}"
-  find "$TEMPLATE_DIR/skills" -iname "*$query*.md" -exec basename {} .md \; | sed 's/^/  [Skill: /; s/$/]/' || true
-  echo ""
-}
-
-function list_catalog() {
-  local agent_count
-  local skill_count
-  agent_count=$(ls -1 "$TEMPLATE_DIR/agents" 2>/dev/null | wc -l || echo "0")
-  skill_count=$(ls -1 "$TEMPLATE_DIR/skills" 2>/dev/null | wc -l || echo "0")
-  
-  echo -e "${C_CYAN}${C_BOLD}========================================================================${C_RESET}"
-  echo -e "${C_YELLOW}${C_BOLD}⚡ TOTAL ARMADA: $agent_count SUB-AGENTS & $skill_count MODULAR SKILLS${C_RESET}"
-  echo -e "${C_CYAN}${C_BOLD}========================================================================${C_RESET}\n"
-  
-  echo -e "${C_GREEN}${C_BOLD}👥 $agent_count Sub-Agents Available:${C_RESET}"
-  for f in "$TEMPLATE_DIR/agents"/*.md; do
-    echo -e "  - ${C_BOLD}@$(basename "$f" .md)${C_RESET}"
-  done
-  echo ""
-  echo -e "${C_PURPLE}${C_BOLD}🧰 $skill_count Modular Skills Terkategori (Bebas Duplikat)${C_RESET}"
-}
-
-CMD="${1:-help}"
-
-case "$CMD" in
   ui|tui)
     exec node "$SCRIPT_DIR/tui.js"
     ;;
+
+  compose)
+    shift || true
+    exec node "$SCRIPT_DIR/composer.js" "$@"
+    ;;
+
+  spawn)
+    shift || true
+    exec "$SCRIPT_DIR/spawn.sh" "$@"
+    ;;
+
+  init)
+    shift || true
+    exec "$SCRIPT_DIR/init.sh" "$@"
+    ;;
+
+  run)
+    shift || true
+    exec "$SCRIPT_DIR/run.sh" "$@"
+    ;;
+
   account)
     shift || true
     exec "$SCRIPT_DIR/account.sh" "$@"
     ;;
+
   rotate)
     exec "$SCRIPT_DIR/account.sh" rotate
     ;;
-  reset-full|purge-auth|logout)
-    exec "$SCRIPT_DIR/account.sh" reset
+
+  reset-full|logout)
+    exec "$SCRIPT_DIR/account.sh" reset-full
     ;;
-  pair|collaborate)
-    shift || true
-    exec "$SCRIPT_DIR/pair.sh" "$@"
-    ;;
-  share|tunnel)
-    shift || true
-    exec "$SCRIPT_DIR/share.sh" "$@"
-    ;;
-  snapshot)
-    shift || true
-    exec "$SCRIPT_DIR/snapshot.sh" "$@"
-    ;;
-  rollback)
-    exec "$SCRIPT_DIR/snapshot.sh" restore
-    ;;
-  eval|benchmark)
-    exec node "$SCRIPT_DIR/eval.js"
-    ;;
-  audit|review)
-    exec node "$SCRIPT_DIR/audit.js"
-    ;;
-  commit)
-    exec "$SCRIPT_DIR/commit.sh"
-    ;;
-  docs|doc)
-    shift || true
-    exec node "$SCRIPT_DIR/docs.js" "$@"
-    ;;
-  release)
-    exec "$SCRIPT_DIR/release.sh"
-    ;;
-  seed)
-    shift || true
-    exec node "$SCRIPT_DIR/seed.js" "$@"
-    ;;
-  bench)
-    shift || true
-    exec node "$SCRIPT_DIR/bench.js" "$@"
-    ;;
-  theme)
-    shift || true
-    exec node "$SCRIPT_DIR/theme.js" "$@"
-    ;;
-  env)
-    exec node "$SCRIPT_DIR/envcheck.js"
-    ;;
-  clean-code)
-    exec node "$SCRIPT_DIR/cleancode.js"
-    ;;
-  readme)
-    exec node "$SCRIPT_DIR/readme-gen.js"
-    ;;
-  explain)
-    shift || true
-    exec node "$SCRIPT_DIR/explain.js" "$@"
-    ;;
-  docker|dockerize)
-    exec "$SCRIPT_DIR/dockerize.sh"
-    ;;
-  new|scaffold)
-    shift || true
-    exec "$SCRIPT_DIR/scaffolder.sh" "$@"
-    ;;
-  export)
-    shift || true
-    exec node "$SCRIPT_DIR/exporter.js" "$@"
-    ;;
-  start|go|full)
-    shift || true
-    one_shot_start "$@"
-    ;;
-  init)
-    shift || true
-    inject_superpower "${1:-$(pwd)}"
-    echo -e "${C_GREEN}✅ Sukses! 50 Sub-Agents & 1,055 Modular Skills berhasil disuntikkan ke $(pwd).${C_RESET}"
-    ;;
-  spawn)
-    shift || true
-    spawn_agent "$@"
-    ;;
-  compose)
-    shift || true
-    compose_prompt "$@"
-    ;;
-  update)
-    update_library
-    ;;
-  session)
-    shift || true
-    exec node "$SCRIPT_DIR/session.js" "$@"
-    ;;
+
   continue|resume)
     shift || true
     exec node "$SCRIPT_DIR/session.js" continue "$@"
     ;;
-  clean)
-    apply_anti_ban_shield
-    echo -e "${C_GREEN}✅ Telemetry Anonymous ID & residual cache berhasil dibersihkan (Anti-Ban Active).${C_RESET}"
-    ;;
-  doctor)
-    run_doctor
-    ;;
-  info)
+
+  session)
     shift || true
-    show_info "$@"
+    exec node "$SCRIPT_DIR/session.js" "$@"
     ;;
+
+  release)
+    exec "$SCRIPT_DIR/release.sh"
+    ;;
+
+  seed)
+    shift || true
+    exec node "$SCRIPT_DIR/seed.js" "$@"
+    ;;
+
+  bench)
+    shift || true
+    exec node "$SCRIPT_DIR/bench.js" "$@"
+    ;;
+
+  theme)
+    shift || true
+    exec node "$SCRIPT_DIR/theme.js" "$@"
+    ;;
+
+  env)
+    exec node "$SCRIPT_DIR/envcheck.js"
+    ;;
+
+  clean-code)
+    exec node "$SCRIPT_DIR/cleancode.js"
+    ;;
+
+  readme)
+    exec node "$SCRIPT_DIR/readme-gen.js"
+    ;;
+
+  explain)
+    shift || true
+    exec node "$SCRIPT_DIR/explain.js" "$@"
+    ;;
+
+  docker|dockerize)
+    exec "$SCRIPT_DIR/dockerize.sh"
+    ;;
+
+  audit|review)
+    shift || true
+    exec node "$SCRIPT_DIR/audit.js" "$@"
+    ;;
+
+  commit)
+    shift || true
+    exec "$SCRIPT_DIR/commit.sh" "$@"
+    ;;
+
+  docs)
+    shift || true
+    exec node "$SCRIPT_DIR/docs.js" "$@"
+    ;;
+
+  new|scaffold)
+    shift || true
+    exec "$SCRIPT_DIR/scaffolder.sh" "$@"
+    ;;
+
+  pair|collaborate)
+    shift || true
+    exec "$SCRIPT_DIR/pair.sh" "$@"
+    ;;
+
+  share|tunnel)
+    shift || true
+    exec "$SCRIPT_DIR/share.sh" "$@"
+    ;;
+
+  snapshot)
+    shift || true
+    exec "$SCRIPT_DIR/snapshot.sh" "$@"
+    ;;
+
+  rollback)
+    exec "$SCRIPT_DIR/snapshot.sh" rollback
+    ;;
+
+  export)
+    shift || true
+    exec node "$SCRIPT_DIR/exporter.js" "$@"
+    ;;
+
+  eval)
+    exec node "$SCRIPT_DIR/eval.js"
+    ;;
+
+  clean)
+    exec "$SCRIPT_DIR/clean.sh"
+    ;;
+
+  doctor)
+    exec "$SCRIPT_DIR/doctor.sh"
+    ;;
+
+  update)
+    exec "$SCRIPT_DIR/update.sh"
+    ;;
+
   search)
     shift || true
-    search_catalog "$@"
+    exec "$SCRIPT_DIR/search.sh" "$@"
     ;;
-  list)
-    list_catalog
-    ;;
-  run)
+
+  info)
     shift || true
-    apply_anti_ban_shield
-    exec freebuff "$@"
+    exec "$SCRIPT_DIR/info.sh" "$@"
     ;;
-  help|-h|--help)
-    show_help
+
+  list)
+    exec "$SCRIPT_DIR/list.sh"
     ;;
+
   *)
-    echo -e "${C_RED}Unknown command: $CMD${C_RESET}"
-    show_help
-    exit 1
+    exec "$SCRIPT_DIR/run.sh" "$@"
     ;;
 esac
