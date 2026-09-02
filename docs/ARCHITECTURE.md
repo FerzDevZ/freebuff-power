@@ -19,7 +19,7 @@ graph TD
     end
     
     subgraph Modular Skills Catalog
-        Dev -.-> S1[1,055 Modular Skills]
+        Dev -.-> S1[1,061 Modular Skills]
         QA -.-> S1
     end
     

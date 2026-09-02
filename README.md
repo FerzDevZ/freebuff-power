@@ -1,7 +1,7 @@
 <div align="center">
 
 # ⚡ FREEBUFF-POWER (Omnipotent Edition v4.5)
-### The World's Most Advanced 46-Agent Swarm, 1,055 Skills, Multi-Account Vault & Anti-Ban Architecture for Freebuff
+### The World's Most Advanced 46-Agent Swarm, 1,061 Skills, Multi-Account Vault & Anti-Ban Architecture for Freebuff
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Sub-Agents: 46](https://img.shields.io/badge/Sub--Agents-46%20Elite-blueviolet.svg)](#-specialized-sub-agents-roster-46-elite-agents)
@@ -19,9 +19,9 @@
  |_|    |_|  \_\______|______|____/ \____/|_|    |_|      |_|     \____/   \/  \/   |______|_|  \_\
 ```
 
-**Freebuff-Power v4.5** transforms Freebuff into an autonomous **46-Agent Swarm** powered by **1,055 Modular Skills**, Multi-Account Quota Rotation, an interactive **Terminal TUI Dashboard**, Time-Travel Snapshots, Live Mobile Tunneling, Dual-Gate QA Invariants, and Enterprise Anti-Ban Safety.
+**Freebuff-Power v4.5** transforms Freebuff into an autonomous **46-Agent Swarm** powered by **1,061 Modular Skills**, Multi-Account Quota Rotation, an interactive **Terminal TUI Dashboard**, Time-Travel Snapshots, Live Mobile Tunneling, Dual-Gate QA Invariants, and Enterprise Anti-Ban Safety.
 
-[Instalasi 1 Baris](#-quick-installation-1-line-installer) • [Fitur Utama v4.5](#-fitur-utama-v45) • [Panduan CLI Lengkap](#-cli-command-palette-v45) • [Multi-Account Vault](#-multi-account-vault--quota-rotation) • [Roster 54 Sub-Agents](#-specialized-sub-agents-roster-46-elite-agents) • [Katalog 1,055 Skills](#-modular-skills-catalog-1055-skills)
+[Instalasi 1 Baris](#-quick-installation-1-line-installer) • [Fitur Utama v4.5](#-fitur-utama-v45) • [Panduan CLI Lengkap](#-cli-command-palette-v45) • [Multi-Account Vault](#-multi-account-vault--quota-rotation) • [Roster 60 Sub-Agents](#-specialized-sub-agents-roster-46-elite-agents) • [Katalog 1,061 Skills](#-modular-skills-catalog-1055-skills)
 
 </div>
 
@@ -51,7 +51,7 @@ wget -qO- https://raw.githubusercontent.com/FerzDevZ/freebuff-power/main/install
 
 ### 2. 🖥️ Interactive Terminal TUI Dashboard (`freebuff-power ui`)
 - Dashboard visual keyboard-driven di terminal (ala `lazygit`).
-- Jelajahi **54 Sub-Agents & 1,055 Skills** dengan preview SOP instan.
+- Jelajahi **60 Sub-Agents & 1,061 Skills** dengan preview SOP instan.
 - Centang kombinasi agen/skill dengan `[Spacebar]`, lalu tekan `[Enter]` untuk meluncurkan Freebuff!
 - Filter pencarian instan dengan menekan tombol `/`.
 
@@ -67,7 +67,7 @@ wget -qO- https://raw.githubusercontent.com/FerzDevZ/freebuff-power/main/install
 - Menilai kesiapan armada multi-agent berdasarkan 5 metrik kualitas (*Roster Diversity, Skills Depth, Anti-Slop, Dual-Gate QA, Token Economy*). **Skor Sempurna: 100/100 Grade A+**.
 
 ### 6. 🔄 Multi-IDE Universal Exporter (`freebuff-power export`)
-- Ekspor seluruh 46 Agen dan 1,055 Skills ke semua editor AI lainnya dalam 1 detik:
+- Ekspor seluruh 46 Agen dan 1,061 Skills ke semua editor AI lainnya dalam 1 detik:
   - `freebuff-power export --cursor` $\rightarrow$ `.cursorrules`
   - `freebuff-power export --claude` $\rightarrow$ `CLAUDE.md`
   - `freebuff-power export --windsurf` $\rightarrow$ `.windsurfrules`
@@ -102,7 +102,7 @@ wget -qO- https://raw.githubusercontent.com/FerzDevZ/freebuff-power/main/install
   freebuff-power snapshot save     Simpan checkpoint snapshot proyek
   freebuff-power snapshot list     Daftar riwayat checkpoint proyek
   freebuff-power rollback          Pulihkan seluruh kode ke snapshot terakhir
-  freebuff-power export --all      Ekspor 54 Agents & 1,055 Skills ke Cursor/Claude/Windsurf
+  freebuff-power export --all      Ekspor 60 Agents & 1,061 Skills ke Cursor/Claude/Windsurf
   freebuff-power eval              Jalankan Swarm Benchmark Evaluator (Skor 100/100)
 
 💬 MANAJEMEN SESI & CHAT:
@@ -118,7 +118,7 @@ wget -qO- https://raw.githubusercontent.com/FerzDevZ/freebuff-power/main/install
 
 ---
 
-## 👥 Specialized Sub-Agents Roster (54 Elite Agents)
+## 👥 Specialized Sub-Agents Roster (60 Elite Agents)
 
 | Sub-Agent | Focus & Responsibility |
 |---|---|
@@ -162,7 +162,7 @@ wget -qO- https://raw.githubusercontent.com/FerzDevZ/freebuff-power/main/install
 
 ---
 
-## 🧰 Modular Skills Catalog (1,055 Skills)
+## 🧰 Modular Skills Catalog (1,061 Skills)
 
 1. **Architecture & Design (115+ skills)**: Clean Architecture, CQRS, Event Sourcing, Domain-Driven Design, API Design.
 2. **Backend Polyglot (185+ skills)**: FastAPI, NestJS, Go Concurrency & Channels, Rust Tokio/Axum, Spring Boot, Bun/ElysiaJS.
