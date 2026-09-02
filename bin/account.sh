@@ -156,7 +156,7 @@ SUBCMD="${1:-list}"
 shift || true
 
 case "$SUBCMD" in
-  reset|full-reset|purge|logout)
+  reset|reset-full|full-reset|purge|logout)
     full_reset
     ;;
   save)

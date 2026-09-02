@@ -158,7 +158,7 @@ case "$COMMAND" in
     exec "$SCRIPT_DIR/account.sh" rotate
     ;;
 
-  reset-full|logout)
+  reset-full|reset|logout)
     exec "$SCRIPT_DIR/account.sh" reset-full
     ;;
 
