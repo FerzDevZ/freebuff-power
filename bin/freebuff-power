@@ -51,7 +51,7 @@ PENGGUNAAN:
 
 🔥 PERINTAH UTAMA & PELUNCURAN:
   start / go / full     [REKOMENDASI] One-Shot All-in-One:
-                        Reset Telemetry (Anti-Ban) + Injeksi 44 Agents & 1,042 Skills
+                        Reset Telemetry (Anti-Ban) + Injeksi 46 Agents & 1,055 Skills
                         + Langsung buka sesi interaktif Freebuff siap koding!
 
   ui / tui              Buka Interactive Terminal TUI Dashboard (pilih agen/skill visual).
@@ -81,7 +81,7 @@ PENGGUNAAN:
   snapshot restore [id] Pulihkan seluruh file proyek ke checkpoint snapshot pilihan.
   rollback              Shortcut instan: Pulihkan proyek ke snapshot terakhir (1 detik).
   export [--cursor|--claude|--windsurf|--all]
-                        Ekspor 44 Agents & 1,042 Skills ke semua format AI IDE.
+                        Ekspor 46 Agents & 1,055 Skills ke semua format AI IDE.
   eval                  Jalankan Autonomous SWE-Bench Swarm Evaluator (Scorecard A+).
 
 💬 MANAJEMEN SESI & CHAT:
@@ -90,13 +90,13 @@ PENGGUNAAN:
 
 🛡️ ANTI-BAN, UPDATE & PEMELIHARAAN:
   clean                 Reset total anonymous UUID telemetry & lockfile (100% Anti-Ban).
-  doctor                Pemeriksaan kesehatan sistem (integritas 1,042 skills & templates).
+  doctor                Pemeriksaan kesehatan sistem (integritas 1,055 skills & templates).
   update                Perbarui pustaka Skills & Agents ke versi rilis terbaru dari GitHub.
 
 🔍 EKSPLORASI & PANDUAN:
   search <keyword>      Cari Sub-Agent atau Modular Skills berdasarkan kata kunci.
   info <name>           Buka dan baca SOP / instruksi lengkap dari Agent atau Skill.
-  list                  Tampilkan rekapitulasi 44 Sub-Agents & 1,042 Modular Skills.
+  list                  Tampilkan rekapitulasi 46 Sub-Agents & 1,055 Modular Skills.
   help / --help / -h    Tampilkan panduan bantuan lengkap ini.
 
 ----------------------------------------------------------------------------------------
@@ -146,7 +146,7 @@ function inject_superpower() {
 function one_shot_start() {
   local target_dir="$(pwd)"
   echo -e "${C_CYAN}${C_BOLD}========================================================================${C_RESET}"
-  echo -e "${C_YELLOW}${C_BOLD}⚡ [FREEBUFF-POWER] ONE-SHOT ALL-IN-ONE (44 AGENTS & 1,042 SKILLS)...${C_RESET}"
+  echo -e "${C_YELLOW}${C_BOLD}⚡ [FREEBUFF-POWER] ONE-SHOT ALL-IN-ONE (46 AGENTS & 1,055 SKILLS)...${C_RESET}"
   echo -e "${C_CYAN}${C_BOLD}========================================================================${C_RESET}"
   
   apply_anti_ban_shield
@@ -514,7 +514,7 @@ case "$CMD" in
   init)
     shift || true
     inject_superpower "${1:-$(pwd)}"
-    echo -e "${C_GREEN}✅ Sukses! 44 Sub-Agents & 1,042 Modular Skills berhasil disuntikkan ke $(pwd).${C_RESET}"
+    echo -e "${C_GREEN}✅ Sukses! 46 Sub-Agents & 1,055 Modular Skills berhasil disuntikkan ke $(pwd).${C_RESET}"
     ;;
   spawn)
     shift || true
