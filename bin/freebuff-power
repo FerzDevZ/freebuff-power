@@ -202,6 +202,9 @@ case "$COMMAND" in
     exec node "$SCRIPT_DIR/readme-gen.js"
     ;;
 
+  vpn)
+    exec "$SCRIPT_DIR/vpn.sh"
+    ;;
   hook)
     exec "$SCRIPT_DIR/hook.sh"
     ;;
