@@ -31,8 +31,16 @@ export SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt
 export SSL_CERT_DIR=/etc/ssl/certs
 export NODE_EXTRA_CA_CERTS=/etc/ssl/certs/ca-certificates.crt
 
-# Bersihkan variabel proxy jika ada agar tidak mengganggu WireGuard
+# 4. Auto-Connect Cloudflare WARP secara otomatis jika terpasang
+if which warp-cli >/dev/null 2>&1; then
+  if ! warp-cli status 2>/dev/null | grep -q "Connected"; then
+    echo -e "\033[0;36m🌐 Menghubungkan Cloudflare WARP secara otomatis...\033[0m"
+    warp-cli connect >/dev/null 2>&1 || true
+  fi
+fi
+
+# Bersihkan variabel proxy jika ada agar tidak bentrok
 unset HTTP_PROXY HTTPS_PROXY ALL_PROXY http_proxy https_proxy all_proxy NODE_TLS_REJECT_UNAUTHORIZED || true
 
-# 4. Jalankan Freebuff
+# 5. Jalankan Freebuff
 exec freebuff "$@"
