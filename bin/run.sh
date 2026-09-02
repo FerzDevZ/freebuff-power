@@ -30,16 +30,18 @@ export MANICODE_DEVICE_HASH="$(od -vN "16" -An -tx1 /dev/urandom | tr -d " \n")"
 CLEAN_ARGS=()
 USE_FULL_TUNNEL=false
 
-for arg in "${@:-}"; do
-  if [ "$arg" = "--full" ] || [ "$arg" = "--proxy" ] || [ "$arg" = "-f" ]; then
-    USE_FULL_TUNNEL=true
-  else
-    CLEAN_ARGS+=("$arg")
+for arg in "$@"; do
+  if [ -n "$arg" ]; then
+    if [ "$arg" = "--full" ] || [ "$arg" = "--proxy" ] || [ "$arg" = "-f" ]; then
+      USE_FULL_TUNNEL=true
+    else
+      CLEAN_ARGS+=("$arg")
+    fi
   fi
 done
 
 if [ "$USE_FULL_TUNNEL" = true ]; then
-  echo -e "\033[0;32m\033[1m[🌐 FULL ACCESS TUNNEL ACTIVE]\033[0m Routing Freebuff via Tier-1 Global SOCKS5 (Zero System Lag)..."
+  echo -e "\033[0;32m\033[1m[🌐 FULL ACCESS TUNNEL ACTIVE]\033[0m Routing Freebuff via Tier-1 Global SOCKS5..."
   export HTTPS_PROXY="socks5h://127.0.0.1:9050"
   export HTTP_PROXY="socks5h://127.0.0.1:9050"
   export ALL_PROXY="socks5h://127.0.0.1:9050"

@@ -119,9 +119,10 @@ case "$COMMAND" in
     ;;
 
   start|go|full)
+    shift || true
     "$SCRIPT_DIR/clean.sh" >/dev/null 2>&1 || true
     "$SCRIPT_DIR/init.sh" . >/dev/null 2>&1 || true
-    exec "$SCRIPT_DIR/run.sh"
+    exec "$SCRIPT_DIR/run.sh" "$@"
     ;;
 
   ui|tui)
