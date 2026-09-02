@@ -1,8 +1,16 @@
 #!/usr/bin/env bash
 # ==============================================================================
-# 🤝 FREEBUFF-POWER INSTANT LIVE PAIR-PROGRAMMING (CLEAN URL DISPLAY)
+# 🤝 FREEBUFF-POWER INSTANT LIVE PAIR-PROGRAMMING (ZERO PASSWORD DIRECT ACCESS)
 # ==============================================================================
 set -euo pipefail
+
+SOURCE="${BASH_SOURCE[0]}"
+while [ -h "$SOURCE" ]; do
+  DIR="$( cd -P "$( dirname "$SOURCE" )" >/dev/null 2>&1 && pwd )"
+  SOURCE="$(readlink "$SOURCE")"
+  [[ $SOURCE != /* ]] && SOURCE="$DIR/$SOURCE"
+done
+SCRIPT_DIR="$( cd -P "$( dirname "$SOURCE" )" >/dev/null 2>&1 && pwd )"
 
 C_CYAN='\033[0;36m'
 C_GREEN='\033[0;32m'
@@ -16,20 +24,26 @@ C_RESET='\033[0m'
 PORT="${1:-7681}"
 
 echo -e "${C_CYAN}${C_BOLD}========================================================================${C_RESET}"
-echo -e "${C_YELLOW}${C_BOLD}🤝 [FREEBUFF-POWER PAIR] Instant Collaborative Terminal${C_RESET}"
+echo -e "${C_YELLOW}${C_BOLD}🤝 [FREEBUFF-POWER PAIR] Instant Live Collaborative Terminal${C_RESET}"
 echo -e "${C_CYAN}${C_BOLD}========================================================================${C_RESET}\n"
 
 # 1. Injeksi Superpower
 freebuff-power init . >/dev/null 2>&1 || true
 
-# 2. Start Web Terminal in Background
-echo -e "${C_GREEN}🚀 Menyalakan Web Terminal Engine...${C_RESET}"
-npx -y wetty --port "$PORT" --command "bash -l" --bypass-helmet >/dev/null 2>&1 &
+# 2. Check for tmate first (best terminal experience)
+if which tmate >/dev/null 2>&1; then
+  echo -e "${C_GREEN}🚀 Meluncurkan sesi Tmate...${C_RESET}\n"
+  exec tmate -F
+fi
+
+# 3. Start Zero-Password Web Terminal
+echo -e "${C_GREEN}🚀 Menjalankan Zero-Password Web Terminal Engine...${C_RESET}"
+node "$SCRIPT_DIR/webterm/server.js" >/dev/null 2>&1 &
 SERVER_PID=$!
 
-sleep 2
+sleep 1
 
-# 3. Create Cloudflare Tunnel & Extract Clean URL
+# 4. Create Cloudflare Tunnel & Extract Clean URL
 echo -e "${C_YELLOW}⏳ Menghubungkan ke Cloudflare Tunnel...${C_RESET}\n"
 
 CLOUDFLARED_LOG="$(mktemp)"
@@ -47,16 +61,15 @@ done
 
 if [ -n "$CLEAN_URL" ]; then
   echo -e "${C_GREEN}${C_BOLD}========================================================================${C_RESET}"
-  echo -e "${C_GREEN}${C_BOLD}🎉 LINK LIVE PAIR-PROGRAMMING KAMU SUDAH SIAP!${C_RESET}"
+  echo -e "${C_GREEN}${C_BOLD}🎉 LINK LIVE PAIR-PROGRAMMING SIAP (100% BEBAS PASSWORD)!${C_RESET}"
   echo -e "${C_GREEN}${C_BOLD}========================================================================${C_RESET}"
   echo -e "\n👉 ${C_CYAN}${C_BOLD}$CLEAN_URL${C_RESET}\n"
-  echo -e "${C_YELLOW}💡 Buka link di atas di browser atau bagikan ke temanmu untuk koding bersama!${C_RESET}"
+  echo -e "${C_YELLOW}💡 Buka link di atas di browser untuk koding bersama secara instan!${C_RESET}"
   echo -e "${C_DIM}(Tekan Ctrl+C untuk mematikan sesi kolaborasi)${C_RESET}"
   echo -e "${C_GREEN}${C_BOLD}========================================================================${C_RESET}\n"
 else
   echo -e "${C_RED}❌ Gagal mendapatkan URL Cloudflare. Terminal lokal aktif di: http://localhost:$PORT${C_RESET}\n"
 fi
 
-# Wait for Ctrl+C
 trap 'kill $SERVER_PID $TUNNEL_PID 2>/dev/null || true; rm -f "$CLOUDFLARED_LOG"; echo -e "\n${C_RED}🛑 Sesi kolaborasi dimatikan.${C_RESET}"; exit 0' INT TERM
 wait $TUNNEL_PID
