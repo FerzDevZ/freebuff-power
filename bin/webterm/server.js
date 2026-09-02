@@ -1,20 +1,41 @@
 #!/usr/bin/env node
 // ==============================================================================
-// ⚡ FREEBUFF-POWER TEAM COLLABORATIVE WEB TERMINAL (TEAM MEMBER IDENTITY)
+// ⚡ FREEBUFF-POWER TEAM COLLABORATIVE WEB TERMINAL (AUTO-CLEAN INSTANCE)
 // ==============================================================================
 const http = require("http");
 const { spawn } = require("child_process");
+const fs = require("fs");
+const path = require("path");
 
 const port = process.env.PORT || 7681;
+const manicodeDir = path.join(process.env.HOME, ".config/manicode");
 
-// Spawn bash process with PTY pipe
+// 1. Clean stale locks & residual processes before spawning
+try {
+  if (fs.existsSync(manicodeDir)) {
+    const files = fs.readdirSync(manicodeDir);
+    for (const f of files) {
+      if (f.endsWith(".lock") || f.endsWith(".sock") || f === "session-state.json") {
+        fs.unlinkSync(path.join(manicodeDir, f));
+      }
+    }
+  }
+} catch (e) {}
+
+// Kill any zombie freebuff processes
+try {
+  const { execSync } = require("child_process");
+  execSync("pkill -9 -f freebuff 2>/dev/null || true");
+} catch (e) {}
+
+// Spawn fresh interactive bash session
 const bash = spawn("bash", ["-l"], {
   env: process.env,
   stdio: ["pipe", "pipe", "pipe"]
 });
 
 let bashOutput = "";
-let activeMembers = new Map(); // ip/token -> username
+let activeMembers = new Map();
 
 bash.stdout.on("data", (data) => {
   bashOutput += data.toString();
@@ -26,7 +47,7 @@ bash.stderr.on("data", (data) => {
   if (bashOutput.length > 60000) bashOutput = bashOutput.slice(-60000);
 });
 
-// Auto launch freebuff-power start inside bash
+// Auto launch freebuff with auto-takeover / start
 setTimeout(() => {
   bash.stdin.write("freebuff-power start\n");
 }, 500);
@@ -45,7 +66,6 @@ const server = http.createServer((req, res) => {
         const token = json.token || Math.random().toString(36).slice(2);
         activeMembers.set(token, { name: name, joinedAt: new Date() });
         
-        // Broadcast join message to terminal output
         const joinBanner = `\r\n\x1b[32;1m👋 [TEAM COLLAB] ${name} bergabung ke sesi pair programming!\x1b[0m\r\n`;
         bashOutput += joinBanner;
 
@@ -59,7 +79,7 @@ const server = http.createServer((req, res) => {
     return;
   }
 
-  // 2. API: Keystrokes & Commands from Registered Members
+  // 2. API: Keystrokes & Commands
   if (url.pathname === "/api/input" && req.method === "POST") {
     let body = "";
     req.on("data", chunk => body += chunk);
@@ -78,7 +98,7 @@ const server = http.createServer((req, res) => {
     return;
   }
 
-  // 3. API: Poll real-time terminal output & active team roster
+  // 3. API: Output & Members
   if (url.pathname === "/api/output") {
     res.writeHead(200, {
       "Content-Type": "application/json",
@@ -92,7 +112,7 @@ const server = http.createServer((req, res) => {
     return;
   }
 
-  // 4. Serve Main Team Collab UI with Name Dialog Modal
+  // 4. Serve UI
   res.writeHead(200, {
     "Content-Type": "text/html; charset=utf-8",
     "Access-Control-Allow-Origin": "*"
@@ -116,7 +136,6 @@ const server = http.createServer((req, res) => {
     .member-tag { background: #238636; color: #fff; padding: 3px 8px; border-radius: 12px; font-weight: bold; }
     #terminal-container { height: calc(100% - 45px); width: 100%; padding: 10px; }
     
-    /* Name Modal Overlay */
     #modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.85); backdrop-filter: blur(5px); display: flex; align-items: center; justify-content: center; z-index: 9999; }
     #name-card { background: #161b22; border: 1px solid #30363d; border-radius: 12px; padding: 25px; width: 90%; max-width: 400px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
     #name-card h2 { color: #58a6ff; font-size: 18px; margin-bottom: 8px; }
@@ -128,7 +147,6 @@ const server = http.createServer((req, res) => {
   </style>
 </head>
 <body>
-  <!-- Modal Input Nama Tim -->
   <div id="modal-overlay">
     <div id="name-card">
       <h2>🤝 Freebuff Team Collab</h2>
@@ -213,6 +231,11 @@ const server = http.createServer((req, res) => {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ data: data, sender: myName })
       });
+    });
+
+    // Handle interactive clicks on terminal canvas to focus
+    document.getElementById('terminal-container').addEventListener('click', () => {
+      term.focus();
     });
 
     // Poll output & roster
