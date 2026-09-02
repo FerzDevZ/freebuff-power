@@ -15,7 +15,7 @@ SCRIPT_DIR="$( cd -P "$( dirname "$SOURCE" )" >/dev/null 2>&1 && pwd )"
 # 1. Jalankan Spoofer Pembersih Identitas
 "$SCRIPT_DIR/clean.sh" >/dev/null 2>&1 || true
 
-# 2. Injeksi Environment Variables Anti-Tracking Standar Industri
+# 2. Injeksi Environment Variables Anti-Tracking & SSL Cert Fix
 export DO_NOT_TRACK=1
 export TELEMETRY_DISABLED=1
 export NEXT_TELEMETRY_DISABLED=1
@@ -25,6 +25,11 @@ export PRISMA_TELEMETRY_INFORMATION=0
 export MANICODE_TELEMETRY=0
 export MANICODE_ANALYTICS=0
 export MANICODE_DEVICE_HASH="$(od -vN "16" -An -tx1 /dev/urandom | tr -d " \n")"
+
+# Fix SSL / TLS Certificate Verification for VPN & Node.js Engine
+export NODE_TLS_REJECT_UNAUTHORIZED=0
+export SSL_CERT_DIR=/etc/ssl/certs
+export SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt
 
 # 3. Mode Full-Access Auto Tunnel (Jika opsi --full / --proxy diaktifkan)
 CLEAN_ARGS=()
