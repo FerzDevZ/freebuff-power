@@ -202,6 +202,15 @@ case "$COMMAND" in
     exec node "$SCRIPT_DIR/readme-gen.js"
     ;;
 
+  hook)
+    exec "$SCRIPT_DIR/hook.sh"
+    ;;
+  ci)
+    exec "$SCRIPT_DIR/ci.sh"
+    ;;
+  pr)
+    exec node "$SCRIPT_DIR/pr.js"
+    ;;
   explain)
     shift || true
     exec node "$SCRIPT_DIR/explain.js" "$@"
