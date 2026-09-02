@@ -1,13 +1,13 @@
 <div align="center">
 
-# ⚡ FREEBUFF-POWER (Titanium Swarm Edition v4.0)
-### The World's Most Advanced 42-Agent Autonomous Swarm, Dual-Gate QA Engine & Anti-Ban Shield for Freebuff
+# ⚡ FREEBUFF-POWER (Omnipotent Edition v4.5)
+### The World's Most Powerful Autonomous Multi-Agent Swarm, TUI Dashboard & Anti-Ban Architecture for Freebuff
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Sub-Agents: 42](https://img.shields.io/badge/Sub--Agents-42%20Elite-blueviolet.svg)](#-specialized-sub-agents-roster-42-elite-agents)
 [![Modular Skills: 1,025](https://img.shields.io/badge/Modular%20Skills-1%2C025%20Clean-emerald.svg)](#-modular-skills-catalog-1025-skills)
-[![Quality: Dual--Gate QA](https://img.shields.io/badge/Quality%20Gate-Dual--Gate%20Invariant-orange.svg)](#-dual-gate-quality-invariants)
-[![Anti-Ban: Active](https://img.shields.io/badge/Anti--Ban%20Shield-Active%20v4.0-brightgreen.svg)](#-enterprise-anti-ban--anti-suspend-shield)
+[![Swarm Score: 100/100 A+](https://img.shields.io/badge/Swarm%20Rating-100%2F100%20Grade%20A%2B-brightgreen.svg)](#-autonomous-swe-bench-evaluator)
+[![Anti-Ban: Active](https://img.shields.io/badge/Anti--Ban%20Shield-Active%20v4.5-brightgreen.svg)](#-enterprise-anti-ban--anti-suspend-shield)
 [![Platform: Linux & macOS](https://img.shields.io/badge/Platform-Linux%20%7C%20macOS-informational.svg)](#-quick-installation-1-line-installer)
 
 ```
@@ -19,9 +19,9 @@
  |_|    |_|  \_\______|______|____/ \____/|_|    |_|      |_|     \____/   \/  \/   |______|_|  \_\
 ```
 
-**Freebuff-Power v4.0** transforms Freebuff into an autonomous **42-Agent Titanium Swarm** powered by **1,025 Modular Skills**, Dual-Gate Quality Invariants, a 3-Tier Cognitive Execution Matrix, and enterprise-grade anti-ban safety.
+**Freebuff-Power v4.5** is the ultimate AI engineering toolkit: an autonomous **42-Agent Swarm** powered by **1,025 Modular Skills**, an interactive **Terminal TUI Dashboard**, Time-Travel Snapshots, Live Mobile Tunneling, Dual-Gate QA Invariants, and Enterprise Anti-Ban Safety.
 
-[Instalasi 1 Baris](#-quick-installation-1-line-installer) • [Fitur Utama](#-fitur-utama-v40) • [Dual-Gate Invariants](#-dual-gate-quality-invariants) • [Roster 42 Sub-Agents](#-specialized-sub-agents-roster-42-elite-agents) • [Katalog Skills](#-modular-skills-catalog-1025-skills)
+[Instalasi 1 Baris](#-quick-installation-1-line-installer) • [Fitur Baru v4.5](#-fitur-baru-v45-god-tier) • [Panduan CLI](#-cli-command-palette) • [Roster 42 Sub-Agents](#-specialized-sub-agents-roster-42-elite-agents) • [Katalog 1,025 Skills](#-modular-skills-catalog-1025-skills)
 
 </div>
 
@@ -42,31 +42,64 @@ wget -qO- https://raw.githubusercontent.com/FerzDevZ/freebuff-power/main/install
 
 ---
 
-## 🌟 Fitur Utama (v4.0 Titanium Swarm)
+## 🌟 Fitur Baru v4.5 (God-Tier Edition)
 
-- 👥 **42 Specialized Sub-Agents**: Persona rekayasa terlengkap dari `@architect`, `@programmer`, `@monorepo-architect`, `@system-debugger-forensics`, `@tokenomics-fintech-ledger`, `@smart-contract-auditor`, `@nlp-rag-specialist`, hingga `@localization-i18n-pro`.
-- 🛡️ **Dual-Gate Quality Invariants**: Kode wajib lolos 2 gerbang mutlak (Gerbang 1: Static Quality 0 linter error & zero AI-slop; Gerbang 2: Behavioral Invariants 1 happy-path test + 2 negative edge cases).
-- 🧠 **Adaptive Cognitive Depth (3-Tier Matrix)**: Klasifikasi cerdas antara *Tier 1: Surgical Edits*, *Tier 2: Feature Development*, dan *Tier 3: Deep Swarm Architecture* dengan pembuatan dokumen `RFC.md` formal.
-- 🔄 **Standardized Swarm Handoff Protocol**: Kolaborasi multi-agent terstruktur menggunakan artifact handoff (`RFC.md` $\rightarrow$ `DIFF_LOG.md` $\rightarrow$ `TEST_REPORT.md` $\rightarrow$ `SECURITY_PASS.md` $\rightarrow$ `MEMORY.md`).
-- 🧰 **1,025 Modular Engineering Skills**: Pustaka komprehensif mencakup Next.js 15, FastAPI, Go concurrency, Rust Axum, PostgreSQL internals, Web3, 3D WebGL, hingga OWASP AppSec.
-- 🛡️ **Enterprise Anti-Ban & Anti-Suspend Shield**: Isolasi telemetry UUID dinamis (`anon_<uuid_v4>`), reset residual lockfiles, dan proteksi context budget (Zero 413 error).
-- 🪄 **Power Composer 2.0**: Analisis intent semantik dan auto-launch Freebuff langsung via `freebuff-power compose "<task>" --run`.
+### 1. 🖥️ Interactive Terminal TUI Dashboard (`freebuff-power ui`)
+Antarmuka visual keyboard-driven di terminal (ala `lazygit`):
+- Jelajahi **42 Sub-Agents & 1,025 Skills** secara interaktif dengan preview SOP instan.
+- Centang kombinasi agen/skill dengan `[Spacebar]`, lalu tekan `[Enter]` untuk langsung meluncurkan Freebuff!
+- Filter pencarian instan dengan menekan tombol `/`.
+
+### 2. 🌐 Mobile Live Preview & Tunnel (`freebuff-power share`)
+- Otomatis mendeteksi framework (Next.js/Vite/Astro) $\rightarrow$ menyalakan dev server $\rightarrow$ membuat link HTTPS publik instan via Cloudflare Tunnel.
+- Buka dan uji langsung aplikasi buatan AI di layar HP kamu atau bagikan linknya ke klien.
+
+### 3. ⏪ Time-Travel Safety Checkpoints (`freebuff-power snapshot`)
+- `freebuff-power snapshot save "label"`: Membuat *shadow checkpoint* proyek dalam 0.05 detik sebelum AI melakukan refactor besar.
+- `freebuff-power rollback`: Membatalkan kesalahan AI dan mengembalikan seluruh kode ke kondisi snapshot semula dalam 1 detik.
+
+### 4. 🧪 Autonomous SWE-Bench Swarm Evaluator (`freebuff-power eval`)
+- Menilai kesehatan dan kesiapan armada multi-agent kamu berdasarkan 5 metrik kualitas (*Roster Diversity, Skills Coverage, Anti-Slop, Dual-Gate QA, Token Economy*). **Skor Sempurna: 100/100 Grade A+**.
+
+### 5. 🔄 Multi-IDE Universal Exporter (`freebuff-power export`)
+- Ekspor seluruh 42 Agen dan 1,025 Skills ke editor AI lainnya dalam 1 detik:
+  - `freebuff-power export --cursor` $\rightarrow$ `.cursorrules`
+  - `freebuff-power export --claude` $\rightarrow$ `CLAUDE.md`
+  - `freebuff-power export --windsurf` $\rightarrow$ `.windsurfrules`
+  - `freebuff-power export --all` $\rightarrow$ Sinkronisasi ke semua IDE sekaligus!
 
 ---
 
-## 🛡️ Dual-Gate Quality Invariants
+## 🎮 CLI Command Palette (v4.5)
 
-```
-┌─────────────────────────────────────────────────────────────────────────┐
-│                      DUAL-GATE QUALITY PASS/FAIL                        │
-├────────────────────────────────────┬────────────────────────────────────┤
-│  GATE 1: STATIC QUALITY            │  GATE 2: BEHAVIORAL VERIFICATION   │
-├────────────────────────────────────┼────────────────────────────────────┤
-│ • Zero Compiler / Linter Errors    │ • 1x Automated Happy-Path Test     │
-│ • Zero TypeScript 'any' Coercions  │ • 2x Negative Edge-Case Tests      │
-│ • Zero Synthetic Stubs (// TODO)   │ • Zero-Regression Self-Heal Loop   │
-│ • Hallucination Circuit-Breaker    │ • Persistent MEMORY.md Auto-Sync   │
-└────────────────────────────────────┴────────────────────────────────────┘
+```text
+========================================================================================
+⚡ FREEBUFF-POWER SUPREME — Omnipotent Multi-Agent & Skills Suite (v4.5)
+========================================================================================
+
+🔥 PERINTAH UTAMA:
+  freebuff-power start             [Rekomendasi] One-Shot Injeksi + Anti-Ban + Buka Freebuff
+  freebuff-power ui / tui          Buka Interactive Terminal TUI Dashboard
+  freebuff-power compose <task> -r Racik prompt arsitektur terbaik (-r untuk auto-run)
+  freebuff-power spawn <agent>     Luncurkan Freebuff dengan persona spesifik (misal: architect)
+  freebuff-power init [dir]        Injeksi AGENTS.md & .freebuff/ ke folder tanpa membuka sesi
+
+🌐 LIVE PREVIEW, TIME-TRAVEL & EXPORTER:
+  freebuff-power share [port]      Buka HTTPS Public Tunnel & Live Preview ke HP
+  freebuff-power snapshot save     Simpan checkpoint snapshot proyek
+  freebuff-power rollback          Pulihkan seluruh kode ke snapshot terakhir
+  freebuff-power export --all      Ekspor 42 Agents & 1,025 Skills ke Cursor/Claude/Windsurf
+  freebuff-power eval              Jalankan Swarm Benchmark Evaluator (Skor 100/100)
+
+💬 MANAJEMEN SESI & CHAT:
+  freebuff-power continue          Lanjutkan sesi percakapan/coding terakhir
+  freebuff-power session list      Daftar histori proyek dan riwayat sesi chat
+
+🛡️ PEMELIHARAAN, UPDATE & ANTI-BAN:
+  freebuff-power clean             Reset UUID telemetry & residual lock (100% Anti-Ban)
+  freebuff-power doctor            Pemeriksaan kesehatan sistem (integritas template)
+  freebuff-power update            Update pustaka Skills & Agents ke versi rilis terbaru
+========================================================================================
 ```
 
 ---
@@ -115,37 +148,14 @@ wget -qO- https://raw.githubusercontent.com/FerzDevZ/freebuff-power/main/install
 
 ## 🧰 Modular Skills Catalog (1,025 Skills)
 
-Skills dikelompokkan ke dalam 8 pilar rekayasa perangkat lunak:
-1. **Architecture & Design (110+ skills)**: Clean Architecture, CQRS, Event Sourcing, Domain-Driven Design, API Design (REST/gRPC/GraphQL).
-2. **Backend Polyglot (180+ skills)**: FastAPI, NestJS, Go Concurrency & Channels, Rust Tokio/Axum, Spring Boot, Deno 2.0, Bun runtime.
+1. **Architecture & Design (110+ skills)**: Clean Architecture, CQRS, Event Sourcing, Domain-Driven Design, API Design.
+2. **Backend Polyglot (180+ skills)**: FastAPI, NestJS, Go Concurrency & Channels, Rust Tokio/Axum, Spring Boot, Deno/Bun.
 3. **Frontend & Mobile (220+ skills)**: Next.js 15, React 19, Vue/Nuxt 3, Tailwind Fluid Typography, Bento Grid, Radix UI, Framer Motion, SwiftUI, Jetpack Compose.
 4. **Database & OLAP (120+ skills)**: PostgreSQL Internals & Indexing, ClickHouse, DuckDB, Redis Streams, MongoDB, SQLite Edge WAL.
-5. **Testing & QA (130+ skills)**: Vitest TDD, Playwright E2E & Visual Regression, k6 Load & Soak Testing, Stryker Mutation Testing, Pact.
+5. **Testing & QA (130+ skills)**: Vitest TDD, Playwright E2E & Visual Regression, k6 Load Testing, Stryker Mutation Testing, Pact.
 6. **Security & AppSec (115+ skills)**: OWASP Top 10, Authflow PKCE, Passkeys WebAuthn, Prompt Injection Guardrails, SBOM Provenance.
-7. **AI & Machine Learning (90+ skills)**: RAG Pipelines, Vector DB (pgvector/Qdrant), LLM Evals, vLLM / Ollama Local Deploy, AI Observability.
+7. **AI & Machine Learning (90+ skills)**: RAG Pipelines, Vector DB (pgvector/Qdrant), LLM Evals, vLLM / Ollama Local Deploy.
 8. **Anti-Slop & Performance (60+ skills)**: Anti-Waffle Writing, Anti-Slop AI, Cognitive Load Minimizer, Core Web Vitals (INP/LCP), DevTools Heap Profiler.
-
----
-
-## 🔄 Standardized Multi-Agent Swarm Flow
-
-```mermaid
-flowchart TD
-    User["User Instruction"] --> Tier{"Classify Complexity Tier"}
-    Tier -->|Tier 1: Surgical| Fix["@programmer (Surgical Edit)"]
-    Tier -->|Tier 2: Feature| Flow["@planner -> @programmer -> @tddmaster"]
-    Tier -->|Tier 3: Deep Swarm| RFC["@architect Generates RFC.md"]
-    RFC --> Code["@programmer Implements -> DIFF_LOG.md"]
-    Code --> QA["@tddmaster / @qa Tests -> TEST_REPORT.md"]
-    QA --> Gate{"Dual-Gate Invariants Pass?"}
-    Gate -->|No| Heal["[Skill: autonomous-swe-loop-healer]"]
-    Heal --> Code
-    Gate -->|Yes| Sec["@security Signs SECURITY_PASS.md"]
-    Sec --> Mem["[Skill: memory-by-ferz] Syncs MEMORY.md"]
-    Mem --> Done["Production Ready!"]
-    Fix --> Done
-    Flow --> Done
-```
 
 ---
 

@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # ==============================================================================
-# ⚡ FREEBUFF-POWER SUPREME 1-LINE INSTALLER (v3.8 DYNAMIC)
+# ⚡ FREEBUFF-POWER SUPREME 1-LINE INSTALLER (v4.5 OMNIPOTENT EDITION)
 # ==============================================================================
 # Usage:
 #   curl -fsSL https://raw.githubusercontent.com/FerzDevZ/freebuff-power/main/install.sh | bash
@@ -18,7 +18,7 @@ C_DIM='\033[2m'
 C_RESET='\033[0m'
 
 echo -e "${C_CYAN}${C_BOLD}========================================================================${C_RESET}"
-echo -e "${C_YELLOW}${C_BOLD}⚡ FREEBUFF-POWER — 1-Line Universal Installer (v3.8-Enterprise)${C_RESET}"
+echo -e "${C_YELLOW}${C_BOLD}⚡ FREEBUFF-POWER — 1-Line Universal Installer (v4.5-Omnipotent)${C_RESET}"
 echo -e "${C_CYAN}${C_BOLD}========================================================================${C_RESET}\n"
 
 INSTALL_BIN_DIR="$HOME/.local/bin"
@@ -40,14 +40,13 @@ else
   git clone --depth 1 "$REPO_URL" "$REPO_CACHE_DIR" --quiet
 fi
 
-# Count real live agents and skills
-TOTAL_AGENTS=$(ls -1 "$REPO_CACHE_DIR/superpower/agents" 2>/dev/null | wc -l || echo "38")
+TOTAL_AGENTS=$(ls -1 "$REPO_CACHE_DIR/superpower/agents" 2>/dev/null | wc -l || echo "42")
 TOTAL_SKILLS=$(ls -1 "$REPO_CACHE_DIR/superpower/skills" 2>/dev/null | wc -l || echo "1025")
 
-# 2. Install CLI binary
-echo -e "${C_BLUE}⚙️  [2/3] Memasang binary freebuff-power ke $INSTALL_BIN_DIR...${C_RESET}"
-cp -f "$REPO_CACHE_DIR/bin/freebuff-power" "$INSTALL_BIN_DIR/freebuff-power"
-chmod +x "$INSTALL_BIN_DIR/freebuff-power"
+# 2. Install All CLI binaries and helpers
+echo -e "${C_BLUE}⚙️  [2/3] Memasang seluruh suite CLI binary ke $INSTALL_BIN_DIR...${C_RESET}"
+cp -rf "$REPO_CACHE_DIR/bin/"* "$INSTALL_BIN_DIR/"
+chmod +x "$INSTALL_BIN_DIR"/freebuff-power "$INSTALL_BIN_DIR"/*.sh "$INSTALL_BIN_DIR"/*.js 2>/dev/null || true
 
 # 3. Install Superpower templates
 echo -e "${C_BLUE}🧰 [3/3] Menyinkronkan ${TOTAL_AGENTS} Sub-Agents & ${TOTAL_SKILLS} Modular Skills ke $SUPERPOWER_DIR...${C_RESET}"
@@ -73,4 +72,5 @@ echo -e "${C_GREEN}${C_BOLD}🎉 INSTALASI SELESAI & SUKSES 100%! (${TOTAL_AGENT
 echo -e "${C_GREEN}${C_BOLD}========================================================================${C_RESET}"
 echo -e "\n🔥 Sekarang di folder mana pun kamu bisa langsung ketik:"
 echo -e "  \033[0;36m\033[1mfreebuff-power start\033[0m   \033[2m# Injeksi instan & langsung koding\033[0m"
-echo -e "  \033[0;36m\033[1mfreebuff-power --help\033[0m  \033[2m# Lihat semua fitur\033[0m\n"
+echo -e "  \033[0;36m\033[1mfreebuff-power ui\033[0m      \033[2m# Buka Interactive Dashboard di Terminal\033[0m"
+echo -e "  \033[0;36m\033[1mfreebuff-power --help\033[0m  \033[2m# Lihat semua fitur v4.5\033[0m\n"

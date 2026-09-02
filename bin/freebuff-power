@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 # ==============================================================================
-# ⚡ FREEBUFF-POWER SUPREME — ULTRA MULTI-AGENT, SKILLS & ANTI-BAN SUITE (v4.0-Titanium)
+# ⚡ FREEBUFF-POWER SUPREME — ULTRA MULTI-AGENT, SKILLS & ANTI-BAN SUITE (v4.5)
 # ==============================================================================
 # Author: Freebuff Superpower Open-Source Community
-# Version: 3.8.0-Enterprise
+# Version: 4.5.0-Omnipotent Edition
 # License: MIT
 # ==============================================================================
 set -euo pipefail
@@ -43,7 +43,7 @@ C_RESET='\033[0m'
 function show_help() {
   cat << 'HELP_EOF'
 ========================================================================================
-⚡ FREEBUFF-POWER SUPREME — Ultra Multi-Agent, Skills & Anti-Ban Suite (v4.0-Titanium)
+⚡ FREEBUFF-POWER SUPREME — Omnipotent Multi-Agent & Skills Suite (v4.5)
 ========================================================================================
 
 PENGGUNAAN:
@@ -54,10 +54,10 @@ PENGGUNAAN:
                         Reset Telemetry (Anti-Ban) + Injeksi 42 Agents & 1,025 Skills
                         + Langsung buka sesi interaktif Freebuff siap koding!
 
+  ui / tui              Buka Interactive Terminal TUI Dashboard (pilih agen/skill visual)
+
   compose <task> [-r]   [POWER COMPOSER 2.0] Menganalisis kebutuhan arsitektur dan
-                        meracik kombinasi Agen & Skills terbaik.
-                        Tambahkan flag -r / --run untuk LANGSUNG MELUNCURKAN Freebuff!
-                        (Contoh: freebuff-power compose "Bikin web warkop Next.js" --run)
+                        meracik kombinasi Agen & Skills terbaik (-r untuk auto-run).
 
   spawn <agent> [task]  Luncurkan Freebuff dengan persona sub-agent spesifik
                         (Contoh: freebuff-power spawn architect "Rancang API warkop")
@@ -65,6 +65,12 @@ PENGGUNAAN:
   init [dir]            Injeksi file AGENTS.md dan katalog .freebuff/ ke folder aktif
 
   run [args]            Jalankan sesi Freebuff biasa dengan proteksi Anti-Ban aktif.
+
+🌐 LIVE PREVIEW, TIME-TRAVEL & EXPORTER (NEW v4.5):
+  share [port]          Buka HTTPS Public Tunnel + Live Preview untuk web buatan AI
+  snapshot <save|list|restore>  Time-Travel Checkpoint & 1-Second Instant Rollback
+  export [--cursor|--claude|--windsurf|--all]  Ekspor 42 Agents & 1,025 Skills ke semua IDE
+  eval                  Jalankan Autonomous SWE-Bench Swarm Evaluator (Scorecard A+)
 
 💬 MANAJEMEN SESI & CHAT:
   continue / resume     Lanjutkan sesi percakapan/coding terakhir tanpa kehilangan konteks.
@@ -83,10 +89,13 @@ PENGGUNAAN:
 
 ----------------------------------------------------------------------------------------
 💡 CONTOH PENGGUNAAN CEPAT:
+  $ freebuff-power ui                                # Buka Dashboard Visual di Terminal
   $ freebuff-power start                             # Mulai koding instan 1 detik
-  $ freebuff-power compose "Bikin web e-commerce" -r # Compose prompt & langsung jalankan
-  $ freebuff-power spawn frontend "Buat UI modern"   # Spawn langsung spesifik agen
-  $ freebuff-power update                            # Update skill & agent terbaru
+  $ freebuff-power compose "Bikin web warkop" -r     # Auto-compose prompt & jalankan
+  $ freebuff-power share                             # Buka live preview web ke HP
+  $ freebuff-power snapshot save "sebelum refactor"  # Buat checkpoint aman
+  $ freebuff-power snapshot restore                  # Rollback jika AI salah koding
+  $ freebuff-power export --all                      # Ekspor ke Cursor/Claude/Windsurf
 ========================================================================================
 HELP_EOF
 }
@@ -179,9 +188,6 @@ function spawn_agent() {
   exec freebuff
 }
 
-# ==============================================================================
-# 🧠 POWER COMPOSER 2.0 ENGINE
-# ==============================================================================
 function compose_prompt() {
   local should_run=0
   local task_args=()
@@ -211,7 +217,6 @@ function compose_prompt() {
   local agents=()
   local skills=()
   
-  # 1. Frontend & Visual Design
   if [[ "$lower_q" =~ (ui|tampilan|web|frontend|design|desain|css|landing|porto|warkop|html|page|dashboard) ]]; then
     agents+=("@design-engineer" "@frontend")
     skills+=("[Skill: hallmark]" "[Skill: modern-web-design-master]")
@@ -227,13 +232,11 @@ function compose_prompt() {
     fi
   fi
 
-  # 2. Backend & APIs
   if [[ "$lower_q" =~ (api|backend|rest|grpc|graphql|auth|login|jwt|server|endpoint|crud|oauth) ]]; then
     agents+=("@architect" "@backend")
     skills+=("[Skill: clean-architecture-refactoring]" "[Skill: authflow-security-architect]" "[Skill: api-design-rest-grpc-graphql]")
   fi
 
-  # 3. Database & Big Data
   if [[ "$lower_q" =~ (db|database|sql|postgres|clickhouse|redis|mongo|query|tabel|schema) ]]; then
     agents+=("@database")
     if [[ "$lower_q" =~ (postgres|postgresql|index) ]]; then
@@ -245,37 +248,31 @@ function compose_prompt() {
     fi
   fi
 
-  # 4. Web3 / Smart Contract
   if [[ "$lower_q" =~ (web3|solidity|contract|smart contract|crypto|defi|token|eth|erc) ]]; then
     agents+=("@smart-contract-auditor")
     skills+=("[Skill: smart-contract-web3-security]" "[Skill: solidity-foundry-gas-optimizer]")
   fi
 
-  # 5. AI / RAG / Machine Learning
   if [[ "$lower_q" =~ (ai|rag|llm|vector|embedding|qdrant|ollama|vllm|gpt|claude|chat) ]]; then
     agents+=("@ai-engineer" "@nlp-rag-specialist")
     skills+=("[Skill: rag-llm-integrator]" "[Skill: vector-db-pgvector-qdrant-master]" "[Skill: prompt-injection-defense-guardrails]")
   fi
 
-  # 6. Mobile & Cross-platform
   if [[ "$lower_q" =~ (mobile|android|ios|flutter|react native|swiftui|app) ]]; then
     agents+=("@mobile-engineer")
     skills+=("[Skill: crossplatform-mobile-flutter-rn]")
   fi
 
-  # 7. Testing & Quality Assurance
   if [[ "$lower_q" =~ (test|testing|qa|vitest|unit|e2e|playwright) ]]; then
     agents+=("@tddmaster" "@qa")
     skills+=("[Skill: unit-integration-tdd-master]" "[Skill: e2e-playwright-automation]")
   fi
 
-  # Fallback Defaults
   if [ ${#agents[@]} -eq 0 ]; then
     agents+=("@architect" "@programmer")
     skills+=("[Skill: hallmark]" "[Skill: clean-architecture-refactoring]")
   fi
 
-  # Deduplicate arrays
   local -A seen_agents seen_skills
   local unique_agents=()
   for a in "${agents[@]}"; do
@@ -464,6 +461,27 @@ function list_catalog() {
 CMD="${1:-help}"
 
 case "$CMD" in
+  ui|tui)
+    exec node "$SCRIPT_DIR/tui.js"
+    ;;
+  share|tunnel)
+    shift || true
+    exec "$SCRIPT_DIR/share.sh" "$@"
+    ;;
+  snapshot)
+    shift || true
+    exec "$SCRIPT_DIR/snapshot.sh" "$@"
+    ;;
+  rollback)
+    exec "$SCRIPT_DIR/snapshot.sh" restore
+    ;;
+  eval|benchmark)
+    exec node "$SCRIPT_DIR/eval.js"
+    ;;
+  export)
+    shift || true
+    exec node "$SCRIPT_DIR/exporter.js" "$@"
+    ;;
   start|go|full)
     shift || true
     one_shot_start "$@"
