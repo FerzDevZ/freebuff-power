@@ -7,9 +7,9 @@ set -euo pipefail
 MANICODE_DIR="$HOME/.config/manicode"
 mkdir -p "$MANICODE_DIR"
 
-# 1. Kill all running instances and locks
-pkill -9 -f "freebuff" 2>/dev/null || true
-pkill -9 -f "manicode" 2>/dev/null || true
+# 1. Kill only zombie freebuff/manicode backend binaries (EXACT process match, NEVER kill self)
+pkill -9 -x "freebuff" 2>/dev/null || true
+pkill -9 -x "manicode" 2>/dev/null || true
 
 # 2. Hapus seluruh session state, stale sockets, dan temporary locks
 rm -f "$MANICODE_DIR"/*.lock 2>/dev/null || true

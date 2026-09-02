@@ -67,7 +67,7 @@ show_help() {
   echo -e "  ${C_GREEN}explain <file>${C_RESET}        Bedah arsitektur kode file target & beri rekomendasi swarm persona."
   echo -e "  ${C_GREEN}docker${C_RESET}                Buat Dockerfile multi-stage (< 50MB) & docker-compose.yml siap pakai."
   echo -e "  ${C_GREEN}docs <library>${C_RESET}        Ingest dokumentasi resmi framework terbaru ke dalam konteks AI."
-  echo -e "  ${C_GREEN}new <preset> [name]${C_RESET}   Scaffold proyek baru instan (saas / flutter / go) + injeksi 1,055 skills.\n"
+  echo -e "  ${C_GREEN}new <preset> [name]${C_RESET}   Scaffold proyek baru instan (saas / flutter / go) + injeksi 1,061 skills.\n"
 
   echo -e "${C_PURPLE}${C_BOLD}🌐 LIVE COLLABORATION, PREVIEW & SAFETY:${C_RESET}"
   echo -e "  ${C_GREEN}pair [port]${C_RESET}           Buka Sesi Live Pair-Programming Real-Time (Bagikan link ke tim)."
@@ -86,7 +86,7 @@ show_help() {
 
   echo -e "${C_PURPLE}${C_BOLD}🛡️ ANTI-BAN, UPDATE & PEMELIHARAAN:${C_RESET}"
   echo -e "  ${C_GREEN}clean${C_RESET}                 Reset total anonymous UUID telemetry & lockfile (100% Anti-Ban)."
-  echo -e "  ${C_GREEN}doctor${C_RESET}                Pemeriksaan kesehatan sistem (integritas 50 agents & 1,055 skills)."
+  echo -e "  ${C_GREEN}doctor${C_RESET}                Pemeriksaan kesehatan sistem (integritas 60 agents & 1,061 skills)."
   echo -e "  ${C_GREEN}update${C_RESET}                Perbarui pustaka Skills & Agents ke versi rilis terbaru dari GitHub.\n"
 
   echo -e "${C_PURPLE}${C_BOLD}🔍 EKSPLORASI & PANDUAN:${C_RESET}"
