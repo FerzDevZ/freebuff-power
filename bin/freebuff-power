@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # ==============================================================================
-# ⚡ FREEBUFF-POWER SUPREME — ULTRA MULTI-AGENT, SKILLS & ANTI-BAN SUITE (v3.8)
+# ⚡ FREEBUFF-POWER SUPREME — ULTRA MULTI-AGENT, SKILLS & ANTI-BAN SUITE (v4.0-Titanium)
 # ==============================================================================
 # Author: Freebuff Superpower Open-Source Community
 # Version: 3.8.0-Enterprise
@@ -43,7 +43,7 @@ C_RESET='\033[0m'
 function show_help() {
   cat << 'HELP_EOF'
 ========================================================================================
-⚡ FREEBUFF-POWER SUPREME — Ultra Multi-Agent, Skills & Anti-Ban Suite (v3.8)
+⚡ FREEBUFF-POWER SUPREME — Ultra Multi-Agent, Skills & Anti-Ban Suite (v4.0-Titanium)
 ========================================================================================
 
 PENGGUNAAN:
@@ -51,7 +51,7 @@ PENGGUNAAN:
 
 🔥 PERINTAH UTAMA:
   start / go / full     [REKOMENDASI] One-Shot All-in-One:
-                        Reset Telemetry (Anti-Ban) + Injeksi 38 Agents & 1,025 Skills
+                        Reset Telemetry (Anti-Ban) + Injeksi 42 Agents & 1,025 Skills
                         + Langsung buka sesi interaktif Freebuff siap koding!
 
   compose <task> [-r]   [POWER COMPOSER 2.0] Menganalisis kebutuhan arsitektur dan
@@ -78,7 +78,7 @@ PENGGUNAAN:
 🔍 EKSPLORASI & PANDUAN:
   search <keyword>      Cari Sub-Agent atau Modular Skills berdasarkan kata kunci.
   info <name>           Buka dan baca SOP / instruksi lengkap dari Agent atau Skill.
-  list                  Tampilkan rekapitulasi 38 Sub-Agents & 1,025 Modular Skills.
+  list                  Tampilkan rekapitulasi 42 Sub-Agents & 1,025 Modular Skills.
   help / --help / -h    Tampilkan panduan bantuan ini.
 
 ----------------------------------------------------------------------------------------
@@ -122,7 +122,7 @@ function inject_superpower() {
 function one_shot_start() {
   local target_dir="$(pwd)"
   echo -e "${C_CYAN}${C_BOLD}========================================================================${C_RESET}"
-  echo -e "${C_YELLOW}${C_BOLD}⚡ [FREEBUFF-POWER] ONE-SHOT ALL-IN-ONE (38 AGENTS & 1,025 SKILLS)...${C_RESET}"
+  echo -e "${C_YELLOW}${C_BOLD}⚡ [FREEBUFF-POWER] ONE-SHOT ALL-IN-ONE (42 AGENTS & 1,025 SKILLS)...${C_RESET}"
   echo -e "${C_CYAN}${C_BOLD}========================================================================${C_RESET}"
   
   apply_anti_ban_shield
@@ -471,7 +471,7 @@ case "$CMD" in
   init)
     shift || true
     inject_superpower "${1:-$(pwd)}"
-    echo -e "${C_GREEN}✅ Sukses! 38 Sub-Agents & 1,025 Modular Skills berhasil disuntikkan ke $(pwd).${C_RESET}"
+    echo -e "${C_GREEN}✅ Sukses! 42 Sub-Agents & 1,025 Modular Skills berhasil disuntikkan ke $(pwd).${C_RESET}"
     ;;
   spawn)
     shift || true

@@ -1,12 +1,13 @@
 <div align="center">
 
-# ⚡ FREEBUFF-POWER SUPREME ULTRA
-### The World's Most Advanced Multi-Agent Swarm, Skills Engine & Anti-Ban Shield for Freebuff
+# ⚡ FREEBUFF-POWER (Titanium Swarm Edition v4.0)
+### The World's Most Advanced 42-Agent Autonomous Swarm, Dual-Gate QA Engine & Anti-Ban Shield for Freebuff
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Sub-Agents: 38](https://img.shields.io/badge/Sub--Agents-38%20Elite-blueviolet.svg)](#-specialized-sub-agents-roster)
-[![Modular Skills: 1,025](https://img.shields.io/badge/Modular%20Skills-1%2C025%20Clean-emerald.svg)](#-modular-skills-catalog)
-[![Anti-Ban: Active](https://img.shields.io/badge/Anti--Ban%20Shield-Active%20v3.8-brightgreen.svg)](#-enterprise-anti-ban--anti-suspend-shield)
+[![Sub-Agents: 42](https://img.shields.io/badge/Sub--Agents-42%20Elite-blueviolet.svg)](#-specialized-sub-agents-roster-42-elite-agents)
+[![Modular Skills: 1,025](https://img.shields.io/badge/Modular%20Skills-1%2C025%20Clean-emerald.svg)](#-modular-skills-catalog-1025-skills)
+[![Quality: Dual--Gate QA](https://img.shields.io/badge/Quality%20Gate-Dual--Gate%20Invariant-orange.svg)](#-dual-gate-quality-invariants)
+[![Anti-Ban: Active](https://img.shields.io/badge/Anti--Ban%20Shield-Active%20v4.0-brightgreen.svg)](#-enterprise-anti-ban--anti-suspend-shield)
 [![Platform: Linux & macOS](https://img.shields.io/badge/Platform-Linux%20%7C%20macOS-informational.svg)](#-quick-installation-1-line-installer)
 
 ```
@@ -18,9 +19,9 @@
  |_|    |_|  \_\______|______|____/ \____/|_|    |_|      |_|     \____/   \/  \/   |______|_|  \_\
 ```
 
-**Freebuff-Power** transforms Freebuff from a single chatbot into an autonomous **38-Agent Engineering Swarm** armed with **1,025 Modular Skills**, zero-bloat on-demand loading, and enterprise-grade anti-ban safety.
+**Freebuff-Power v4.0** transforms Freebuff into an autonomous **42-Agent Titanium Swarm** powered by **1,025 Modular Skills**, Dual-Gate Quality Invariants, a 3-Tier Cognitive Execution Matrix, and enterprise-grade anti-ban safety.
 
-[Instalasi 1 Baris](#-quick-installation-1-line-installer) • [Fitur Utama](#-fitur-utama) • [Panduan CLI](#-cli-command-palette) • [Roster Sub-Agents](#-specialized-sub-agents-roster) • [Katalog Skills](#-modular-skills-catalog)
+[Instalasi 1 Baris](#-quick-installation-1-line-installer) • [Fitur Utama](#-fitur-utama-v40) • [Dual-Gate Invariants](#-dual-gate-quality-invariants) • [Roster 42 Sub-Agents](#-specialized-sub-agents-roster-42-elite-agents) • [Katalog Skills](#-modular-skills-catalog-1025-skills)
 
 </div>
 
@@ -39,65 +40,56 @@ curl -fsSL https://raw.githubusercontent.com/FerzDevZ/freebuff-power/main/instal
 wget -qO- https://raw.githubusercontent.com/FerzDevZ/freebuff-power/main/install.sh | bash
 ```
 
-> 💡 **Apa yang dilakukan installer ini secara otomatis?**
-> 1. Mengunduh seluruh pustaka **38 Sub-Agents** dan **1,025 Modular Skills**.
-> 2. Memasang executable CLI `freebuff-power` ke `~/.local/bin/` dan mengonfigurasi `$PATH`.
-> 3. Menyiapkan master template di `~/.freebuff-superpower/`.
-> 4. Selesai dalam 2 detik tanpa perlu clone atau `cd` manual!
+---
+
+## 🌟 Fitur Utama (v4.0 Titanium Swarm)
+
+- 👥 **42 Specialized Sub-Agents**: Persona rekayasa terlengkap dari `@architect`, `@programmer`, `@monorepo-architect`, `@system-debugger-forensics`, `@tokenomics-fintech-ledger`, `@smart-contract-auditor`, `@nlp-rag-specialist`, hingga `@localization-i18n-pro`.
+- 🛡️ **Dual-Gate Quality Invariants**: Kode wajib lolos 2 gerbang mutlak (Gerbang 1: Static Quality 0 linter error & zero AI-slop; Gerbang 2: Behavioral Invariants 1 happy-path test + 2 negative edge cases).
+- 🧠 **Adaptive Cognitive Depth (3-Tier Matrix)**: Klasifikasi cerdas antara *Tier 1: Surgical Edits*, *Tier 2: Feature Development*, dan *Tier 3: Deep Swarm Architecture* dengan pembuatan dokumen `RFC.md` formal.
+- 🔄 **Standardized Swarm Handoff Protocol**: Kolaborasi multi-agent terstruktur menggunakan artifact handoff (`RFC.md` $\rightarrow$ `DIFF_LOG.md` $\rightarrow$ `TEST_REPORT.md` $\rightarrow$ `SECURITY_PASS.md` $\rightarrow$ `MEMORY.md`).
+- 🧰 **1,025 Modular Engineering Skills**: Pustaka komprehensif mencakup Next.js 15, FastAPI, Go concurrency, Rust Axum, PostgreSQL internals, Web3, 3D WebGL, hingga OWASP AppSec.
+- 🛡️ **Enterprise Anti-Ban & Anti-Suspend Shield**: Isolasi telemetry UUID dinamis (`anon_<uuid_v4>`), reset residual lockfiles, dan proteksi context budget (Zero 413 error).
+- 🪄 **Power Composer 2.0**: Analisis intent semantik dan auto-launch Freebuff langsung via `freebuff-power compose "<task>" --run`.
 
 ---
 
-## 🌟 Fitur Utama
+## 🛡️ Dual-Gate Quality Invariants
 
-- 👥 **38 Specialized Sub-Agents**: Persona ahli dari `@architect`, `@programmer`, `@design-engineer`, `@backend`, `@database`, `@tddmaster`, `@security`, hingga `@sre`.
-- 🧰 **1,025 Modular Engineering Skills**: Pustaka lengkap mencakup arsitektur bersih, Next.js 15, FastAPI, Go concurrency, Rust, PostgreSQL internals, Playwright E2E, OWASP security, hingga WebGL.
-- 🛡️ **Enterprise Anti-Ban & Anti-Suspend Shield**: Sanitasi identitas virtual dinamis (`anon_<uuid_v4>`), reset residual lockfiles, dan proteksi telemetry otomatis.
-- ⚡ **Tiered On-Demand Loading**: `AGENTS.md` bertindak sebagai Master Index tipis & cepat; detail modul dibaca on-demand sehingga **bebas dari payload 413 / context blowout**.
-- 🔄 **Self-Healing Auto-Verify Loop**: Otomatis menjalankan compiler/test checks dan memperbaiki regresi secara otonom tanpa intervensi manual.
-- 🧠 **Persistent Project Memory**: Sinkronisasi otomatis file `MEMORY.md` untuk menjaga keputusan arsitektur dan status tugas antar sesi.
-- 💬 **Session & Chat Switcher**: Pindah dan lanjutkan percakapan coding kapan saja dengan `freebuff-power continue` atau `freebuff-power session resume`.
-- 🪄 **Prompt Composer**: Menganalisis kebutuhan tugas dan merekomendasikan kombo sub-agent & skill terbaik via `freebuff-power compose`.
-
----
-
-## 🎮 CLI Command Palette
-
-```text
-========================================================================================
-⚡ FREEBUFF-POWER — Supreme Multi-Agent, Skills & Anti-Ban Controller (v3.8)
-========================================================================================
-
-🔥 PERINTAH UTAMA:
-  freebuff-power start             [Rekomendasi] Injeksi All-in-One + Anti-Ban + Buka Freebuff
-  freebuff-power spawn <agent>     Luncurkan Freebuff dengan persona spesifik (misal: architect)
-  freebuff-power init [dir]        Injeksi AGENTS.md & .freebuff/ ke folder tanpa membuka sesi
-  freebuff-power run               Jalankan sesi Freebuff dengan Anti-Ban aktif
-
-💬 MANAJEMEN SESI & PROMPT COMPOSER:
-  freebuff-power compose <task>    Analisis & buatkan prompt kombo agent + skill terbaik
-  freebuff-power continue          Lanjutkan sesi percakapan/coding terakhir
-  freebuff-power session list      Daftar histori proyek dan riwayat sesi chat
-
-🛡️ PEMELIHARAAN, UPDATE & ANTI-BAN:
-  freebuff-power clean             Reset UUID telemetry & residual lock (Anti-Ban Fresh)
-  freebuff-power doctor            Pemeriksaan kesehatan sistem (integritas template)
-  freebuff-power update            Update pustaka Skills & Agents ke versi rilis terbaru
-
-🔍 EKSPLORASI & PANDUAN:
-  freebuff-power search <keyword>  Cari Sub-Agent atau Modular Skills
-  freebuff-power info <name>       Lihat SOP & dokumentasi lengkap Agent atau Skill
-  freebuff-power list              Daftar seluruh 38 Sub-Agents & 1,025 Skills
-========================================================================================
+```
+┌─────────────────────────────────────────────────────────────────────────┐
+│                      DUAL-GATE QUALITY PASS/FAIL                        │
+├────────────────────────────────────┬────────────────────────────────────┤
+│  GATE 1: STATIC QUALITY            │  GATE 2: BEHAVIORAL VERIFICATION   │
+├────────────────────────────────────┼────────────────────────────────────┤
+│ • Zero Compiler / Linter Errors    │ • 1x Automated Happy-Path Test     │
+│ • Zero TypeScript 'any' Coercions  │ • 2x Negative Edge-Case Tests      │
+│ • Zero Synthetic Stubs (// TODO)   │ • Zero-Regression Self-Heal Loop   │
+│ • Hallucination Circuit-Breaker    │ • Persistent MEMORY.md Auto-Sync   │
+└────────────────────────────────────┴────────────────────────────────────┘
 ```
 
 ---
 
-## 👥 Specialized Sub-Agents Roster (38 Elite Agents)
+## 👥 Specialized Sub-Agents Roster (42 Elite Agents)
 
 | Sub-Agent | Focus & Responsibility |
 |---|---|
-| `@architect` | System architecture, technical RFCs, component boundaries & schema design |
+| `@architect` | System topology, technical RFCs, component boundaries & schema design |
 | `@programmer` | Ultimate precision engineer, strict typing, Hallmark craftsmanship, zero AI slop |
+| `@monorepo-architect` | Turborepo, Nx, PNPM workspaces, boundary enforcement, shared build caches |
+| `@system-debugger-forensics` | Low-level memory leaks, CPU flamegraphs, race conditions, eBPF tracing |
+| `@tokenomics-fintech-ledger` | Double-entry bookkeeping, ACID transactions, immutable financial ledgers |
+| `@localization-i18n-pro` | Global internationalization (i18n), RTL CSS logical properties, ICU catalogs |
+| `@smart-contract-auditor` | Web3, Solidity, EVM security, reentrancy guards, Foundry invariants |
+| `@nlp-rag-specialist` | Advanced RAG, hybrid search (BM25 + Dense vector), semantic chunking |
+| `@game-dev-3d` | 3D interactive graphics, Three.js, WebGL, custom GLSL shaders, Rapier physics |
+| `@data-engineer-olap` | Real-time analytics, ClickHouse OLAP, DuckDB embedded queries, Parquet |
+| `@cloud-security-architect` | Cloud IAM least-privilege, Zero-Trust networking, KMS encryption |
+| `@microservices-mesh` | Distributed systems, Istio service mesh, gRPC, Kafka streams, Outbox pattern |
+| `@accessibility-champion` | WCAG 2.2 AAA accessibility, keyboard traps, screen reader live regions |
+| `@pwa-offline-architect` | Progressive Web Apps, Workbox service workers, IndexedDB, background sync |
+| `@prompt-red-teamer` | AI security testing, adversarial prompt injections, NeMo guardrails |
 | `@backend` | High-throughput backend APIs, microservices, auth, DB transactions |
 | `@frontend` | Modern reactive UI (Next.js/React 19/Tailwind), micro-interactions |
 | `@design-engineer`| Design systems, OKLCH color palettes, fluid typography, bespoke layouts |
@@ -135,29 +127,25 @@ Skills dikelompokkan ke dalam 8 pilar rekayasa perangkat lunak:
 
 ---
 
-## 🔄 Supreme Multi-Agent Swarm Workflow
+## 🔄 Standardized Multi-Agent Swarm Flow
 
 ```mermaid
 flowchart TD
-    User["User Instruction"] --> Plan["@architect & @planner<br/>(System Architecture & RFC)"]
-    Plan --> Build["@programmer & @implementer<br/>(Hallmark Craftsmanship & Anti-Slop)"]
-    Build --> Test["@tddmaster & @qa<br/>(Automated Unit & E2E Testing)"]
-    Test --> Check{"Tests Pass?"}
-    Check -->|No: Regression Detected| Heal["[Skill: autonomous-swe-loop-healer]<br/>(Autonomous Self-Repair)"]
-    Heal --> Build
-    Check -->|Yes: 100% Green| Audit["@security & @reviewer<br/>(OWASP & Code Quality Audit)"]
-    Audit --> Mem["[Skill: memory-by-ferz]<br/>(Sync MEMORY.md for Next Session)"]
-    Mem --> Done["Task Complete & Production-Ready!"]
+    User["User Instruction"] --> Tier{"Classify Complexity Tier"}
+    Tier -->|Tier 1: Surgical| Fix["@programmer (Surgical Edit)"]
+    Tier -->|Tier 2: Feature| Flow["@planner -> @programmer -> @tddmaster"]
+    Tier -->|Tier 3: Deep Swarm| RFC["@architect Generates RFC.md"]
+    RFC --> Code["@programmer Implements -> DIFF_LOG.md"]
+    Code --> QA["@tddmaster / @qa Tests -> TEST_REPORT.md"]
+    QA --> Gate{"Dual-Gate Invariants Pass?"}
+    Gate -->|No| Heal["[Skill: autonomous-swe-loop-healer]"]
+    Heal --> Code
+    Gate -->|Yes| Sec["@security Signs SECURITY_PASS.md"]
+    Sec --> Mem["[Skill: memory-by-ferz] Syncs MEMORY.md"]
+    Mem --> Done["Production Ready!"]
+    Fix --> Done
+    Flow --> Done
 ```
-
----
-
-## 🛡️ Enterprise Anti-Ban & Anti-Suspend Shield
-
-1. **Synthetic Dynamic Fingerprinting**: Setiap eksekusi `freebuff-power start` atau `clean` menghasilkan UUID unik acak (`anon_<uuid_v4>`), memutuskan rantai pelacakan sesi server.
-2. **Residual Lock Janitor**: Membersihkan socket usang dan file lock orphaned di `~/.config/manicode/` untuk mencegah konflik status instance.
-3. **Secret Redaction Gatekeeper**: Aturan mutlak di semua persona untuk menyamarkan token rahasia, API key, dan credential.
-4. **Token Budget Economy**: Arsitektur *Tiered On-Demand Loading* memastikan context window tidak pernah overflow (Mencegah error HTTP 413).
 
 ---
 
