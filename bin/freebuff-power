@@ -74,9 +74,11 @@ PENGGUNAAN:
   account rotate        Putar ke akun berikutnya secara otomatis (Round-Robin).
   reset-full / logout   Reset TOTAL seluruh token login, sesi, dan device fingerprint.
 
-🛠️ SECURITY, GIT & PROJECT TOOLING (NEW):
+🛠️ SECURITY, DEVOPS & PROJECT TOOLING:
   audit / review        Pindai kebocoran secret API Key, celah OWASP & hapus AI-slop.
   commit                AI Conventional Commit Assistant otomatis berdasarkan git diff.
+  explain <file>        Bedah arsitektur kode file target & beri rekomendasi swarm persona.
+  docker                Buat Dockerfile multi-stage (< 50MB) & docker-compose.yml siap pakai.
   docs <library>        Ingest dokumentasi resmi framework terbaru ke dalam konteks AI.
   new <preset> [name]   Scaffold proyek baru instan (saas / flutter / go) + injeksi 1,055 skills.
 
@@ -523,6 +525,13 @@ case "$CMD" in
   docs|doc)
     shift || true
     exec node "$SCRIPT_DIR/docs.js" "$@"
+    ;;
+  explain)
+    shift || true
+    exec node "$SCRIPT_DIR/explain.js" "$@"
+    ;;
+  docker|dockerize)
+    exec "$SCRIPT_DIR/dockerize.sh"
     ;;
   new|scaffold)
     shift || true
