@@ -1,13 +1,13 @@
 <div align="center">
 
-# ⚡ FREEBUFF-POWER (Omnipotent Edition v4.5)
+# ⚡ FREEBUFF-POWER (Omnipotent Edition v6.0)
 ### The World's Most Advanced 46-Agent Swarm, 1,061 Skills, Multi-Account Vault & Anti-Ban Architecture for Freebuff
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Sub-Agents: 46](https://img.shields.io/badge/Sub--Agents-46%20Elite-blueviolet.svg)](#-specialized-sub-agents-roster-46-elite-agents)
 [![Modular Skills: 1,055](https://img.shields.io/badge/Modular%20Skills-1%2C042%20Clean-emerald.svg)](#-modular-skills-catalog-1055-skills)
 [![Swarm Score: 100/100 A+](https://img.shields.io/badge/Swarm%20Rating-100%2F100%20Grade%20A%2B-brightgreen.svg)](#-autonomous-swe-bench-evaluator)
-[![Anti-Ban: Active](https://img.shields.io/badge/Anti--Ban%20Shield-Active%20v4.5-brightgreen.svg)](#-enterprise-anti-ban--anti-suspend-shield)
+[![Anti-Ban: Active](https://img.shields.io/badge/Anti--Ban%20Shield-Active%20v6.0-brightgreen.svg)](#-enterprise-anti-ban--anti-suspend-shield)
 [![Platform: Linux & macOS](https://img.shields.io/badge/Platform-Linux%20%7C%20macOS-informational.svg)](#-quick-installation-1-line-installer)
 
 ```
@@ -19,9 +19,9 @@
  |_|    |_|  \_\______|______|____/ \____/|_|    |_|      |_|     \____/   \/  \/   |______|_|  \_\
 ```
 
-**Freebuff-Power v4.5** transforms Freebuff into an autonomous **46-Agent Swarm** powered by **1,061 Modular Skills**, Multi-Account Quota Rotation, an interactive **Terminal TUI Dashboard**, Time-Travel Snapshots, Live Mobile Tunneling, Dual-Gate QA Invariants, and Enterprise Anti-Ban Safety.
+**Freebuff-Power v6.0** transforms Freebuff into an autonomous **46-Agent Swarm** powered by **1,061 Modular Skills**, Multi-Account Quota Rotation, an interactive **Terminal TUI Dashboard**, Time-Travel Snapshots, Live Mobile Tunneling, Dual-Gate QA Invariants, and Enterprise Anti-Ban Safety.
 
-[Instalasi 1 Baris](#-quick-installation-1-line-installer) • [Fitur Utama v4.5](#-fitur-utama-v45) • [Panduan CLI Lengkap](#-cli-command-palette-v45) • [Multi-Account Vault](#-multi-account-vault--quota-rotation) • [Roster 60 Sub-Agents](#-specialized-sub-agents-roster-46-elite-agents) • [Katalog 1,061 Skills](#-modular-skills-catalog-1055-skills)
+[Instalasi 1 Baris](#-quick-installation-1-line-installer) • [Fitur Utama v6.0](#-fitur-utama-v45) • [Panduan CLI Lengkap](#-cli-command-palette-v45) • [Multi-Account Vault](#-multi-account-vault--quota-rotation) • [Roster 60 Sub-Agents](#-specialized-sub-agents-roster-46-elite-agents) • [Katalog 1,061 Skills](#-modular-skills-catalog-1055-skills)
 
 </div>
 
@@ -42,7 +42,7 @@ wget -qO- https://raw.githubusercontent.com/FerzDevZ/freebuff-power/main/install
 
 ---
 
-## 🌟 Fitur Utama (v4.5 Omnipotent Edition)
+## 🌟 Fitur Utama (v6.0 Omnipotent Edition)
 
 ### 1. 👥 Multi-Account Vault & Round-Robin Quota Rotation (NEW 🔥)
 - **Atasi Limit Kuota Harian**: Simpan beberapa akun Google/Freebuff ke dalam vault terisolasi (`freebuff-power account save <nama>`).
@@ -75,11 +75,11 @@ wget -qO- https://raw.githubusercontent.com/FerzDevZ/freebuff-power/main/install
 
 ---
 
-## 🎮 CLI Command Palette (v4.5)
+## 🎮 CLI Command Palette (v6.0)
 
 ```text
 ========================================================================================
-⚡ FREEBUFF-POWER SUPREME — Omnipotent Multi-Agent & Skills Suite (v4.5)
+⚡ FREEBUFF-POWER SUPREME — Omnipotent Multi-Agent & Skills Suite (v6.0)
 ========================================================================================
 
 🔥 PERINTAH UTAMA & PELUNCURAN:

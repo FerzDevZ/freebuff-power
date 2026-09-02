@@ -2,7 +2,7 @@
 
 ```mermaid
 graph TD
-    User([User Developer]) --> CLI[freebuff-power CLI v4.5]
+    User([User Developer]) --> CLI[freebuff-power CLI v6.0]
     
     subgraph Core Engine
         CLI --> TUI[Interactive TUI Dashboard]

@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # ==============================================================================
-# ⚡ FREEBUFF-POWER SUPREME — Omnipotent Multi-Agent & Modular Skills Suite (v4.5)
+# ⚡ FREEBUFF-POWER SUPREME — Omnipotent Multi-Agent & Modular Skills Suite (v6.0)
 # ==============================================================================
 set -euo pipefail
 
@@ -32,7 +32,7 @@ C_RESET='\033[0m'
 
 show_help() {
   echo -e "${C_CYAN}${C_BOLD}========================================================================================${C_RESET}"
-  echo -e "${C_YELLOW}${C_BOLD}⚡ FREEBUFF-POWER SUPREME — Omnipotent Multi-Agent & Skills Suite (v4.5-Titanium)${C_RESET}"
+  echo -e "${C_YELLOW}${C_BOLD}⚡ FREEBUFF-POWER SUPREME — Omnipotent Multi-Agent & Skills Suite (v6.0-Titanium)${C_RESET}"
   echo -e "${C_CYAN}${C_BOLD}========================================================================================${C_RESET}\n"
   echo -e "${C_BOLD}PENGGUNAAN:${C_RESET}"
   echo -e "  ${C_GREEN}freebuff-power${C_RESET} ${C_YELLOW}<command>${C_RESET} [arguments] [options]\n"

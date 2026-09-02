@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # ==============================================================================
-# ⚡ FREEBUFF-POWER SUPREME 1-LINE INSTALLER (v4.5 OMNIPOTENT EDITION)
+# ⚡ FREEBUFF-POWER SUPREME 1-LINE INSTALLER (v6.0 OMNIPOTENT EDITION)
 # ==============================================================================
 # Usage:
 #   curl -fsSL https://raw.githubusercontent.com/FerzDevZ/freebuff-power/main/install.sh | bash
@@ -18,7 +18,7 @@ C_DIM='\033[2m'
 C_RESET='\033[0m'
 
 echo -e "${C_CYAN}${C_BOLD}========================================================================${C_RESET}"
-echo -e "${C_YELLOW}${C_BOLD}⚡ FREEBUFF-POWER — 1-Line Universal Installer (v4.5-Omnipotent)${C_RESET}"
+echo -e "${C_YELLOW}${C_BOLD}⚡ FREEBUFF-POWER — 1-Line Universal Installer (v6.0-Omnipotent)${C_RESET}"
 echo -e "${C_CYAN}${C_BOLD}========================================================================${C_RESET}\n"
 
 INSTALL_BIN_DIR="$HOME/.local/bin"
@@ -71,4 +71,4 @@ echo -e "${C_GREEN}${C_BOLD}====================================================
 echo -e "\n🔥 Sekarang di folder mana pun kamu bisa langsung ketik:"
 echo -e "  \033[0;36m\033[1mfreebuff-power start\033[0m   \033[2m# Injeksi instan & langsung koding\033[0m"
 echo -e "  \033[0;36m\033[1mfreebuff-power ui\033[0m      \033[2m# Buka Interactive Dashboard di Terminal\033[0m"
-echo -e "  \033[0;36m\033[1mfreebuff-power --help\033[0m  \033[2m# Lihat semua fitur v4.5\033[0m\n"
+echo -e "  \033[0;36m\033[1mfreebuff-power --help\033[0m  \033[2m# Lihat semua fitur v6.0\033[0m\n"

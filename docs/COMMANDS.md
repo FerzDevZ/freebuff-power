@@ -1,4 +1,4 @@
-# 📖 Complete Command Reference (freebuff-power v4.5)
+# 📖 Complete Command Reference (freebuff-power v6.0)
 
 ## Primary Commands
 - `freebuff-power start`: One-Shot All-in-One initialization, anti-ban reset, injection of 46 agents & 1,055 skills, and instant launch.

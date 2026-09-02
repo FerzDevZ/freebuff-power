@@ -54,7 +54,7 @@ function render() {
   const height = process.stdout.rows || 24;
 
   console.log("\x1b[36m\x1b[1m" + "=".repeat(width) + "\x1b[0m");
-  console.log(`\x1b[33m\x1b[1m⚡ FREEBUFF-POWER — INTERACTIVE TUI DASHBOARD (v4.5)\x1b[0m`);
+  console.log(`\x1b[33m\x1b[1m⚡ FREEBUFF-POWER — INTERACTIVE TUI DASHBOARD (v6.0)\x1b[0m`);
   console.log("\x1b[36m" + "=".repeat(width) + "\x1b[0m");
 
   // Tabs Header
