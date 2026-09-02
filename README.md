@@ -97,6 +97,7 @@ wget -qO- https://raw.githubusercontent.com/FerzDevZ/freebuff-power/main/install
   freebuff-power reset-full        Reset TOTAL seluruh token login, sesi & device fingerprint
 
 🌐 LIVE PREVIEW, TIME-TRAVEL & EXPORTER:
+  freebuff-power pair [port]       Buka Sesi Live Pair-Programming Real-Time (Bagikan link ke tim)
   freebuff-power share [port]      Buka HTTPS Public Tunnel & Live Preview ke HP
   freebuff-power snapshot save     Simpan checkpoint snapshot proyek
   freebuff-power snapshot list     Daftar riwayat checkpoint proyek

@@ -80,7 +80,8 @@ PENGGUNAAN:
   docs <library>        Ingest dokumentasi resmi framework terbaru ke dalam konteks AI.
   new <preset> [name]   Scaffold proyek baru instan (saas / flutter / go) + injeksi 1,055 skills.
 
-🌐 LIVE PREVIEW, TIME-TRAVEL & EXPORTER:
+🌐 LIVE COLLABORATION, PREVIEW & SAFETY:
+  pair [port]           Buka Sesi Terminal Kolaboratif Real-Time (Bagikan link ke tim).
   share [port]          Buka HTTPS Public Tunnel & Live Preview ke HP (via Cloudflare).
   snapshot save <label> Buat checkpoint snapshot proyek sebelum AI melakukan refactor.
   snapshot list         Tampilkan seluruh riwayat snapshot checkpoint proyek.
@@ -494,6 +495,10 @@ case "$CMD" in
     ;;
   reset-full|purge-auth|logout)
     exec "$SCRIPT_DIR/account.sh" reset
+    ;;
+  pair|collaborate)
+    shift || true
+    exec "$SCRIPT_DIR/pair.sh" "$@"
     ;;
   share|tunnel)
     shift || true
