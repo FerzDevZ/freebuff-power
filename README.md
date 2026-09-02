@@ -4,8 +4,8 @@
 ### The World's Most Powerful Autonomous Multi-Agent Swarm, TUI Dashboard & Anti-Ban Architecture for Freebuff
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Sub-Agents: 42](https://img.shields.io/badge/Sub--Agents-42%20Elite-blueviolet.svg)](#-specialized-sub-agents-roster-42-elite-agents)
-[![Modular Skills: 1,025](https://img.shields.io/badge/Modular%20Skills-1%2C025%20Clean-emerald.svg)](#-modular-skills-catalog-1025-skills)
+[![Sub-Agents: 44](https://img.shields.io/badge/Sub--Agents-44%20Elite-blueviolet.svg)](#-specialized-sub-agents-roster-44-elite-agents)
+[![Modular Skills: 1,042](https://img.shields.io/badge/Modular%20Skills-1%2C025%20Clean-emerald.svg)](#-modular-skills-catalog-1042-skills)
 [![Swarm Score: 100/100 A+](https://img.shields.io/badge/Swarm%20Rating-100%2F100%20Grade%20A%2B-brightgreen.svg)](#-autonomous-swe-bench-evaluator)
 [![Anti-Ban: Active](https://img.shields.io/badge/Anti--Ban%20Shield-Active%20v4.5-brightgreen.svg)](#-enterprise-anti-ban--anti-suspend-shield)
 [![Platform: Linux & macOS](https://img.shields.io/badge/Platform-Linux%20%7C%20macOS-informational.svg)](#-quick-installation-1-line-installer)
@@ -19,9 +19,9 @@
  |_|    |_|  \_\______|______|____/ \____/|_|    |_|      |_|     \____/   \/  \/   |______|_|  \_\
 ```
 
-**Freebuff-Power v4.5** is the ultimate AI engineering toolkit: an autonomous **42-Agent Swarm** powered by **1,025 Modular Skills**, an interactive **Terminal TUI Dashboard**, Time-Travel Snapshots, Live Mobile Tunneling, Dual-Gate QA Invariants, and Enterprise Anti-Ban Safety.
+**Freebuff-Power v4.5** is the ultimate AI engineering toolkit: an autonomous **44-Agent Swarm** powered by **1,042 Modular Skills**, an interactive **Terminal TUI Dashboard**, Time-Travel Snapshots, Live Mobile Tunneling, Dual-Gate QA Invariants, and Enterprise Anti-Ban Safety.
 
-[Instalasi 1 Baris](#-quick-installation-1-line-installer) • [Fitur Baru v4.5](#-fitur-baru-v45-god-tier) • [Panduan CLI](#-cli-command-palette) • [Roster 42 Sub-Agents](#-specialized-sub-agents-roster-42-elite-agents) • [Katalog 1,025 Skills](#-modular-skills-catalog-1025-skills)
+[Instalasi 1 Baris](#-quick-installation-1-line-installer) • [Fitur Baru v4.5](#-fitur-baru-v45-god-tier) • [Panduan CLI](#-cli-command-palette) • [Roster 44 Sub-Agents](#-specialized-sub-agents-roster-44-elite-agents) • [Katalog 1,042 Skills](#-modular-skills-catalog-1042-skills)
 
 </div>
 
@@ -46,7 +46,7 @@ wget -qO- https://raw.githubusercontent.com/FerzDevZ/freebuff-power/main/install
 
 ### 1. 🖥️ Interactive Terminal TUI Dashboard (`freebuff-power ui`)
 Antarmuka visual keyboard-driven di terminal (ala `lazygit`):
-- Jelajahi **42 Sub-Agents & 1,025 Skills** secara interaktif dengan preview SOP instan.
+- Jelajahi **44 Sub-Agents & 1,042 Skills** secara interaktif dengan preview SOP instan.
 - Centang kombinasi agen/skill dengan `[Spacebar]`, lalu tekan `[Enter]` untuk langsung meluncurkan Freebuff!
 - Filter pencarian instan dengan menekan tombol `/`.
 
@@ -62,7 +62,7 @@ Antarmuka visual keyboard-driven di terminal (ala `lazygit`):
 - Menilai kesehatan dan kesiapan armada multi-agent kamu berdasarkan 5 metrik kualitas (*Roster Diversity, Skills Coverage, Anti-Slop, Dual-Gate QA, Token Economy*). **Skor Sempurna: 100/100 Grade A+**.
 
 ### 5. 🔄 Multi-IDE Universal Exporter (`freebuff-power export`)
-- Ekspor seluruh 42 Agen dan 1,025 Skills ke editor AI lainnya dalam 1 detik:
+- Ekspor seluruh 44 Agen dan 1,042 Skills ke editor AI lainnya dalam 1 detik:
   - `freebuff-power export --cursor` $\rightarrow$ `.cursorrules`
   - `freebuff-power export --claude` $\rightarrow$ `CLAUDE.md`
   - `freebuff-power export --windsurf` $\rightarrow$ `.windsurfrules`
@@ -88,7 +88,7 @@ Antarmuka visual keyboard-driven di terminal (ala `lazygit`):
   freebuff-power share [port]      Buka HTTPS Public Tunnel & Live Preview ke HP
   freebuff-power snapshot save     Simpan checkpoint snapshot proyek
   freebuff-power rollback          Pulihkan seluruh kode ke snapshot terakhir
-  freebuff-power export --all      Ekspor 42 Agents & 1,025 Skills ke Cursor/Claude/Windsurf
+  freebuff-power export --all      Ekspor 44 Agents & 1,042 Skills ke Cursor/Claude/Windsurf
   freebuff-power eval              Jalankan Swarm Benchmark Evaluator (Skor 100/100)
 
 💬 MANAJEMEN SESI & CHAT:
@@ -104,7 +104,7 @@ Antarmuka visual keyboard-driven di terminal (ala `lazygit`):
 
 ---
 
-## 👥 Specialized Sub-Agents Roster (42 Elite Agents)
+## 👥 Specialized Sub-Agents Roster (44 Elite Agents)
 
 | Sub-Agent | Focus & Responsibility |
 |---|---|
@@ -146,7 +146,7 @@ Antarmuka visual keyboard-driven di terminal (ala `lazygit`):
 
 ---
 
-## 🧰 Modular Skills Catalog (1,025 Skills)
+## 🧰 Modular Skills Catalog (1,042 Skills)
 
 1. **Architecture & Design (110+ skills)**: Clean Architecture, CQRS, Event Sourcing, Domain-Driven Design, API Design.
 2. **Backend Polyglot (180+ skills)**: FastAPI, NestJS, Go Concurrency & Channels, Rust Tokio/Axum, Spring Boot, Deno/Bun.
