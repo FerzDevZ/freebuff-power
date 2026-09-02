@@ -76,9 +76,16 @@ PENGGUNAAN:
   continue / resume     Lanjutkan sesi percakapan/coding terakhir tanpa kehilangan konteks.
   session list          Tampilkan daftar histori proyek dan riwayat sesi chat.
 
+👥 MULTI-ACCOUNT VAULT & ROTATION (NEW):
+  account save <nama>   Simpan sesi login akun aktif ke dalam vault
+  account list          Lihat daftar akun tersimpan di vault
+  account switch <nama> Beralih ke akun lain dalam 0.1 detik (Instant Quota Swap)
+  account rotate        Putar ke akun berikutnya secara otomatis (Round-Robin)
+  reset-full / logout   Reset TOTAL seluruh sesi, token login, dan device fingerprint
+
 🛡️ ANTI-BAN, UPDATE & PEMELIHARAAN:
   clean                 Reset total anonymous UUID telemetry & lockfile (100% Anti-Ban).
-  doctor                Pemeriksaan kesehatan sistem (integritas 1,025 skills, permissions).
+  doctor                Pemeriksaan kesehatan sistem (integritas 1,042 skills, permissions).
   update                Perbarui pustaka Skills & Agents ke versi rilis terbaru dari GitHub.
 
 🔍 EKSPLORASI & PANDUAN:
@@ -498,6 +505,16 @@ case "$CMD" in
   compose)
     shift || true
     compose_prompt "$@"
+    ;;
+  account)
+    shift || true
+    exec "$SCRIPT_DIR/account.sh" "$@"
+    ;;
+  rotate)
+    exec "$SCRIPT_DIR/account.sh" rotate
+    ;;
+  reset-full|purge-auth|logout)
+    exec "$SCRIPT_DIR/account.sh" reset
     ;;
   update)
     update_library
