@@ -1,24 +1,78 @@
 #!/usr/bin/env node
 // ==============================================================================
-// ⚡ FREEBUFF-POWER BULLETPROOF WEB TERMINAL SERVER
+// ⚡ FREEBUFF-POWER INTERACTIVE FULL-DUPLEX WEB TERMINAL
 // ==============================================================================
 const http = require("http");
 const { spawn } = require("child_process");
 
 const port = process.env.PORT || 7681;
 
+// Spawn bash process with PTY pipe
+const bash = spawn("bash", ["-l"], {
+  env: process.env,
+  stdio: ["pipe", "pipe", "pipe"]
+});
+
+let bashOutput = "";
+bash.stdout.on("data", (data) => {
+  bashOutput += data.toString();
+  if (bashOutput.length > 50000) bashOutput = bashOutput.slice(-50000);
+});
+
+bash.stderr.on("data", (data) => {
+  bashOutput += data.toString();
+  if (bashOutput.length > 50000) bashOutput = bashOutput.slice(-50000);
+});
+
+// Auto launch freebuff-power start inside bash
+setTimeout(() => {
+  bash.stdin.write("freebuff-power start\n");
+}, 500);
+
 const server = http.createServer((req, res) => {
+  const url = new URL(req.url, `http://${req.headers.host}`);
+
+  // API to receive keystrokes/commands from browser
+  if (url.pathname === "/api/input" && req.method === "POST") {
+    let body = "";
+    req.on("data", chunk => body += chunk);
+    req.on("end", () => {
+      try {
+        const json = JSON.parse(body);
+        if (json.data) {
+          bash.stdin.write(json.data);
+        }
+      } catch (e) {
+        bash.stdin.write(body);
+      }
+      res.writeHead(200, { "Content-Type": "application/json" });
+      res.end(JSON.stringify({ ok: true }));
+    });
+    return;
+  }
+
+  // API to poll real-time terminal output
+  if (url.pathname === "/api/output") {
+    res.writeHead(200, {
+      "Content-Type": "text/plain; charset=utf-8",
+      "Cache-Control": "no-cache"
+    });
+    res.end(bashOutput);
+    return;
+  }
+
+  // Serve Main Full-Interactive UI
   res.writeHead(200, {
     "Content-Type": "text/html; charset=utf-8",
     "Access-Control-Allow-Origin": "*"
   });
-  
+
   res.end(`<!DOCTYPE html>
 <html lang="id">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Freebuff-Power Live Collaborative Terminal</title>
+  <title>Freebuff-Power Live Interactive Terminal</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/xterm@5.3.0/css/xterm.css" />
   <script src="https://cdn.jsdelivr.net/npm/xterm@5.3.0/lib/xterm.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/xterm-addon-fit@0.8.0/lib/xterm-addon-fit.js"></script>
@@ -33,8 +87,8 @@ const server = http.createServer((req, res) => {
 </head>
 <body>
   <div id="header">
-    <h1>⚡ FREEBUFF-POWER (46 AGENTS & 1,055 SKILLS) — LIVE TERMINAL</h1>
-    <span id="badge">● LIVE CONNECTED</span>
+    <h1>⚡ FREEBUFF-POWER — LIVE FULL-INTERACTIVE TERMINAL</h1>
+    <span id="badge">● INTERACTIVE ACTIVE</span>
   </div>
   <div id="terminal-container">
     <div id="terminal" style="height:100%; width:100%;"></div>
@@ -57,20 +111,32 @@ const server = http.createServer((req, res) => {
     fitAddon.fit();
     window.addEventListener('resize', () => fitAddon.fit());
 
-    term.writeln('\\x1b[36;1m========================================================================\\x1b[0m');
-    term.writeln('\\x1b[33;1m⚡ FREEBUFF-POWER SUPREME — LIVE COLLABORATIVE TERMINAL\\x1b[0m');
-    term.writeln('\\x1b[36;1m========================================================================\\x1b[0m\\r\\n');
-    term.writeln('\\x1b[32m[✓] Status       : 100% Online & Bebas Password\\x1b[0m');
-    term.writeln('\\x1b[35m[✓] Swarm Engine : 46 Specialized Sub-Agents & 1,055 Modular Skills\\x1b[0m');
-    term.writeln('\\x1b[34m[✓] Anti-Ban     : Fresh Anonymous Telemetry Active\\x1b[0m\\r\\n');
-    term.writeln('\\x1b[90m------------------------------------------------------------------------\\x1b[0m');
-    term.writeln('\\x1b[1mSesi koding siap! Menjalankan Freebuff di terminal host...\\x1b[0m\\r\\n');
-    term.write('\\x1b[32mfreebuff-power\\x1b[0m:\\x1b[34m~/project\\x1b[0m$ freebuff-power start\\r\\n');
+    // 1. Send all keystrokes from browser to backend bash process
+    term.onData(data => {
+      fetch('/api/input', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ data: data })
+      });
+    });
+
+    // 2. Poll bash output continuously
+    let lastLength = 0;
+    setInterval(() => {
+      fetch('/api/output')
+        .then(res => res.text())
+        .then(text => {
+          if (text.length > lastLength) {
+            term.write(text.slice(lastLength));
+            lastLength = text.length;
+          }
+        });
+    }, 150);
   </script>
 </body>
 </html>`);
 });
 
 server.listen(port, "0.0.0.0", () => {
-  console.log("Freebuff Web Terminal listening on 0.0.0.0:" + port);
+  console.log("Interactive Web Terminal server running on 0.0.0.0:" + port);
 });
