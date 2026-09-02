@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # ==============================================================================
-# ⚡ FREEBUFF-POWER TURBO LIVE PAIR-PROGRAMMING (ULTRA FAST)
+# ⚡ FREEBUFF-POWER TURBO LIVE PAIR-PROGRAMMING (ULTRA FAST WEB ENGINE)
 # ==============================================================================
 set -euo pipefail
 
@@ -15,6 +15,7 @@ SCRIPT_DIR="$( cd -P "$( dirname "$SOURCE" )" >/dev/null 2>&1 && pwd )"
 C_CYAN='\033[0;36m'
 C_GREEN='\033[0;32m'
 C_YELLOW='\033[0;33m'
+C_PURPLE='\033[0;35m'
 C_RED='\033[0;31m'
 C_BOLD='\033[1m'
 C_DIM='\033[2m'
@@ -26,17 +27,11 @@ echo -e "${C_CYAN}${C_BOLD}=====================================================
 echo -e "${C_YELLOW}${C_BOLD}🤝 [FREEBUFF-POWER PAIR] Instant Turbo Collaborative Terminal${C_RESET}"
 echo -e "${C_CYAN}${C_BOLD}========================================================================${C_RESET}\n"
 
-# Injeksi Superpower
+# 1. Injeksi Superpower
 freebuff-power init . >/dev/null 2>&1 || true
 
-# Check for tmate (Native ultra-fast zero lag)
-if which tmate >/dev/null 2>&1; then
-  echo -e "${C_GREEN}🚀 Meluncurkan Tmate Native Engine (Super Fast 0ms)...${C_RESET}\n"
-  exec tmate -F
-fi
-
-# Start Turbo Web Terminal Engine
-echo -e "${C_GREEN}🚀 Menyalakan Web Terminal Engine di port $PORT...${C_RESET}"
+# 2. Start Turbo Web Terminal Engine
+echo -e "${C_GREEN}🚀 Menyalakan Turbo Web Terminal Server di port $PORT...${C_RESET}"
 node "$SCRIPT_DIR/webterm/server.js" >/dev/null 2>&1 &
 SERVER_PID=$!
 
@@ -45,12 +40,12 @@ sleep 1
 echo -e "\n${C_GREEN}${C_BOLD}========================================================================${C_RESET}"
 echo -e "${C_GREEN}${C_BOLD}🎉 SESI PAIR-PROGRAMMING AKTIF & SUPER CEPAT!${C_RESET}"
 echo -e "${C_GREEN}${C_BOLD}========================================================================${C_RESET}"
-echo -e "⚡ ${C_BOLD}Link Browser Lokal (0ms Lag):${C_RESET} ${C_CYAN}${C_BOLD}http://localhost:$PORT${C_RESET}"
-echo -e "\n${C_YELLOW}👉 Siap menghubungkan tunnel publik untuk temanmu...${C_RESET}\n"
+echo -e "⚡ ${C_BOLD}Link Browser Lokal (0ms Delay):${C_RESET} ${C_CYAN}${C_BOLD}http://localhost:$PORT${C_RESET}"
+echo -e "\n${C_YELLOW}👉 Siap menghubungkan tunnel publik...${C_RESET}\n"
 
 trap 'kill $SERVER_PID 2>/dev/null || true; echo -e "\n${C_RED}🛑 Sesi kolaborasi dimatikan.${C_RESET}"; exit 0' INT TERM
 
-# Preferred: Cloudflare / Localtunnel with keepalive
+# Preferred: Cloudflare / Localtunnel
 if which cloudflared >/dev/null 2>&1; then
   cloudflared tunnel --url "http://localhost:$PORT"
 elif which npx >/dev/null 2>&1; then
