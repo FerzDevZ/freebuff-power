@@ -157,6 +157,12 @@ case "$COMMAND" in
   rotate)
     exec "$SCRIPT_DIR/account.sh" rotate
     ;;
+  rotate-ip|ip)
+    exec "$SCRIPT_DIR/rotate-ip.sh"
+    ;;
+  stealth|ghost)
+    exec "$SCRIPT_DIR/stealth.sh"
+    ;;
 
   reset-full|reset|logout)
     exec "$SCRIPT_DIR/account.sh" reset-full
