@@ -49,60 +49,68 @@ function show_help() {
 PENGGUNAAN:
   freebuff-power <command> [arguments] [options]
 
-🔥 PERINTAH UTAMA:
+🔥 PERINTAH UTAMA & PELUNCURAN:
   start / go / full     [REKOMENDASI] One-Shot All-in-One:
-                        Reset Telemetry (Anti-Ban) + Injeksi 42 Agents & 1,025 Skills
+                        Reset Telemetry (Anti-Ban) + Injeksi 44 Agents & 1,042 Skills
                         + Langsung buka sesi interaktif Freebuff siap koding!
 
-  ui / tui              Buka Interactive Terminal TUI Dashboard (pilih agen/skill visual)
+  ui / tui              Buka Interactive Terminal TUI Dashboard (pilih agen/skill visual).
 
   compose <task> [-r]   [POWER COMPOSER 2.0] Menganalisis kebutuhan arsitektur dan
                         meracik kombinasi Agen & Skills terbaik (-r untuk auto-run).
 
   spawn <agent> [task]  Luncurkan Freebuff dengan persona sub-agent spesifik
-                        (Contoh: freebuff-power spawn architect "Rancang API warkop")
+                        (Contoh: freebuff-power spawn architect "Rancang API warkop").
 
   init [dir]            Injeksi file AGENTS.md dan katalog .freebuff/ ke folder aktif
+                        tanpa membuka sesi Freebuff.
 
   run [args]            Jalankan sesi Freebuff biasa dengan proteksi Anti-Ban aktif.
 
-🌐 LIVE PREVIEW, TIME-TRAVEL & EXPORTER (NEW v4.5):
-  share [port]          Buka HTTPS Public Tunnel + Live Preview untuk web buatan AI
-  snapshot <save|list|restore>  Time-Travel Checkpoint & 1-Second Instant Rollback
-  export [--cursor|--claude|--windsurf|--all]  Ekspor 42 Agents & 1,025 Skills ke semua IDE
-  eval                  Jalankan Autonomous SWE-Bench Swarm Evaluator (Scorecard A+)
+👥 MULTI-ACCOUNT VAULT & QUOTA ROTATION (NEW):
+  account save <nama>   Simpan sesi login akun aktif ke dalam vault aman.
+  account list          Lihat daftar akun tersimpan di vault beserta status aktif.
+  account switch <nama> Beralih ke akun lain dalam 0.1 detik (Instant Quota Swap).
+  account rotate        Putar ke akun berikutnya secara otomatis (Round-Robin).
+  reset-full / logout   Reset TOTAL seluruh token login, sesi, dan device fingerprint.
+
+🌐 LIVE PREVIEW, TIME-TRAVEL & EXPORTER:
+  share [port]          Buka HTTPS Public Tunnel & Live Preview ke HP (via Cloudflare).
+  snapshot save <label> Buat checkpoint snapshot proyek sebelum AI melakukan refactor.
+  snapshot list         Tampilkan seluruh riwayat snapshot checkpoint proyek.
+  snapshot restore [id] Pulihkan seluruh file proyek ke checkpoint snapshot pilihan.
+  rollback              Shortcut instan: Pulihkan proyek ke snapshot terakhir (1 detik).
+  export [--cursor|--claude|--windsurf|--all]
+                        Ekspor 44 Agents & 1,042 Skills ke semua format AI IDE.
+  eval                  Jalankan Autonomous SWE-Bench Swarm Evaluator (Scorecard A+).
 
 💬 MANAJEMEN SESI & CHAT:
   continue / resume     Lanjutkan sesi percakapan/coding terakhir tanpa kehilangan konteks.
   session list          Tampilkan daftar histori proyek dan riwayat sesi chat.
 
-👥 MULTI-ACCOUNT VAULT & ROTATION (NEW):
-  account save <nama>   Simpan sesi login akun aktif ke dalam vault
-  account list          Lihat daftar akun tersimpan di vault
-  account switch <nama> Beralih ke akun lain dalam 0.1 detik (Instant Quota Swap)
-  account rotate        Putar ke akun berikutnya secara otomatis (Round-Robin)
-  reset-full / logout   Reset TOTAL seluruh sesi, token login, dan device fingerprint
-
 🛡️ ANTI-BAN, UPDATE & PEMELIHARAAN:
   clean                 Reset total anonymous UUID telemetry & lockfile (100% Anti-Ban).
-  doctor                Pemeriksaan kesehatan sistem (integritas 1,042 skills, permissions).
+  doctor                Pemeriksaan kesehatan sistem (integritas 1,042 skills & templates).
   update                Perbarui pustaka Skills & Agents ke versi rilis terbaru dari GitHub.
 
 🔍 EKSPLORASI & PANDUAN:
   search <keyword>      Cari Sub-Agent atau Modular Skills berdasarkan kata kunci.
   info <name>           Buka dan baca SOP / instruksi lengkap dari Agent atau Skill.
-  list                  Tampilkan rekapitulasi 42 Sub-Agents & 1,025 Modular Skills.
-  help / --help / -h    Tampilkan panduan bantuan ini.
+  list                  Tampilkan rekapitulasi 44 Sub-Agents & 1,042 Modular Skills.
+  help / --help / -h    Tampilkan panduan bantuan lengkap ini.
 
 ----------------------------------------------------------------------------------------
-💡 CONTOH PENGGUNAAN CEPAT:
-  $ freebuff-power ui                                # Buka Dashboard Visual di Terminal
-  $ freebuff-power start                             # Mulai koding instan 1 detik
-  $ freebuff-power compose "Bikin web warkop" -r     # Auto-compose prompt & jalankan
-  $ freebuff-power share                             # Buka live preview web ke HP
-  $ freebuff-power snapshot save "sebelum refactor"  # Buat checkpoint aman
-  $ freebuff-power snapshot restore                  # Rollback jika AI salah koding
-  $ freebuff-power export --all                      # Ekspor ke Cursor/Claude/Windsurf
+💡 CONTOH SKENARIO PENGGUNAAN NYATA:
+  1. Mulai Koding Instan      : $ freebuff-power start
+  2. Buka Visual Dashboard    : $ freebuff-power ui
+  3. Racik & Jalankan Prompt  : $ freebuff-power compose "Buat landing page 3D" -r
+  4. Preview Web ke HP        : $ freebuff-power share
+  5. Checkpoint Sebelum AI    : $ freebuff-power snapshot save "sebelum refactor"
+  6. Batalkan Kesalahan AI    : $ freebuff-power rollback
+  7. Simpan Akun ke Vault     : $ freebuff-power account save akun_utama
+  8. Putar Akun saat Limit    : $ freebuff-power rotate
+  9. Ekspor ke Cursor/Claude  : $ freebuff-power export --all
+ 10. Reset Identitas Total    : $ freebuff-power reset-full
 ========================================================================================
 HELP_EOF
 }
@@ -138,7 +146,7 @@ function inject_superpower() {
 function one_shot_start() {
   local target_dir="$(pwd)"
   echo -e "${C_CYAN}${C_BOLD}========================================================================${C_RESET}"
-  echo -e "${C_YELLOW}${C_BOLD}⚡ [FREEBUFF-POWER] ONE-SHOT ALL-IN-ONE (42 AGENTS & 1,025 SKILLS)...${C_RESET}"
+  echo -e "${C_YELLOW}${C_BOLD}⚡ [FREEBUFF-POWER] ONE-SHOT ALL-IN-ONE (44 AGENTS & 1,042 SKILLS)...${C_RESET}"
   echo -e "${C_CYAN}${C_BOLD}========================================================================${C_RESET}"
   
   apply_anti_ban_shield
@@ -266,8 +274,8 @@ function compose_prompt() {
   fi
 
   if [[ "$lower_q" =~ (mobile|android|ios|flutter|react native|swiftui|app) ]]; then
-    agents+=("@mobile-engineer")
-    skills+=("[Skill: crossplatform-mobile-flutter-rn]")
+    agents+=("@mobile-engineer" "@flutter-specialist")
+    skills+=("[Skill: crossplatform-mobile-flutter-rn]" "[Skill: flutter-bloc-riverpod-clean-architecture]")
   fi
 
   if [[ "$lower_q" =~ (test|testing|qa|vitest|unit|e2e|playwright) ]]; then
@@ -471,6 +479,16 @@ case "$CMD" in
   ui|tui)
     exec node "$SCRIPT_DIR/tui.js"
     ;;
+  account)
+    shift || true
+    exec "$SCRIPT_DIR/account.sh" "$@"
+    ;;
+  rotate)
+    exec "$SCRIPT_DIR/account.sh" rotate
+    ;;
+  reset-full|purge-auth|logout)
+    exec "$SCRIPT_DIR/account.sh" reset
+    ;;
   share|tunnel)
     shift || true
     exec "$SCRIPT_DIR/share.sh" "$@"
@@ -496,7 +514,7 @@ case "$CMD" in
   init)
     shift || true
     inject_superpower "${1:-$(pwd)}"
-    echo -e "${C_GREEN}✅ Sukses! 42 Sub-Agents & 1,025 Modular Skills berhasil disuntikkan ke $(pwd).${C_RESET}"
+    echo -e "${C_GREEN}✅ Sukses! 44 Sub-Agents & 1,042 Modular Skills berhasil disuntikkan ke $(pwd).${C_RESET}"
     ;;
   spawn)
     shift || true
@@ -505,16 +523,6 @@ case "$CMD" in
   compose)
     shift || true
     compose_prompt "$@"
-    ;;
-  account)
-    shift || true
-    exec "$SCRIPT_DIR/account.sh" "$@"
-    ;;
-  rotate)
-    exec "$SCRIPT_DIR/account.sh" rotate
-    ;;
-  reset-full|purge-auth|logout)
-    exec "$SCRIPT_DIR/account.sh" reset
     ;;
   update)
     update_library
