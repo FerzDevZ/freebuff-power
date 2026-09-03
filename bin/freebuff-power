@@ -163,6 +163,18 @@ case "$COMMAND" in
   stealth|ghost)
     exec "$SCRIPT_DIR/stealth.sh"
     ;;
+  vps)
+    shift || true
+    echo -e "\033[0;36m\033[1m🚀 Menghubungkan ke VPS US (54.184.103.61) — Full Access Activated...\033[0m"
+    exec sshpass -p "ubuntu" ssh -o StrictHostKeyChecking=no -t ubuntu@54.184.103.61 "freebuff-power start"
+    ;;
+  vps-tunnel)
+    shift || true
+    echo -e "\033[0;36m\033[1m🌐 Membuka SOCKS5 Tunnel Lokal ke VPS US di 127.0.0.1:1080...\033[0m"
+    pkill -f "ssh.*54.184.103.61" 2>/dev/null || true
+    sshpass -p "ubuntu" ssh -o StrictHostKeyChecking=no -D 1080 -N -f ubuntu@54.184.103.61
+    echo -e "\033[0;32m✅ SOCKS5 Proxy aktif di 127.0.0.1:1080 (US Oregon)\033[0m"
+    ;;
 
   reset-full|reset|logout)
     exec "$SCRIPT_DIR/account.sh" reset-full

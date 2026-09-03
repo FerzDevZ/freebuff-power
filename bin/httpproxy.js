@@ -5,9 +5,9 @@
 const http = require("http");
 const net = require("net");
 
-const HTTP_PORT = 8118;
-const SOCKS_HOST = "127.0.0.1";
-const SOCKS_PORT = 9050;
+const HTTP_PORT = parseInt(process.env.HTTP_PROXY_PORT || "8118", 10);
+const SOCKS_HOST = process.env.SOCKS_HOST || "127.0.0.1";
+const SOCKS_PORT = parseInt(process.env.SOCKS_PORT || "1080", 10);
 
 function createSocksConnection(targetHost, targetPort, clientSocket, head) {
   const socksSocket = net.connect(SOCKS_PORT, SOCKS_HOST, () => {
