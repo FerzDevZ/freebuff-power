@@ -19,9 +19,9 @@
  |_|    |_|  \_\______|______|____/ \____/|_|    |_|      |_|     \____/   \/  \/   |______|_|  \_\
 ```
 
-**Freebuff-Power v6.0** transforms Freebuff into an autonomous **46-Agent Swarm** powered by **1,061 Modular Skills**, Multi-Account Quota Rotation, an interactive **Terminal TUI Dashboard**, Time-Travel Snapshots, Live Mobile Tunneling, Dual-Gate QA Invariants, and Enterprise Anti-Ban Safety.
+**Freebuff-Power v6.0** transforms Freebuff into an autonomous **46-Agent Swarm** powered by **1,069 Modular Skills**, Multi-Account Quota Rotation, an interactive **Terminal TUI Dashboard**, Time-Travel Snapshots, Live Mobile Tunneling, Dual-Gate QA Invariants, and Enterprise Anti-Ban Safety.
 
-[Instalasi 1 Baris](#-quick-installation-1-line-installer) • [Fitur Utama v6.0](#-fitur-utama-v45) • [Panduan CLI Lengkap](#-cli-command-palette-v45) • [Multi-Account Vault](#-multi-account-vault--quota-rotation) • [Roster 60 Sub-Agents](#-specialized-sub-agents-roster-46-elite-agents) • [Katalog 1,061 Skills](#-modular-skills-catalog-1055-skills)
+[Instalasi 1 Baris](#-quick-installation-1-line-installer) • [Fitur Utama v6.0](#-fitur-utama-v45) • [Panduan CLI Lengkap](#-cli-command-palette-v45) • [Multi-Account Vault](#-multi-account-vault--quota-rotation) • [Roster 66 Sub-Agents](#-specialized-sub-agents-roster-46-elite-agents) • [Katalog 1,061 Skills](#-modular-skills-catalog-1055-skills)
 
 </div>
 
@@ -51,7 +51,7 @@ wget -qO- https://raw.githubusercontent.com/FerzDevZ/freebuff-power/main/install
 
 ### 2. 🖥️ Interactive Terminal TUI Dashboard (`freebuff-power ui`)
 - Dashboard visual keyboard-driven di terminal (ala `lazygit`).
-- Jelajahi **60 Sub-Agents & 1,061 Skills** dengan preview SOP instan.
+- Jelajahi **66 Sub-Agents & 1,061 Skills** dengan preview SOP instan.
 - Centang kombinasi agen/skill dengan `[Spacebar]`, lalu tekan `[Enter]` untuk meluncurkan Freebuff!
 - Filter pencarian instan dengan menekan tombol `/`.
 
@@ -118,7 +118,16 @@ wget -qO- https://raw.githubusercontent.com/FerzDevZ/freebuff-power/main/install
 
 ---
 
-## 👥 Specialized Sub-Agents Roster (60 Elite Agents)
+## 👥 Specialized Sub-Agents
+
+### 🎮 Roblox Game Development Suite (NEW)
+- **`@roblox-architect`**: Rojo project topology (`default.project.json`), Wally packages, and client-server shared architecture.
+- **`@roblox-luau-scripter`**: Strict Luau (`--!strict`), task library, types, and modern garbage collection patterns.
+- **`@roblox-security-anti-exploit`**: Server-authoritative validation, token-bucket remote rate limiters, magnitude & raycast sanity checks.
+- **`@roblox-datastore-engineer`**: ProfileService session-locking, zero-loss persistence, and safe `BindToClose`.
+- **`@roblox-gameplay-physics`**: Constraint physics, FastCast projectile engines, and RaycastHitbox combat.
+- **`@roblox-ui-fusion-roact`**: Declarative cross-platform UI with Fusion, reactive springs, and gamepad accessibility.
+ Roster (60 Elite Agents)
 
 | Sub-Agent | Focus & Responsibility |
 |---|---|
