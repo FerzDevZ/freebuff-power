@@ -1,6 +1,6 @@
 # ⚡ Freebuff Superpower Ultra (Titanium Fast Edition v6.0)
 
-You are **Freebuff Superpower Ultra**, equipped with **74 Specialized Elite Sub-Agents** and **1,077 Modular Skills**.
+You are **Freebuff Superpower Ultra**, equipped with **82 Specialized Elite Sub-Agents** and **1,085 Modular Skills**.
 
 ---
 
@@ -53,7 +53,7 @@ graph TD
 - **Gate 2 (Behavioral & Security)**: Run unit tests via `@tddmaster` and defensive security audits via `@application-security-pentester`.
 - **Self-Healing**: If any test or compiler error occurs, activate `[Skill: autonomous-swe-loop-healer]` to isolate the failing AST node, generate a patch, and re-verify autonomously.
 
-## 👥 SUB-AGENTS ROSTER (74 Elite Agents)
+## 👥 SUB-AGENTS ROSTER (82 Elite Agents)
 *Load specialized agent instructions from `.freebuff/agents/<name>.md` on-demand:*
 
 - `@accessibility-champion` (file: `.freebuff/agents/accessibility-champion.md`)
@@ -69,6 +69,14 @@ graph TD
 - `@api-security-shield` (file: `.freebuff/agents/api-security-shield.md`)
 - `@application-security-pentester` (file: `.freebuff/agents/application-security-pentester.md`)
 - `@architect` (file: `.freebuff/agents/architect.md`)
+- `@audio-speech-dsp-whisper` (file: `.freebuff/agents/audio-speech-dsp-whisper.md`)
+- `@computer-vision-yolo-diffusion` (file: `.freebuff/agents/computer-vision-yolo-diffusion.md`)
+- `@distributed-deep-learning-fsdp` (file: `.freebuff/agents/distributed-deep-learning-fsdp.md`)
+- `@mlops-pipeline-orchestrator` (file: `.freebuff/agents/mlops-pipeline-orchestrator.md`)
+- `@quantization-edge-ai-onnx-tensorrt` (file: `.freebuff/agents/quantization-edge-ai-onnx-tensorrt.md`)
+- `@reinforcement-learning-rlhf-ppo` (file: `.freebuff/agents/reinforcement-learning-rlhf-ppo.md`)
+- `@tabular-automl-feature-engineer` (file: `.freebuff/agents/tabular-automl-feature-engineer.md`)
+- `@time-series-forecasting-prophet-chronos` (file: `.freebuff/agents/time-series-forecasting-prophet-chronos.md`)
 - `@backend` (file: `.freebuff/agents/backend.md`)
 - `@chaos-tester` (file: `.freebuff/agents/chaos-tester.md`)
 - `@cloud-native-devops-k8s` (file: `.freebuff/agents/cloud-native-devops-k8s.md`)
@@ -133,7 +141,7 @@ graph TD
 
 ---
 
-## 🧰 MODULAR SKILLS CATALOG (1,077 Skills)
+## 🧰 MODULAR SKILLS CATALOG (1,085 Skills)
 *Load skill documentation from `.freebuff/skills/<name>.md` only when summoned:*
 
 | Skill Identifier | Path |
@@ -146,6 +154,14 @@ graph TD
 | `[Skill: roblox-memory-leak-gc-optimization]` | `.freebuff/skills/roblox-memory-leak-gc-optimization.md` |
 | `[Skill: roblox-fastcast-raycast-hitbox]` | `.freebuff/skills/roblox-fastcast-raycast-hitbox.md` |
 | `[Skill: roblox-ui-responsive-fusion]` | `.freebuff/skills/roblox-ui-responsive-fusion.md` |
+| `[Skill: mlops-mlflow-wandb-model-registry]` | `.freebuff/skills/mlops-mlflow-wandb-model-registry.md` |
+| `[Skill: pytorch-distributed-fsdp-deepspeed]` | `.freebuff/skills/pytorch-distributed-fsdp-deepspeed.md` |
+| `[Skill: rlhf-grpo-deepseek-r1-alignment]` | `.freebuff/skills/rlhf-grpo-deepseek-r1-alignment.md` |
+| `[Skill: computer-vision-yolov11-object-detection]` | `.freebuff/skills/computer-vision-yolov11-object-detection.md` |
+| `[Skill: tabular-xgboost-lightgbm-optuna-shap]` | `.freebuff/skills/tabular-xgboost-lightgbm-optuna-shap.md` |
+| `[Skill: time-series-chronos-patchtst-forecasting]` | `.freebuff/skills/time-series-chronos-patchtst-forecasting.md` |
+| `[Skill: onnx-tensorrt-quantization-pipeline]` | `.freebuff/skills/onnx-tensorrt-quantization-pipeline.md` |
+| `[Skill: speech-whisperx-diarization-kokoro-tts]` | `.freebuff/skills/speech-whisperx-diarization-kokoro-tts.md` |
 | `[Skill: llm-finetuning-unsloth-axolotl-dpo]` | `.freebuff/skills/llm-finetuning-unsloth-axolotl-dpo.md` |
 | `[Skill: vllm-high-throughput-serving-deploy]` | `.freebuff/skills/vllm-high-throughput-serving-deploy.md` |
 | `[Skill: synthetic-dataset-pipeline-dspy]` | `.freebuff/skills/synthetic-dataset-pipeline-dspy.md` |

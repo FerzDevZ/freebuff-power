@@ -19,9 +19,9 @@
  |_|    |_|  \_\______|______|____/ \____/|_|    |_|      |_|     \____/   \/  \/   |______|_|  \_\
 ```
 
-**Freebuff-Power v6.0** transforms Freebuff into an autonomous **46-Agent Swarm** powered by **1,077 Modular Skills**, Multi-Account Quota Rotation, an interactive **Terminal TUI Dashboard**, Time-Travel Snapshots, Live Mobile Tunneling, Dual-Gate QA Invariants, and Enterprise Anti-Ban Safety.
+**Freebuff-Power v6.0** transforms Freebuff into an autonomous **46-Agent Swarm** powered by **1,085 Modular Skills**, Multi-Account Quota Rotation, an interactive **Terminal TUI Dashboard**, Time-Travel Snapshots, Live Mobile Tunneling, Dual-Gate QA Invariants, and Enterprise Anti-Ban Safety.
 
-[Instalasi 1 Baris](#-quick-installation-1-line-installer) • [Fitur Utama v6.0](#-fitur-utama-v45) • [Panduan CLI Lengkap](#-cli-command-palette-v45) • [Multi-Account Vault](#-multi-account-vault--quota-rotation) • [Roster 74 Sub-Agents](#-specialized-sub-agents-roster-46-elite-agents) • [Katalog 1,061 Skills](#-modular-skills-catalog-1055-skills)
+[Instalasi 1 Baris](#-quick-installation-1-line-installer) • [Fitur Utama v6.0](#-fitur-utama-v45) • [Panduan CLI Lengkap](#-cli-command-palette-v45) • [Multi-Account Vault](#-multi-account-vault--quota-rotation) • [Roster 82 Sub-Agents](#-specialized-sub-agents-roster-46-elite-agents) • [Katalog 1,061 Skills](#-modular-skills-catalog-1055-skills)
 
 </div>
 
@@ -51,7 +51,7 @@ wget -qO- https://raw.githubusercontent.com/FerzDevZ/freebuff-power/main/install
 
 ### 2. 🖥️ Interactive Terminal TUI Dashboard (`freebuff-power ui`)
 - Dashboard visual keyboard-driven di terminal (ala `lazygit`).
-- Jelajahi **74 Sub-Agents & 1,061 Skills** dengan preview SOP instan.
+- Jelajahi **82 Sub-Agents & 1,061 Skills** dengan preview SOP instan.
 - Centang kombinasi agen/skill dengan `[Spacebar]`, lalu tekan `[Enter]` untuk meluncurkan Freebuff!
 - Filter pencarian instan dengan menekan tombol `/`.
 
@@ -119,6 +119,17 @@ wget -qO- https://raw.githubusercontent.com/FerzDevZ/freebuff-power/main/install
 ---
 
 ## 👥 Specialized Sub-Agents
+
+### ⚡ Machine Learning & Deep Learning Suite (NEW)
+- **`@mlops-pipeline-orchestrator`**: MLflow, W&B tracking, DVC dataset versioning, model registry, and continuous drift monitoring.
+- **`@distributed-deep-learning-fsdp`**: Multi-GPU / multi-node PyTorch FSDP, DeepSpeed ZeRO-3, and Slurm distributed cluster training.
+- **`@reinforcement-learning-rlhf-ppo`**: RLHF, PPO, DeepSeek-R1 style Group Relative Policy Optimization (GRPO), and verifier reward modeling.
+- **`@computer-vision-yolo-diffusion`**: YOLOv11, RT-DETR object detection, SAM segmentation, and Stable Diffusion 3 / Flux.1 LoRA tuning.
+- **`@tabular-automl-feature-engineer`**: XGBoost, LightGBM, CatBoost, Optuna Bayesian tuning, and SHAP explainability.
+- **`@time-series-forecasting-prophet-chronos`**: Pretrained time series foundation models (Amazon Chronos), PatchTST, and conformal risk bounds.
+- **`@quantization-edge-ai-onnx-tensorrt`**: ONNX Runtime, TensorRT INT8/FP16 compilation, and embedded edge deployment.
+- **`@audio-speech-dsp-whisper`**: WhisperX phoneme alignment, PyAnnote speaker diarization, Kokoro-82M TTS, and streaming voice agents.
+
 
 ### 🧠 Full AI Engineering & LLM Suite (NEW)
 - **`@llm-finetuning-post-training`**: SFT, LoRA, QLoRA, Unsloth, Axolotl, DPO, KTO, PPO, and sequence packing.
