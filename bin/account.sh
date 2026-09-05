@@ -125,17 +125,28 @@ function list_accounts() {
     echo -e "🔴 ${C_YELLOW}Status: Tidak ada akun yang sedang login (Guest / Clean State)${C_RESET}\n"
   fi
 
-  echo -e "${C_BOLD}📁 Akun di dalam Vault:${C_RESET}"
+  echo -e "${C_BOLD}📁 Akun di dalam Vault (Live Quota & Status Server):${C_RESET}"
   local count=0
-  for acc in "$VAULT_DIR"/*.json; do
-    if [ -f "$acc" ]; then
-      count=$((count + 1))
-      local aname aemail
-      aname="$(basename "$acc" .json)"
-      aemail="$(grep -o '"email": "[^"]*"' "$acc" | cut -d'"' -f4 || echo "Unknown")"
-      echo -e "  [$count] ${C_CYAN}${C_BOLD}$aname${C_RESET} ➔ ${C_DIM}$aemail${C_RESET}"
-    fi
-  done
+  local script_dir
+  script_dir="$( cd -P "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+  local files=("$VAULT_DIR"/*.json)
+  count=${#files[@]}
+  if [ ! -f "${files[0]}" ]; then count=0; fi
+
+  if [ -f "$script_dir/check_quota.js" ]; then
+    node "$script_dir/check_quota.js"
+  else
+    local idx=0
+    for acc in "$VAULT_DIR"/*.json; do
+      if [ -f "$acc" ]; then
+        idx=$((idx + 1))
+        local aname aemail
+        aname="$(basename "$acc" .json)"
+        aemail="$(grep -o '"email": "[^"]*"' "$acc" | cut -d'"' -f4 || echo "Unknown")"
+        echo -e "  [$idx] ${C_CYAN}${C_BOLD}$aname${C_RESET} ➔ ${C_DIM}$aemail${C_RESET}"
+      fi
+    done
+  fi
 
   if [ "$count" -eq 0 ]; then
     echo -e "  (Belum ada akun di vault. Gunakan 'freebuff-power account save <nama>')\n"
