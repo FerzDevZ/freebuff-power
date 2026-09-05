@@ -19,9 +19,9 @@
  |_|    |_|  \_\______|______|____/ \____/|_|    |_|      |_|     \____/   \/  \/   |______|_|  \_\
 ```
 
-**Freebuff-Power v6.0** transforms Freebuff into an autonomous **46-Agent Swarm** powered by **1,069 Modular Skills**, Multi-Account Quota Rotation, an interactive **Terminal TUI Dashboard**, Time-Travel Snapshots, Live Mobile Tunneling, Dual-Gate QA Invariants, and Enterprise Anti-Ban Safety.
+**Freebuff-Power v6.0** transforms Freebuff into an autonomous **46-Agent Swarm** powered by **1,077 Modular Skills**, Multi-Account Quota Rotation, an interactive **Terminal TUI Dashboard**, Time-Travel Snapshots, Live Mobile Tunneling, Dual-Gate QA Invariants, and Enterprise Anti-Ban Safety.
 
-[Instalasi 1 Baris](#-quick-installation-1-line-installer) • [Fitur Utama v6.0](#-fitur-utama-v45) • [Panduan CLI Lengkap](#-cli-command-palette-v45) • [Multi-Account Vault](#-multi-account-vault--quota-rotation) • [Roster 66 Sub-Agents](#-specialized-sub-agents-roster-46-elite-agents) • [Katalog 1,061 Skills](#-modular-skills-catalog-1055-skills)
+[Instalasi 1 Baris](#-quick-installation-1-line-installer) • [Fitur Utama v6.0](#-fitur-utama-v45) • [Panduan CLI Lengkap](#-cli-command-palette-v45) • [Multi-Account Vault](#-multi-account-vault--quota-rotation) • [Roster 74 Sub-Agents](#-specialized-sub-agents-roster-46-elite-agents) • [Katalog 1,061 Skills](#-modular-skills-catalog-1055-skills)
 
 </div>
 
@@ -51,7 +51,7 @@ wget -qO- https://raw.githubusercontent.com/FerzDevZ/freebuff-power/main/install
 
 ### 2. 🖥️ Interactive Terminal TUI Dashboard (`freebuff-power ui`)
 - Dashboard visual keyboard-driven di terminal (ala `lazygit`).
-- Jelajahi **66 Sub-Agents & 1,061 Skills** dengan preview SOP instan.
+- Jelajahi **74 Sub-Agents & 1,061 Skills** dengan preview SOP instan.
 - Centang kombinasi agen/skill dengan `[Spacebar]`, lalu tekan `[Enter]` untuk meluncurkan Freebuff!
 - Filter pencarian instan dengan menekan tombol `/`.
 
@@ -119,6 +119,17 @@ wget -qO- https://raw.githubusercontent.com/FerzDevZ/freebuff-power/main/install
 ---
 
 ## 👥 Specialized Sub-Agents
+
+### 🧠 Full AI Engineering & LLM Suite (NEW)
+- **`@llm-finetuning-post-training`**: SFT, LoRA, QLoRA, Unsloth, Axolotl, DPO, KTO, PPO, and sequence packing.
+- **`@vllm-serving-inference-opt`**: Ultra-throughput vLLM & SGLang deployment, continuous batching, prefix caching, speculative decoding.
+- **`@synthetic-data-curation-engineer`**: Self-Instruct, Evol-Instruct, UltraFeedback format, DSPy optimization, MinHash LSH deduplication.
+- **`@agentic-workflow-langgraph-architect`**: Cyclic StateGraphs, persistent memory checkpointers, tool validation, human-in-the-loop.
+- **`@graphrag-hybrid-search-engineer`**: Neo4j Knowledge Graphs, dense + sparse BM25 hybrid search with RRF, and cross-encoder rerankers.
+- **`@llm-evals-judge-benchmarking`**: DeepEval, RAGAS, TruLens, calibrated LLM-as-a-Judge, and CI/CD quality gates.
+- **`@multimodal-vlm-vision-specialist`**: Qwen2-VL, Pixtral, ColPali late-interaction visual document RAG without OCR, and Whisper STT/TTS.
+- **`@ai-safety-guardrails-redteam`**: NeMo Guardrails, Llama-Guard 3, PII redaction, prompt injection defense, and automated red-teaming.
+
 
 ### 🎮 Roblox Game Development Suite (NEW)
 - **`@roblox-architect`**: Rojo project topology (`default.project.json`), Wally packages, and client-server shared architecture.
