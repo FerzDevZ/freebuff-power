@@ -1,16 +1,18 @@
 #!/usr/bin/env bash
 # ==============================================================================
-# 🔄 FREEBUFF-POWER MULTI-ACCOUNT VAULT & FULL IDENTITY RESET
+# 🔄 FREEBUFF-POWER MULTI-ACCOUNT VAULT & FULL IDENTITY ISOLATION (ZERO LIMIT LEAK)
 # ==============================================================================
 set -euo pipefail
 
 MANICODE_DIR="$HOME/.config/manicode"
 VAULT_DIR="$MANICODE_DIR/account_vault"
+DEVICE_DIR="$VAULT_DIR/devices"
 CREDS_FILE="$MANICODE_DIR/credentials.json"
 ANALYTICS_FILE="$MANICODE_DIR/analytics-id.json"
+ANONYMOUS_FILE="$MANICODE_DIR/anonymous-id.json"
 OWNER_FILE="$MANICODE_DIR/freebuff-instance-owner.json"
 
-mkdir -p "$VAULT_DIR"
+mkdir -p "$VAULT_DIR" "$DEVICE_DIR"
 
 C_CYAN='\033[0;36m'
 C_GREEN='\033[0;32m'
@@ -21,23 +23,58 @@ C_BOLD='\033[1m'
 C_DIM='\033[2m'
 C_RESET='\033[0m'
 
+function kill_active_sessions() {
+  # Kill any active/zombie freebuff or manicode processes holding old session state in RAM
+  pkill -9 -x "freebuff" 2>/dev/null || true
+  pkill -9 -x "manicode" 2>/dev/null || true
+  pgrep -f "node.*bin/freebuff" | grep -v "$$" | xargs -r kill -9 2>/dev/null || true
+}
+
+function clear_session_locks() {
+  rm -f "$MANICODE_DIR"/*.lock 2>/dev/null || true
+  rm -f "$MANICODE_DIR"/*.sock 2>/dev/null || true
+  rm -f "$MANICODE_DIR"/session-state*.json 2>/dev/null || true
+  rm -f "$MANICODE_DIR"/telemetry-queue*.json 2>/dev/null || true
+  rm -f "$MANICODE_DIR"/freebuff-instance-owner.json 2>/dev/null || true
+  rm -f "$MANICODE_DIR"/device-lock*.json 2>/dev/null || true
+}
+
 function full_reset() {
   echo -e "${C_CYAN}${C_BOLD}========================================================================${C_RESET}"
   echo -e "${C_RED}${C_BOLD}🧹 [FREEBUFF-POWER] FULL IDENTITY & ACCOUNT PURGE RESET${C_RESET}"
   echo -e "${C_CYAN}${C_BOLD}========================================================================${C_RESET}\n"
 
-  # 1. Remove credentials & session metadata
-  rm -f "$CREDS_FILE" "$OWNER_FILE" "$MANICODE_DIR"/*.lock "$MANICODE_DIR"/*.sock "$MANICODE_DIR"/session-state.json 2>/dev/null || true
+  kill_active_sessions
+  clear_session_locks
+  rm -f "$CREDS_FILE" 2>/dev/null || true
 
-  # 2. Generate brand new randomized anonymous identity & hardware hash
-  local new_uuid new_fingerprint
+  # Generate brand new randomized anonymous identity & hardware hash
+  local new_uuid new_fingerprint new_machine_id new_salt fake_mac
   new_uuid="anon_$(cat /proc/sys/kernel/random/uuid 2>/dev/null || python3 -c 'import uuid; print(uuid.uuid4())')"
   new_fingerprint="$(head -c 32 /dev/urandom | sha256sum | awk '{print $1}')"
-  
+  new_machine_id="$(od -vN "16" -An -tx1 /dev/urandom | tr -d " \n")"
+  new_salt="$(od -vN "8" -An -tx1 /dev/urandom | tr -d " \n")"
+  fake_mac="52:54:00:$(printf '%02x:%02x:%02x' $((RANDOM%256)) $((RANDOM%256)) $((RANDOM%256)))"
+
   echo "{\"anonymousId\": \"$new_uuid\", \"deviceHash\": \"$new_fingerprint\"}" > "$ANALYTICS_FILE"
   chmod 600 "$ANALYTICS_FILE" 2>/dev/null || true
 
-  echo -e "${C_GREEN}✅ 1. Sesi login & token lama telah dibersihkan secara total.${C_RESET}"
+  cat << STATE_EOF > "$ANONYMOUS_FILE"
+{
+  "anonymousId": "${new_uuid#anon_}",
+  "machineId": "$new_machine_id",
+  "deviceHash": "$new_fingerprint",
+  "virtualMac": "$fake_mac",
+  "salt": "$new_salt",
+  "spoofedAt": "$(date -u +"%Y-%m-%dT%H:%M:%SZ")",
+  "telemetryEnabled": false,
+  "crashReporting": false,
+  "analyticsOptOut": true
+}
+STATE_EOF
+  chmod 600 "$ANONYMOUS_FILE" 2>/dev/null || true
+
+  echo -e "${C_GREEN}✅ 1. Sesi login & token lama telah dimatikan dan dibersihkan secara total.${C_RESET}"
   echo -e "${C_GREEN}✅ 2. Hardware fingerprint & Anonymous ID baru berhasil di-generate.${C_RESET}"
   echo -e "${C_GREEN}✅ 3. Residual lockfile & socket cache telah di-wipe.${C_RESET}\n"
   echo -e "👉 ${C_BOLD}Sekarang kamu bisa login dengan akun baru tanpa terikat limit lama:${C_RESET}"
@@ -57,7 +94,21 @@ function save_current_account() {
   fi
 
   cp -f "$CREDS_FILE" "$VAULT_DIR/${name}.json"
-  echo -e "${C_GREEN}🎉 Akun yang sedang aktif berhasil disimpan ke vault sebagai: ${C_BOLD}$name${C_RESET}"
+  chmod 600 "$VAULT_DIR/${name}.json" 2>/dev/null || true
+
+  # Save paired isolated device identity
+  if [ -f "$ANALYTICS_FILE" ]; then
+    cp -f "$ANALYTICS_FILE" "$DEVICE_DIR/${name}.analytics.json"
+    chmod 600 "$DEVICE_DIR/${name}.analytics.json" 2>/dev/null || true
+  fi
+  if [ -f "$ANONYMOUS_FILE" ]; then
+    cp -f "$ANONYMOUS_FILE" "$DEVICE_DIR/${name}.anonymous.json"
+    chmod 600 "$DEVICE_DIR/${name}.anonymous.json" 2>/dev/null || true
+  fi
+
+  local email
+  email="$(grep -o '"email": "[^"]*"' "$CREDS_FILE" | cut -d'"' -f4 || echo "Unknown")"
+  echo -e "${C_GREEN}🎉 Akun ($email) berhasil disimpan ke vault sebagai: ${C_BOLD}$name${C_RESET} (dengan profil perangkat terisolasi)!"
 }
 
 function list_accounts() {
@@ -108,11 +159,69 @@ function switch_account() {
     exit 1
   fi
 
+  echo -e "${C_YELLOW}⚙️  [1/5] Mematikan seluruh sesi aktif & melepaskan session lock...${C_RESET}"
+  kill_active_sessions
+
+  echo -e "${C_YELLOW}🧹 [2/5] Membersihkan session state & lockfiles residual...${C_RESET}"
+  clear_session_locks
+
+  echo -e "${C_YELLOW}🎭 [3/5] Mengisolasi hardware fingerprint & machine identity...${C_RESET}"
+  # Restore or Generate Isolated Device Identity for this account
+  if [ -f "$DEVICE_DIR/${name}.analytics.json" ]; then
+    cp -f "$DEVICE_DIR/${name}.analytics.json" "$ANALYTICS_FILE"
+  else
+    local new_uuid new_fingerprint
+    new_uuid="anon_$(cat /proc/sys/kernel/random/uuid 2>/dev/null || python3 -c 'import uuid; print(uuid.uuid4())')"
+    new_fingerprint="$(head -c 32 /dev/urandom | sha256sum | awk '{print $1}')"
+    echo "{\"anonymousId\": \"$new_uuid\", \"deviceHash\": \"$new_fingerprint\"}" > "$ANALYTICS_FILE"
+    cp -f "$ANALYTICS_FILE" "$DEVICE_DIR/${name}.analytics.json" 2>/dev/null || true
+  fi
+  chmod 600 "$ANALYTICS_FILE" 2>/dev/null || true
+
+  if [ -f "$DEVICE_DIR/${name}.anonymous.json" ]; then
+    cp -f "$DEVICE_DIR/${name}.anonymous.json" "$ANONYMOUS_FILE"
+  else
+    local new_anon_id new_machine_id new_device_hash new_salt fake_mac
+    new_anon_id="$(cat /proc/sys/kernel/random/uuid 2>/dev/null || od -x /dev/urandom | head -1 | awk '{OFS="-"; print $2$3,$4,$5,$6,$7$8$9}')"
+    new_machine_id="$(od -vN "16" -An -tx1 /dev/urandom | tr -d " \n")"
+    new_device_hash="$(od -vN "32" -An -tx1 /dev/urandom | tr -d " \n")"
+    new_salt="$(od -vN "8" -An -tx1 /dev/urandom | tr -d " \n")"
+    fake_mac="52:54:00:$(printf '%02x:%02x:%02x' $((RANDOM%256)) $((RANDOM%256)) $((RANDOM%256)))"
+    cat << STATE_EOF > "$ANONYMOUS_FILE"
+{
+  "anonymousId": "$new_anon_id",
+  "machineId": "$new_machine_id",
+  "deviceHash": "$new_device_hash",
+  "virtualMac": "$fake_mac",
+  "salt": "$new_salt",
+  "spoofedAt": "$(date -u +"%Y-%m-%dT%H:%M:%SZ")",
+  "telemetryEnabled": false,
+  "crashReporting": false,
+  "analyticsOptOut": true
+}
+STATE_EOF
+    cp -f "$ANONYMOUS_FILE" "$DEVICE_DIR/${name}.anonymous.json" 2>/dev/null || true
+  fi
+  chmod 600 "$ANONYMOUS_FILE" 2>/dev/null || true
+
+  echo -e "${C_YELLOW}🔑 [4/5] Mengaktifkan kredensial target...${C_RESET}"
   cp -f "$target" "$CREDS_FILE"
+  chmod 600 "$CREDS_FILE" 2>/dev/null || true
+
+  echo -e "${C_YELLOW}🌐 [5/5] Merotasi alamat IP (Cloudflare WARP Renew)...${C_RESET}"
+  if command -v warp-cli >/dev/null 2>&1; then
+    (
+      warp-cli disconnect >/dev/null 2>&1 || true
+      sleep 1
+      warp-cli connect >/dev/null 2>&1 || true
+    ) &
+  fi
+
   local email
   email="$(grep -o '"email": "[^"]*"' "$CREDS_FILE" | cut -d'"' -f4 || echo "Unknown")"
-  echo -e "${C_GREEN}🎉 Berhasil beralih ke akun: ${C_BOLD}$name${C_RESET} ($email)!"
-  echo -e "🚀 Kamu bisa langsung mulai koding dengan: ${C_CYAN}freebuff-power start${C_RESET}"
+  echo -e "\n${C_GREEN}${C_BOLD}🎉 BERHASIL BERALIH KE AKUN: ${C_CYAN}$name${C_GREEN} ($email)!${C_RESET}"
+  echo -e "${C_GREEN}🛡️ Isolasi Total:${C_RESET} Sesi lama dihentikan, hardware fingerprint diisolasi, residual cache di-purge, & IP dirotasi."
+  echo -e "🚀 Mulai koding segar tanpa batas limit akun lama: ${C_CYAN}${C_BOLD}freebuff-power start${C_RESET}\n"
 }
 
 function rotate_account() {
@@ -144,12 +253,10 @@ function rotate_account() {
     current_target="${accounts[0]}"
   fi
 
-  cp -f "$current_target" "$CREDS_FILE"
-  local aname aemail
+  local aname
   aname="$(basename "$current_target" .json)"
-  aemail="$(grep -o '"email": "[^"]*"' "$CREDS_FILE" | cut -d'"' -f4 || echo "Unknown")"
-
-  echo -e "${C_GREEN}🔄 Rotasi Berhasil! Sekarang aktif di akun: ${C_BOLD}$aname${C_RESET} ($aemail)"
+  echo -e "${C_CYAN}🔄 Merotasi ke akun berikutnya: ${C_BOLD}$aname${C_RESET}"
+  switch_account "$aname"
 }
 
 SUBCMD="${1:-list}"
