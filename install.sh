@@ -40,19 +40,23 @@ else
   git clone --depth 1 "$REPO_URL" "$REPO_CACHE_DIR" --quiet
 fi
 
-TOTAL_AGENTS=$(ls -1 "$REPO_CACHE_DIR/superpower/.freebuff/agents" 2>/dev/null | wc -l || echo "60")
-TOTAL_SKILLS="1,061"
+TOTAL_AGENTS=$(ls -1 "$REPO_CACHE_DIR/superpower/.freebuff/agents" 2>/dev/null | wc -l || echo "82")
+TOTAL_SKILLS=$(ls -1 "$REPO_CACHE_DIR/superpower/skills" 2>/dev/null | wc -l || echo "1,088")
 
 # 2. Install All CLI binaries and helpers
-echo -e "${C_BLUE}⚙️  [2/3] Memasang seluruh suite CLI binary ke $INSTALL_BIN_DIR...${C_RESET}"
+echo -e "${C_BLUE}⚙️  [2/4] Memasang seluruh suite CLI binary ke $INSTALL_BIN_DIR...${C_RESET}"
 cp -rf "$REPO_CACHE_DIR/bin/"* "$INSTALL_BIN_DIR/"
 chmod +x "$INSTALL_BIN_DIR"/freebuff-power "$INSTALL_BIN_DIR"/*.sh "$INSTALL_BIN_DIR"/*.js 2>/dev/null || true
 
-# 3. Install Superpower templates
-echo -e "${C_BLUE}🧰 [3/3] Menyinkronkan ${TOTAL_AGENTS} Sub-Agents & ${TOTAL_SKILLS} Modular Skills ke $SUPERPOWER_DIR...${C_RESET}"
+# 3. Install Superpower templates & Anti-Slop Skills
+echo -e "${C_BLUE}🧰 [3/4] Menyinkronkan ${TOTAL_AGENTS} Sub-Agents & ${TOTAL_SKILLS} Modular Skills ke $SUPERPOWER_DIR...${C_RESET}"
 cp -rf "$REPO_CACHE_DIR/superpower/"* "$SUPERPOWER_DIR/"
 
-# 4. Check Shell PATH
+# 4. Auto-Enforce Anti-Watermark Stealth Hooks & Pre-Push Secret Guard
+echo -e "${C_BLUE}🛡️  [4/4] Mengaktifkan Git Stealth Hooks, Pre-Push Secret Guard & Telemetri Anti-Ban...${C_RESET}"
+"$INSTALL_BIN_DIR/clean.sh" >/dev/null 2>&1 || true
+
+# 5. Check Shell PATH
 CURRENT_SHELL="$(basename "$SHELL" 2>/dev/null || echo "bash")"
 RC_FILE="$HOME/.bashrc"
 if [ "$CURRENT_SHELL" = "zsh" ]; then
@@ -69,6 +73,8 @@ echo -e "\n${C_GREEN}${C_BOLD}==================================================
 echo -e "${C_GREEN}${C_BOLD}🎉 INSTALASI SELESAI & SUKSES 100%! (${TOTAL_AGENTS} AGENTS & ${TOTAL_SKILLS} SKILLS)${C_RESET}"
 echo -e "${C_GREEN}${C_BOLD}========================================================================${C_RESET}"
 echo -e "\n🔥 Sekarang di folder mana pun kamu bisa langsung ketik:"
-echo -e "  \033[0;36m\033[1mfreebuff-power start\033[0m   \033[2m# Injeksi instan & langsung koding\033[0m"
-echo -e "  \033[0;36m\033[1mfreebuff-power ui\033[0m      \033[2m# Buka Interactive Dashboard di Terminal\033[0m"
-echo -e "  \033[0;36m\033[1mfreebuff-power --help\033[0m  \033[2m# Lihat semua fitur v6.0\033[0m\n"
+echo -e "  \033[0;36m\033[1mfreebuff-power start\033[0m      \033[2m# Injeksi instan, anti-watermark & langsung koding\033[0m"
+echo -e "  \033[0;36m\033[1mfreebuff-power antislop\033[0m   \033[2m# Scan & bersihkan codebase dari AI slop\033[0m"
+echo -e "  \033[0;36m\033[1mfreebuff-power context\033[0m    \033[2m# Padatkan arsitektur codebase (hemat 60% token)\033[0m"
+echo -e "  \033[0;36m\033[1mfreebuff-power ui\033[0m         \033[2m# Buka Interactive Dashboard di Terminal\033[0m"
+echo -e "  \033[0;36m\033[1mfreebuff-power --help\033[0m     \033[2m# Lihat semua fitur v6.0 Titanium\033[0m\n"
