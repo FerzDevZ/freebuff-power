@@ -29,7 +29,7 @@ REPO_URL="https://github.com/FerzDevZ/freebuff-power.git"
 mkdir -p "$INSTALL_BIN_DIR" "$SUPERPOWER_DIR/.freebuff/agents" "$SUPERPOWER_DIR/.freebuff/skills"
 
 # 1. Fetch Repository (Clone or Update)
-echo -e "${C_BLUE}📦 [1/3] Mengunduh repository & pustaka Superpower...${C_RESET}"
+echo -e "${C_BLUE}📦 [1/4] Mengunduh repository & pustaka Superpower...${C_RESET}"
 if [ -d "$REPO_CACHE_DIR/.git" ]; then
   git -C "$REPO_CACHE_DIR" pull --quiet || {
     rm -rf "$REPO_CACHE_DIR"
