@@ -238,8 +238,24 @@ case "$COMMAND" in
     exec node "$SCRIPT_DIR/cleancode.js"
     ;;
 
+  antislop|anti-slop)
+    shift || true
+    exec node "$SCRIPT_DIR/antislop.js" "$@"
+    ;;
+
+  context|ingest)
+    shift || true
+    exec node "$SCRIPT_DIR/context-extractor.js" "$@"
+    ;;
+
+  scan-secrets|secrets|pre-push)
+    shift || true
+    exec "$SCRIPT_DIR/pre-push-guard.sh" "$@"
+    ;;
+
   readme)
-    exec node "$SCRIPT_DIR/readme-gen.js"
+    shift || true
+    exec node "$SCRIPT_DIR/readme-gen.js" "$@"
     ;;
 
   vpn)
