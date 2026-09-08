@@ -31,8 +31,17 @@ if [ -n "$SOURCE_SUPERPOWER" ]; then
   
   # Copy .freebuff folder (agents & skills)
   mkdir -p "$TARGET_DIR/.freebuff/agents" "$TARGET_DIR/.freebuff/skills"
-  if [ -d "$SOURCE_SUPERPOWER/.freebuff" ]; then
-    cp -rf "$SOURCE_SUPERPOWER/.freebuff/"* "$TARGET_DIR/.freebuff/"
+  if [ -d "$SOURCE_SUPERPOWER/.freebuff/agents" ]; then
+    cp -rf "$SOURCE_SUPERPOWER/.freebuff/agents/"* "$TARGET_DIR/.freebuff/agents/" 2>/dev/null || true
+  elif [ -d "$SOURCE_SUPERPOWER/agents" ]; then
+    cp -rf "$SOURCE_SUPERPOWER/agents/"* "$TARGET_DIR/.freebuff/agents/" 2>/dev/null || true
+  fi
+
+  if [ -d "$SOURCE_SUPERPOWER/.freebuff/skills" ]; then
+    cp -rf "$SOURCE_SUPERPOWER/.freebuff/skills/"* "$TARGET_DIR/.freebuff/skills/" 2>/dev/null || true
+  fi
+  if [ -d "$SOURCE_SUPERPOWER/skills" ]; then
+    cp -rf "$SOURCE_SUPERPOWER/skills/"* "$TARGET_DIR/.freebuff/skills/" 2>/dev/null || true
   fi
 
   # Auto-inject stealth git hooks into project repository

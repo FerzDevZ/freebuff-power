@@ -51,6 +51,13 @@ chmod +x "$INSTALL_BIN_DIR"/freebuff-power "$INSTALL_BIN_DIR"/*.sh "$INSTALL_BIN
 # 3. Install Superpower templates & Anti-Slop Skills
 echo -e "${C_BLUE}🧰 [3/4] Menyinkronkan ${TOTAL_AGENTS} Sub-Agents & ${TOTAL_SKILLS} Modular Skills ke $SUPERPOWER_DIR...${C_RESET}"
 cp -rf "$REPO_CACHE_DIR/superpower/"* "$SUPERPOWER_DIR/"
+mkdir -p "$SUPERPOWER_DIR/.freebuff/agents" "$SUPERPOWER_DIR/.freebuff/skills"
+if [ -d "$SUPERPOWER_DIR/skills" ]; then
+  cp -rf "$SUPERPOWER_DIR/skills/"* "$SUPERPOWER_DIR/.freebuff/skills/" 2>/dev/null || true
+fi
+if [ -d "$SUPERPOWER_DIR/agents" ]; then
+  cp -rf "$SUPERPOWER_DIR/agents/"* "$SUPERPOWER_DIR/.freebuff/agents/" 2>/dev/null || true
+fi
 
 # 4. Ensure Core Freebuff CLI Engine is Installed
 if ! command -v freebuff >/dev/null 2>&1; then

@@ -1,5 +1,5 @@
 ---
-name: sepuh-programmer
+name: "sepuh-programmer"
 description: "Master veteran developer persona: sets communication style, coding values, and response patterns for all sepuh skills. Invoke when answering code questions or when user asks for 'sepuh' style advice."
 ---
 

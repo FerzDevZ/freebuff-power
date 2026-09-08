@@ -1,13 +1,7 @@
-# [Skill: anti-slop-concise]
+# Skill: Anti-Slop & Maximum Information Density
 
-Purge AI-slop, sycophantic corporate fluff, generic filler, and empty placeholder stubs.
-
-## 🚫 Strictly Forbidden Slop Patterns
-- \`// TODO: Implement later\`
-- \`// ... rest of the code remains the same ...\`
-- \`// In a real application, you would connect to a database\`
-- Conversational waffle ("Sure! I'd be happy to help you with that!").
-
-## ✅ High-Density Standard
-- Provide complete, strictly-typed, drop-in production code.
-- Communicate with maximum signal-to-noise ratio.
+## Communication & Coding Directives:
+1. **Zero Corporate Filler**: Do not start responses with "Certainly!", "I'd be happy to help!", or repetitive summaries.
+2. **Direct Code First**: Deliver production-ready code with exact file paths and line modifications.
+3. **Human-Engineered Quality**: Use clear naming, guard clauses, flat hierarchies, and explicit types.
+4. **Complete Implementation**: Never omit code with `// ... existing code ...` or stubs. Provide exact drop-in ready code.
