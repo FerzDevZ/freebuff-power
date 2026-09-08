@@ -74,6 +74,7 @@ echo -e "${C_GREEN}${C_BOLD}🎉 INSTALASI SELESAI & SUKSES 100%! (${TOTAL_AGENT
 echo -e "${C_GREEN}${C_BOLD}========================================================================${C_RESET}"
 echo -e "\n🔥 Sekarang di folder mana pun kamu bisa langsung ketik:"
 echo -e "  \033[0;36m\033[1mfreebuff-power start\033[0m      \033[2m# Injeksi instan, anti-watermark & langsung koding\033[0m"
+echo -e "  \033[0;36m\033[1mfreebuff-power warp\033[0m       \033[2m# Auto-setup Cloudflare WARP (Full Access IP Masking)\033[0m"
 echo -e "  \033[0;36m\033[1mfreebuff-power antislop\033[0m   \033[2m# Scan & bersihkan codebase dari AI slop\033[0m"
 echo -e "  \033[0;36m\033[1mfreebuff-power context\033[0m    \033[2m# Padatkan arsitektur codebase (hemat 60% token)\033[0m"
 echo -e "  \033[0;36m\033[1mfreebuff-power ui\033[0m         \033[2m# Buka Interactive Dashboard di Terminal\033[0m"

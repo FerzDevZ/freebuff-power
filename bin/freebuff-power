@@ -261,6 +261,10 @@ case "$COMMAND" in
   vpn)
     exec "$SCRIPT_DIR/vpn.sh"
     ;;
+  warp|warp-setup)
+    shift || true
+    exec "$SCRIPT_DIR/warp-setup.sh" "$@"
+    ;;
   hook)
     exec "$SCRIPT_DIR/hook.sh"
     ;;
