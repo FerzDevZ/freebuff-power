@@ -52,7 +52,15 @@ chmod +x "$INSTALL_BIN_DIR"/freebuff-power "$INSTALL_BIN_DIR"/*.sh "$INSTALL_BIN
 echo -e "${C_BLUE}🧰 [3/4] Menyinkronkan ${TOTAL_AGENTS} Sub-Agents & ${TOTAL_SKILLS} Modular Skills ke $SUPERPOWER_DIR...${C_RESET}"
 cp -rf "$REPO_CACHE_DIR/superpower/"* "$SUPERPOWER_DIR/"
 
-# 4. Auto-Enforce Anti-Watermark Stealth Hooks & Pre-Push Secret Guard
+# 4. Ensure Core Freebuff CLI Engine is Installed
+if ! command -v freebuff >/dev/null 2>&1; then
+  echo -e "${C_YELLOW}⚡ Core Engine 'freebuff' belum terpasang. Memasang via npm...${C_RESET}"
+  if command -v npm >/dev/null 2>&1; then
+    sudo npm install -g freebuff >/dev/null 2>&1 || npm install -g freebuff >/dev/null 2>&1 || true
+  fi
+fi
+
+# 5. Auto-Enforce Anti-Watermark Stealth Hooks & Pre-Push Secret Guard
 echo -e "${C_BLUE}🛡️  [4/4] Mengaktifkan Git Stealth Hooks, Pre-Push Secret Guard & Telemetri Anti-Ban...${C_RESET}"
 "$INSTALL_BIN_DIR/clean.sh" >/dev/null 2>&1 || true
 

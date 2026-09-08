@@ -47,5 +47,13 @@ if which warp-cli >/dev/null 2>&1; then
   fi
 fi
 
-# 5. Jalankan Freebuff
+# 5. Pastikan Core Freebuff terpasang
+if ! command -v freebuff >/dev/null 2>&1; then
+  echo -e "\033[0;33m⚡ Core engine Freebuff belum terdeteksi. Memasang via npm install -g freebuff...\033[0m"
+  if command -v npm >/dev/null 2>&1; then
+    sudo npm install -g freebuff 2>/dev/null || npm install -g freebuff 2>/dev/null || true
+  fi
+fi
+
+# 6. Jalankan Freebuff
 exec freebuff "$@"
