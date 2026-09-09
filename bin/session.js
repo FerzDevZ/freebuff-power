@@ -106,7 +106,10 @@ if (cmd === "list" || cmd === "ls") {
     child.on("exit", (code) => process.exit(code || 0));
   } else {
     console.log(`\x1b[32m\x1b[1m🚀 Melanjutkan sesi Freebuff: \x1b[36m${targetId}\x1b[0m\n`);
-    const child = spawn("freebuff", ["--continue", targetId], { stdio: "inherit" });
+    const runScript = path.join(__dirname, "run.sh");
+    const child = fs.existsSync(runScript)
+      ? spawn(runScript, ["--continue", targetId], { stdio: "inherit" })
+      : spawn("freebuff", ["--continue", targetId], { stdio: "inherit" });
     child.on("exit", (code) => process.exit(code || 0));
   }
 }
