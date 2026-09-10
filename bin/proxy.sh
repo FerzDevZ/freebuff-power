@@ -205,6 +205,34 @@ case "$ACTION" in
     "$FREEBUFF_PROXY_DIR/restart.sh"
     exit 0
     ;;
+  set-key|key)
+    shift || true
+    NEW_KEY="${1:-ferztampanz}"
+    ensure_proxy_running
+    node -e "
+      const fs = require('fs');
+      const path = require('path');
+      const authPath = path.resolve('$FREEBUFF_PROXY_DIR', 'data', 'auth.json');
+      fs.mkdirSync(path.dirname(authPath), { recursive: true });
+      let d = { accounts: [], api_keys: [], next_id: 1, next_key_id: 1, keys_enabled: true };
+      if (fs.existsSync(authPath)) {
+        try { d = JSON.parse(fs.readFileSync(authPath, 'utf-8')); } catch {}
+      }
+      d.keys_enabled = true;
+      d.api_keys = [{
+        id: 'key_1',
+        key: '$NEW_KEY',
+        name: 'Master Key ($NEW_KEY)',
+        created_at: new Date().toISOString()
+      }];
+      fs.writeFileSync(authPath, JSON.stringify(d, null, 2));
+      console.log('\x1b[32m✅ API Key Proxy berhasil disetel menjadi: \x1b[1m$NEW_KEY\x1b[0m');
+      console.log('\x1b[36m🔒 Mode Autentikasi: Diaktifkan (keys_enabled = true)\x1b[0m');
+    "
+    echo -e "${C_YELLOW}⚡ Me-restart proxy agar API Key langsung aktif...${C_RESET}"
+    "$FREEBUFF_PROXY_DIR/restart.sh"
+    exit 0
+    ;;
   init)
     shift || true
     TARGET_DIR="${1:-.}"
