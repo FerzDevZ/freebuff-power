@@ -87,20 +87,88 @@ case "$ACTION" in
     echo -e "${C_BOLD}👥 Daftar Akun Tersambung di Freebuff Proxy:${C_RESET}"
     node -e "
       const fs = require('fs');
-      try {
-        const d = JSON.parse(fs.readFileSync('$FREEBUFF_PROXY_DIR/data/auth.json', 'utf-8'));
-        const accs = d.accounts || [];
-        if (accs.length === 0) {
-          console.log('\x1b[33m⚠️  Belum ada akun tersimpan di auth.json.\x1b[0m');
-          console.log('\x1b[36m👉 Gunakan: freebuff-power proxy add <session_token> untuk menambah akun.\x1b[0m');
-        } else {
-          console.log('\x1b[32mTotal Akun: ' + accs.length + '\x1b[0m\n');
-          accs.forEach((a, i) => {
-            console.log('  [' + (i+1) + '] ID: \x1b[36m' + a.id + '\x1b[0m | Model: \x1b[33m' + (a.session_model || 'z-ai/glm-5.3-flash') + '\x1b[0m | Status: \x1b[32m' + (a.serve_status || 'active') + '\x1b[0m');
-          });
+      const path = require('path');
+      const authPath = path.resolve('$FREEBUFF_PROXY_DIR', 'data', 'auth.json');
+      const vaultDir = path.resolve(process.env.HOME, '.config', 'manicode', 'account_vault');
+      const activeFile = path.resolve(process.env.HOME, '.config', 'manicode', 'credentials.json');
+
+      fs.mkdirSync(path.dirname(authPath), { recursive: true });
+      let d = { accounts: [], api_keys: [], next_id: 1, next_key_id: 1, keys_enabled: false };
+      if (fs.existsSync(authPath)) {
+        try { d = JSON.parse(fs.readFileSync(authPath, 'utf-8')); } catch {}
+      }
+
+      // Auto-sync from freebuff-power vault if empty or new
+      const existingTokens = new Set((d.accounts || []).map(a => a.token));
+      let synced = 0;
+
+      // 1. Check active account
+      if (fs.existsSync(activeFile)) {
+        try {
+          const act = JSON.parse(fs.readFileSync(activeFile, 'utf-8'));
+          for (const k of Object.keys(act)) {
+            const v = act[k];
+            if (v && (v.authToken || v.token)) {
+              const tk = v.authToken || v.token;
+              if (!existingTokens.has(tk)) {
+                d.accounts.push({
+                  id: 'acct_active_' + (v.email ? v.email.split('@')[0] : 'active'),
+                  token: tk,
+                  session_model: 'z-ai/glm-5.3-flash',
+                  serve_status: 'active',
+                  paused: false,
+                  created_at: new Date().toISOString()
+                });
+                existingTokens.add(tk);
+                synced++;
+              }
+            }
+          }
+        } catch {}
+      }
+
+      // 2. Check vault dir
+      if (fs.existsSync(vaultDir)) {
+        const files = fs.readdirSync(vaultDir).filter(f => f.endsWith('.json'));
+        for (const file of files) {
+          try {
+            const vfile = JSON.parse(fs.readFileSync(path.join(vaultDir, file), 'utf-8'));
+            const name = file.replace('.json', '');
+            for (const k of Object.keys(vfile)) {
+              const v = vfile[k];
+              if (v && (v.authToken || v.token)) {
+                const tk = v.authToken || v.token;
+                if (!existingTokens.has(tk)) {
+                  d.accounts.push({
+                    id: 'acct_' + name,
+                    token: tk,
+                    session_model: 'z-ai/glm-5.3-flash',
+                    serve_status: 'active',
+                    paused: false,
+                    created_at: new Date().toISOString()
+                  });
+                  existingTokens.add(tk);
+                  synced++;
+                }
+              }
+            }
+          } catch {}
         }
-      } catch (err) {
-        console.log('\x1b[31mGagal membaca auth.json: ' + err.message + '\x1b[0m');
+      }
+
+      if (synced > 0 || !fs.existsSync(authPath)) {
+        fs.writeFileSync(authPath, JSON.stringify(d, null, 2));
+      }
+
+      const accs = d.accounts || [];
+      if (accs.length === 0) {
+        console.log('\x1b[33m⚠️  Belum ada akun di vault (~/.config/manicode/account_vault) ataupun auth.json.\x1b[0m');
+        console.log('\x1b[36m👉 Login dulu dengan \"freebuff login\" lalu simpan \"freebuff-power account save <nama>\".\x1b[0m');
+      } else {
+        console.log('\x1b[32mTotal Akun di Proxy Pool: ' + accs.length + '\x1b[0m\n');
+        accs.forEach((a, i) => {
+          console.log('  [' + (i+1) + '] ID: \x1b[36m' + a.id + '\x1b[0m | Model: \x1b[33m' + (a.session_model || 'z-ai/glm-5.3-flash') + '\x1b[0m | Status: \x1b[32m' + (a.serve_status || 'active') + '\x1b[0m');
+        });
       }
     "
     exit 0

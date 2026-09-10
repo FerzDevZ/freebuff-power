@@ -109,6 +109,35 @@ function save_current_account() {
   local email
   email="$(grep -o '"email": "[^"]*"' "$CREDS_FILE" | cut -d'"' -f4 || echo "Unknown")"
   echo -e "${C_GREEN}🎉 Akun ($email) berhasil disimpan ke vault sebagai: ${C_BOLD}$name${C_RESET} (dengan profil perangkat terisolasi)!"
+
+  # Auto-sync to freebuff-proxy auth.json if proxy directory exists
+  local proxy_auth="$HOME/freebuff-proxy/data/auth.json"
+  if [ -d "$HOME/freebuff-proxy" ]; then
+    node -e "
+      const fs = require('fs');
+      const p = '$proxy_auth';
+      let d = { accounts: [], api_keys: [], next_id: 1, next_key_id: 1, keys_enabled: false };
+      try { d = JSON.parse(fs.readFileSync(p, 'utf-8')); } catch {}
+      try {
+        const creds = JSON.parse(fs.readFileSync('$CREDS_FILE', 'utf-8'));
+        const def = creds.default || Object.values(creds)[0];
+        const tk = def?.authToken || def?.token;
+        if (tk && !(d.accounts || []).some(a => a.token === tk)) {
+          d.accounts.push({
+            id: 'acct_$name',
+            token: tk,
+            session_model: 'z-ai/glm-5.3-flash',
+            serve_status: 'active',
+            paused: false,
+            created_at: new Date().toISOString()
+          });
+          fs.mkdirSync('$HOME/freebuff-proxy/data', { recursive: true });
+          fs.writeFileSync(p, JSON.stringify(d, null, 2));
+          console.log('\x1b[32m🔄 Akun otomatis disinkronkan ke pool Freebuff Proxy!\x1b[0m');
+        }
+      } catch {}
+    " 2>/dev/null || true
+  fi
 }
 
 function list_accounts() {
