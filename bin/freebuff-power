@@ -45,7 +45,9 @@ show_help() {
   echo -e "  ${C_GREEN}compose <task> [-r]${C_RESET}   ${C_BOLD}[POWER COMPOSER 2.0]${C_RESET} Analisis arsitektur & racik agen/skills terbaik."
   echo -e "  ${C_GREEN}spawn <agent> [task]${C_RESET}  Luncurkan Freebuff dengan persona spesifik (Contoh: spawn architect)."
   echo -e "  ${C_GREEN}init [dir]${C_RESET}            Injeksi AGENTS.md & katalog .freebuff/ ke folder aktif tanpa buka sesi."
-  echo -e "  ${C_GREEN}run [args]${C_RESET}            Jalankan sesi Freebuff biasa dengan proteksi Anti-Ban aktif.\n"
+  echo -e "  ${C_GREEN}run [args]${C_RESET}            Jalankan sesi Freebuff biasa dengan proteksi Anti-Ban aktif."
+  echo -e "  ${C_GREEN}run proxy [model]${C_RESET}     ${C_BOLD}[FREE MODELS]${C_RESET} Pilih model FREE Freebuff & buka sesi koding."
+  echo -e "  ${C_GREEN}proxy [cmd]${C_RESET}           ${C_BOLD}[PROXY ENGINE]${C_RESET} Kelola Proxy (start/stop/restart/status/models/init).\n"
 
   echo -e "${C_PURPLE}${C_BOLD}👥 MULTI-ACCOUNT VAULT & QUOTA ROTATION:${C_RESET}"
   echo -e "  ${C_GREEN}account save <nama>${C_RESET}   Simpan sesi login akun aktif ke dalam vault aman."
@@ -139,13 +141,26 @@ case "$COMMAND" in
     exec "$SCRIPT_DIR/spawn.sh" "$@"
     ;;
 
+  proxy)
+    shift || true
+    exec "$SCRIPT_DIR/proxy.sh" "$@"
+    ;;
+
   init)
     shift || true
+    if [ "${1:-}" = "proxy" ]; then
+      shift || true
+      exec "$SCRIPT_DIR/proxy.sh" init "$@"
+    fi
     exec "$SCRIPT_DIR/init.sh" "$@"
     ;;
 
   run)
     shift || true
+    if [ "${1:-}" = "proxy" ]; then
+      shift || true
+      exec "$SCRIPT_DIR/proxy.sh" run "$@"
+    fi
     exec "$SCRIPT_DIR/run.sh" "$@"
     ;;
 
