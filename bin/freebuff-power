@@ -125,6 +125,8 @@ case "$COMMAND" in
     shift || true
     "$SCRIPT_DIR/clean.sh" >/dev/null 2>&1 || true
     "$SCRIPT_DIR/init.sh" . >/dev/null 2>&1 || true
+    # Auto-Checkpoint Sebelum AI Mulai (Fitur Anti-Nyesel)
+    "$SCRIPT_DIR/snapshot.sh" save "auto_before_session" >/dev/null 2>&1 || true
     exec "$SCRIPT_DIR/run.sh" "$@"
     ;;
 
