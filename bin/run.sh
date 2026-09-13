@@ -39,11 +39,16 @@ if which warp-cli >/dev/null 2>&1; then
     warp-cli connect >/dev/null 2>&1 || true
     sleep 1
   fi
-  # Route traffic via WARP SOCKS5 proxy to mask hosting/datacenter IP
+  # Note: Core Freebuff CLI engine is built on Bun. Bun's internal fetch only supports http:// or https:// proxy URLs,
+  # and throws "UnsupportedProxyProtocol" when given "socks5://".
+  # Only export HTTP_PROXY if an HTTP-compatible proxy adapter is running, or let WARP handle system routing.
   if warp-cli status 2>/dev/null | grep -q "Connected"; then
-    export HTTP_PROXY="socks5://127.0.0.1:$WARP_PORT"
-    export HTTPS_PROXY="socks5://127.0.0.1:$WARP_PORT"
-    export ALL_PROXY="socks5://127.0.0.1:$WARP_PORT"
+    # If WARP is in WARP mode (tun/system), no env proxy is required
+    WARP_MODE="$(warp-cli mode 2>/dev/null || echo '')"
+    if echo "$WARP_MODE" | grep -qi "proxy"; then
+      # If explicit HTTP proxy adapter is available, use http://, otherwise avoid socks5 in HTTP_PROXY
+      export ALL_PROXY="socks5h://127.0.0.1:$WARP_PORT"
+    fi
   fi
 fi
 
