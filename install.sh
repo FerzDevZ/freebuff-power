@@ -86,6 +86,19 @@ else
 fi
 
 if [ -d "$PROXY_DIR" ] && [ -f "$PROXY_DIR/package.json" ]; then
+  mkdir -p "$PROXY_DIR/data" "$PROXY_DIR/logs"
+  if [ ! -f "$PROXY_DIR/data/auth.json" ]; then
+    cat << 'AUTH_INIT_EOF' > "$PROXY_DIR/data/auth.json"
+{
+  "accounts": [],
+  "api_keys": [],
+  "next_id": 1,
+  "next_key_id": 1,
+  "keys_enabled": false
+}
+AUTH_INIT_EOF
+  fi
+
   if [ ! -d "$PROXY_DIR/dist" ] || [ ! -d "$PROXY_DIR/node_modules" ]; then
     echo -e "${C_YELLOW}⚡ Membangun build produksi freebuff-proxy (npm install & build)...${C_RESET}"
     (cd "$PROXY_DIR" && npm install --silent && npm run build --silent) || echo -e "${C_YELLOW}⚠️  Build proxy mandiri dilewati, dapat dijalankan manual nanti.${C_RESET}"
