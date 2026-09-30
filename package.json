@@ -1,7 +1,7 @@
 {
   "name": "freebuff-power",
-  "version": "3.6.0",
-  "description": "Supreme Multi-Agent, Modular Skills & Anti-Ban Controller for Freebuff AI Coding Assistant",
+  "version": "8.1.0",
+  "description": "Supreme Autonomous Cognitive Swarm v8.1, Modular Skills & Anti-Ban Controller for Freebuff AI Coding Assistant",
   "main": "bin/freebuff-power",
   "bin": {
     "freebuff-power": "./bin/freebuff-power"

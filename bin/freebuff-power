@@ -32,14 +32,14 @@ C_RESET='\033[0m'
 
 show_help() {
   echo -e "${C_CYAN}${C_BOLD}========================================================================================${C_RESET}"
-  echo -e "${C_YELLOW}${C_BOLD}⚡ FREEBUFF-POWER SUPREME — Omnipotent Multi-Agent & Skills Suite (v6.0-Titanium)${C_RESET}"
+  echo -e "${C_YELLOW}${C_BOLD}⚡ FREEBUFF-POWER SUPREME — Autonomous Cognitive Swarm (v8.1-Titanium)${C_RESET}"
   echo -e "${C_CYAN}${C_BOLD}========================================================================================${C_RESET}\n"
   echo -e "${C_BOLD}PENGGUNAAN:${C_RESET}"
   echo -e "  ${C_GREEN}freebuff-power${C_RESET} ${C_YELLOW}<command>${C_RESET} [arguments] [options]\n"
 
   echo -e "${C_PURPLE}${C_BOLD}🔥 PERINTAH UTAMA & PELUNCURAN KODING:${C_RESET}"
   echo -e "  ${C_GREEN}start / go / full${C_RESET}     ${C_BOLD}[REKOMENDASI] One-Shot Launch:${C_RESET}"
-  echo -e "                        Reset Telemetry (Anti-Ban) + Injeksi 60 Agents & 1,061 Skills"
+  echo -e "                        Reset Telemetry (Anti-Ban) + Injeksi 82 Agents & 1,106 Skills"
   echo -e "                        + Langsung buka sesi interaktif Freebuff siap koding!"
   echo -e "  ${C_GREEN}ui / tui${C_RESET}              Buka Interactive Terminal TUI Dashboard (pilih agen/skill visual)."
   echo -e "  ${C_GREEN}compose <task> [-r]${C_RESET}   ${C_BOLD}[POWER COMPOSER 2.0]${C_RESET} Analisis arsitektur & racik agen/skills terbaik."
