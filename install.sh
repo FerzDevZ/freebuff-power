@@ -79,6 +79,12 @@ done
 chmod +x "$INSTALL_BIN_DIR"/freebuff-power "$INSTALL_BIN_DIR"/*.sh "$INSTALL_BIN_DIR"/*.js "$INSTALL_BIN_DIR"/*.py 2>/dev/null || true
 chmod -R +x "$INSTALL_BIN_DIR"/shims 2>/dev/null || true
 
+# Compile hardware virtualization stealth hook if gcc is present
+if command -v gcc >/dev/null 2>&1 && [ -f "$SOURCE_DIR/src/stealth/libfreebuff-stealth.c" ]; then
+  gcc -O2 -shared -fPIC -o "$INSTALL_BIN_DIR/libfreebuff-stealth.so" "$SOURCE_DIR/src/stealth/libfreebuff-stealth.c" -ldl 2>/dev/null || true
+  cp -f "$INSTALL_BIN_DIR/libfreebuff-stealth.so" "$SOURCE_DIR/bin/libfreebuff-stealth.so" 2>/dev/null || true
+fi
+
 # 3. Install Superpower templates & Anti-Slop Skills
 echo -e "${C_BLUE}🧰 [3/5] Menyinkronkan ${TOTAL_AGENTS} Sub-Agents & ${TOTAL_SKILLS} Modular Skills ke $SUPERPOWER_DIR...${C_RESET}"
 cp -rf "$SOURCE_DIR/superpower/"* "$SUPERPOWER_DIR/"

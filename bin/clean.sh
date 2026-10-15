@@ -50,6 +50,12 @@ NEW_DEVICE_HASH="$(od -vN "32" -An -tx1 /dev/urandom | tr -d " \n")"
 NEW_SESSION_SALT="$(od -vN "8" -An -tx1 /dev/urandom | tr -d " \n")"
 FAKE_MAC="52:54:00:$(printf '%02x:%02x:%02x' $((RANDOM%256)) $((RANDOM%256)) $((RANDOM%256)))"
 
+# Tulis file spoofing fisik untuk C-hook LD_PRELOAD
+echo "$NEW_MACHINE_ID" > "$MANICODE_DIR/spoofed-machine-id"
+echo "$FAKE_MAC" > "$MANICODE_DIR/spoofed-mac"
+echo "$NEW_ANON_ID" > "$MANICODE_DIR/spoofed-product-uuid"
+chmod 644 "$MANICODE_DIR/spoofed-machine-id" "$MANICODE_DIR/spoofed-mac" "$MANICODE_DIR/spoofed-product-uuid" 2>/dev/null || true
+
 # 4. Tulis file konfigurasi identitas baru (Zero Tracking Profile)
 cat << STATE_EOF > "$MANICODE_DIR/anonymous-id.json"
 {

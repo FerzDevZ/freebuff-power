@@ -134,6 +134,8 @@ except Exception as e:
     rm -f "$ELECTRON_CONFIG_DIR"/'Trust Tokens'* 2>/dev/null || true
     rm -f "$ELECTRON_CONFIG_DIR"/SharedStorage* 2>/dev/null || true
     rm -f "$ELECTRON_CONFIG_DIR"/Singleton* 2>/dev/null || true
+    rm -f "$ELECTRON_CONFIG_DIR"/'Network Persistent State'* 2>/dev/null || true
+    rm -rf "$ELECTRON_CONFIG_DIR"/Network/* 2>/dev/null || true
 
     # Acak .updaterId
     python3 -c "import uuid; print(str(uuid.uuid4()))" > "$UPDATER_ID_FILE" 2>/dev/null || true
@@ -175,6 +177,37 @@ except Exception:
   echo -e "   - Daftar proyek Anda tetap dipertahankan aman\n"
 }
 
+function desktop_launch() {
+  local appimage
+  appimage=$(find "$HOME/Downloads" "$HOME" -maxdepth 2 -name "Freebuff*.AppImage" 2>/dev/null | sort -V | tail -n 1 || echo "")
+  if [ -z "$appimage" ] || [ ! -f "$appimage" ]; then
+    echo -e "${C_RED}❌ Tidak ditemukan file Freebuff AppImage di ~/Downloads atau ~!${C_RESET}"
+    exit 1
+  fi
+
+  SCRIPT_DIR="$( cd -P "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+  echo -e "${C_CYAN}${C_BOLD}========================================================================${C_RESET}"
+  echo -e "${C_GREEN}${C_BOLD}🚀 [FREEBUFF-POWER] MELUNCURKAN FREEBUFF DESKTOP DENGAN STEALTH SHIELD${C_RESET}"
+  echo -e "${C_CYAN}${C_BOLD}========================================================================${C_RESET}"
+  echo -e "📦 AppImage : ${C_YELLOW}${appimage}${C_RESET}"
+  echo -e "🛡️ Stealth  : ${C_GREEN}LD_PRELOAD C-Hook Active (Virtual Machine-ID & Spoofed MAC)${C_RESET}"
+  echo -e "🌐 Browser  : ${C_PURPLE}Stealth Sandbox Browser Auto-Interceptor Active${C_RESET}\n"
+
+  if [ -f "$SCRIPT_DIR/libfreebuff-stealth.so" ]; then
+    export LD_PRELOAD="$SCRIPT_DIR/libfreebuff-stealth.so${LD_PRELOAD:+:$LD_PRELOAD}"
+  elif [ -f "$HOME/.local/bin/libfreebuff-stealth.so" ]; then
+    export LD_PRELOAD="$HOME/.local/bin/libfreebuff-stealth.so${LD_PRELOAD:+:$LD_PRELOAD}"
+  fi
+
+  export BROWSER="$SCRIPT_DIR/browser-stealth.sh"
+  export PATH="$SCRIPT_DIR/shims:$PATH"
+
+  chmod +x "$appimage" 2>/dev/null || true
+  nohup "$appimage" --no-sandbox "$@" >/dev/null 2>&1 &
+  local new_pid=$!
+  echo -e "${C_GREEN}✅ Freebuff Desktop berhasil diluncurkan di background (PID: $new_pid)!${C_RESET}\n"
+}
+
 CMD="${1:-status}"
 case "$CMD" in
   status)
@@ -186,8 +219,12 @@ case "$CMD" in
   reset|purge)
     desktop_reset
     ;;
+  launch|start|run)
+    shift || true
+    desktop_launch "$@"
+    ;;
   *)
-    echo -e "Penggunaan: freebuff-power desktop [status|reset|kill]"
+    echo -e "Penggunaan: freebuff-power desktop [status|reset|kill|launch]"
     exit 1
     ;;
 esac

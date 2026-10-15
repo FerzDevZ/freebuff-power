@@ -73,6 +73,11 @@ function full_reset() {
   echo "{\"anonymousId\": \"$new_uuid\", \"deviceHash\": \"$new_fingerprint\"}" > "$ANALYTICS_FILE"
   chmod 600 "$ANALYTICS_FILE" 2>/dev/null || true
 
+  echo "$new_machine_id" > "$MANICODE_DIR/spoofed-machine-id"
+  echo "$fake_mac" > "$MANICODE_DIR/spoofed-mac"
+  echo "${new_uuid#anon_}" > "$MANICODE_DIR/spoofed-product-uuid"
+  chmod 644 "$MANICODE_DIR/spoofed-machine-id" "$MANICODE_DIR/spoofed-mac" "$MANICODE_DIR/spoofed-product-uuid" 2>/dev/null || true
+
   cat << STATE_EOF > "$ANONYMOUS_FILE"
 {
   "anonymousId": "${new_uuid#anon_}",

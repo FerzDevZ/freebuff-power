@@ -35,6 +35,13 @@ export NODE_EXTRA_CA_CERTS=/etc/ssl/certs/ca-certificates.crt
 export BROWSER="$SCRIPT_DIR/browser-stealth.sh"
 export PATH="$SCRIPT_DIR/shims:$PATH"
 
+# 3c. Linux Hardware & Machine-ID Virtualization C-Hook (Anti-Ban Shield)
+if [ -f "$SCRIPT_DIR/libfreebuff-stealth.so" ]; then
+  export LD_PRELOAD="$SCRIPT_DIR/libfreebuff-stealth.so${LD_PRELOAD:+:$LD_PRELOAD}"
+elif [ -f "$HOME/.local/bin/libfreebuff-stealth.so" ]; then
+  export LD_PRELOAD="$HOME/.local/bin/libfreebuff-stealth.so${LD_PRELOAD:+:$LD_PRELOAD}"
+fi
+
 # 4. Smart Quota Failover Check
 CREDS_FILE="$HOME/.config/manicode/credentials.json"
 if [ -f "$CREDS_FILE" ] && [ -f "$SCRIPT_DIR/check_quota.js" ]; then
