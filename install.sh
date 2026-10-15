@@ -41,30 +41,46 @@ for dep in git curl node npm; do
 done
 echo -e "${C_GREEN}✅ Node.js $(node -v), npm $(npm -v), git, dan curl siap!${C_RESET}\n"
 
-# 1. Fetch freebuff-power Repository
-echo -e "${C_BLUE}📦 [1/5] Mengunduh repository & pustaka Superpower...${C_RESET}"
-if [ -d "$REPO_CACHE_DIR/.git" ]; then
-  echo -e "${C_DIM}Menyinkronkan pembaruan freebuff-power...${C_RESET}"
-  git -C "$REPO_CACHE_DIR" pull --quiet || {
+# 1. Resolve source repository
+SOURCE_DIR="$REPO_CACHE_DIR"
+CURRENT_SCRIPT_DIR="$( cd -P "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+
+if [ -d "$CURRENT_SCRIPT_DIR/bin" ] && [ -d "$CURRENT_SCRIPT_DIR/superpower" ]; then
+  echo -e "${C_GREEN}📁 [1/5] Menggunakan repository lokal aktif di $CURRENT_SCRIPT_DIR...${C_RESET}"
+  SOURCE_DIR="$CURRENT_SCRIPT_DIR"
+else
+  echo -e "${C_BLUE}📦 [1/5] Mengunduh repository & pustaka Superpower...${C_RESET}"
+  if [ -d "$REPO_CACHE_DIR/.git" ]; then
+    echo -e "${C_DIM}Menyinkronkan pembaruan freebuff-power...${C_RESET}"
+    git -C "$REPO_CACHE_DIR" pull --quiet || {
+      rm -rf "$REPO_CACHE_DIR"
+      git clone --depth 1 "$POWER_REPO_URL" "$REPO_CACHE_DIR" --quiet
+    }
+  else
     rm -rf "$REPO_CACHE_DIR"
     git clone --depth 1 "$POWER_REPO_URL" "$REPO_CACHE_DIR" --quiet
-  }
-else
-  rm -rf "$REPO_CACHE_DIR"
-  git clone --depth 1 "$POWER_REPO_URL" "$REPO_CACHE_DIR" --quiet
+  fi
 fi
 
-TOTAL_AGENTS=$(ls -1 "$REPO_CACHE_DIR/superpower/.freebuff/agents" 2>/dev/null | wc -l || echo "82")
-TOTAL_SKILLS=$(ls -1 "$REPO_CACHE_DIR/superpower/skills" 2>/dev/null | wc -l || echo "1,088")
+TOTAL_AGENTS=$(ls -1 "$SOURCE_DIR/superpower/agents" 2>/dev/null | wc -l || echo "82")
+TOTAL_SKILLS=$(ls -1 "$SOURCE_DIR/superpower/skills" 2>/dev/null | wc -l || echo "1106")
 
 # 2. Install All CLI binaries and helpers
 echo -e "${C_BLUE}⚙️  [2/5] Memasang seluruh suite CLI binary ke $INSTALL_BIN_DIR...${C_RESET}"
-cp -rf "$REPO_CACHE_DIR/bin/"* "$INSTALL_BIN_DIR/"
+for bin_file in "$SOURCE_DIR/bin/"*; do
+  dest="$INSTALL_BIN_DIR/$(basename "$bin_file")"
+  if [ -L "$dest" ] || [ -f "$dest" ]; then
+    if [ "$(realpath "$dest" 2>/dev/null)" = "$(realpath "$bin_file" 2>/dev/null)" ]; then
+      continue
+    fi
+  fi
+  cp -rf "$bin_file" "$dest" 2>/dev/null || true
+done
 chmod +x "$INSTALL_BIN_DIR"/freebuff-power "$INSTALL_BIN_DIR"/*.sh "$INSTALL_BIN_DIR"/*.js 2>/dev/null || true
 
 # 3. Install Superpower templates & Anti-Slop Skills
 echo -e "${C_BLUE}🧰 [3/5] Menyinkronkan ${TOTAL_AGENTS} Sub-Agents & ${TOTAL_SKILLS} Modular Skills ke $SUPERPOWER_DIR...${C_RESET}"
-cp -rf "$REPO_CACHE_DIR/superpower/"* "$SUPERPOWER_DIR/"
+cp -rf "$SOURCE_DIR/superpower/"* "$SUPERPOWER_DIR/"
 mkdir -p "$SUPERPOWER_DIR/.freebuff/agents" "$SUPERPOWER_DIR/.freebuff/skills"
 if [ -d "$SUPERPOWER_DIR/skills" ]; then
   cp -rf "$SUPERPOWER_DIR/skills/"* "$SUPERPOWER_DIR/.freebuff/skills/" 2>/dev/null || true

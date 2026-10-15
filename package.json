@@ -1,7 +1,7 @@
 {
   "name": "freebuff-power",
-  "version": "8.1.0",
-  "description": "Supreme Autonomous Cognitive Swarm v8.1, Modular Skills & Anti-Ban Controller for Freebuff AI Coding Assistant",
+  "version": "8.5.0",
+  "description": "Supreme Autonomous Cognitive Swarm v8.5-Titanium: 82 Sub-Agents, 1,106 Skills, Auto-Failover Quota Rotator, Deep Anti-Ban & Multi-IDE Exporter",
   "main": "bin/freebuff-power",
   "bin": {
     "freebuff-power": "./bin/freebuff-power"
@@ -9,7 +9,8 @@
   "scripts": {
     "install:local": "./install.sh",
     "doctor": "./bin/freebuff-power doctor",
-    "test": "./bin/freebuff-power doctor"
+    "test": "./bin/freebuff-power doctor",
+    "eval": "node bin/eval.js"
   },
   "keywords": [
     "freebuff",
@@ -21,7 +22,9 @@
     "hallmark",
     "anti-slop",
     "anti-ban",
-    "tdd"
+    "tdd",
+    "failover",
+    "quota-rotator"
   ],
   "author": "Firman <firman@local>",
   "license": "MIT",

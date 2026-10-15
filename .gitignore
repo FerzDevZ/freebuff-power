@@ -25,5 +25,7 @@ Thumbs.db
 
 # Freebuff Runtime State
 .freebuff_state/
+.freebuff-snapshots/
 *.pid
 *.sock
+

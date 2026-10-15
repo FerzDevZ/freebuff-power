@@ -141,6 +141,20 @@ function list_snapshots() {
   echo -e "\n👉 Untuk membatalkan kesalahan AI: ${C_GREEN}${C_BOLD}freebuff-power rollback${C_RESET}\n"
 }
 
+function diff_snapshot() {
+  if [ "$IS_GIT_REPO" = true ] && [ -f "$SNAPSHOT_DIR/latest_git_checkpoint" ]; then
+    local cp_name
+    cp_name="$(cat "$SNAPSHOT_DIR/latest_git_checkpoint" 2>/dev/null || echo '')"
+    if [ -n "$cp_name" ] && git rev-parse --verify "$cp_name" >/dev/null 2>&1; then
+      echo -e "${C_CYAN}📊 [DIFF CHECKPOINT] Perubahan sejak checkpoint: ${C_BOLD}$cp_name${C_RESET}\n"
+      git diff --stat "$cp_name" HEAD 2>/dev/null || git status -s
+      echo ""
+      return 0
+    fi
+  fi
+  echo -e "${C_YELLOW}ℹ️ Tidak ada checkpoint Git yang aktif untuk dibandingkan.${C_RESET}"
+}
+
 ACTION="${1:-list}"
 shift || true
 
@@ -151,10 +165,14 @@ case "$ACTION" in
   list)
     list_snapshots
     ;;
+  diff)
+    diff_snapshot
+    ;;
   restore|rollback)
     restore_snapshot "$@"
     ;;
   *)
-    echo "Penggunaan: freebuff-power snapshot [save <label> | list | restore]"
+    echo "Penggunaan: freebuff-power snapshot [save <label> | list | diff | restore]"
     ;;
 esac
+

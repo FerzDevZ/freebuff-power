@@ -172,6 +172,10 @@ case "$COMMAND" in
     exec "$SCRIPT_DIR/account.sh" "$@"
     ;;
 
+  auto|failover|auto-rotate|ready)
+    exec "$SCRIPT_DIR/account.sh" auto
+    ;;
+
   rotate)
     exec "$SCRIPT_DIR/account.sh" rotate
     ;;

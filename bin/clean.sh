@@ -1,11 +1,16 @@
 #!/usr/bin/env bash
 # ==============================================================================
-# 🛡️ FREEBUFF-POWER SUPREME ANTI-BAN & IDENTITY HARDWARE SPOOFER (DEEP PURGE)
+# 🛡️ FREEBUFF-POWER SUPREME ANTI-BAN & IDENTITY HARDWARE SPOOFER (DEEP PURGE v8.5)
 # ==============================================================================
 set -euo pipefail
 
 MANICODE_DIR="$HOME/.config/manicode"
 mkdir -p "$MANICODE_DIR"
+
+IS_DEEP_CLEAN=false
+if [ "${1:-}" = "--deep" ] || [ "${1:-}" = "--full" ] || [ "${1:-}" = "-f" ]; then
+  IS_DEEP_CLEAN=true
+fi
 
 # 1. Kill only zombie freebuff/manicode backend binaries (EXACT process match, NEVER kill self)
 pkill -9 -x "freebuff" 2>/dev/null || true
@@ -19,6 +24,13 @@ rm -f "$MANICODE_DIR"/session-state*.json 2>/dev/null || true
 rm -f "$MANICODE_DIR"/telemetry-queue*.json 2>/dev/null || true
 rm -f "$MANICODE_DIR"/device-lock*.json 2>/dev/null || true
 rm -f "$MANICODE_DIR"/freebuff-instance-owner.json 2>/dev/null || true
+
+if [ "$IS_DEEP_CLEAN" = true ]; then
+  rm -f "$MANICODE_DIR/device-key.json" 2>/dev/null || true
+  rm -f "$MANICODE_DIR/settings.json" 2>/dev/null || true
+  rm -f "$MANICODE_DIR/message-history.json" 2>/dev/null || true
+  rm -rf "$HOME/.cache/@codebufffreebuff-desktop-updater" 2>/dev/null || true
+fi
 
 # 3. Generate Hardware & Machine Signature Spoofing (Deep UUIDs & Hashes)
 NEW_ANON_ID="$(cat /proc/sys/kernel/random/uuid 2>/dev/null || od -x /dev/urandom | head -1 | awk '{OFS="-"; print $2$3,$4,$5,$6,$7$8$9}')"
@@ -143,4 +155,3 @@ if [ -d ".git/hooks" ]; then
 fi
 
 echo -e "\033[0;32m✅ Identitas perangkat, machine ID, Git Stealth Hook & Pre-Push Secret Guard aktif!\033[0m"
-

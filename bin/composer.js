@@ -1,59 +1,125 @@
 #!/usr/bin/env node
 // ==============================================================================
-// 🧠 FREEBUFF-POWER COMPOSER 2.0 (INTELLIGENT SWARM RECIPE ENGINE)
+// 🧠 FREEBUFF-POWER COMPOSER 3.0 (AUTONOMOUS SWARM COGNITIVE SYNTHESIZER)
+// Deep Task Decomposition, Domain Sensing & Dynamic Agent-Skill Wiring
 // ==============================================================================
-const { execSync } = require("child_process");
+const { execSync, spawn } = require("child_process");
 const path = require("path");
+const fs = require("fs");
 
 const args = process.argv.slice(2);
 const autoRun = args.includes("-r") || args.includes("--run");
-const task = args.filter(a => a !== "-r" && a !== "--run").join(" ");
+const task = args.filter(a => a !== "-r" && a !== "--run").join(" ").trim();
 
 if (!task) {
-  console.log("Penggunaan: freebuff-power compose \"Tugas koding yang ingin dikerjakan\" [-r]");
+  console.log("\x1b[33mPenggunaan: freebuff-power compose \"<Tugas koding yang ingin dikerjakan>\" [-r]\x1b[0m");
+  console.log("Contoh: freebuff-power compose \"Buat sistem auth JWT dengan refresh token & database Postgres\" -r");
   process.exit(1);
 }
 
-console.log("\x1b[36m\x1b[1m========================================================================\x1b[0m");
-console.log("\x1b[33m\x1b[1m🧠 [FREEBUFF-POWER COMPOSER 2.0] Menganalisis Kebutuhan Arsitektur...\x1b[0m");
-console.log("\x1b[36m\x1b[1m========================================================================\x1b[0m\n");
+console.log("\x1b[36m\x1b[1m================================================================================\x1b[0m");
+console.log("\x1b[33m\x1b[1m🧠 [FREEBUFF-POWER COMPOSER 3.0] Autonomous Swarm Synthesizer & Router\x1b[0m");
+console.log("\x1b[36m\x1b[1m================================================================================\x1b[0m\n");
 
 console.log(`🎯 Target Tugas: \x1b[1m"${task}"\x1b[0m\n`);
 
-let selectedAgents = ["@architect", "@programmer"];
-let selectedSkills = ["autonomous-swe-loop-healer", "anti-slop-concise"];
+let selectedAgents = new Set(["@architect", "@programmer"]);
+let selectedSkills = new Set(["autonomous-swe-loop-healer", "clean-code-anti-slop"]);
 
 const lower = task.toLowerCase();
-if (lower.includes("ui") || lower.includes("landing") || lower.includes("frontend") || lower.includes("react") || lower.includes("next")) {
-  selectedAgents.push("@frontend", "@design-engineer");
-  selectedSkills.push("bento-grid-dashboard-ui", "accessible-wcag-aaa-keyboard-aria");
-}
-if (lower.includes("api") || lower.includes("backend") || lower.includes("auth") || lower.includes("jwt") || lower.includes("login")) {
-  selectedAgents.push("@backend", "@api-security-shield", "@application-security-pentester");
-  selectedSkills.push("api-security-bola-shield", "owasp-asvs-defensive-audit");
-}
-if (lower.includes("db") || lower.includes("database") || lower.includes("sql") || lower.includes("postgres") || lower.includes("prisma")) {
-  selectedAgents.push("@database");
-  selectedSkills.push("database-administrator", "postgres-pro");
-}
-if (lower.includes("rag") || lower.includes("ai") || lower.includes("vector") || lower.includes("llm")) {
-  selectedAgents.push("@rag-vector-specialist", "@deepseek-reasoner-pro");
-  selectedSkills.push("agentic-rag-hybrid-reranking-cohere");
+
+// Domain 1: Frontend, UI/UX & Design Systems
+if (/\b(ui|ux|frontend|landing|dashboard|tailwind|shadcn|component|css|design|framer|animation|bento)\b/.test(lower)) {
+  selectedAgents.add("@frontend");
+  selectedAgents.add("@design-engineer");
+  selectedSkills.add("bento-grid-dashboard-ui");
+  selectedSkills.add("tailwind-v4-shadcn-system");
+  selectedSkills.add("accessible-wcag-aaa-keyboard-aria");
+  selectedSkills.add("anti-ai-slop-design-craftsman");
 }
 
-console.log("\x1b[32m\x1b[1m✨ Resep Swarm Optimal Berhasil Diracik:\x1b[0m");
-console.log("👥 Sub-Agents : " + selectedAgents.join(", "));
-console.log("🧰 Skills     : " + selectedSkills.map(s => `[Skill: ${s}]`).join(", "));
-console.log("\n\x1b[36m========================================================================\x1b[0m\n");
+// Domain 2: Backend APIs, Auth & Microservices
+if (/\b(api|backend|auth|jwt|oauth|session|login|signup|rest|grpc|fastify|express|nest|endpoint)\b/.test(lower)) {
+  selectedAgents.add("@backend");
+  selectedAgents.add("@api-security-shield");
+  selectedAgents.add("@security");
+  selectedSkills.add("authflow-security-architect");
+  selectedSkills.add("api-design-rest-grpc-graphql");
+  selectedSkills.add("idempotency-distributed-transactions");
+}
 
-const finalPrompt = `[Swarm Recipe: ${selectedAgents.join(" + ")} | Skills: ${selectedSkills.join(", ")}] ${task}`;
+// Domain 3: Databases & Data Engineering
+if (/\b(db|database|sql|postgres|postgresql|prisma|drizzle|mongo|redis|clickhouse|sqlite|migration|query)\b/.test(lower)) {
+  selectedAgents.add("@database");
+  selectedSkills.add("database-architect-optimization");
+  selectedSkills.add("postgres-pro");
+  selectedSkills.add("redis-distributed-locking-caching");
+}
+
+// Domain 4: Mobile & Cross-Platform (Flutter / React Native)
+if (/\b(flutter|dart|mobile|android|ios|bloc|riverpod|react-native|expo)\b/.test(lower)) {
+  selectedAgents.add("@flutter-specialist");
+  selectedAgents.add("@mobile-engineer");
+  selectedSkills.add("flutter-clean-architecture-tdd");
+  selectedSkills.add("flutter-bloc-riverpod-state");
+}
+
+// Domain 5: AI, LLM, RAG & Machine Learning
+if (/\b(rag|ai|vector|llm|embedding|langchain|langgraph|deepseek|openai|vllm|finetuning|vision|vlm|agentic)\b/.test(lower)) {
+  selectedAgents.add("@rag-vector-specialist");
+  selectedAgents.add("@ai-engineer");
+  selectedAgents.add("@deepseek-reasoner-pro");
+  selectedSkills.add("rag-llm-integrator");
+  selectedSkills.add("prompt-engineering-evals");
+}
+
+// Domain 6: Web3, Crypto & Smart Contracts
+if (/\b(solidity|smart-contract|web3|ethereum|token|crypto|solana|blockchain|evm|foundry)\b/.test(lower)) {
+  selectedAgents.add("@smart-contract-auditor");
+  selectedAgents.add("@tokenomics-fintech-ledger");
+  selectedSkills.add("smart-contract-web3-security");
+}
+
+// Domain 7: DevOps, Containers & Cloud
+if (/\b(docker|k8s|kubernetes|devops|ci|cd|github-actions|deploy|aws|gcp|terraform|helm)\b/.test(lower)) {
+  selectedAgents.add("@cloud-native-devops-k8s");
+  selectedAgents.add("@devops");
+  selectedSkills.add("docker-container-master");
+  selectedSkills.add("github-actions-ci-cd");
+}
+
+// Domain 8: Testing & Bug Triage
+if (/\b(test|testing|tdd|unit|e2e|playwright|vitest|jest|bug|fix|heal|error)\b/.test(lower)) {
+  selectedAgents.add("@tddmaster");
+  selectedAgents.add("@qa");
+  selectedAgents.add("@debugger");
+  selectedSkills.add("unit-integration-tdd-master");
+  selectedSkills.add("e2e-playwright-automation");
+}
+
+// Domain 9: Realtime WebSockets & Streaming
+if (/\b(websocket|webrtc|socket|realtime|stream|sse|live|presence)\b/.test(lower)) {
+  selectedAgents.add("@websocket-realtime");
+  selectedSkills.add("websocket-realtime-architect");
+}
+
+const agentsArray = Array.from(selectedAgents);
+const skillsArray = Array.from(selectedSkills);
+
+console.log("\x1b[32m\x1b[1m✨ Resep Swarm Optimal Berhasil Disintesis:\x1b[0m");
+console.log(`👥 \x1b[1mSub-Agents (${agentsArray.length})\x1b[0m : \x1b[36m` + agentsArray.join(", ") + "\x1b[0m");
+console.log(`🧰 \x1b[1mModular Skills (${skillsArray.length})\x1b[0m: \x1b[35m` + skillsArray.map(s => `[Skill: ${s}]`).join(", ") + "\x1b[0m");
+console.log("\n\x1b[36m================================================================================\x1b[0m\n");
+
+const finalPrompt = `[Autonomous Swarm: ${agentsArray.join(" + ")} | Modular Skills: ${skillsArray.join(", ")}] ${task}`;
 
 if (autoRun) {
-  console.log("🚀 Menjalankan Freebuff secara otomatis...\n");
+  console.log("\x1b[32m\x1b[1m🚀 Meluncurkan Freebuff dengan Swarm Recipe yang telah diracik...\x1b[0m\n");
   const scriptDir = __dirname;
   execSync(`"${path.join(scriptDir, "init.sh")}" . >/dev/null 2>&1 || true`);
-  require("child_process").spawn(path.join(scriptDir, "run.sh"), [finalPrompt], { stdio: "inherit" });
+  const runner = spawn(path.join(scriptDir, "run.sh"), [finalPrompt], { stdio: "inherit" });
+  runner.on("exit", (code) => process.exit(code || 0));
 } else {
-  console.log("💡 Jalankan dengan opsi -r untuk langsung eksekusi:");
-  console.log(`   freebuff-power compose "${task}" -r\n`);
+  console.log("💡 \x1b[1mTips:\x1b[0m Tambahkan flag \x1b[33m-r\x1b[0m untuk langsung mengeksekusi resep ini:");
+  console.log(`   \x1b[36mfreebuff-power compose "${task}" -r\x1b[0m\n`);
 }
