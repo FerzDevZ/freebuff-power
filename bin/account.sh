@@ -45,24 +45,24 @@ function clear_session_locks() {
 
 function full_reset() {
   echo -e "${C_CYAN}${C_BOLD}========================================================================${C_RESET}"
-  echo -e "${C_RED}${C_BOLD}🧹 [FREEBUFF-POWER] FULL DEEP IDENTITY & ACCOUNT PURGE (v8.5)${C_RESET}"
+  echo -e "${C_RED}${C_BOLD}🧹 [FREEBUFF-POWER] FULL DEEP IDENTITY & BROWSER PURGE (v8.5)${C_RESET}"
   echo -e "${C_CYAN}${C_BOLD}========================================================================${C_RESET}\n"
 
-  echo -e "${C_YELLOW}⚙️  [1/5] Menghentikan seluruh proses backend zombie...${C_RESET}"
+  echo -e "${C_YELLOW}⚙️  [1/6] Menghentikan seluruh proses backend zombie...${C_RESET}"
   kill_active_sessions
 
-  echo -e "${C_YELLOW}🧹 [2/5] Menghapus session locks, socket, & temporary caches...${C_RESET}"
+  echo -e "${C_YELLOW}🧹 [2/6] Menghapus session locks, socket, & temporary caches...${C_RESET}"
   clear_session_locks
   rm -rf /tmp/freebuff-* /tmp/manicode-* /tmp/codebuff-* 2>/dev/null || true
   rm -rf "$HOME/.cache/@codebufffreebuff-desktop-updater" 2>/dev/null || true
 
-  echo -e "${C_YELLOW}🔑 [3/5] Memusnahkan kredensial, token login & Ed25519 device-key.json...${C_RESET}"
+  echo -e "${C_YELLOW}🔑 [3/6] Memusnahkan kredensial, token login & Ed25519 device-key.json...${C_RESET}"
   rm -f "$CREDS_FILE" 2>/dev/null || true
   rm -f "$DEVICE_KEY_FILE" 2>/dev/null || true
   rm -f "$SETTINGS_FILE" 2>/dev/null || true
   rm -f "$HISTORY_FILE" 2>/dev/null || true
 
-  echo -e "${C_YELLOW}🎭 [4/5] Meng-generate identitas perangkat baru (Zero Fingerprint Linkage)...${C_RESET}"
+  echo -e "${C_YELLOW}🎭 [4/6] Meng-generate identitas perangkat baru (Zero Fingerprint Linkage)...${C_RESET}"
   local new_uuid new_fingerprint new_machine_id new_salt fake_mac
   new_uuid="anon_$(cat /proc/sys/kernel/random/uuid 2>/dev/null || python3 -c 'import uuid; print(uuid.uuid4())')"
   new_fingerprint="$(head -c 32 /dev/urandom | sha256sum | awk '{print $1}')"
@@ -88,7 +88,12 @@ function full_reset() {
 STATE_EOF
   chmod 600 "$ANONYMOUS_FILE" 2>/dev/null || true
 
-  echo -e "${C_YELLOW}🌐 [5/5] Merotasi network Anycast & memeriksa machine-id...${C_RESET}"
+  echo -e "${C_YELLOW}🌐 [5/6] Memusnahkan cookie pelacak & web storage browser (Chrome, Brave, Chromium)...${C_RESET}"
+  if [ -f "$SCRIPT_DIR/browser-clean.py" ]; then
+    python3 "$SCRIPT_DIR/browser-clean.py" || true
+  fi
+
+  echo -e "${C_YELLOW}📡 [6/6] Merotasi network Anycast & memeriksa konektivitas...${C_RESET}"
   if command -v warp-cli >/dev/null 2>&1; then
     warp-cli tunnel rotate-keys >/dev/null 2>&1 || true
     warp-cli disconnect >/dev/null 2>&1 || true
@@ -97,14 +102,14 @@ STATE_EOF
   fi
 
   echo -e "\n${C_GREEN}${C_BOLD}========================================================================${C_RESET}"
-  echo -e "${C_GREEN}${C_BOLD}🎉 PURGE BERHASIL 100%! Seluruh sisa kunci & token telah dibersihkan.${C_RESET}"
+  echo -e "${C_GREEN}${C_BOLD}🎉 PURGE TOTAL BERHASIL 100%! Identitas mesin & browser telah bersih total.${C_RESET}"
   echo -e "${C_GREEN}${C_BOLD}========================================================================${C_RESET}\n"
   echo -e "${C_BOLD}💡 PANDUAN PENTING AGAR TIDAK DITAGIH NOMOR HP SAAT LOGIN BARU:${C_RESET}"
-  echo -e "  1. ${C_CYAN}Gunakan Koneksi Residensial Murni${C_RESET}: Disarankan memakai hotspot tethering HP seluler."
-  echo -e "     (Matikan VPN/WARP saat proses registrasi/login akun baru, karena IP Datacenter otomatis dicurigai bot)."
-  echo -e "  2. ${C_CYAN}Buka di Mode Incognito / Browser Bersih${C_RESET}: Saat link login muncul, copy URL dan buka"
-  echo -e "     di jendela Incognito/Private window agar cookie Google lama tidak terdeteksi."
-  echo -e "  3. ${C_CYAN}Gunakan Akun Google Berumur (Aged Account)${C_RESET}: Hindari akun Gmail yang baru dibuat 5 menit lalu."
+  echo -e "  1. ${C_CYAN}Gunakan Stealth Isolated Browser${C_RESET}: Jalankan ${C_BOLD}freebuff-power login${C_RESET} atau"
+  echo -e "     ${C_BOLD}freebuff-power browser stealth${C_RESET} untuk membuka browser sandbox anti-detect."
+  echo -e "  2. ${C_CYAN}Gunakan Koneksi Residensial Murni${C_RESET}: Disarankan memakai hotspot HP seluler (IP perumahan/mobile)."
+  echo -e "     (Matikan VPN/WARP saat registrasi baru, karena IP Datacenter otomatis dicurigai bot)."
+  echo -e "  3. ${C_CYAN}Gunakan Akun Google Berumur (Aged Account)${C_RESET}: Hindari Gmail yang baru berumur hitungan menit."
   echo -e "\n👉 Luncurkan sesi bersih sekarang: ${C_CYAN}${C_BOLD}freebuff-power start${C_RESET}\n"
 }
 

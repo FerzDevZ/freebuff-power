@@ -31,6 +31,10 @@ export SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt
 export SSL_CERT_DIR=/etc/ssl/certs
 export NODE_EXTRA_CA_CERTS=/etc/ssl/certs/ca-certificates.crt
 
+# 3b. Stealth Browser Sandbox & Auth URL Interceptor
+export BROWSER="$SCRIPT_DIR/browser-stealth.sh"
+export PATH="$SCRIPT_DIR/shims:$PATH"
+
 # 4. Smart Quota Failover Check
 CREDS_FILE="$HOME/.config/manicode/credentials.json"
 if [ -f "$CREDS_FILE" ] && [ -f "$SCRIPT_DIR/check_quota.js" ]; then

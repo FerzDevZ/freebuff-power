@@ -4,6 +4,14 @@
 # ==============================================================================
 set -euo pipefail
 
+SOURCE="${BASH_SOURCE[0]}"
+while [ -h "$SOURCE" ]; do
+  DIR="$( cd -P "$( dirname "$SOURCE" )" >/dev/null 2>&1 && pwd )"
+  SOURCE="$(readlink "$SOURCE")"
+  [[ $SOURCE != /* ]] && SOURCE="$DIR/$SOURCE"
+done
+SCRIPT_DIR="$( cd -P "$( dirname "$SOURCE" )" >/dev/null 2>&1 && pwd )"
+
 MANICODE_DIR="$HOME/.config/manicode"
 mkdir -p "$MANICODE_DIR"
 
@@ -30,6 +38,9 @@ if [ "$IS_DEEP_CLEAN" = true ]; then
   rm -f "$MANICODE_DIR/settings.json" 2>/dev/null || true
   rm -f "$MANICODE_DIR/message-history.json" 2>/dev/null || true
   rm -rf "$HOME/.cache/@codebufffreebuff-desktop-updater" 2>/dev/null || true
+  if [ -f "$SCRIPT_DIR/browser-clean.py" ]; then
+    python3 "$SCRIPT_DIR/browser-clean.py" --silent || true
+  fi
 fi
 
 # 3. Generate Hardware & Machine Signature Spoofing (Deep UUIDs & Hashes)

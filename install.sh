@@ -76,7 +76,8 @@ for bin_file in "$SOURCE_DIR/bin/"*; do
   fi
   cp -rf "$bin_file" "$dest" 2>/dev/null || true
 done
-chmod +x "$INSTALL_BIN_DIR"/freebuff-power "$INSTALL_BIN_DIR"/*.sh "$INSTALL_BIN_DIR"/*.js 2>/dev/null || true
+chmod +x "$INSTALL_BIN_DIR"/freebuff-power "$INSTALL_BIN_DIR"/*.sh "$INSTALL_BIN_DIR"/*.js "$INSTALL_BIN_DIR"/*.py 2>/dev/null || true
+chmod -R +x "$INSTALL_BIN_DIR"/shims 2>/dev/null || true
 
 # 3. Install Superpower templates & Anti-Slop Skills
 echo -e "${C_BLUE}🧰 [3/5] Menyinkronkan ${TOTAL_AGENTS} Sub-Agents & ${TOTAL_SKILLS} Modular Skills ke $SUPERPOWER_DIR...${C_RESET}"

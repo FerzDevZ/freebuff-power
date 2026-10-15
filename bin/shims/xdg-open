@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+# ==============================================================================
+# 🪝 FREEBUFF-POWER XDG-OPEN STEALTH INTERCEPTOR SHIM
+# Automatically diverts Codebuff/Freebuff auth URLs to Stealth Isolated Sandbox
+# ==============================================================================
+set -euo pipefail
+
+SHIM_DIR="$( cd -P "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+BIN_DIR="$( cd -P "$SHIM_DIR/.." >/dev/null 2>&1 && pwd )"
+
+TARGET="${1:-}"
+
+# Check if target is a Codebuff or Freebuff authentication URL
+if [[ "$TARGET" =~ (codebuff\.com|freebuff\.com) ]]; then
+  echo -e "\n\033[0;32m\033[1m🛡️ [STEALTH BROWSER INTERCEPTOR]\033[0m URL auth terdeteksi: mengalihkan ke Isolated Stealth Browser..." >&2
+  exec "$BIN_DIR/browser-stealth.sh" "$TARGET"
+fi
+
+# Fallback to system xdg-open for non-auth requests
+if [ -x /usr/bin/xdg-open ]; then
+  exec /usr/bin/xdg-open "$@"
+elif [ -x /bin/xdg-open ]; then
+  exec /bin/xdg-open "$@"
+else
+  echo -e "Tidak ada /usr/bin/xdg-open fallback." >&2
+  exit 1
+fi

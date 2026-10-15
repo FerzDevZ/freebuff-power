@@ -87,7 +87,11 @@ show_help() {
   echo -e "  ${C_GREEN}continue / resume${C_RESET}     Lanjutkan sesi percakapan/coding terakhir tanpa kehilangan konteks."
   echo -e "  ${C_GREEN}session list${C_RESET}          Tampilkan daftar histori proyek dan riwayat sesi chat.\n"
 
-  echo -e "${C_PURPLE}${C_BOLD}🛡️ ANTI-BAN, UPDATE & PEMELIHARAAN:${C_RESET}"
+  echo -e "${C_PURPLE}${C_BOLD}🛡️ ANTI-BAN, BROWSER ANTI-DETECT & PEMELIHARAAN:${C_RESET}"
+  echo -e "  ${C_GREEN}login / auth${C_RESET}          Login aman bebas verifikasi HP via Stealth Browser Sandbox."
+  echo -e "  ${C_GREEN}browser clean${C_RESET}         Musnahkan total cookie pelacak & web storage di Chrome, Brave & Chromium."
+  echo -e "  ${C_GREEN}browser stealth [url]${C_RESET} Luncurkan Disposable Sandbox Anti-Detect Browser (0 Bekas Jejak)."
+  echo -e "  ${C_GREEN}stealth / ghost${C_RESET}       Protokol Hantu: Acak Mesin + Hapus Sesi + Wiped Browser + Putar IP."
   echo -e "  ${C_GREEN}clean${C_RESET}                 Reset total anonymous UUID telemetry & lockfile (100% Anti-Ban)."
   echo -e "  ${C_GREEN}doctor${C_RESET}                Pemeriksaan kesehatan sistem (integritas 60 agents & 1,061 skills)."
   echo -e "  ${C_GREEN}update${C_RESET}                Perbarui pustaka Skills & Agents ke versi rilis terbaru dari GitHub.\n"
@@ -217,6 +221,30 @@ case "$COMMAND" in
     pkill -f "ssh.*54.184.103.61" 2>/dev/null || true
     sshpass -p "ubuntu" ssh -o StrictHostKeyChecking=no -D 1080 -N -f ubuntu@54.184.103.61
     echo -e "\033[0;32m✅ SOCKS5 Proxy aktif di 127.0.0.1:1080 (US Oregon)\033[0m"
+    ;;
+
+  browser|stealth-browser)
+    shift || true
+    SUB="${1:-}"
+    if [ "$SUB" = "clean" ] || [ "$SUB" = "purge" ]; then
+      shift || true
+      exec python3 "$SCRIPT_DIR/browser-clean.py" "$@"
+    elif [ "$SUB" = "status" ] || [ "$SUB" = "scan" ]; then
+      exec python3 "$SCRIPT_DIR/browser-clean.py" --dry-run
+    else
+      if [ "$SUB" = "launch" ] || [ "$SUB" = "open" ] || [ "$SUB" = "stealth" ]; then
+        shift || true
+      fi
+      exec "$SCRIPT_DIR/browser-stealth.sh" "$@"
+    fi
+    ;;
+
+  login|login-stealth|auth)
+    shift || true
+    echo -e "\033[0;32m\033[1m🚀 [FREEBUFF-POWER] Mempersiapkan Lingkungan Login Stealth 100% Anti-Detect...\033[0m"
+    export BROWSER="$SCRIPT_DIR/browser-stealth.sh"
+    export PATH="$SCRIPT_DIR/shims:$PATH"
+    exec "$SCRIPT_DIR/run.sh" login "$@"
     ;;
 
   reset-full|reset|logout)
