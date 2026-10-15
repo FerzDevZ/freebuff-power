@@ -92,6 +92,7 @@ show_help() {
   echo -e "  ${C_GREEN}browser clean${C_RESET}         Musnahkan total cookie pelacak & web storage di Chrome, Brave & Chromium."
   echo -e "  ${C_GREEN}browser stealth [url]${C_RESET} Luncurkan Disposable Sandbox Anti-Detect Browser (0 Bekas Jejak)."
   echo -e "  ${C_GREEN}stealth / ghost${C_RESET}       Protokol Hantu: Acak Mesin + Hapus Sesi + Wiped Browser + Putar IP."
+  echo -e "  ${C_GREEN}desktop [cmd]${C_RESET}         Kelola Freebuff Desktop Linux (status/reset/kill Machine ID & Sesi)."
   echo -e "  ${C_GREEN}clean${C_RESET}                 Reset total anonymous UUID telemetry & lockfile (100% Anti-Ban)."
   echo -e "  ${C_GREEN}doctor${C_RESET}                Pemeriksaan kesehatan sistem (integritas 60 agents & 1,061 skills)."
   echo -e "  ${C_GREEN}update${C_RESET}                Perbarui pustaka Skills & Agents ke versi rilis terbaru dari GitHub.\n"
@@ -245,6 +246,11 @@ case "$COMMAND" in
     export BROWSER="$SCRIPT_DIR/browser-stealth.sh"
     export PATH="$SCRIPT_DIR/shims:$PATH"
     exec "$SCRIPT_DIR/run.sh" login "$@"
+    ;;
+
+  desktop)
+    shift || true
+    exec "$SCRIPT_DIR/desktop.sh" "$@"
     ;;
 
   reset-full|reset|logout)
