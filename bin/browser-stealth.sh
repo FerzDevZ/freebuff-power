@@ -15,20 +15,26 @@ C_RESET='\033[0m'
 
 TARGET_URL="${1:-https://codebuff.com}"
 
-# 1. Detect Best Stealth Browser
-# Priority: Brave (built-in fingerprint farbling) > Chrome > Chromium > Firefox
+# 1. Resolve Extension Directory & Detect Best Stealth Browser
+SCRIPT_DIR="$( cd -P "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+EXT_DIR="$SCRIPT_DIR/chrome-stealth-ext"
+if [ ! -d "$EXT_DIR" ] && [ -d "$HOME/.local/bin/chrome-stealth-ext" ]; then
+  EXT_DIR="$HOME/.local/bin/chrome-stealth-ext"
+fi
+
 BROWSER_BIN=""
 BROWSER_NAME=""
 
-if command -v brave-browser >/dev/null 2>&1; then
-  BROWSER_BIN="$(command -v brave-browser)"
-  BROWSER_NAME="Brave Browser (Anti-Fingerprint Farbling Enabled)"
-elif command -v google-chrome-stable >/dev/null 2>&1; then
+# User priority: Google Chrome first with Farbling Shield
+if command -v google-chrome-stable >/dev/null 2>&1; then
   BROWSER_BIN="$(command -v google-chrome-stable)"
-  BROWSER_NAME="Google Chrome"
+  BROWSER_NAME="Google Chrome (with Stealth Farbling Shield & Canvas Masking Active)"
 elif command -v google-chrome >/dev/null 2>&1; then
   BROWSER_BIN="$(command -v google-chrome)"
-  BROWSER_NAME="Google Chrome"
+  BROWSER_NAME="Google Chrome (with Stealth Farbling Shield & Canvas Masking Active)"
+elif command -v brave-browser >/dev/null 2>&1; then
+  BROWSER_BIN="$(command -v brave-browser)"
+  BROWSER_NAME="Brave Browser (Anti-Fingerprint Farbling Enabled)"
 elif command -v chromium-browser >/dev/null 2>&1; then
   BROWSER_BIN="$(command -v chromium-browser)"
   BROWSER_NAME="Chromium"
@@ -41,7 +47,7 @@ elif command -v firefox >/dev/null 2>&1; then
 fi
 
 if [ -z "$BROWSER_BIN" ]; then
-  echo -e "${C_RED}❌ Tidak ditemukan browser modern (Brave, Chrome, Chromium, Firefox)!${C_RESET}"
+  echo -e "${C_RED}❌ Tidak ditemukan browser modern (Chrome, Brave, Chromium, Firefox)!${C_RESET}"
   exit 1
 fi
 
@@ -62,7 +68,7 @@ echo -e "${C_GREEN}${C_BOLD}🕶️ [FREEBUFF-POWER] STEALTH ISOLATED BROWSER LA
 echo -e "${C_CYAN}${C_BOLD}========================================================================${C_RESET}"
 echo -e "🚀 Engine        : ${C_YELLOW}${BROWSER_NAME}${C_RESET}"
 echo -e "🛡️ Sandbox       : ${C_PURPLE}${SANDBOX_DIR}${C_RESET} ${C_BOLD}(Auto-Wipe on Exit)${C_RESET}"
-echo -e "🔒 Fingerprint   : ${C_GREEN}Zero-Trace | AutomationControlled: Disabled | Incognito: ON${C_RESET}"
+echo -e "🔒 Fingerprint   : ${C_GREEN}Zero-Trace | AutomationControlled: Disabled | Canvas/WebGL: Masked${C_RESET}"
 echo -e "🔗 Target URL    : ${C_CYAN}${TARGET_URL}${C_RESET}\n"
 
 # 3. Check for SOCKS5 Proxy (Cloudflare WARP or VPS Tunnel)
@@ -80,21 +86,27 @@ if [[ "$BROWSER_BIN" == *"firefox"* ]]; then
     "$TARGET_URL" >/dev/null 2>&1 &
   BROWSER_PID=$!
 else
-  # Chromium / Chrome / Brave hardened flags
+  # Chromium / Chrome hardened flags with Farbling extension
+  CHROME_FLAGS=(
+    "--user-data-dir=$SANDBOX_DIR"
+    "--disable-blink-features=AutomationControlled"
+    "--no-first-run"
+    "--no-default-browser-check"
+    "--disable-features=IsolateOrigins,site-per-process,Translate,OptimizationHints"
+    "--disable-sync"
+    "--disable-background-networking"
+    "--disable-component-update"
+    "--disable-domain-reliability"
+    "--disable-client-side-phishing-detection"
+    "--window-size=1280,800"
+    "--lang=en-US,en"
+  )
+  if [ -d "$EXT_DIR" ]; then
+    CHROME_FLAGS+=("--load-extension=$EXT_DIR" "--disable-extensions-except=$EXT_DIR")
+  fi
+
   "$BROWSER_BIN" \
-    --user-data-dir="$SANDBOX_DIR" \
-    --incognito \
-    --disable-blink-features=AutomationControlled \
-    --no-first-run \
-    --no-default-browser-check \
-    --disable-features=IsolateOrigins,site-per-process,Translate,OptimizationHints \
-    --disable-sync \
-    --disable-background-networking \
-    --disable-component-update \
-    --disable-domain-reliability \
-    --disable-client-side-phishing-detection \
-    --window-size=1280,800 \
-    --lang=en-US,en \
+    "${CHROME_FLAGS[@]}" \
     "${PROXY_ARGS[@]}" \
     "$TARGET_URL" >/dev/null 2>&1 &
   BROWSER_PID=$!
