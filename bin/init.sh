@@ -107,7 +107,21 @@ HOOK_EOF
     chmod +x "$REPO_ROOT/.git/hooks/prepare-commit-msg" "$REPO_ROOT/.git/hooks/commit-msg" "$REPO_ROOT/.git/hooks/pre-push" 2>/dev/null || true
   fi
   
-  echo -e "\033[0;32m\033[1m[✓] Sukses menginjeksi AGENTS.md, .freebuff/, Stealth Git Hooks & Secret Guard ke $TARGET_DIR\033[0m"
+  echo -e "\n\033[0;36m\033[1m========================================================================\033[0m"
+  echo -e "\033[0;32m\033[1m🎉 INJEKSI SUKSES 100%! AGENTS.MD & .AGENTS/ TELAH TERPASANG LENGKAP\033[0m"
+  echo -e "\033[0;36m\033[1m========================================================================\033[0m"
+  echo -e "📁 Target Folder  : \033[0;33m$TARGET_DIR\033[0m"
+  echo -e "👥 Sub-Agents     : \033[0;32m71 Specialized Production Agents (.agents/agents/)\033[0m"
+  echo -e "🧰 Modular Skills : \033[0;32m326 Curated Skills (.agents/skills/)\033[0m"
+  echo -e "📜 Stack Rules    : \033[0;32m23 Language & Framework Rules (.agents/rules/)\033[0m"
+  echo -e "🛡️ Stealth Hooks  : \033[0;32mGit Watermark Purge & Pre-Push Secret Guard Active\033[0m"
+  echo -e "\n\033[1m💡 CARA MEMANGGIL DI CLI FREEBUFF:\033[0m"
+  echo -e "👉 \033[0;32m\033[1mDi prompt terminal Freebuff, ketik:\033[0m"
+  echo -e "   \033[0;36m\033[1m@AGENTS.md <instruksi koding kamu>\033[0m"
+  echo -e "   Contoh: \033[0;33m@AGENTS.md buatkan REST API auth JWT + PostgreSQL\033[0m"
+  echo -e "   Contoh: \033[0;33m@AGENTS.md /plan arsitektur microservices\033[0m"
+  echo -e "   Contoh: \033[0;33m@AGENTS.md /ui rancang dashboard Next.js 15 Tailwind v4\033[0m"
+  echo -e "\033[0;36m\033[1m========================================================================\033[0m\n"
 else
   echo -e "\033[0;31m❌ Gagal menemukan template Superpower di $GLOBAL_SUPERPOWER_DIR\033[0m"
   exit 1
