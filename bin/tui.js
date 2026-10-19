@@ -25,11 +25,19 @@ const agents = fs.existsSync(agentsDir) ? fs.readdirSync(agentsDir).filter(f => 
   type: "agent"
 })) : [];
 
-const skills = fs.existsSync(skillsDir) ? fs.readdirSync(skillsDir).filter(f => f.endsWith(".md")).map(f => ({
-  name: "[Skill: " + f.replace(/\.md$/, "") + "]",
-  file: path.join(skillsDir, f),
-  type: "skill"
-})) : [];
+const skills = fs.existsSync(skillsDir) ? fs.readdirSync(skillsDir).filter(f => {
+  const full = path.join(skillsDir, f);
+  return (fs.statSync(full).isDirectory() && fs.existsSync(path.join(full, "SKILL.md"))) || f.endsWith(".md");
+}).map(f => {
+  const isDir = fs.statSync(path.join(skillsDir, f)).isDirectory();
+  const name = isDir ? f : f.replace(/\.md$/, "");
+  const file = isDir ? path.join(skillsDir, f, "SKILL.md") : path.join(skillsDir, f);
+  return {
+    name: "[Skill: " + name + "]",
+    file,
+    type: "skill"
+  };
+}) : [];
 
 const proxyModels = [
   { name: "z-ai/glm-5.3-flash", desc: "⭐ UNMETERED — Deepest reasoning, free without session limit" },
