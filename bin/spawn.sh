@@ -22,7 +22,13 @@ fi
 
 "$SCRIPT_DIR/init.sh" . >/dev/null 2>&1 || true
 
-AGENT_FILE=".freebuff/agents/${AGENT}.md"
+AGENT_FILE=".agents/agents/${AGENT}.md"
+if [ ! -f "$AGENT_FILE" ]; then
+  AGENT_FILE=".freebuff/agents/${AGENT}.md"
+fi
+if [ ! -f "$AGENT_FILE" ]; then
+  AGENT_FILE="$HOME/.freebuff-superpower/agents/${AGENT}.md"
+fi
 if [ ! -f "$AGENT_FILE" ]; then
   AGENT_FILE="$HOME/.freebuff-superpower/.freebuff/agents/${AGENT}.md"
 fi
@@ -30,7 +36,14 @@ fi
 echo -e "\033[0;36m\033[1m🚀 Meluncurkan Freebuff dengan Sub-Agent: @$AGENT\033[0m\n"
 
 if [ -f "$AGENT_FILE" ]; then
-  PROMPT="[System: You are operating under the identity and strict SOP of @$AGENT] ${TASK}"
+  AGENT_CONTENT="$(cat "$AGENT_FILE")"
+  PROMPT="[System Role & SOP: You are operating strictly under the instructions of @${AGENT}]
+
+${AGENT_CONTENT}
+
+---
+[User Task]:
+${TASK}"
   exec "$SCRIPT_DIR/run.sh" "$PROMPT"
 else
   exec "$SCRIPT_DIR/run.sh" "${TASK}"

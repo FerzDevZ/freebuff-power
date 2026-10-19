@@ -29,19 +29,31 @@ if [ -n "$SOURCE_SUPERPOWER" ]; then
   # Copy AGENTS.md
   cp -f "$SOURCE_SUPERPOWER/AGENTS.md" "$TARGET_DIR/AGENTS.md"
   
-  # Copy .freebuff folder (agents & skills)
-  mkdir -p "$TARGET_DIR/.freebuff/agents" "$TARGET_DIR/.freebuff/skills"
-  if [ -d "$SOURCE_SUPERPOWER/.freebuff/agents" ]; then
-    cp -rf "$SOURCE_SUPERPOWER/.freebuff/agents/"* "$TARGET_DIR/.freebuff/agents/" 2>/dev/null || true
-  elif [ -d "$SOURCE_SUPERPOWER/agents" ]; then
-    cp -rf "$SOURCE_SUPERPOWER/agents/"* "$TARGET_DIR/.freebuff/agents/" 2>/dev/null || true
+  # Inject .agents standard folder (Native Freebuff & Codebuff standard)
+  mkdir -p "$TARGET_DIR/.agents/skills" "$TARGET_DIR/.agents/agents" "$TARGET_DIR/.agents/rules"
+  if [ -d "$SOURCE_SUPERPOWER/skills" ]; then
+    cp -rf "$SOURCE_SUPERPOWER/skills/"* "$TARGET_DIR/.agents/skills/" 2>/dev/null || true
+  fi
+  if [ -d "$SOURCE_SUPERPOWER/agents" ]; then
+    cp -rf "$SOURCE_SUPERPOWER/agents/"* "$TARGET_DIR/.agents/agents/" 2>/dev/null || true
+  fi
+  if [ -d "$SOURCE_SUPERPOWER/rules" ]; then
+    cp -rf "$SOURCE_SUPERPOWER/rules/"* "$TARGET_DIR/.agents/rules/" 2>/dev/null || true
   fi
 
-  if [ -d "$SOURCE_SUPERPOWER/.freebuff/skills" ]; then
-    cp -rf "$SOURCE_SUPERPOWER/.freebuff/skills/"* "$TARGET_DIR/.freebuff/skills/" 2>/dev/null || true
+  # Maintain backward compatibility for .freebuff/
+  mkdir -p "$TARGET_DIR/.freebuff/agents" "$TARGET_DIR/.freebuff/skills"
+  if [ -d "$TARGET_DIR/.agents/skills" ]; then
+    cp -rf "$TARGET_DIR/.agents/skills/"* "$TARGET_DIR/.freebuff/skills/" 2>/dev/null || true
   fi
+  if [ -d "$TARGET_DIR/.agents/agents" ]; then
+    cp -rf "$TARGET_DIR/.agents/agents/"* "$TARGET_DIR/.freebuff/agents/" 2>/dev/null || true
+  fi
+
+  # Ensure user home ~/.agents/skills/ is also globally populated
+  mkdir -p "$HOME/.agents/skills" "$HOME/.agents/agents" "$HOME/.agents/rules" 2>/dev/null || true
   if [ -d "$SOURCE_SUPERPOWER/skills" ]; then
-    cp -rf "$SOURCE_SUPERPOWER/skills/"* "$TARGET_DIR/.freebuff/skills/" 2>/dev/null || true
+    cp -rf "$SOURCE_SUPERPOWER/skills/"* "$HOME/.agents/skills/" 2>/dev/null || true
   fi
 
   # Auto-inject stealth git hooks into project repository

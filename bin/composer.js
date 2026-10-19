@@ -111,7 +111,38 @@ console.log(`👥 \x1b[1mSub-Agents (${agentsArray.length})\x1b[0m : \x1b[36m` +
 console.log(`🧰 \x1b[1mModular Skills (${skillsArray.length})\x1b[0m: \x1b[35m` + skillsArray.map(s => `[Skill: ${s}]`).join(", ") + "\x1b[0m");
 console.log("\n\x1b[36m================================================================================\x1b[0m\n");
 
-const finalPrompt = `[Autonomous Swarm: ${agentsArray.join(" + ")} | Modular Skills: ${skillsArray.join(", ")}] ${task}`;
+let promptContextParts = [];
+
+// 1. Load active agent role specifications
+for (const ag of agentsArray) {
+  const agClean = ag.replace(/^@/, "");
+  const candPaths = [
+    path.join(process.cwd(), ".agents", "agents", `${agClean}.md`),
+    path.join(__dirname, "..", "superpower", "agents", `${agClean}.md`),
+    path.join(process.env.HOME || "", ".agents", "agents", `${agClean}.md`),
+  ];
+  for (const cp of candPaths) {
+    if (fs.existsSync(cp)) {
+      try {
+        const content = fs.readFileSync(cp, "utf-8");
+        promptContextParts.push(`### [Persona & SOP: ${ag}]\n${content.trim()}`);
+      } catch {}
+      break;
+    }
+  }
+}
+
+// 2. Load active skill directives
+promptContextParts.push(`### [Active Directives: JIT Loaded Skills]
+Skills are available at .agents/skills/<name>/SKILL.md. Use the native skill tool or consult them:
+${skillsArray.map(s => `- ${s}: Loaded in context. Consult .agents/skills/${s}/SKILL.md`).join("\n")}`);
+
+const finalPrompt = `${promptContextParts.join("\n\n---\n\n")}
+
+================================================================================
+USER CODING TASK:
+${task}
+================================================================================`;
 
 if (autoRun) {
   console.log("\x1b[32m\x1b[1m🚀 Meluncurkan Freebuff dengan Swarm Recipe yang telah diracik...\x1b[0m\n");

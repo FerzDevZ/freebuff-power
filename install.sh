@@ -88,16 +88,31 @@ fi
 # Link universal freebuff command to stealth wrapper
 ln -sf "$INSTALL_BIN_DIR/freebuff-wrapper.sh" "$INSTALL_BIN_DIR/freebuff" 2>/dev/null || true
 
-# 3. Install Superpower templates & Anti-Slop Skills
-echo -e "${C_BLUE}🧰 [3/5] Menyinkronkan ${TOTAL_AGENTS} Sub-Agents & ${TOTAL_SKILLS} Modular Skills ke $SUPERPOWER_DIR...${C_RESET}"
+# 3. Install Superpower templates, ECC Architecture & Anti-Slop Skills
+echo -e "${C_BLUE}🧰 [3/5] Menyinkronkan ${TOTAL_AGENTS} Sub-Agents & ${TOTAL_SKILLS} Modular Skills ke $SUPERPOWER_DIR dan ~/.agents...${C_RESET}"
+# Clear old stale files in SUPERPOWER_DIR
+rm -rf "$SUPERPOWER_DIR/skills" "$SUPERPOWER_DIR/agents" "$SUPERPOWER_DIR/rules" "$SUPERPOWER_DIR/.freebuff" 2>/dev/null || true
 cp -rf "$SOURCE_DIR/superpower/"* "$SUPERPOWER_DIR/"
-mkdir -p "$SUPERPOWER_DIR/.freebuff/agents" "$SUPERPOWER_DIR/.freebuff/skills"
+
+# Populate ~/.agents/ (Freebuff & Codebuff Native Skill Registry)
+mkdir -p "$HOME/.agents/skills" "$HOME/.agents/agents" "$HOME/.agents/rules"
 if [ -d "$SUPERPOWER_DIR/skills" ]; then
-  cp -rf "$SUPERPOWER_DIR/skills/"* "$SUPERPOWER_DIR/.freebuff/skills/" 2>/dev/null || true
+  rm -rf "$HOME/.agents/skills"/* 2>/dev/null || true
+  cp -rf "$SUPERPOWER_DIR/skills/"* "$HOME/.agents/skills/" 2>/dev/null || true
 fi
 if [ -d "$SUPERPOWER_DIR/agents" ]; then
-  cp -rf "$SUPERPOWER_DIR/agents/"* "$SUPERPOWER_DIR/.freebuff/agents/" 2>/dev/null || true
+  rm -rf "$HOME/.agents/agents"/* 2>/dev/null || true
+  cp -rf "$SUPERPOWER_DIR/agents/"* "$HOME/.agents/agents/" 2>/dev/null || true
 fi
+if [ -d "$SUPERPOWER_DIR/rules" ]; then
+  rm -rf "$HOME/.agents/rules"/* 2>/dev/null || true
+  cp -rf "$SUPERPOWER_DIR/rules/"* "$HOME/.agents/rules/" 2>/dev/null || true
+fi
+
+# Backward compatibility for .freebuff
+mkdir -p "$SUPERPOWER_DIR/.freebuff/agents" "$SUPERPOWER_DIR/.freebuff/skills"
+cp -rf "$SUPERPOWER_DIR/skills/"* "$SUPERPOWER_DIR/.freebuff/skills/" 2>/dev/null || true
+cp -rf "$SUPERPOWER_DIR/agents/"* "$SUPERPOWER_DIR/.freebuff/agents/" 2>/dev/null || true
 
 # 4. Install & Build Standalone freebuff-proxy Suite
 echo -e "${C_BLUE}🌐 [4/5] Memeriksa & menyinkronkan Freebuff Proxy Engine di $PROXY_DIR...${C_RESET}"
