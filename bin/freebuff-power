@@ -51,11 +51,13 @@ show_help() {
   echo -e "  ${C_GREEN}update${C_RESET}                ${C_BOLD}[AUTO UPDATER]${C_RESET} Perbarui library superpower, CLI, dan proxy engine.\n"
 
   echo -e "${C_PURPLE}${C_BOLD}👥 MULTI-ACCOUNT VAULT & QUOTA ROTATION:${C_RESET}"
+  echo -e "  ${C_GREEN}account new <nama>${C_RESET}    ${C_BOLD}[WIZARD 1-CLICK]${C_RESET} Onboard Akun Baru (Anti-Ban, Chrome Sandbox & Vault)."
   echo -e "  ${C_GREEN}account save <nama>${C_RESET}   Simpan sesi login akun aktif ke dalam vault aman."
   echo -e "  ${C_GREEN}account list${C_RESET}          Lihat daftar akun tersimpan di vault beserta status aktif."
   echo -e "  ${C_GREEN}account switch <nama>${C_RESET} Beralih ke akun lain dalam 0.1 detik (Instant Quota Swap)."
+  echo -e "  ${C_GREEN}account auto${C_RESET}          Otomatis pilih akun pertama yang berstatus READY aktif."
   echo -e "  ${C_GREEN}account rotate${C_RESET}        Putar ke akun berikutnya secara otomatis (Round-Robin Rotator)."
-  echo -e "  ${C_GREEN}reset-full / logout${C_RESET}   Reset TOTAL seluruh token login, sesi, dan device fingerprint.\n"
+  echo -e "  ${C_GREEN}reset-full / logout${C_RESET}   Reset TOTAL 7-Fase seluruh token login, sesi, hardware & browser.\n"
 
   echo -e "${C_PURPLE}${C_BOLD}🛠️ ENTERPRISE DEVOPS, SECURITY & PRO-TOOLING:${C_RESET}"
   echo -e "  ${C_GREEN}release${C_RESET}               Otomasi Semantic Versioning, update CHANGELOG.md & siapkan tag."
@@ -88,6 +90,7 @@ show_help() {
   echo -e "  ${C_GREEN}session list${C_RESET}          Tampilkan daftar histori proyek dan riwayat sesi chat.\n"
 
   echo -e "${C_PURPLE}${C_BOLD}🛡️ ANTI-BAN, BROWSER ANTI-DETECT & PEMELIHARAAN:${C_RESET}"
+  echo -e "  ${C_GREEN}chrome [url]${C_RESET}          Luncurkan Google Chrome Stealth Sandbox + Farbling Shield (Anti-Detect)."
   echo -e "  ${C_GREEN}login / auth${C_RESET}          Login aman bebas verifikasi HP via Stealth Browser Sandbox."
   echo -e "  ${C_GREEN}browser clean${C_RESET}         Musnahkan total cookie pelacak & web storage di Chrome, Brave & Chromium."
   echo -e "  ${C_GREEN}browser stealth [url]${C_RESET} Luncurkan Disposable Sandbox Anti-Detect Browser (0 Bekas Jejak)."
@@ -238,6 +241,16 @@ case "$COMMAND" in
       fi
       exec "$SCRIPT_DIR/browser-stealth.sh" "$@"
     fi
+    ;;
+
+  chrome)
+    shift || true
+    exec "$SCRIPT_DIR/browser-stealth.sh" "$@"
+    ;;
+
+  new-account|add-account)
+    shift || true
+    exec "$SCRIPT_DIR/account.sh" new "$@"
     ;;
 
   login|login-stealth|auth)

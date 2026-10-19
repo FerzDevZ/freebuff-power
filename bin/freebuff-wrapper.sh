@@ -39,12 +39,31 @@ export SSL_CERT_DIR=/etc/ssl/certs
 export NODE_EXTRA_CA_CERTS=/etc/ssl/certs/ca-certificates.crt
 
 # 5. Launch Real Freebuff Engine
-REAL_ENGINE="$HOME/.local/lib/node_modules/freebuff/index.js"
-if [ -f "$REAL_ENGINE" ]; then
+REAL_ENGINE=""
+if command -v npm >/dev/null 2>&1; then
+  NPM_ROOT="$(npm root -g 2>/dev/null || echo "")"
+  if [ -n "$NPM_ROOT" ] && [ -f "$NPM_ROOT/freebuff/index.js" ]; then
+    REAL_ENGINE="$NPM_ROOT/freebuff/index.js"
+  fi
+fi
+
+if [ -z "$REAL_ENGINE" ] && [ -f "$HOME/.local/lib/node_modules/freebuff/index.js" ]; then
+  REAL_ENGINE="$HOME/.local/lib/node_modules/freebuff/index.js"
+fi
+
+if [ -n "$REAL_ENGINE" ] && [ -f "$REAL_ENGINE" ]; then
   exec node "$REAL_ENGINE" "$@"
 elif [ -x "$HOME/.config/manicode/freebuff" ]; then
   exec "$HOME/.config/manicode/freebuff" "$@"
 else
-  echo -e "\033[0;31m❌ Engine Freebuff tidak ditemukan di $REAL_ENGINE!\033[0m" >&2
+  # Fallback to next binary in PATH that is not this wrapper
+  THIS_WRAPPER="$(realpath "${BASH_SOURCE[0]}")"
+  for cand in $(which -a freebuff 2>/dev/null); do
+    cand_real="$(realpath "$cand" 2>/dev/null || echo "$cand")"
+    if [ "$cand_real" != "$THIS_WRAPPER" ] && [ -x "$cand" ]; then
+      exec "$cand" "$@"
+    fi
+  done
+  echo -e "\033[0;31m❌ Engine Freebuff tidak ditemukan!\033[0m" >&2
   exit 1
 fi

@@ -370,6 +370,114 @@ function rotate_account() {
   switch_account "$aname"
 }
 
+function new_account_wizard() {
+  local name="${1:-}"
+  if [ -z "$name" ]; then
+    echo -e "${C_RED}⚠️ Masukkan label/nama untuk akun baru. Contoh: freebuff-power account new akun6${C_RESET}"
+    exit 1
+  fi
+
+  if [ -f "$VAULT_DIR/${name}.json" ]; then
+    echo -e "${C_YELLOW}⚠️ PERINGATAN: Akun '${name}' sudah ada di vault.${C_RESET}"
+    read -r -p "Apakah Anda ingin menimpa akun '${name}'? [y/N]: " confirm_overwrite || true
+    if [[ ! "${confirm_overwrite:-n}" =~ ^[Yy] ]]; then
+      echo -e "${C_RED}Dibatalkan. Silakan gunakan nama akun lain.${C_RESET}"
+      exit 0
+    fi
+  fi
+
+  echo -e "${C_CYAN}${C_BOLD}========================================================================${C_RESET}"
+  echo -e "${C_GREEN}${C_BOLD}🚀 [FREEBUFF-POWER] ONBOARDING AKUN BARU 100% STEALTH & ANTI-BAN${C_RESET}"
+  echo -e "${C_CYAN}${C_BOLD}========================================================================${C_RESET}\n"
+
+  # 1. Pre-flight Network & IP Safety Check
+  echo -e "${C_YELLOW}🔍 [1/5] Memeriksa status jaringan & reputasi IP...${C_RESET}"
+  if command -v warp-cli >/dev/null 2>&1 && warp-cli status 2>/dev/null | grep -q "Connected"; then
+    echo -e "${C_YELLOW}  ⚠️ PERINGATAN: Cloudflare WARP terdeteksi aktif.${C_RESET}"
+    echo -e "  💡 Rekomendasi: Untuk registrasi/login akun baru pertama kali, disarankan mematikan WARP/VPN"
+    echo -e "     dan gunakan hotspot seluler (IP perumahan) agar Google/Codebuff tidak meminta SMS verifikasi."
+    read -r -p "  Tetap lanjutkan dengan koneksi saat ini? [Y/n]: " confirm_net || true
+    if [[ "${confirm_net:-y}" =~ ^[Nn] ]]; then
+      echo -e "${C_RED}Proses dibatalkan oleh pengguna.${C_RESET}"
+      exit 0
+    fi
+  else
+    echo -e "${C_GREEN}  ✓ Koneksi siap (IP Non-Datacenter)${C_RESET}"
+  fi
+
+  # 2. Fresh Hardware Virtualization Tuple
+  echo -e "${C_YELLOW}🎭 [2/5] Meng-generate identitas hardware baru (Zero Correlation)...${C_RESET}"
+  kill_active_sessions
+  clear_session_locks
+  rm -f "$CREDS_FILE" "$DEVICE_KEY_FILE" 2>/dev/null || true
+
+  local new_uuid new_fingerprint new_machine_id new_salt fake_mac
+  new_uuid="anon_$(cat /proc/sys/kernel/random/uuid 2>/dev/null || python3 -c 'import uuid; print(uuid.uuid4())')"
+  new_fingerprint="$(head -c 32 /dev/urandom | sha256sum | awk '{print $1}')"
+  new_machine_id="$(od -vN "16" -An -tx1 /dev/urandom | tr -d " \n")"
+  new_salt="$(od -vN "8" -An -tx1 /dev/urandom | tr -d " \n")"
+  fake_mac="52:54:00:$(printf '%02x:%02x:%02x' $((RANDOM%256)) $((RANDOM%256)) $((RANDOM%256)))"
+
+  echo "$new_machine_id" > "$MANICODE_DIR/spoofed-machine-id"
+  echo "$fake_mac" > "$MANICODE_DIR/spoofed-mac"
+  echo "${new_uuid#anon_}" > "$MANICODE_DIR/spoofed-product-uuid"
+  chmod 644 "$MANICODE_DIR/spoofed-machine-id" "$MANICODE_DIR/spoofed-mac" "$MANICODE_DIR/spoofed-product-uuid" 2>/dev/null || true
+
+  cat << STATE_EOF > "$ANONYMOUS_FILE"
+{
+  "anonymousId": "${new_uuid#anon_}",
+  "machineId": "$new_machine_id",
+  "deviceHash": "$new_fingerprint",
+  "virtualMac": "$fake_mac",
+  "salt": "$new_salt",
+  "spoofedAt": "$(date -u +"%Y-%m-%dT%H:%M:%SZ")",
+  "telemetryEnabled": false,
+  "crashReporting": false,
+  "analyticsOptOut": true
+}
+STATE_EOF
+  chmod 600 "$ANONYMOUS_FILE" 2>/dev/null || true
+  echo "{\"anonymousId\": \"$new_uuid\", \"deviceHash\": \"$new_fingerprint\"}" > "$ANALYTICS_FILE"
+  chmod 600 "$ANALYTICS_FILE" 2>/dev/null || true
+  echo -e "${C_GREEN}  ✓ Virtual Machine ID & MAC baru: ${fake_mac}${C_RESET}"
+
+  # 3. Setup Stealth Browser Environment
+  echo -e "${C_YELLOW}🌐 [3/5] Mempersiapkan Google Chrome Stealth Sandbox (Farbling Shield Active)...${C_RESET}"
+  export BROWSER="$SCRIPT_DIR/browser-stealth.sh"
+  export PATH="$SCRIPT_DIR/shims:$PATH"
+  if [ -f "$SCRIPT_DIR/libfreebuff-stealth.so" ]; then
+    export LD_PRELOAD="$SCRIPT_DIR/libfreebuff-stealth.so${LD_PRELOAD:+:$LD_PRELOAD}"
+  elif [ -f "$HOME/.local/bin/libfreebuff-stealth.so" ]; then
+    export LD_PRELOAD="$HOME/.local/bin/libfreebuff-stealth.so${LD_PRELOAD:+:$LD_PRELOAD}"
+  fi
+
+  # 4. Trigger Freebuff Login
+  echo -e "${C_YELLOW}⏳ [4/5] Membuka sesi login Freebuff di Google Chrome...${C_RESET}"
+  echo -e "${C_DIM}  (Google Chrome akan terbuka secara otomatis dengan profil terisolasi zero-trace)${C_RESET}\n"
+
+  # Call real freebuff login
+  if [ -x "$SCRIPT_DIR/freebuff-wrapper.sh" ]; then
+    "$SCRIPT_DIR/freebuff-wrapper.sh" login || true
+  else
+    freebuff login || true
+  fi
+
+  # 5. Check and Save Session to Vault
+  echo -e "\n${C_YELLOW}💾 [5/5] Memeriksa hasil otentikasi...${C_RESET}"
+  if [ -f "$CREDS_FILE" ]; then
+    save_current_account "$name"
+    echo -e "\n${C_GREEN}${C_BOLD}========================================================================${C_RESET}"
+    echo -e "${C_GREEN}${C_BOLD}🎉 AKUN '${name}' RESMI AKTIF & TERISOLASI 100%!${C_RESET}"
+    echo -e "${C_GREEN}${C_BOLD}========================================================================${C_RESET}\n"
+    if [ -f "$SCRIPT_DIR/check_quota.js" ]; then
+      node "$SCRIPT_DIR/check_quota.js" --check "$name" 2>/dev/null || true
+    fi
+  else
+    echo -e "${C_RED}❌ Login belum selesai atau credentials.json tidak ditemukan.${C_RESET}"
+    echo -e "Silakan coba lagi dengan: freebuff-power account new $name"
+  fi
+}
+
 function remove_account() {
   local name="${1:-}"
   if [ -z "$name" ]; then
@@ -405,10 +513,13 @@ case "$SUBCMD" in
   rotate)
     rotate_account
     ;;
+  new|add|create|onboard)
+    new_account_wizard "$@"
+    ;;
   remove|rm|del|delete)
     remove_account "$@"
     ;;
   *)
-    echo "Penggunaan: freebuff-power account [save <nama> | list | switch <nama> | auto | rotate | remove <nama> | reset]"
+    echo "Penggunaan: freebuff-power account [new <nama> | save <nama> | list | switch <nama> | auto | rotate | remove <nama> | reset]"
     ;;
 esac

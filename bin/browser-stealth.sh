@@ -100,6 +100,9 @@ else
     "--disable-client-side-phishing-detection"
     "--window-size=1280,800"
     "--lang=en-US,en"
+    "--webrtc-ip-handling-policy=disable_non_proxied_udp"
+    "--enforce-webrtc-ip-permission-check"
+    "--disable-breakpad"
   )
   if [ -d "$EXT_DIR" ]; then
     CHROME_FLAGS+=("--load-extension=$EXT_DIR" "--disable-extensions-except=$EXT_DIR")
