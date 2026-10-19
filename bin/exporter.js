@@ -98,4 +98,4 @@ switch (target) {
     break;
 }
 
-console.log("\n\x1b[32m\x1b[1m🎉 Sukses! 82 Sub-Agents & 1,106 Skills tersinkronisasi ke seluruh AI IDE.\x1b[0m\n");
+console.log("\n\x1b[32m\x1b[1m🎉 Sukses! 71 Production Agents & 326 Curated Skills tersinkronisasi ke seluruh AI IDE.\x1b[0m\n");
