@@ -85,6 +85,9 @@ if command -v gcc >/dev/null 2>&1 && [ -f "$SOURCE_DIR/src/stealth/libfreebuff-s
   cp -f "$INSTALL_BIN_DIR/libfreebuff-stealth.so" "$SOURCE_DIR/bin/libfreebuff-stealth.so" 2>/dev/null || true
 fi
 
+# Link universal freebuff command to stealth wrapper
+ln -sf "$INSTALL_BIN_DIR/freebuff-wrapper.sh" "$INSTALL_BIN_DIR/freebuff" 2>/dev/null || true
+
 # 3. Install Superpower templates & Anti-Slop Skills
 echo -e "${C_BLUE}🧰 [3/5] Menyinkronkan ${TOTAL_AGENTS} Sub-Agents & ${TOTAL_SKILLS} Modular Skills ke $SUPERPOWER_DIR...${C_RESET}"
 cp -rf "$SOURCE_DIR/superpower/"* "$SUPERPOWER_DIR/"
