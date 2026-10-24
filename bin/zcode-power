@@ -149,6 +149,7 @@ COMMAND="${1:-help}"
 
 case "$COMMAND" in
   start|go|launch)
+    shift || true
     APPIMAGE="$(find_appimage)"
     if [ -z "$APPIMAGE" ]; then
       echo -e "${C_RED}❌ File ZCode AppImage tidak ditemukan di ~/Downloads atau ~/.local/bin!${C_RESET}"
@@ -184,9 +185,10 @@ case "$COMMAND" in
     fi
 
     echo -e "📦 AppImage Binary         : ${C_YELLOW}$APPIMAGE${C_RESET}"
+    echo -e "🛡️  Electron Sandbox        : ${C_GREEN}--no-sandbox (Active)${C_RESET}"
     echo -e "${C_GREEN}${C_BOLD}✨ Meluncurkan ZCode Desktop IDE...${C_RESET}\n"
 
-    nohup "$APPIMAGE" >/dev/null 2>&1 &
+    nohup "$APPIMAGE" --no-sandbox "$@" >/dev/null 2>&1 &
     disown
     echo -e "${C_GREEN}✅ ZCode berhasil dibuka di background!${C_RESET}\n"
     ;;
