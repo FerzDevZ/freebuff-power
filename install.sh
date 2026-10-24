@@ -76,7 +76,7 @@ for bin_file in "$SOURCE_DIR/bin/"*; do
   fi
   cp -rf "$bin_file" "$dest" 2>/dev/null || true
 done
-chmod +x "$INSTALL_BIN_DIR"/freebuff-power "$INSTALL_BIN_DIR"/*.sh "$INSTALL_BIN_DIR"/*.js "$INSTALL_BIN_DIR"/*.py 2>/dev/null || true
+chmod +x "$INSTALL_BIN_DIR"/freebuff-power "$INSTALL_BIN_DIR"/zcode-power "$INSTALL_BIN_DIR"/*.sh "$INSTALL_BIN_DIR"/*.js "$INSTALL_BIN_DIR"/*.py 2>/dev/null || true
 chmod -R +x "$INSTALL_BIN_DIR"/shims 2>/dev/null || true
 
 # Compile hardware virtualization stealth hook if gcc is present
