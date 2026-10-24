@@ -18,12 +18,28 @@
     });
   } catch (e) {}
 
-  // 2. Normalize Languages & Platform
+  // 2. Normalize Languages, Platform & US Geolocation / Timezone
   try {
     Object.defineProperty(navigator, 'languages', {
-      get: () => ['id-ID', 'id', 'en-US', 'en'],
+      get: () => ['en-US', 'en'],
       configurable: true
     });
+    Object.defineProperty(navigator, 'language', {
+      get: () => 'en-US',
+      configurable: true
+    });
+  } catch (e) {}
+
+  // Spoof Intl Timezone & Date Offset to US Eastern (America/New_York)
+  try {
+    const origResolvedOptions = Intl.DateTimeFormat.prototype.resolvedOptions;
+    Intl.DateTimeFormat.prototype.resolvedOptions = function () {
+      const opts = origResolvedOptions.apply(this, arguments);
+      return Object.assign(opts, {
+        timeZone: 'America/New_York',
+        locale: 'en-US'
+      });
+    };
   } catch (e) {}
 
   // Generate deterministic subtle session shift based on load time

@@ -26,6 +26,11 @@ export MANICODE_TELEMETRY=0
 export MANICODE_ANALYTICS=0
 export MANICODE_DEVICE_HASH="$(od -vN "16" -An -tx1 /dev/urandom | tr -d " \n")"
 
+# 2b. Enforce US Locale & Timezone Masking (Eliminate Indonesian Quota Penalty)
+export TZ="America/New_York"
+export LANG="en_US.UTF-8"
+export LC_ALL="en_US.UTF-8"
+
 # 3. SSL / TLS Root Certificates Fix for Bun & Node.js Engine
 export SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt
 export SSL_CERT_DIR=/etc/ssl/certs

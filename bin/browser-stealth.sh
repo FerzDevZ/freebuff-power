@@ -71,14 +71,25 @@ echo -e "🛡️ Sandbox       : ${C_PURPLE}${SANDBOX_DIR}${C_RESET} ${C_BOLD}(A
 echo -e "🔒 Fingerprint   : ${C_GREEN}Zero-Trace | AutomationControlled: Disabled | Canvas/WebGL: Masked${C_RESET}"
 echo -e "🔗 Target URL    : ${C_CYAN}${TARGET_URL}${C_RESET}\n"
 
-# 3. Check for SOCKS5 Proxy (Cloudflare WARP or VPS Tunnel)
+# 3. Enforce US Locale & Timezone Masking
+export TZ="America/New_York"
+export LANG="en_US.UTF-8"
+export LC_ALL="en_US.UTF-8"
+
+# 4. Check for SOCKS5 / HTTP Proxy (Cloudflare WARP, Tor US, or VPS Tunnel)
 PROXY_ARGS=()
 if [ -n "${ALL_PROXY:-}" ]; then
   PROXY_ARGS+=("--proxy-server=$ALL_PROXY")
   echo -e "🌐 Routing Proxy : ${C_GREEN}${ALL_PROXY}${C_RESET}"
+elif [ -n "${HTTPS_PROXY:-}" ]; then
+  PROXY_ARGS+=("--proxy-server=$HTTPS_PROXY")
+  echo -e "🌐 Routing Proxy : ${C_GREEN}${HTTPS_PROXY}${C_RESET}"
+elif [ -n "${HTTP_PROXY:-}" ]; then
+  PROXY_ARGS+=("--proxy-server=$HTTP_PROXY")
+  echo -e "🌐 Routing Proxy : ${C_GREEN}${HTTP_PROXY}${C_RESET}"
 fi
 
-# 4. Launch with Anti-Detection Flags
+# 5. Launch with Anti-Detection Flags
 if [[ "$BROWSER_BIN" == *"firefox"* ]]; then
   "$BROWSER_BIN" \
     --profile "$SANDBOX_DIR" \
