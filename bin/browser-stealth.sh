@@ -13,7 +13,7 @@ C_PURPLE='\033[0;35m'
 C_BOLD='\033[1m'
 C_RESET='\033[0m'
 
-TARGET_URL="${1:-https://codebuff.com}"
+TARGET_URL="${1:-https://freebuff.com/login}"
 
 # 1. Resolve Extension Directory & Detect Best Stealth Browser
 SCRIPT_DIR="$( cd -P "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"

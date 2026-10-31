@@ -63,12 +63,13 @@ function full_reset() {
   rm -f "$HISTORY_FILE" 2>/dev/null || true
 
   echo -e "${C_YELLOW}🎭 [4/7] Meng-generate identitas perangkat baru (Zero Fingerprint Linkage)...${C_RESET}"
-  local new_uuid new_fingerprint new_machine_id new_salt fake_mac
+  local new_uuid new_fingerprint new_machine_id new_salt fake_mac new_serial
   new_uuid="anon_$(cat /proc/sys/kernel/random/uuid 2>/dev/null || python3 -c 'import uuid; print(uuid.uuid4())')"
   new_fingerprint="$(head -c 32 /dev/urandom | sha256sum | awk '{print $1}')"
   new_machine_id="$(od -vN "16" -An -tx1 /dev/urandom | tr -d " \n")"
   new_salt="$(od -vN "8" -An -tx1 /dev/urandom | tr -d " \n")"
   fake_mac="52:54:00:$(printf '%02x:%02x:%02x' $((RANDOM%256)) $((RANDOM%256)) $((RANDOM%256)))"
+  new_serial="CZC$(od -vN "4" -An -tx1 /dev/urandom | tr -d " \n" | tr '[:lower:]' '[:upper:]')"
 
   echo "{\"anonymousId\": \"$new_uuid\", \"deviceHash\": \"$new_fingerprint\"}" > "$ANALYTICS_FILE"
   chmod 600 "$ANALYTICS_FILE" 2>/dev/null || true
@@ -76,7 +77,8 @@ function full_reset() {
   echo "$new_machine_id" > "$MANICODE_DIR/spoofed-machine-id"
   echo "$fake_mac" > "$MANICODE_DIR/spoofed-mac"
   echo "${new_uuid#anon_}" > "$MANICODE_DIR/spoofed-product-uuid"
-  chmod 644 "$MANICODE_DIR/spoofed-machine-id" "$MANICODE_DIR/spoofed-mac" "$MANICODE_DIR/spoofed-product-uuid" 2>/dev/null || true
+  echo "$new_serial" > "$MANICODE_DIR/spoofed-product-serial"
+  chmod 644 "$MANICODE_DIR/spoofed-machine-id" "$MANICODE_DIR/spoofed-mac" "$MANICODE_DIR/spoofed-product-uuid" "$MANICODE_DIR/spoofed-product-serial" 2>/dev/null || true
 
   cat << STATE_EOF > "$ANONYMOUS_FILE"
 {
@@ -104,23 +106,29 @@ STATE_EOF
     echo -e "  ✓ Identitas Freebuff Desktop & Electron storage berhasil di-reset"
   fi
 
-  echo -e "${C_YELLOW}📡 [7/7] Merotasi network Anycast & memeriksa konektivitas...${C_RESET}"
+  echo -e "${C_YELLOW}📡 [7/7] Merotasi network Anycast & membersihkan DNS cache...${C_RESET}"
+  resolvectl flush-caches 2>/dev/null || systemd-resolve --flush-caches 2>/dev/null || true
   if command -v warp-cli >/dev/null 2>&1; then
     warp-cli tunnel rotate-keys >/dev/null 2>&1 || true
     warp-cli disconnect >/dev/null 2>&1 || true
     sleep 0.5
     warp-cli connect >/dev/null 2>&1 || true
+    echo -e "  ✓ Cloudflare WARP Anycast keypair berhasil dirotasi & DNS cache di-flush"
   fi
 
   echo -e "\n${C_GREEN}${C_BOLD}========================================================================${C_RESET}"
-  echo -e "${C_GREEN}${C_BOLD}🎉 PURGE TOTAL BERHASIL 100%! Identitas mesin & browser telah bersih total.${C_RESET}"
+  echo -e "${C_GREEN}${C_BOLD}🎉 PURGE TOTAL BERHASIL 100%! Seluruh Identitas Mesin & Browser Steril!${C_RESET}"
   echo -e "${C_GREEN}${C_BOLD}========================================================================${C_RESET}\n"
-  echo -e "${C_BOLD}💡 PANDUAN PENTING AGAR TIDAK DITAGIH NOMOR HP SAAT LOGIN BARU:${C_RESET}"
-  echo -e "  1. ${C_CYAN}Gunakan Stealth Isolated Browser${C_RESET}: Jalankan ${C_BOLD}freebuff-power login${C_RESET} atau"
-  echo -e "     ${C_BOLD}freebuff-power browser stealth${C_RESET} untuk membuka browser sandbox anti-detect."
-  echo -e "  2. ${C_CYAN}Gunakan Koneksi Residensial Murni${C_RESET}: Disarankan memakai hotspot HP seluler (IP perumahan/mobile)."
-  echo -e "     (Matikan VPN/WARP saat registrasi baru, karena IP Datacenter otomatis dicurigai bot)."
-  echo -e "  3. ${C_CYAN}Gunakan Akun Google Berumur (Aged Account)${C_RESET}: Hindari Gmail yang baru berumur hitungan menit."
+  echo -e "${C_BOLD}⚠️  PERINGATAN PENTING MENGENAI URL BAN:${C_RESET}"
+  echo -e "  Jangan reload atau buka URL lama yang berakhiran:"
+  echo -e "  ${C_RED}freebuff.com/login?error=device_linked_to_banned_account${C_RESET}"
+  echo -e "  (Parameter '?error=...' tersebut otomatis memicu banner ban oleh web frontend!)\n"
+  echo -e "${C_BOLD}💡 PANDUAN CARA LOGIN BERSIH & AMAN:${C_RESET}"
+  echo -e "  1. ${C_CYAN}Gunakan Mode Stealth Sandbox (Disarankan)${C_RESET}:"
+  echo -e "     Jalankan: ${C_BOLD}freebuff-power login${C_RESET} atau ${C_BOLD}freebuff-power browser stealth${C_RESET}"
+  echo -e "  2. ${C_CYAN}Atau Buka Google Chrome dengan URL Murni${C_RESET}:"
+  echo -e "     Buka tab baru dan ketik langsung: ${C_GREEN}${C_BOLD}https://freebuff.com/login${C_RESET} (tanpa query ?error=...)"
+  echo -e "  3. ${C_CYAN}Gunakan Koneksi Residensial / Hotspot HP${C_RESET} saat daftar baru agar tidak dicurigai bot."
   echo -e "\n👉 Luncurkan sesi bersih sekarang: ${C_CYAN}${C_BOLD}freebuff-power start${C_RESET}\n"
 }
 
