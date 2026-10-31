@@ -95,7 +95,7 @@ STATE_EOF
 
   echo -e "${C_YELLOW}🌐 [5/7] Memusnahkan cookie pelacak & web storage browser (Chrome, Brave, Chromium)...${C_RESET}"
   if [ -f "$SCRIPT_DIR/browser-clean.py" ]; then
-    python3 "$SCRIPT_DIR/browser-clean.py" || true
+    python3 "$SCRIPT_DIR/browser-clean.py" --kill || true
   fi
 
   echo -e "${C_YELLOW}🖥️  [6/7] Memeriksa & mereset identitas Freebuff Desktop Linux...${C_RESET}"
