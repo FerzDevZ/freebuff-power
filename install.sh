@@ -19,7 +19,7 @@ C_RESET='\033[0m'
 
 clear 2>/dev/null || true
 echo -e "${C_CYAN}${C_BOLD}========================================================================${C_RESET}"
-echo -e "${C_YELLOW}${C_BOLD}⚡ FREEBUFF-POWER SUPREME & PROXY SUITE — Universal Installer (v6.5)${C_RESET}"
+echo -e "${C_YELLOW}${C_BOLD}⚡ FREEBUFF-POWER SUPREME & PROXY SUITE — Universal Installer (v10.0)${C_RESET}"
 echo -e "${C_CYAN}${C_BOLD}========================================================================${C_RESET}\n"
 
 INSTALL_BIN_DIR="$HOME/.local/bin"
@@ -62,8 +62,8 @@ else
   fi
 fi
 
-TOTAL_AGENTS=$(ls -1 "$SOURCE_DIR/superpower/agents" 2>/dev/null | wc -l || echo "82")
-TOTAL_SKILLS=$(ls -1 "$SOURCE_DIR/superpower/skills" 2>/dev/null | wc -l || echo "1106")
+TOTAL_AGENTS=$(ls -1 "$SOURCE_DIR/superpower/agents" 2>/dev/null | wc -l || echo "75")
+TOTAL_SKILLS=$(ls -1 "$SOURCE_DIR/superpower/skills" 2>/dev/null | wc -l || echo "332")
 
 # 2. Install All CLI binaries and helpers
 echo -e "${C_BLUE}⚙️  [2/5] Memasang seluruh suite CLI binary ke $INSTALL_BIN_DIR...${C_RESET}"

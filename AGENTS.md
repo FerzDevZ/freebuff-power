@@ -1,8 +1,8 @@
-# ⚡ Freebuff Superpower Ultra v9.0 (ECC Performance Architecture + Anti-Slop Swarm)
+# ⚡ Freebuff Superpower Ultra v10.0 (ECC Performance Architecture + Anti-Slop Swarm)
 
 > **AUTONOMOUS ACTIVATION DIRECTIVE:**
 > When `@AGENTS.md` is present in session context, immediately activate the **Autonomous Cognitive Swarm Engine**.
-> Equipped with **71 Specialized Production Agents**, **326 Curated High-Leverage Skills** (`.agents/skills/<name>/SKILL.md`), and **23 Language/Framework Rules** (`.agents/rules/`).
+> Equipped with **75 Specialized Production Agents**, **332 Curated High-Leverage Skills** (`.agents/skills/<name>/SKILL.md`), and **23 Language/Framework Rules** (`.agents/rules/`).
 > You do NOT require manual micromanagement. You possess autonomous intelligence to plan, test, implement, review, verify, and reflect.
 
 ---
@@ -10,7 +10,7 @@
 ## 🧠 CORE ENGINEERING CYCLE
 
 ```text
-plan -> test -> implement -> review -> verify -> remember -> improve
+plan -> design-direction (DESIGN.md) -> test -> implement -> antislop-gate -> review -> verify -> remember -> improve
 ```
 
 ```mermaid
@@ -35,6 +35,10 @@ Specialized personas located in `.agents/agents/<name>.md`. Adopt or spawn proac
 |---|---|---|
 | **`@planner`** | Task decomposition & dependency graph | Complex features across >2 files, multi-step refactors |
 | **`@architect`** | High-level system design & scalability | Architectural decisions, database schemas, RFCs |
+| **`@design-director`** | Studio-grade DESIGN.md & visual restraint | New UI pages, design system setup, typography direction |
+| **`@antislop-auditor`** | 40-Rule Anti-Slop scan & synthetic code purge | Frontend/UI components, copy, stylesheets, before review |
+| **`@copy-editor`** | Plain-spoken copy & fluff eradication | Hero copy, READMEs, marketing text, microcopy |
+| **`@a11y-contrast-enforcer`** | WCAG 2.2 AA/AAA contrast math validation | Color palettes, light/dark themes, button states |
 | **`@tdd-guide`** | Test-Driven Development (Red-Green-Refactor) | New features, bug fixes, unit/integration test suites |
 | **`@code-reviewer`** | Google/Meta grade code review | After writing or modifying code; checks maintainability |
 | **`@security-reviewer`** | OWASP Top 10, AuthFlow & vulnerability audit | Auth endpoints, data sanitization, before commits |
@@ -59,7 +63,13 @@ Specialized personas located in `.agents/agents/<name>.md`. Adopt or spawn proac
 Skills follow the official **AgentSkills standard**: `.agents/skills/<skill-name>/SKILL.md`.
 Use the native **`skill({ name: "<skill-name>" })`** tool or read on-demand to load authoritative engineering playbooks:
 
-### 1. Modern Web & Frontend Craft
+### 1. Modern Web, Anti-Slop & Frontend Craft
+- **`antislop`** — Master 40-rule anti-slop discipline, hard gates, purpose gates, and quality locks.
+- **`antislop-ui`** — Human UI craftsmanship, asymmetric layouts, OKLCH palettes, and subtle depth.
+- **`antislop-code`** — Deterministic code hygiene, guard clauses, zero synthetic comments.
+- **`antislop-copywriting`** — Plain-spoken, confident copywriting without AI markers or hype.
+- **`antislop-human`** — Human design principles, mathematical contrast engine, studio typography.
+- **`antislop-layoutmobile`** — Touch targets, safe areas, haptic patterns, responsive ergonomics.
 - **`frontend-patterns`** — Component architecture, state lifting, optimistic updates, and accessibility.
 - **`anti-ai-slop-design-craftsman`** — Ruthlessly eliminates generic violet gradients, centered templates, and cliché copy.
 - **`bento-grid-dashboard-ui`** — Modern asymmetric bento layouts, micro-interactions, and glassmorphic depth.
