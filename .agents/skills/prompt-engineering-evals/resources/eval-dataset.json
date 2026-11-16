@@ -1,0 +1,14 @@
+[
+  {
+    "id": "eval_01",
+    "prompt": "Extract user details as JSON from: 'Alice Smith, age 29, engineer at Acme Corp'",
+    "expected_schema": { "name": "string", "age": "number", "occupation": "string" },
+    "expected_values": { "name": "Alice Smith", "age": 29, "occupation": "engineer" }
+  },
+  {
+    "id": "eval_02",
+    "prompt": "Explain difference between 1NF and 2NF in 2 short bullet points without conversational filler.",
+    "banned_phrases": ["certainly", "delve", "hope this helps"],
+    "max_words": 50
+  }
+]

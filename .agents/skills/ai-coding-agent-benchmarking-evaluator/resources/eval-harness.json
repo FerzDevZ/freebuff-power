@@ -1,0 +1,19 @@
+{
+  "benchmark_name": "SWE-Bench-Mini",
+  "eval_cases": [
+    {
+      "id": "django__django-11099",
+      "repo": "django/django",
+      "base_commit": "d8213b26fe7539",
+      "test_cmd": "python tests/runtests.py auth_tests",
+      "timeout_seconds": 180
+    },
+    {
+      "id": "scikit-learn__scikit-learn-13439",
+      "repo": "scikit-learn/scikit-learn",
+      "base_commit": "14d1297e20562",
+      "test_cmd": "pytest sklearn/tests/test_pipeline.py",
+      "timeout_seconds": 180
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "experiment_id": "chaos_exp_001",
+  "name": "Database Primary Kill Test",
+  "steady_state": {
+    "probe_endpoint": "http://app:8080/health",
+    "expected_status": 200
+  },
+  "action": {
+    "type": "kill_pod",
+    "selector": "app=postgres-primary",
+    "grace_period_seconds": 0
+  },
+  "verification": {
+    "expected_failover_time_seconds": 15,
+    "automatic_replica_promotion": true
+  }
+}

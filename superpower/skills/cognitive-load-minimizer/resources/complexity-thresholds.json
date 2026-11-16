@@ -1,0 +1,4 @@
+{
+  "max_cyclomatic_complexity": 5,
+  "max_function_lines": 40
+}

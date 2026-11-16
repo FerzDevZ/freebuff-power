@@ -1,0 +1,5 @@
+{
+  "mutator": "typescript",
+  "testRunner": "vitest",
+  "thresholds": { "high": 85, "low": 65, "break": 60 }
+}

@@ -1,0 +1,4 @@
+{
+  "npm": ["fastify", "zod", "prisma", "drizzle-orm", "framer-motion", "zustand"],
+  "pypi": ["fastapi", "pydantic", "sqlalchemy", "asyncpg", "pytest"]
+}

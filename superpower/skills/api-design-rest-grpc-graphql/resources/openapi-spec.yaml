@@ -1,0 +1,39 @@
+openapi: 3.1.0
+info:
+  title: Production Order API
+  version: 1.0.0
+  description: High-throughput API contract with idempotency and RFC 7807 error schema
+paths:
+  /v1/orders:
+    post:
+      summary: Create a new order
+      parameters:
+        - name: Idempotency-Key
+          in: header
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [items, customer_id]
+              properties:
+                customer_id:
+                  type: string
+                items:
+                  type: array
+                  items:
+                    type: object
+                    required: [sku, quantity]
+                    properties:
+                      sku: { type: string }
+                      quantity: { type: integer, minimum: 1 }
+      responses:
+        '201':
+          description: Order created successfully
+        '422':
+          description: Validation error

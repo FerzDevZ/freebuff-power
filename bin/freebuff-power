@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # ==============================================================================
-# ⚡ FREEBUFF-POWER SUPREME — Omnipotent Multi-Agent & Modular Skills Suite (v10.0)
+# ⚡ FREEBUFF-POWER SUPREME — Omnipotent Multi-Agent & Modular Skills Suite (v11.0)
 # ==============================================================================
 set -euo pipefail
 
@@ -32,14 +32,14 @@ C_RESET='\033[0m'
 
 show_help() {
   echo -e "${C_CYAN}${C_BOLD}========================================================================================${C_RESET}"
-  echo -e "${C_YELLOW}${C_BOLD}⚡ FREEBUFF-POWER SUPREME — Autonomous Cognitive Swarm (v10.0-ECC)${C_RESET}"
+  echo -e "${C_YELLOW}${C_BOLD}⚡ FREEBUFF-POWER SUPREME — Autonomous Cognitive Swarm (v11.0-ECC)${C_RESET}"
   echo -e "${C_CYAN}${C_BOLD}========================================================================================${C_RESET}\n"
   echo -e "${C_BOLD}PENGGUNAAN:${C_RESET}"
   echo -e "  ${C_GREEN}freebuff-power${C_RESET} ${C_YELLOW}<command>${C_RESET} [arguments] [options]\n"
 
   echo -e "${C_PURPLE}${C_BOLD}🔥 PERINTAH UTAMA & PELUNCURAN KODING:${C_RESET}"
   echo -e "  ${C_GREEN}start / go / full${C_RESET}     ${C_BOLD}[REKOMENDASI] One-Shot Launch:${C_RESET}"
-  echo -e "                        Reset Telemetry (Anti-Ban) + Injeksi 75 Production Agents & 332 Skills"
+  echo -e "                        Reset Telemetry (Anti-Ban) + Injeksi 83 Production Agents & 561 Skills"
   echo -e "                        + Langsung buka sesi interaktif Freebuff siap koding!"
   echo -e "  ${C_GREEN}ui / tui${C_RESET}              Buka Interactive Terminal TUI Dashboard (pilih agen/skill visual)."
   echo -e "  ${C_GREEN}compose <task> [-r]${C_RESET}   ${C_BOLD}[POWER COMPOSER 2.0]${C_RESET} Analisis arsitektur & racik agen/skills terbaik."
@@ -77,7 +77,7 @@ show_help() {
   echo -e "  ${C_GREEN}explain <file>${C_RESET}        Bedah arsitektur kode file target & beri rekomendasi swarm persona."
   echo -e "  ${C_GREEN}docker${C_RESET}                Buat Dockerfile multi-stage (< 50MB) & docker-compose.yml siap pakai."
   echo -e "  ${C_GREEN}docs <library>${C_RESET}        Ingest dokumentasi resmi framework terbaru ke dalam konteks AI."
-  echo -e "  ${C_GREEN}new <preset> [name]${C_RESET}   Scaffold proyek baru instan (saas / flutter / go) + injeksi 332 skills.\n"
+  echo -e "  ${C_GREEN}new <preset> [name]${C_RESET}   Scaffold proyek baru instan (saas / flutter / go) + injeksi 561 skills.\n"
 
   echo -e "${C_PURPLE}${C_BOLD}🌐 LIVE COLLABORATION, PREVIEW & SAFETY:${C_RESET}"
   echo -e "  ${C_GREEN}pair [port]${C_RESET}           Buka Sesi Live Pair-Programming Real-Time (Bagikan link ke tim)."
@@ -87,7 +87,7 @@ show_help() {
   echo -e "  ${C_GREEN}snapshot restore [id]${C_RESET} Pulihkan seluruh file proyek ke checkpoint snapshot pilihan."
   echo -e "  ${C_GREEN}rollback${C_RESET}              Shortcut instan: Pulihkan proyek ke snapshot terakhir (1 detik)."
   echo -e "  ${C_GREEN}export [--cursor|--claude|--windsurf|--all]${C_RESET}"
-  echo -e "                        Ekspor 75 Production Agents & 332 Skills ke semua format AI IDE."
+  echo -e "                        Ekspor 83 Production Agents & 561 Skills ke semua format AI IDE."
   echo -e "  ${C_GREEN}eval${C_RESET}                  Jalankan Autonomous SWE-Bench Swarm Evaluator (Scorecard A+).\n"
 
   echo -e "${C_PURPLE}${C_BOLD}💬 MANAJEMEN SESI & CHAT:${C_RESET}"
@@ -102,13 +102,13 @@ show_help() {
   echo -e "  ${C_GREEN}stealth / ghost${C_RESET}       Protokol Hantu: Acak Mesin + Hapus Sesi + Wiped Browser + Putar IP."
   echo -e "  ${C_GREEN}desktop [cmd]${C_RESET}         Kelola Freebuff Desktop Linux (status/reset/kill Machine ID & Sesi)."
   echo -e "  ${C_GREEN}clean${C_RESET}                 Reset total anonymous UUID telemetry & lockfile (100% Anti-Ban)."
-  echo -e "  ${C_GREEN}doctor${C_RESET}                Pemeriksaan kesehatan sistem (integritas 75 agents & 332 skills)."
+  echo -e "  ${C_GREEN}doctor${C_RESET}                Pemeriksaan kesehatan sistem (integritas 83 agents & 561 skills)."
   echo -e "  ${C_GREEN}update${C_RESET}                Perbarui pustaka Skills & Agents ke versi rilis terbaru dari GitHub.\n"
 
   echo -e "${C_PURPLE}${C_BOLD}🔍 EKSPLORASI & PANDUAN:${C_RESET}"
   echo -e "  ${C_GREEN}search <keyword>${C_RESET}      Cari Sub-Agent atau Modular Skills berdasarkan kata kunci."
   echo -e "  ${C_GREEN}info <name>${C_RESET}           Buka dan baca SOP / instruksi lengkap dari Agent atau Skill."
-  echo -e "  ${C_GREEN}list${C_RESET}                  Tampilkan rekapitulasi 75 Production Agents & 332 Curated Skills."
+  echo -e "  ${C_GREEN}list${C_RESET}                  Tampilkan rekapitulasi 83 Production Agents & 561 Curated Skills."
   echo -e "  ${C_GREEN}help / --help / -h${C_RESET}    Tampilkan panduan bantuan lengkap ini.\n"
 
   echo -e "${C_CYAN}----------------------------------------------------------------------------------------${C_RESET}"

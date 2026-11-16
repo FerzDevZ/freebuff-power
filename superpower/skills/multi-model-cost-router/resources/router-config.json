@@ -1,0 +1,17 @@
+{
+  "default_tier": "tier_2",
+  "tiers": {
+    "tier_1": {
+      "providers": ["gcli/grok-4.6-xhigh", "anthropic/claude-3-5-sonnet"],
+      "max_tokens": 8192
+    },
+    "tier_2": {
+      "providers": ["alims-intl/qwen2.5-72b-instruct", "deepseek/deepseek-chat"],
+      "max_tokens": 4096
+    },
+    "tier_3": {
+      "providers": ["google/gemini-1.5-flash", "meta-llama/llama-3.1-8b-instruct"],
+      "max_tokens": 2048
+    }
+  }
+}

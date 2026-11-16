@@ -1,0 +1,5 @@
+:root {
+  --fluid-h1: clamp(2.5rem, 5vw + 1rem, 4.5rem);
+  --fluid-h2: clamp(2rem, 3.5vw + 0.8rem, 3rem);
+  --fluid-body: clamp(1rem, 1vw + 0.75rem, 1.25rem);
+}

@@ -101,10 +101,10 @@ if [ $# -gt 0 ]; then
 else
   # Interactive mode: Cetak panduan memanggil @AGENTS.md di prompt CLI
   echo -e "\033[0;36m\033[1m========================================================================\033[0m"
-  echo -e "\033[0;32m\033[1m⚡ FREEBUFF-POWER SUPREME v9.0 (ECC Cognitive Swarm Engine Active)\033[0m"
+  echo -e "\033[0;32m\033[1m⚡ FREEBUFF-POWER SUPREME v11.0 (ECC Cognitive Swarm Engine Active)\033[0m"
   echo -e "\033[0;36m\033[1m========================================================================\033[0m"
   echo -e "🛡️ Stealth Shield : \033[0;32mC-Hook Active (Virtual Machine-ID & Spoofed MAC)\033[0m"
-  echo -e "🧰 Superpower     : \033[0;33m71 Sub-Agents & 326 Curated Skills Injected (.agents/)\033[0m"
+  echo -e "🧰 Superpower     : \033[0;33m83 Sub-Agents & 561 Curated Skills Injected (.agents/)\033[0m"
   echo -e "🌐 Browser        : \033[0;35mGoogle Chrome Stealth Sandbox Active\033[0m"
   echo -e "\n\033[1m💡 CARA MENGAKTIFKAN DI CHAT PROMPT FREEBUFF:\033[0m"
   echo -e "👉 \033[0;32m\033[1mKetik @AGENTS.md <tugas koding kamu>\033[0m"
