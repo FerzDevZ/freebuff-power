@@ -41,6 +41,8 @@ show_help() {
   echo -e "  ${C_GREEN}start / go / full${C_RESET}     ${C_BOLD}[REKOMENDASI] One-Shot Launch:${C_RESET}"
   echo -e "                        Reset Telemetry (Anti-Ban) + Injeksi 83 Production Agents & 561 Skills"
   echo -e "                        + Langsung buka sesi interaktif Freebuff siap koding!"
+  echo -e "  ${C_GREEN}local [model]${C_RESET}         ${C_BOLD}[ZERO-TOKEN]${C_RESET} Koding offline 100% gratis via Ollama lokal (kebal ban)."
+  echo -e "  ${C_GREEN}heal [test_cmd]${C_RESET}       ${C_BOLD}[AUTONOMOUS HEALER]${C_RESET} Jalankan test runner & perbaiki error kode otomatis."
   echo -e "  ${C_GREEN}ui / tui${C_RESET}              Buka Interactive Terminal TUI Dashboard (pilih agen/skill visual)."
   echo -e "  ${C_GREEN}compose <task> [-r]${C_RESET}   ${C_BOLD}[POWER COMPOSER 2.0]${C_RESET} Analisis arsitektur & racik agen/skills terbaik."
   echo -e "  ${C_GREEN}spawn <agent> [task]${C_RESET}  Luncurkan Freebuff dengan persona spesifik (Contoh: spawn architect)."
@@ -48,6 +50,8 @@ show_help() {
   echo -e "  ${C_GREEN}run [args]${C_RESET}            Jalankan sesi Freebuff biasa dengan proteksi Anti-Ban aktif."
   echo -e "  ${C_GREEN}run proxy [model]${C_RESET}     ${C_BOLD}[FREE MODELS]${C_RESET} Pilih model FREE Freebuff & buka sesi koding."
   echo -e "  ${C_GREEN}proxy [cmd]${C_RESET}           ${C_BOLD}[PROXY ENGINE]${C_RESET} Kelola Proxy (start/stop/restart/status/models/acc/add)."
+  echo -e "  ${C_GREEN}sync / export${C_RESET}         ${C_BOLD}[IDE MATRIX]${C_RESET} Ekspor 83 Agents & 561 Skills ke Cursor, Windsurf, Claude."
+  echo -e "  ${C_GREEN}pentest [dir]${C_RESET}         ${C_BOLD}[APPSEC AUDIT]${C_RESET} Pindai celah OWASP, kebocoran secret, & CVE dependensi."
   echo -e "  ${C_GREEN}update${C_RESET}                ${C_BOLD}[AUTO UPDATER]${C_RESET} Perbarui library superpower, CLI, dan proxy engine.\n"
 
   echo -e "${C_PURPLE}${C_BOLD}🎨 ANTI-SLOP SUITE & HUMAN DESIGN PURGER:${C_RESET}"
@@ -411,7 +415,22 @@ case "$COMMAND" in
     exec "$SCRIPT_DIR/snapshot.sh" rollback
     ;;
 
-  export)
+  heal|auto-heal|fix)
+    shift || true
+    exec "$SCRIPT_DIR/heal.sh" "$@"
+    ;;
+
+  local|ollama)
+    shift || true
+    exec "$SCRIPT_DIR/local.sh" "$@"
+    ;;
+
+  pentest|sec|security)
+    shift || true
+    exec "$SCRIPT_DIR/pentest.sh" "$@"
+    ;;
+
+  export|sync)
     shift || true
     exec node "$SCRIPT_DIR/exporter.js" "$@"
     ;;

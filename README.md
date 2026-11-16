@@ -1,14 +1,14 @@
 <div align="center">
 
-# ⚡ FREEBUFF-POWER (Omnipotent Edition v6.0)
-### The World's Most Advanced 46-Agent Swarm, 1,061 Skills, Multi-Account Vault & Anti-Ban Architecture for Freebuff
+# ⚡ FREEBUFF-POWER (Hyper-Modern Edition v11.0)
+### Autonomous Cognitive Swarm Engine with 83 Production Agents, 561 Curated Skills, Anti-Slop Suite, Offline Local LLM & Enterprise Anti-Ban
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Sub-Agents: 46](https://img.shields.io/badge/Sub--Agents-46%20Elite-blueviolet.svg)](#-specialized-sub-agents-roster-46-elite-agents)
-[![Modular Skills: 1,055](https://img.shields.io/badge/Modular%20Skills-1%2C042%20Clean-emerald.svg)](#-modular-skills-catalog-1055-skills)
+[![Sub-Agents: 83](https://img.shields.io/badge/Sub--Agents-83%20Specialized-blueviolet.svg)](#-roster-83-specialized-production-agents)
+[![Modular Skills: 561](https://img.shields.io/badge/Modular%20Skills-561%20Curated-emerald.svg)](#-katalog-561-modular-skills)
 [![Swarm Score: 100/100 A+](https://img.shields.io/badge/Swarm%20Rating-100%2F100%20Grade%20A%2B-brightgreen.svg)](#-autonomous-swe-bench-evaluator)
-[![Anti-Ban: Active](https://img.shields.io/badge/Anti--Ban%20Shield-Active%20v6.0-brightgreen.svg)](#-enterprise-anti-ban--anti-suspend-shield)
-[![Platform: Linux & macOS](https://img.shields.io/badge/Platform-Linux%20%7C%20macOS-informational.svg)](#-quick-installation-1-line-installer)
+[![Anti-Ban: Active](https://img.shields.io/badge/Anti--Ban%20Shield-Active%20v11.0-brightgreen.svg)](#-proteksi-anti-ban--stealth-sandbox)
+[![Platform: Linux & macOS](https://img.shields.io/badge/Platform-Linux%20%7C%20macOS-informational.svg)](#-instalasi-instan-1-line-installer)
 
 ```
   ______ _____  ______ ______ ____  _    _ ______ ______   _____   ______          ________ _____  
@@ -19,193 +19,234 @@
  |_|    |_|  \_\______|______|____/ \____/|_|    |_|      |_|     \____/   \/  \/   |______|_|  \_\
 ```
 
-**Freebuff-Power v6.0** transforms Freebuff into an autonomous **46-Agent Swarm** powered by **1,085 Modular Skills**, Multi-Account Quota Rotation, an interactive **Terminal TUI Dashboard**, Time-Travel Snapshots, Live Mobile Tunneling, Dual-Gate QA Invariants, and Enterprise Anti-Ban Safety.
+**Freebuff-Power v11.0** mengubah Freebuff menjadi **Autonomous Cognitive Swarm** paling tangguh di dunia: dilengkapi **83 Production Agents**, **561 Curated Modular Skills**, **Anti-Slop Delivery Gate**, **Autonomous SWE Healer**, **Local Offline Zero-Token Ollama Engine**, **Multi-Account Vault**, dan **Stealth Anti-Detect Sandbox**.
 
-[Instalasi 1 Baris](#-quick-installation-1-line-installer) • [Fitur Utama v6.0](#-fitur-utama-v45) • [Panduan CLI Lengkap](#-cli-command-palette-v45) • [Multi-Account Vault](#-multi-account-vault--quota-rotation) • [Roster 82 Sub-Agents](#-specialized-sub-agents-roster-46-elite-agents) • [Katalog 1,061 Skills](#-modular-skills-catalog-1055-skills)
+[Instalasi 1 Baris](#-instalasi-instan-1-line-installer) • [Fitur Unggulan v11.0](#-fitur-unggulan-v110) • [Panduan CLI Lengkap](#-cli-command-palette-v110) • [Multi-Account Vault](#-multi-account-vault--rotasi-kuota) • [Roster 83 Sub-Agents](#-roster-83-specialized-production-agents) • [Katalog 561 Skills](#-katalog-561-modular-skills)
 
 </div>
 
 ---
 
-## ⚡ Quick Installation (1-Line Universal Installer)
+## ⚡ Instalasi Instan (1-Line Universal Installer)
 
-Cukup salin dan jalankan **satu baris perintah** ini di terminal Linux atau macOS kamu:
+Salin dan jalankan **satu baris perintah** ini di terminal Linux atau macOS Anda:
 
+### Menggunakan cURL:
 ```bash
 curl -fsSL https://raw.githubusercontent.com/FerzDevZ/freebuff-power/main/install.sh | bash
 ```
 
-*(Atau jika menggunakan Wget)*:
+### Menggunakan Wget:
 ```bash
 wget -qO- https://raw.githubusercontent.com/FerzDevZ/freebuff-power/main/install.sh | bash
 ```
 
----
-
-## 🌟 Fitur Utama (v6.0 Omnipotent Edition)
-
-### 1. 👥 Multi-Account Vault & Round-Robin Quota Rotation (NEW 🔥)
-- **Atasi Limit Kuota Harian**: Simpan beberapa akun Google/Freebuff ke dalam vault terisolasi (`freebuff-power account save <nama>`).
-- **Rotasi Instan 0.1 Detik**: Saat satu akun terkena limit (`3 of 3 sessions used`), cukup ketik `freebuff-power rotate` untuk langsung beralih ke akun berikutnya secara otomatis!
-- **Full Identity Purge Reset**: `freebuff-power reset-full` menghapus seluruh session token lama dan men-generate hardware device fingerprint baru yang 100% segar.
-
-### 2. 🖥️ Interactive Terminal TUI Dashboard (`freebuff-power ui`)
-- Dashboard visual keyboard-driven di terminal (ala `lazygit`).
-- Jelajahi **82 Sub-Agents & 1,061 Skills** dengan preview SOP instan.
-- Centang kombinasi agen/skill dengan `[Spacebar]`, lalu tekan `[Enter]` untuk meluncurkan Freebuff!
-- Filter pencarian instan dengan menekan tombol `/`.
-
-### 3. 🌐 Mobile Live Preview & Tunnel (`freebuff-power share`)
-- Otomatis mendeteksi framework (Next.js/Vite/Astro) $\rightarrow$ menyalakan dev server $\rightarrow$ membuat link HTTPS publik instan via Cloudflare Tunnel.
-- Buka dan uji langsung aplikasi buatan AI di smartphone kamu atau bagikan linknya ke teman/klien.
-
-### 4. ⏪ Time-Travel Safety Checkpoints (`freebuff-power snapshot`)
-- `freebuff-power snapshot save "label"`: Membuat *shadow checkpoint* proyek dalam 0.05 detik sebelum AI melakukan refactor besar.
-- `freebuff-power rollback`: Membatalkan kesalahan AI dan mengembalikan seluruh kode ke kondisi snapshot semula dalam 1 detik.
-
-### 5. 🧪 Autonomous SWE-Bench Swarm Evaluator (`freebuff-power eval`)
-- Menilai kesiapan armada multi-agent berdasarkan 5 metrik kualitas (*Roster Diversity, Skills Depth, Anti-Slop, Dual-Gate QA, Token Economy*). **Skor Sempurna: 100/100 Grade A+**.
-
-### 6. 🔄 Multi-IDE Universal Exporter (`freebuff-power export`)
-- Ekspor seluruh 46 Agen dan 1,061 Skills ke semua editor AI lainnya dalam 1 detik:
-  - `freebuff-power export --cursor` $\rightarrow$ `.cursorrules`
-  - `freebuff-power export --claude` $\rightarrow$ `CLAUDE.md`
-  - `freebuff-power export --windsurf` $\rightarrow$ `.windsurfrules`
-  - `freebuff-power export --all` $\rightarrow$ Sinkronisasi ke seluruh IDE.
+> **Catatan:** Skrip installer otomatis mendeteksi shell (`bash`, `zsh`, `profile`), menyinkronkan 83 agen & 561 skills, mengompilasi hook stealth anti-ban C, dan mengekspor `$PATH` secara instan tanpa perlu reboot.
 
 ---
 
-## 🎮 CLI Command Palette (v6.0)
+## 🧠 Core Engineering Cycle
 
 ```text
-========================================================================================
-⚡ FREEBUFF-POWER SUPREME — Omnipotent Multi-Agent & Skills Suite (v6.0)
-========================================================================================
+plan ➔ design-direction (DESIGN.md) ➔ test ➔ implement ➔ antislop-gate ➔ review ➔ verify ➔ remember ➔ improve
+```
 
-🔥 PERINTAH UTAMA & PELUNCURAN:
-  freebuff-power start             [Rekomendasi] One-Shot Injeksi + Anti-Ban + Buka Freebuff
-  freebuff-power ui / tui          Buka Interactive Terminal TUI Dashboard
-  freebuff-power compose <task> -r Racik prompt arsitektur terbaik (-r untuk auto-run)
-  freebuff-power spawn <agent>     Luncurkan Freebuff dengan persona spesifik (misal: architect)
-  freebuff-power init [dir]        Injeksi AGENTS.md & .freebuff/ ke folder tanpa membuka sesi
-
-👥 MULTI-ACCOUNT VAULT & QUOTA ROTATION:
-  freebuff-power account save <id> Simpan sesi login akun aktif ke dalam vault
-  freebuff-power account list      Lihat daftar akun tersimpan di vault beserta status aktif
-  freebuff-power account switch    Beralih ke akun tertentu dalam 0.1 detik (Instant Quota Swap)
-  freebuff-power rotate            Putar ke akun berikutnya secara otomatis (Round-Robin)
-  freebuff-power reset-full        Reset TOTAL seluruh token login, sesi & device fingerprint
-
-🌐 LIVE PREVIEW, TIME-TRAVEL & EXPORTER:
-  freebuff-power pair [port]       Buka Sesi Live Pair-Programming Real-Time (Bagikan link ke tim)
-  freebuff-power share [port]      Buka HTTPS Public Tunnel & Live Preview ke HP
-  freebuff-power snapshot save     Simpan checkpoint snapshot proyek
-  freebuff-power snapshot list     Daftar riwayat checkpoint proyek
-  freebuff-power rollback          Pulihkan seluruh kode ke snapshot terakhir
-  freebuff-power export --all      Ekspor 60 Agents & 1,061 Skills ke Cursor/Claude/Windsurf
-  freebuff-power eval              Jalankan Swarm Benchmark Evaluator (Skor 100/100)
-
-💬 MANAJEMEN SESI & CHAT:
-  freebuff-power continue          Lanjutkan sesi percakapan/coding terakhir
-  freebuff-power session list      Daftar histori proyek dan riwayat sesi chat
-
-🛡️ PEMELIHARAAN, UPDATE & ANTI-BAN:
-  freebuff-power clean             Reset UUID telemetry & residual lock (100% Anti-Ban)
-  freebuff-power doctor            Pemeriksaan kesehatan sistem (integritas template)
-  freebuff-power update            Update pustaka Skills & Agents ke versi rilis terbaru
-========================================================================================
+```mermaid
+graph TD
+    Trigger([Prompt Koding + @AGENTS.md]) --> Step1[1. Auto-Sense Stack & Domain]
+    Step1 --> Step2[2. Auto-Select Specialist Persona dari .agents/agents/]
+    Step2 --> Step3[3. JIT Load Skills via native skill tool]
+    Step3 --> Step4[4. Tri-Phase Execution & Dual-Gate QA]
+    Step4 -->|Error Terdeteksi| Heal[Autonomous Build & TDD Healer]
+    Heal --> Reflect[Self-Evolving Reflexion: Record to MEMORY.md]
+    Reflect --> Step4
+    Step4 -->|Dual-Gate Cleared| Deliver([Production Output + Update MEMORY.md])
 ```
 
 ---
 
-## 👥 Specialized Sub-Agents
+## 🌟 Fitur Unggulan v11.0
 
-### ⚡ Machine Learning & Deep Learning Suite (NEW)
-- **`@mlops-pipeline-orchestrator`**: MLflow, W&B tracking, DVC dataset versioning, model registry, and continuous drift monitoring.
-- **`@distributed-deep-learning-fsdp`**: Multi-GPU / multi-node PyTorch FSDP, DeepSpeed ZeRO-3, and Slurm distributed cluster training.
-- **`@reinforcement-learning-rlhf-ppo`**: RLHF, PPO, DeepSeek-R1 style Group Relative Policy Optimization (GRPO), and verifier reward modeling.
-- **`@computer-vision-yolo-diffusion`**: YOLOv11, RT-DETR object detection, SAM segmentation, and Stable Diffusion 3 / Flux.1 LoRA tuning.
-- **`@tabular-automl-feature-engineer`**: XGBoost, LightGBM, CatBoost, Optuna Bayesian tuning, and SHAP explainability.
-- **`@time-series-forecasting-prophet-chronos`**: Pretrained time series foundation models (Amazon Chronos), PatchTST, and conformal risk bounds.
-- **`@quantization-edge-ai-onnx-tensorrt`**: ONNX Runtime, TensorRT INT8/FP16 compilation, and embedded edge deployment.
-- **`@audio-speech-dsp-whisper`**: WhisperX phoneme alignment, PyAnnote speaker diarization, Kokoro-82M TTS, and streaming voice agents.
+### 1. 🎨 Studio Anti-Slop & Human Design Purger
+* **Audit Anti-Slop 40 Aturan:** Pindai kode, styling, dan teks dari elemen generik AI (*purple/indigo gradient, 3-card layout, stubs `// TODO`, buzzwords*) via:
+  ```bash
+  freebuff-power antislop audit .
+  ```
+* **Verifikasi Kontras Matematis WCAG 2.2 AAA:**
+  ```bash
+  freebuff-power contrast "#0A0A0A" "#FFFFFF"
+  ```
+* **Inisialisasi Panduan Desain Bertaraf Studio:**
+  ```bash
+  freebuff-power design init
+  ```
 
+### 2. 🩺 Autonomous SWE-Healer (`freebuff-power heal`)
+* Jalankan tes proyek (`npm test`, `pytest`, `cargo test`, `go test`) dan biarkan AI memperbaiki kegagalan koding secara mandiri:
+  ```bash
+  freebuff-power heal "npm test"
+  ```
+* AI menganalisis error traceback $\rightarrow$ mengisolasi file penyebab $\rightarrow$ menerapkan patch minimal $\rightarrow$ memverifikasi ulang hingga hijau (Green).
 
-### 🧠 Full AI Engineering & LLM Suite (NEW)
-- **`@llm-finetuning-post-training`**: SFT, LoRA, QLoRA, Unsloth, Axolotl, DPO, KTO, PPO, and sequence packing.
-- **`@vllm-serving-inference-opt`**: Ultra-throughput vLLM & SGLang deployment, continuous batching, prefix caching, speculative decoding.
-- **`@synthetic-data-curation-engineer`**: Self-Instruct, Evol-Instruct, UltraFeedback format, DSPy optimization, MinHash LSH deduplication.
-- **`@agentic-workflow-langgraph-architect`**: Cyclic StateGraphs, persistent memory checkpointers, tool validation, human-in-the-loop.
-- **`@graphrag-hybrid-search-engineer`**: Neo4j Knowledge Graphs, dense + sparse BM25 hybrid search with RRF, and cross-encoder rerankers.
-- **`@llm-evals-judge-benchmarking`**: DeepEval, RAGAS, TruLens, calibrated LLM-as-a-Judge, and CI/CD quality gates.
-- **`@multimodal-vlm-vision-specialist`**: Qwen2-VL, Pixtral, ColPali late-interaction visual document RAG without OCR, and Whisper STT/TTS.
-- **`@ai-safety-guardrails-redteam`**: NeMo Guardrails, Llama-Guard 3, PII redaction, prompt injection defense, and automated red-teaming.
+### 3. 💻 Local Offline LLM Engine (`freebuff-power local`)
+* Koding tanpa internet, 100% gratis, zero-cost, dan kebal ban selamanya menggunakan model Ollama lokal:
+  ```bash
+  freebuff-power local qwen2.5-coder:14b
+  ```
+* Kompatibel dengan `qwen2.5-coder`, `deepseek-coder-v2`, `llama3.3`, dan model GGUF/AWQ lainnya.
 
+### 4. 👥 Multi-Account Vault & Round-Robin Quota Rotation
+* Simpan banyak akun ke dalam vault terisolasi:
+  ```bash
+  freebuff-power account new akun1
+  freebuff-power account new akun2
+  ```
+* Beralih akun dalam 0.1 detik saat akun aktif mendekati limit:
+  ```bash
+  freebuff-power rotate
+  # atau otomatis pilih akun yang siap:
+  freebuff-power account auto
+  ```
+* **Pembersihan Identitas Total (Zero Correlation):**
+  ```bash
+  freebuff-power reset-full
+  ```
 
-### 🎮 Roblox Game Development Suite (NEW)
-- **`@roblox-architect`**: Rojo project topology (`default.project.json`), Wally packages, and client-server shared architecture.
-- **`@roblox-luau-scripter`**: Strict Luau (`--!strict`), task library, types, and modern garbage collection patterns.
-- **`@roblox-security-anti-exploit`**: Server-authoritative validation, token-bucket remote rate limiters, magnitude & raycast sanity checks.
-- **`@roblox-datastore-engineer`**: ProfileService session-locking, zero-loss persistence, and safe `BindToClose`.
-- **`@roblox-gameplay-physics`**: Constraint physics, FastCast projectile engines, and RaycastHitbox combat.
-- **`@roblox-ui-fusion-roact`**: Declarative cross-platform UI with Fusion, reactive springs, and gamepad accessibility.
- Roster (60 Elite Agents)
+### 5. 🛡️ Proteksi Anti-Ban & Stealth Sandbox
+* **Zero Fingerprint Linkage:** Pemalsuan Machine-ID Linux, D-Bus ID, MAC address virtual, dan serial perangkat via C-hook `libfreebuff-stealth.so` (LD_PRELOAD).
+* **Disposable Chrome Sandbox:**
+  ```bash
+  freebuff-power login
+  # atau
+  freebuff-power browser stealth
+  ```
+  Otomatis memalsukan Canvas, WebGL, AudioContext farbling, WebRTC leak shield, dan auto-wipe tanpa bekas saat ditutup.
 
-| Sub-Agent | Focus & Responsibility |
+### 6. 🔄 Universal IDE Matrix Sync (`freebuff-power sync`)
+* Ekspor seluruh 83 Sub-Agents dan 561 Skills ke seluruh editor AI di laptop Anda:
+  ```bash
+  freebuff-power sync --all
+  ```
+  Mendukung: Cursor (`.cursorrules`), Windsurf (`.windsurfrules`), Claude Code (`CLAUDE.md`), Cline/Roo-Code (`.clinerules`), GitHub Copilot, dan ZCode (`~/.zcode/`).
+
+### 7. 🛡️ AppSec OWASP & Deep Vulnerability Scanner (`freebuff-power pentest`)
+* Audit keamanan kilat terhadap codebase sebelum commit atau deploy:
+  ```bash
+  freebuff-power pentest .
+  ```
+  Mendeteksi kebocoran secret API key, risiko XSS/eval, konfigurasi `.env` bocor, dan advisory CVE dependensi.
+
+---
+
+## 📋 CLI Command Palette (v11.0)
+
+| Kategori | Perintah | Deskripsi & Fungsi |
+|---|---|---|
+| **Koding & Peluncuran** | `freebuff-power start` | **[REKOMENDASI]** Reset telemetry + injeksi 83 agents & 561 skills + buka sesi interaktif. |
+| | `freebuff-power local [model]` | **[OFFLINE]** Koding 100% gratis via Ollama lokal tanpa kuota dan kebal ban. |
+| | `freebuff-power heal [test_cmd]`| **[AUTO-HEALER]** Jalankan test runner & perbaiki error kode secara mandiri. |
+| | `freebuff-power ui` | Buka Interactive Terminal TUI Dashboard (pilih agen/skill visual ala lazygit). |
+| | `freebuff-power compose <task>` | Analisis arsitektur tugas & racik kombinasi 3 skill paling relevan. |
+| | `freebuff-power spawn <agent>` | Luncurkan sesi Freebuff dengan persona spesifik (misal: `spawn architect`). |
+| | `freebuff-power run proxy [model]`| Pilih model FREE (GLM 5.3 / DeepSeek) & koding via proxy lokal. |
+| **Anti-Slop & Desain** | `freebuff-power antislop audit .`| Pindai 40 aturan AI slop, gradien ungu, buzzwords, dan komentar sampah. |
+| | `freebuff-power design init` | Settle direction before building: buat file `DESIGN.md` bertaraf studio. |
+| | `freebuff-power contrast <fg> <bg>`| Hitung matematis rasio kontras WCAG 2.2 AA/AAA (Wajib 4.5:1 / 7:1). |
+| **Multi-Account Vault** | `freebuff-power account new <nama>`| Wizard 1-Click onboard akun baru (Chrome Sandbox + Vault). |
+| | `freebuff-power account save <nama>`| Simpan sesi login akun aktif ke dalam vault aman. |
+| | `freebuff-power account list` | Lihat daftar akun tersimpan di vault beserta status kuotanya. |
+| | `freebuff-power account switch <nama>`| Beralih ke akun lain dalam 0.1 detik (Instant Quota Swap). |
+| | `freebuff-power rotate` | Putar ke akun berikutnya secara otomatis (Round-Robin Rotator). |
+| | `freebuff-power reset-full` | **Reset TOTAL 7-Fase** seluruh token login, sesi, hardware & sterilkan browser. |
+| **Keamanan & DevOps** | `freebuff-power pentest [dir]` | Pindai celah OWASP Top 10, kebocoran secret API, dan CVE dependensi. |
+| | `freebuff-power sync / export` | Ekspor 83 agents & 561 skills ke Cursor, Windsurf, Claude Code, Cline. |
+| | `freebuff-power snapshot save <nama>`| Buat checkpoint shadow proyek sebelum AI merombak kode. |
+| | `freebuff-power rollback` | Batalkan kesalahan AI & pulihkan proyek ke kondisi semula (0.5 detik). |
+| | `freebuff-power share [port]` | Buka HTTPS Public Tunnel & Live Preview ke HP (via Cloudflare). |
+| | `freebuff-power doctor` | Pemeriksaan kesehatan sistem (integritas 83 agents & 561 skills). |
+
+---
+
+## 👥 Roster 83 Specialized Production Agents
+
+Semua agen siap dipanggil di prompt obrolan menggunakan sintaks `@<nama-agent>`:
+
+```text
+@architect buatkan topologi microservice Go dengan Kafka dan Redis
+@design-architect rancang sistem visual Bento Grid dengan palet OKLCH
+@swe-healer perbaiki kegagalan unit test pada module authentication
+@shadcn-craftsman buatkan dialog modal accessible dengan Tailwind CSS v4
+```
+
+| Sub-Agent | Domain & Keahlian Khusus |
 |---|---|
-| `@architect` | System topology, technical RFCs, component boundaries & schema design |
-| `@programmer` | Ultimate precision engineer, strict typing, Hallmark craftsmanship, zero AI slop |
-| `@generative-ui-engineer` | Generative UI, Vercel AI SDK RSC streaming, client-side WebGPU LLMs, dynamic tool calling |
-| `@flutter-specialist` | Cross-platform mobile expert for Flutter, BLoC/Riverpod, CustomPainter animations, platform channels |
-| `@monorepo-architect` | Turborepo, Nx, PNPM workspaces, boundary enforcement, shared build caches |
-| `@system-debugger-forensics` | Low-level memory leaks, CPU flamegraphs, race conditions, eBPF tracing |
-| `@tokenomics-fintech-ledger` | Double-entry bookkeeping, ACID transactions, immutable financial ledgers |
-| `@localization-i18n-pro` | Global internationalization (i18n), RTL CSS logical properties, ICU catalogs |
-| `@smart-contract-auditor` | Web3, Solidity, EVM security, reentrancy guards, Foundry invariants |
-| `@nlp-rag-specialist` | Advanced RAG, hybrid search (BM25 + Dense vector), semantic chunking |
-| `@game-dev-3d` | 3D interactive graphics, Three.js, WebGL, custom GLSL shaders, Rapier physics |
-| `@data-engineer-olap` | Real-time analytics, ClickHouse OLAP, DuckDB embedded queries, Parquet |
-| `@cloud-security-architect` | Cloud IAM least-privilege, Zero-Trust networking, KMS encryption |
-| `@microservices-mesh` | Distributed systems, Istio service mesh, gRPC, Kafka streams, Outbox pattern |
-| `@accessibility-champion` | WCAG 2.2 AAA accessibility, keyboard traps, screen reader live regions |
-| `@pwa-offline-architect` | Progressive Web Apps, Workbox service workers, IndexedDB, background sync |
-| `@prompt-red-teamer` | AI security testing, adversarial prompt injections, NeMo guardrails |
-| `@backend` | High-throughput backend APIs, microservices, auth, DB transactions |
-| `@frontend` | Modern reactive UI (Next.js/React 19/Tailwind), micro-interactions |
-| `@design-engineer`| Design systems, OKLCH color palettes, fluid typography, bespoke layouts |
-| `@database` | Schema modeling, indexing, query execution plans, migration safety |
-| `@tddmaster` | Red-Green-Refactor test-driven development, edge-case coverage |
-| `@qa` | Comprehensive unit/integration/E2E test suites (Playwright/Vitest) |
-| `@security` | OWASP Top 10 hardening, token security, zero secret leaks, input validation |
-| `@reviewer` | Cognitive load reduction, code complexity analysis, anti-slop audit |
-| `@debugger` | Error traceback analysis, reproduction, and minimal surgical patching |
-| `@devops` | Docker multi-stage builds, CI/CD GitHub Actions, infrastructure |
-| `@sre` | SLO monitoring, incident runbooks, health probes, resilience |
-| `@fintech-architect` | Payment lifecycle, idempotency keys, Stripe/Xendit webhooks, ledgers |
-| `@ai-engineer` | RAG pipelines, vector embeddings (pgvector/Qdrant), LLM evaluations |
-| `@mobile-engineer` | Cross-platform & native mobile apps (Flutter, React Native, SwiftUI) |
-| `@websocket-realtime` | Real-time WebSockets, Server-Sent Events, Redis Pub/Sub backends |
-| `@chaos-tester` | Fault injection, k6 load testing, circuit breaker verification |
-| `@refactor-expert` | Legacy code modernization, clean architecture, zero behavioral regressions |
-| `@seo-growth` | Programmatic SEO (pSEO), Schema JSON-LD, Core Web Vitals (INP/LCP) |
+| `@planner` | Task decomposition, dependency graphs & multi-step refactor plans |
+| `@architect` | High-level system design, scalability, database schemas & RFCs |
+| `@design-director` | Studio-grade DESIGN.md, visual restraint & typography systems |
+| `@design-architect` | Swiss typography grids, OKLCH color palettes & anti-slop visual hierarchy |
+| `@antislop-auditor` | 40-Rule Anti-Slop scan, synthetic code purge & quality gatekeeper |
+| `@motion-designer` | Framer Motion, GSAP ScrollTrigger, spring physics, haptics & confetti |
+| `@shadcn-craftsman` | Tailwind CSS v4, Radix headless primitives & accessible UI states |
+| `@copy-editor` | Plain-spoken copy, corporate fluff eradication & concise docs |
+| `@a11y-contrast-enforcer` | Mathematical WCAG 2.2 AA/AAA contrast validation (4.5:1 / 7:1) |
+| `@swe-healer` | Autonomous test-driven repair loop, traceback triage & minimal AST patching |
+| `@local-llm-engineer` | Ollama, vLLM, GGUF/AWQ model serving, zero-token offline coding |
+| `@hono-edge-architect` | High-performance Hono.js edge APIs, Cloudflare Workers, Bun.serve |
+| `@graphrag-architect` | Hybrid search (BM25 + pgvector/Qdrant), knowledge graphs, RRF reranking |
+| `@stealth-browser-engineer`| CDP automation, Playwright stealth, bot evasion & Turnstile bypass |
+| `@tdd-guide` | Test-Driven Development (Red-Green-Refactor) & test suites |
+| `@code-reviewer` | Google/Meta grade code review, maintainability & complexity checks |
+| `@security-reviewer` | OWASP Top 10, AuthFlow & vulnerability audit |
+| `@flutter-reviewer` | Flutter 3, Riverpod, BLoC & Clean Architecture |
+| `@dart-build-resolver` | Dart / Flutter compilation & pub dependency triage |
+| `@react-reviewer` | Next.js 15 App Router, React 19, Server Actions & RSC |
+| `@react-build-resolver` | Next.js / Vite / Turbopack build errors & hydration mismatches |
+| `@fastapi-reviewer` | Python async, Pydantic v2, SQLAlchemy 2.0 & routes |
+| `@python-reviewer` | Idiomatic Python, typing, pytest & asyncio |
+| `@go-reviewer` | Go concurrency, goroutines, channels, interfaces & high-throughput |
+| `@go-build-resolver` | Go compile errors, vet, mod dependency triage |
+| `@database-reviewer` | PostgreSQL, Prisma, Drizzle, query plans & connection pooling |
+| `@performance-optimizer` | Latency profiling, memory leaks & bundle size slashing |
+| `@e2e-runner` | Playwright headless browser automation & visual regression |
+| `@build-error-resolver` | Generic compiler & bundler error triage across all stacks |
+| `@code-simplifier` | Cognitive load reduction without behavior changes |
 
-*(Serta 9 sub-agent spesialis lainnya di `superpower/agents/`)*
+*(Serta 53 sub-agent spesialis lainnya di `.agents/agents/`)*
 
 ---
 
-## 🧰 Modular Skills Catalog (1,061 Skills)
+## 🧰 Katalog 561 Modular Skills
 
-1. **Architecture & Design (115+ skills)**: Clean Architecture, CQRS, Event Sourcing, Domain-Driven Design, API Design.
-2. **Backend Polyglot (185+ skills)**: FastAPI, NestJS, Go Concurrency & Channels, Rust Tokio/Axum, Spring Boot, Bun/ElysiaJS.
-3. **Frontend & Mobile (230+ skills)**: Next.js 15 Server Actions, React 19, Flutter BLoC/Riverpod, React Native Skia, Tailwind Fluid Typography, Bento Grid, Radix UI.
-4. **Database & OLAP (120+ skills)**: PostgreSQL Internals & Indexing, ClickHouse, DuckDB, Redis Streams, MongoDB, SQLite Edge WAL.
-5. **Testing & QA (130+ skills)**: Vitest TDD, Playwright E2E & Visual Regression, k6 Load Testing, Stryker Mutation Testing, Pact.
-6. **Security & AppSec (115+ skills)**: OWASP Top 10, Authflow PKCE, Passkeys WebAuthn, Prompt Injection Guardrails, SBOM Provenance.
-7. **AI & Machine Learning (95+ skills)**: Generative UI, WebGPU In-Browser LLMs (Transformers.js), RAG Pipelines, Vector DB (pgvector/Qdrant), WebRTC Voice AI.
-8. **Anti-Slop & Performance (65+ skills)**: Anti-Waffle Writing, Anti-Slop AI, Cognitive Load Minimizer, Core Web Vitals (INP/LCP), DevTools Heap Profiler.
+Pustaka skills mengikuti standar resmi **AgentSkills** (`.agents/skills/<name>/SKILL.md`):
+
+1. **Modern Frontend & Anti-Slop (140+ skills):**
+   * `antislop`, `antislop-ui`, `antislop-code`, `antislop-copywriting`, `antislop-human`, `antislop-layoutmobile`
+   * `shadcn-radix-headless-craft`, `tailwind-fluid-typography-master`, `framer-motion-animation-wizard`
+   * `scroll-driven-animations-gsap`, `threejs-webgl-3d-experience`, `canvas-charting-high-frequency`
+   * `dark-mode-system-theming`, `glassmorphism-mesh-gradient-craft`, `deck-swiss-international`
+   * `nextjs-turbopack`, `react19-nextjs15-modern-craft`, `bento-grid-dashboard-ui`
+
+2. **Edge, High-Performance & Distributed Backend (165+ skills):**
+   * `bun-runtime-hyper-fast-apis`, `cloudflare-edge-workers-caching`, `duckdb-embedded-olap-sql`
+   * `crdt-realtime-collaboration-yjs`, `transactional-outbox-cdc-debezium`, `ebpf-linux-kernel-observability`
+   * `redis-data-structures-streams`, `database-partitioning-time-series`, `microservices-service-mesh-istio`
+   * `circuit-breaker-rate-limiter-resilience`, `zero-downtime-migration-expand-contract`
+
+3. **AI Engineering & Local Inference (85+ skills):**
+   * `local-llm-ollama-vllm-deploy`, `llm-finetuning-lora-qlora-datasets`
+   * `prompt-injection-defense-guardrails`, `ai-observability-engineer`
+   * `rag-graph-knowledge-neo4j`, `vector-db-pgvector-qdrant-master`
+
+4. **Web Automation, CDP & Stealth (60+ skills):**
+   * `cdp-browser-automation-devtools`, `webrtc-p2p-video-mesh-datachannel`
+   * `pwa-offline-service-worker-cache`, `playwright-visual-regression-testing`
+
+5. **Code Quality, Testing & DevSecOps (111+ skills):**
+   * `autonomous-swe-loop-healer`, `clean-code-anti-slop`, `mutation-testing-stryker-mutmut`
+   * `sast-dast-container-cve-scanner`, `secret-management-vault-infisical`, `e2e-testing`
 
 ---
 
-## 📄 License
+## 📄 Lisensi
 
 Proyek ini dilisensikan di bawah lisensi **MIT License** — lihat berkas [LICENSE](LICENSE) untuk rincian lengkap.

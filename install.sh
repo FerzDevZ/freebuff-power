@@ -1,9 +1,10 @@
 #!/usr/bin/env bash
 # ==============================================================================
-# ⚡ FREEBUFF-POWER & PROXY SUPREME UNIVERSAL INSTALLER (v6.5-Titanium)
+# ⚡ FREEBUFF-POWER & PROXY SUPREME UNIVERSAL INSTALLER (v11.0-Superpower)
 # ==============================================================================
 # Usage:
 #   curl -fsSL https://raw.githubusercontent.com/FerzDevZ/freebuff-power/main/install.sh | bash
+#   wget -qO- https://raw.githubusercontent.com/FerzDevZ/freebuff-power/main/install.sh | bash
 # ==============================================================================
 set -eo pipefail
 
@@ -33,13 +34,18 @@ mkdir -p "$INSTALL_BIN_DIR" "$SUPERPOWER_DIR/.freebuff/agents" "$SUPERPOWER_DIR/
 
 # 0. Check Essential Dependencies
 echo -e "${C_BLUE}🔍 [0/5] Memeriksa dependensi sistem...${C_RESET}"
-for dep in git curl node npm; do
+for dep in git node npm; do
   if ! command -v "$dep" >/dev/null 2>&1; then
     echo -e "${C_RED}❌ Dependensi '$dep' belum terpasang. Harap pasang '$dep' terlebih dahulu.${C_RESET}"
     exit 1
   fi
 done
-echo -e "${C_GREEN}✅ Node.js $(node -v), npm $(npm -v), git, dan curl siap!${C_RESET}\n"
+
+if ! command -v curl >/dev/null 2>&1 && ! command -v wget >/dev/null 2>&1; then
+  echo -e "${C_RED}❌ curl atau wget diperlukan untuk proses instalasi.${C_RESET}"
+  exit 1
+fi
+echo -e "${C_GREEN}✅ Node.js $(node -v), npm $(npm -v), git, dan downloader siap!${C_RESET}\n"
 
 # 1. Resolve source repository
 SOURCE_DIR="$REPO_CACHE_DIR"
@@ -52,7 +58,8 @@ else
   echo -e "${C_BLUE}📦 [1/5] Mengunduh repository & pustaka Superpower...${C_RESET}"
   if [ -d "$REPO_CACHE_DIR/.git" ]; then
     echo -e "${C_DIM}Menyinkronkan pembaruan freebuff-power...${C_RESET}"
-    git -C "$REPO_CACHE_DIR" pull --quiet || {
+    git -C "$REPO_CACHE_DIR" fetch --depth 1 origin main --quiet 2>/dev/null || true
+    git -C "$REPO_CACHE_DIR" reset --hard origin/main --quiet 2>/dev/null || {
       rm -rf "$REPO_CACHE_DIR"
       git clone --depth 1 "$POWER_REPO_URL" "$REPO_CACHE_DIR" --quiet
     }
@@ -157,26 +164,23 @@ fi
 echo -e "${C_BLUE}🛡️  [5/5] Mengaktifkan Git Stealth Hooks, Pre-Push Secret Guard & Telemetri Anti-Ban...${C_RESET}"
 "$INSTALL_BIN_DIR/clean.sh" >/dev/null 2>&1 || true
 
-# 7. Check Shell PATH
-CURRENT_SHELL="$(basename "$SHELL" 2>/dev/null || echo "bash")"
-RC_FILE="$HOME/.bashrc"
-if [ "$CURRENT_SHELL" = "zsh" ]; then
-  RC_FILE="$HOME/.zshrc"
-fi
-
-if [[ ":$PATH:" != *":$INSTALL_BIN_DIR:"* ]]; then
-  echo -e "\n${C_YELLOW}⚠️  Menambahkan $INSTALL_BIN_DIR ke $RC_FILE...${C_RESET}"
-  echo 'export PATH="$HOME/.local/bin:$PATH"' >> "$RC_FILE"
-  export PATH="$HOME/.local/bin:$PATH"
-fi
+# 7. Ensure Shell PATH for all shells
+for rc in "$HOME/.bashrc" "$HOME/.zshrc" "$HOME/.profile"; do
+  if [ -f "$rc" ] && ! grep -q '\.local/bin' "$rc" 2>/dev/null; then
+    echo 'export PATH="$HOME/.local/bin:$PATH"' >> "$rc"
+  fi
+done
+export PATH="$HOME/.local/bin:$PATH"
 
 echo -e "\n${C_GREEN}${C_BOLD}========================================================================${C_RESET}"
 echo -e "${C_GREEN}${C_BOLD}🎉 INSTALASI SUKSES 100%! (${TOTAL_AGENTS} AGENTS, ${TOTAL_SKILLS} SKILLS & PROXY ENGINE)${C_RESET}"
 echo -e "${C_GREEN}${C_BOLD}========================================================================${C_RESET}"
 echo -e "\n🔥 Sekarang di folder mana pun kamu bisa langsung ketik:"
+echo -e "  \033[0;36m\033[1mfreebuff-power start\033[0m       \033[2m# Injeksi instan 83 agents, anti-detect & mulai koding\033[0m"
+echo -e "  \033[0;36m\033[1mfreebuff-power local\033[0m       \033[2m# Koding offline 100% gratis via Ollama lokal (kebal ban)\033[0m"
+echo -e "  \033[0;36m\033[1mfreebuff-power heal\033[0m        \033[2m# Autonomous SWE repair loop: perbaiki bug & test otomatis\033[0m"
+echo -e "  \033[0;36m\033[1mfreebuff-power antislop audit .\033[0m \033[2m# Pindai 40 aturan anti-slop, gradien ungu, & buzzwords\033[0m"
+echo -e "  \033[0;36m\033[1mfreebuff-power sync\033[0m        \033[2m# Ekspor seluruh swarm ke Cursor, Windsurf & Claude Code\033[0m"
 echo -e "  \033[0;36m\033[1mfreebuff-power run proxy\033[0m   \033[2m# Pilih model FREE (GLM 5.3 / DeepSeek) & koding via proxy\033[0m"
-echo -e "  \033[0;36m\033[1mfreebuff-power proxy status\033[0m\033[2m# Cek status engine proxy di background\033[0m"
-echo -e "  \033[0;36m\033[1mfreebuff-power update\033[0m      \033[2m# Update otomatis semua library & proxy ke versi terbaru\033[0m"
-echo -e "  \033[0;36m\033[1mfreebuff-power start\033[0m       \033[2m# Injeksi instan, anti-watermark & langsung koding biasa\033[0m"
-echo -e "  \033[0;36m\033[1mfreebuff-power ui\033[0m          \033[2m# Buka Interactive Terminal Dashboard\033[0m"
-echo -e "  \033[0;36m\033[1mfreebuff-power --help\033[0m      \033[2m# Lihat semua perintah v6.5\033[0m\n"
+echo -e "  \033[0;36m\033[1mfreebuff-power ui\033[0m          \033[2m# Buka Interactive Terminal TUI Dashboard\033[0m"
+echo -e "  \033[0;36m\033[1mfreebuff-power --help\033[0m      \033[2m# Lihat panduan lengkap perintah v11.0\033[0m\n"
