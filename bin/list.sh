@@ -14,8 +14,8 @@ if [[ ! -d "$SKILLS_DIR" ]]; then
   SKILLS_DIR="$HOME/.agents/skills"
 fi
 
-AGENTS_COUNT=$(find "$AGENTS_DIR" -maxdepth 1 -name "*.md" 2>/dev/null | wc -l || echo "71")
-SKILLS_COUNT=$(find "$SKILLS_DIR" -maxdepth 2 -name "SKILL.md" 2>/dev/null | wc -l || echo "326")
+AGENTS_COUNT=$(find "$AGENTS_DIR" -maxdepth 1 -name "*.md" 2>/dev/null | wc -l || echo "87")
+SKILLS_COUNT=$(find "$SKILLS_DIR" -maxdepth 2 -name "SKILL.md" 2>/dev/null | wc -l || echo "569")
 
 echo -e "\033[0;36m\033[1m========================================================================\033[0m"
 echo -e "\033[0;33m\033[1m📋 [FREEBUFF-POWER ROSTER] ${AGENTS_COUNT} Production Agents & ${SKILLS_COUNT} Curated Skills\033[0m"

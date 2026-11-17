@@ -15,11 +15,19 @@ SUPERPOWER_DIR="$HOME/.freebuff-superpower"
 
 AGENT_FILE="$SUPERPOWER_DIR/.freebuff/agents/${NAME}.md"
 SKILL_FILE="$SUPERPOWER_DIR/.freebuff/skills/${NAME}.md"
+SKILL_FOLDER_FILE="$SUPERPOWER_DIR/skills/${NAME}/SKILL.md"
+SKILL_LEGACY_FILE="$SUPERPOWER_DIR/skills/${NAME}.md"
 
 if [ -f "$AGENT_FILE" ]; then
   cat "$AGENT_FILE"
+elif [ -f "$SKILL_FOLDER_FILE" ]; then
+  cat "$SKILL_FOLDER_FILE"
 elif [ -f "$SKILL_FILE" ]; then
   cat "$SKILL_FILE"
+elif [ -f "$SKILL_LEGACY_FILE" ]; then
+  cat "$SKILL_LEGACY_FILE"
+elif [ -f "$SUPERPOWER_DIR/agents/${NAME}.md" ]; then
+  cat "$SUPERPOWER_DIR/agents/${NAME}.md"
 else
   echo "❌ Tidak ditemukan Agent atau Skill dengan nama: $NAME"
 fi

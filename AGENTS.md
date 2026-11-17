@@ -2,7 +2,7 @@
 
 > **AUTONOMOUS ACTIVATION DIRECTIVE:**
 > When `@AGENTS.md` is present in session context, immediately activate the **Autonomous Cognitive Swarm Engine**.
-> Equipped with **83 Specialized Production Agents**, **561 Curated High-Leverage Skills** (`.agents/skills/<name>/SKILL.md`), and **23 Language/Framework Rules** (`.agents/rules/`).
+> Equipped with **87 Specialized Production Agents**, **569 Curated High-Leverage Skills** (`.agents/skills/<name>/SKILL.md`), and **23 Language/Framework Rules** (`.agents/rules/`).
 > You do NOT require manual micromanagement. You possess autonomous intelligence to plan, test, implement, review, verify, and reflect.
 
 ---
@@ -63,6 +63,10 @@ Specialized personas located in `.agents/agents/<name>.md`. Adopt or spawn proac
 | **`@e2e-runner`** | Playwright headless browser automation | Critical user flow verification, visual regression |
 | **`@build-error-resolver`** | Generic build graph & compiler error triage | Any compiler/bundler error across all stacks |
 | **`@code-simplifier`** | Cognitive load reduction without behavior change | Post-implementation cleanup, unrolling over-abstractions |
+| **`@samp-developer`** | PAWN scripting, open.mp & SA-MP gamemodes | SA-MP/open.mp server dev, in-game systems, scripting |
+| **`@samp-server-admin`** | server.cfg / config.json, Linux systemd, anti-cheat | Server setup, plugin troubleshooting, deployment |
+| **`@samp-pawn-wizard`** | Advanced PAWN, YSI5 framework, ALS, RakNet, hooks | Complex PAWN patterns, y_commands, y_hooks, optimization |
+| **`@samp-gamemode-architect`** | Full gamemode system design & economy architecture | Roleplay systems, economy, factions, properties, MySQL |
 
 ---
 
@@ -115,6 +119,16 @@ Use the native **`skill({ name: "<skill-name>" })`** tool or read on-demand to l
 - **`e2e-testing`** — Playwright Page Object Model, resilient locators, and network mocking.
 - **`self-evolving-agent-memory`** — Reflexion learning loops and error post-mortems in `MEMORY.md`.
 
+### 5. GTA SA-MP & open.mp Server Development
+- **`samp-pawn-scripting`** — PAWN syntax, callbacks, timers, sampctl package management, open.mp migration.
+- **`samp-server-configuration`** — server.cfg & config.json, systemd service, plugin load order, firewall rules.
+- **`samp-mysql-database`** — BlueG MySQL R41-4 threaded queries, bcrypt auth, connection pooling, schema design.
+- **`samp-streamer-plugin`** — Dynamic objects, pickups, map icons, 3D text labels, zones via Incognito Streamer.
+- **`samp-dialog-system`** — ShowPlayerDialog 7 styles, safeDialog exploit mitigation, tablist headers, validation.
+- **`samp-anticheat-system`** — Server-side speedhack, teleport, weapon injection, health/armour hack detection.
+- **`samp-ysi-framework`** — YSI5 ecosystem: y_commands, y_hooks, y_iterate (foreach), y_bit, y_inline, y_timers.
+- **`samp-gamemode-architecture`** — Modular feature-based roleplay gamemode design, entity pools, CI/CD pipeline.
+
 ---
 
 ## 📜 LANGUAGE & FRAMEWORK RULES (`.agents/rules/`)
@@ -141,6 +155,7 @@ Gate 1 is NOT passed by looking at code. You MUST execute real terminal verifica
 | **Python Services** | `mypy . && pytest -q` | Strict types pass, all unit tests green |
 | **Go Microservices** | `go vet ./... && go test ./...` | Vet clean, all package tests pass |
 | **Rust Systems** | `cargo check && cargo test` | Zero compiler warnings, all tests pass |
+| **SA-MP / open.mp (Pawn)** | `sampctl package compile` | Exit code 0, 0 compilation errors, .amx emitted |
 
 ---
 
