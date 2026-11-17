@@ -2,7 +2,7 @@
 
 > **AUTONOMOUS ACTIVATION DIRECTIVE:**
 > When `@AGENTS.md` is present in session context, immediately activate the **Autonomous Cognitive Swarm Engine**.
-> Equipped with **90 Specialized Production Agents**, **574 Curated High-Leverage Skills** (`.agents/skills/<name>/SKILL.md`), and **23 Language/Framework Rules** (`.agents/rules/`).
+> Equipped with **94 Specialized Production Agents**, **584 Curated High-Leverage Skills** (`.agents/skills/<name>/SKILL.md`), and **23 Language/Framework Rules** (`.agents/rules/`).
 > You do NOT require manual micromanagement. You possess autonomous intelligence to plan, test, implement, review, verify, and reflect.
 
 ---
@@ -70,6 +70,10 @@ Specialized personas located in `.agents/agents/<name>.md`. Adopt or spawn proac
 | **`@openmp-plugin-creator`** | C++ open.mp SDK components & native AMX plugins | Modern C++ component dev, event dispatchers, CMake/Conan |
 | **`@samp-legacy-migrator`** | SA-MP 0.3.7 to open.mp migration & crash triage | Runtime error 19, memory hack removal, YSI 5 upgrade |
 | **`@samp-filterscript-master`** | Standalone filterscripts, IPC & include libraries | Dynamic load/unload safety, CallRemoteFunction, ALS hooks |
+| **`@samp-textdraw-ui-designer`** | Responsive 640x480 TextDraws, HUDs & preview models | UI/UX design, clickable menus, speedometer, inventory |
+| **`@samp-voice-audio-engineer`** | 3D spatial proximity audio & radio frequency channels | sampvoice integration, microphone telemetry, walkie-talkie |
+| **`@samp-security-anticheat`** | ColAndreas raycasting & server-side physics validation | Silent-aim defense, anti-airbreak, UDP 7777 DDoS shield |
+| **`@samp-architecture-sage`** | Historical SA-MP (0.3c to 0.3.DL) vs open.mp authority | Netcode sync, limits, breaking changes & creative design |
 
 ---
 
@@ -136,6 +140,16 @@ Use the native **`skill({ name: "<skill-name>" })`** tool or read on-demand to l
 - **`samp-crashdetect-debugger`** — Decode AMX runtime errors (4, 19, 20, 26), native stack dumps, compiler -d3 flags.
 - **`samp-filterscript-engineering`** — Standalone hot-reloadable filterscripts, CallRemoteFunction IPC, resource cleanup.
 - **`samp-include-library-design`** — Reusable community includes, ALS hook chaining, tag safety, sampctl publishing.
+- **`samp-textdraw-ui-craft`** — Responsive 640x480 TextDraws, texture sprites (Font 4), 3D model previews (Font 5).
+- **`samp-voice-spatial-audio`** — sampvoice 3D spatial proximity voice, walkie-talkie radio channels, push-to-talk.
+- **`samp-colandreas-physics`** — Server-side map collision, CA_RaycastLine bullet validation, ground elevation.
+- **`samp-raknet-packet-sync`** — Pawn.RakNet packet hooking, BitStreams, RPC interception, desync compensation.
+- **`samp-custom-models-cdn`** — 0.3.DL/open.mp artconfig.txt custom models, FastDL HTTP CDN offloading, CRC checks.
+- **`samp-discord-connector`** — Bi-directional Discord bot bridge, in-game chat sync, admin audit log embeds.
+- **`samp-inventory-item-system`** — Grid & weight-based inventory, 3D item dropping with streamer, trunk storage.
+- **`samp-vs-openmp-encyclopedia`** — Historical SA-MP (0.3c to 0.3.DL) vs open.mp technical matrix & breaking changes.
+- **`samp-roleplay-systems-bible`** — Comprehensive blueprints for Heavy RP, Trucking Simulator, and Gangwar/Deathmatch.
+- **`samp-high-performance-tuning`** — Scaling to 500-1000+ players: AMX tick optimization, y_bit packing, kernel UDP tuning.
 
 ---
 

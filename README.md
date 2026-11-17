@@ -1,11 +1,11 @@
 <div align="center">
 
 # ⚡ FREEBUFF-POWER (Hyper-Modern Edition v11.0)
-### Autonomous Cognitive Swarm Engine with 90 Production Agents, 574 Curated Skills, Anti-Slop Suite, Offline Local LLM & Enterprise Anti-Ban
+### Autonomous Cognitive Swarm Engine with 94 Production Agents, 584 Curated Skills, Anti-Slop Suite, Offline Local LLM & Enterprise Anti-Ban
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Sub-Agents: 90](https://img.shields.io/badge/Sub--Agents-90%20Specialized-blueviolet.svg)](#-roster-90-specialized-production-agents)
-[![Modular Skills: 574](https://img.shields.io/badge/Modular%20Skills-574%20Curated-emerald.svg)](#-katalog-574-modular-skills)
+[![Sub-Agents: 94](https://img.shields.io/badge/Sub--Agents-94%20Specialized-blueviolet.svg)](#-roster-94-specialized-production-agents)
+[![Modular Skills: 584](https://img.shields.io/badge/Modular%20Skills-584%20Curated-emerald.svg)](#-katalog-584-modular-skills)
 [![Swarm Score: 100/100 A+](https://img.shields.io/badge/Swarm%20Rating-100%2F100%20Grade%20A%2B-brightgreen.svg)](#-autonomous-swe-bench-evaluator)
 [![Anti-Ban: Active](https://img.shields.io/badge/Anti--Ban%20Shield-Active%20v11.0-brightgreen.svg)](#-proteksi-anti-ban--stealth-sandbox)
 [![Platform: Linux & macOS](https://img.shields.io/badge/Platform-Linux%20%7C%20macOS-informational.svg)](#-instalasi-instan-1-line-installer)
@@ -19,9 +19,9 @@
  |_|    |_|  \_\______|______|____/ \____/|_|    |_|      |_|     \____/   \/  \/   |______|_|  \_\
 ```
 
-**Freebuff-Power v11.0** mengubah Freebuff menjadi **Autonomous Cognitive Swarm** paling tangguh di dunia: dilengkapi **90 Production Agents**, **574 Curated Modular Skills**, **Anti-Slop Delivery Gate**, **GTA SA-MP/open.mp Suite**, **Autonomous SWE Healer**, **Local Offline Zero-Token Ollama Engine**, **Multi-Account Vault**, dan **Stealth Anti-Detect Sandbox**.
+**Freebuff-Power v11.0** mengubah Freebuff menjadi **Autonomous Cognitive Swarm** paling tangguh di dunia: dilengkapi **94 Production Agents**, **584 Curated Modular Skills**, **Anti-Slop Delivery Gate**, **GTA SA-MP & open.mp Supreme Suite**, **Autonomous SWE Healer**, **Local Offline Zero-Token Ollama Engine**, **Multi-Account Vault**, dan **Stealth Anti-Detect Sandbox**.
 
-[Instalasi 1 Baris](#-instalasi-instan-1-line-installer) • [Fitur Unggulan v11.0](#-fitur-unggulan-v110) • [Panduan CLI Lengkap](#-cli-command-palette-v110) • [Multi-Account Vault](#-multi-account-vault--rotasi-kuota) • [Roster 90 Sub-Agents](#-roster-90-specialized-production-agents) • [Katalog 574 Skills](#-katalog-574-modular-skills)
+[Instalasi 1 Baris](#-instalasi-instan-1-line-installer) • [Fitur Unggulan v11.0](#-fitur-unggulan-v110) • [Panduan CLI Lengkap](#-cli-command-palette-v110) • [Multi-Account Vault](#-multi-account-vault--rotasi-kuota) • [Roster 94 Sub-Agents](#-roster-94-specialized-production-agents) • [Katalog 584 Skills](#-katalog-584-modular-skills)
 
 </div>
 
@@ -41,7 +41,7 @@ curl -fsSL https://raw.githubusercontent.com/FerzDevZ/freebuff-power/main/instal
 wget -qO- https://raw.githubusercontent.com/FerzDevZ/freebuff-power/main/install.sh | bash
 ```
 
-> **Catatan:** Skrip installer otomatis mendeteksi shell (`bash`, `zsh`, `profile`), menyinkronkan 90 agen & 574 skills, mengompilasi hook stealth anti-ban C, dan mengekspor `$PATH` secara instan tanpa perlu reboot.
+> **Catatan:** Skrip installer otomatis mendeteksi shell (`bash`, `zsh`, `profile`), menyinkronkan 94 agen & 584 skills, mengompilasi hook stealth anti-ban C, dan mengekspor `$PATH` secara instan tanpa perlu reboot.
 
 ---
 
@@ -123,7 +123,7 @@ graph TD
   Otomatis memalsukan Canvas, WebGL, AudioContext farbling, WebRTC leak shield, dan auto-wipe tanpa bekas saat ditutup.
 
 ### 6. 🔄 Universal IDE Matrix Sync (`freebuff-power sync`)
-* Ekspor seluruh 90 Sub-Agents dan 574 Skills ke seluruh editor AI di laptop Anda:
+* Ekspor seluruh 94 Sub-Agents dan 584 Skills ke seluruh editor AI di laptop Anda:
   ```bash
   freebuff-power sync --all
   ```
@@ -142,7 +142,7 @@ graph TD
 
 | Kategori | Perintah | Deskripsi & Fungsi |
 |---|---|---|
-| **Koding & Peluncuran** | `freebuff-power start` | **[REKOMENDASI]** Reset telemetry + injeksi 90 agents & 574 skills + buka sesi interaktif. |
+| **Koding & Peluncuran** | `freebuff-power start` | **[REKOMENDASI]** Reset telemetry + injeksi 94 agents & 584 skills + buka sesi interaktif. |
 | | `freebuff-power local [model]` | **[OFFLINE]** Koding 100% gratis via Ollama lokal tanpa kuota dan kebal ban. |
 | | `freebuff-power heal [test_cmd]`| **[AUTO-HEALER]** Jalankan test runner & perbaiki error kode secara mandiri. |
 | | `freebuff-power ui` | Buka Interactive Terminal TUI Dashboard (pilih agen/skill visual ala lazygit). |
@@ -159,15 +159,15 @@ graph TD
 | | `freebuff-power rotate` | Putar ke akun berikutnya secara otomatis (Round-Robin Rotator). |
 | | `freebuff-power reset-full` | **Reset TOTAL 7-Fase** seluruh token login, sesi, hardware & sterilkan browser. |
 | **Keamanan & DevOps** | `freebuff-power pentest [dir]` | Pindai celah OWASP Top 10, kebocoran secret API, dan CVE dependensi. |
-| | `freebuff-power sync / export` | Ekspor 90 agents & 574 skills ke Cursor, Windsurf, Claude Code, Cline. |
+| | `freebuff-power sync / export` | Ekspor 94 agents & 584 skills ke Cursor, Windsurf, Claude Code, Cline. |
 | | `freebuff-power snapshot save <nama>`| Buat checkpoint shadow proyek sebelum AI merombak kode. |
 | | `freebuff-power rollback` | Batalkan kesalahan AI & pulihkan proyek ke kondisi semula (0.5 detik). |
 | | `freebuff-power share [port]` | Buka HTTPS Public Tunnel & Live Preview ke HP (via Cloudflare). |
-| | `freebuff-power doctor` | Pemeriksaan kesehatan sistem (integritas 90 agents & 574 skills). |
+| | `freebuff-power doctor` | Pemeriksaan kesehatan sistem (integritas 94 agents & 584 skills). |
 
 ---
 
-## 👥 Roster 90 Specialized Production Agents
+## 👥 Roster 94 Specialized Production Agents
 
 Semua agen siap dipanggil di prompt obrolan menggunakan sintaks `@<nama-agent>`:
 
@@ -206,6 +206,10 @@ Semua agen siap dipanggil di prompt obrolan menggunakan sintaks `@<nama-agent>`:
 | `@openmp-plugin-creator` | C++ open.mp SDK components, event dispatchers & native AMX plugins |
 | `@samp-legacy-migrator` | SA-MP 0.3.7 to open.mp migration, runtime error 19 triage & memory fix |
 | `@samp-filterscript-master`| Standalone filterscripts, CallRemoteFunction IPC & reusable includes |
+| `@samp-textdraw-ui-designer`| Responsive 640x480 TextDraws, HUDs, speedometers & 3D preview models |
+| `@samp-voice-audio-engineer`| 3D spatial proximity audio & radio frequency channels (sampvoice) |
+| `@samp-security-anticheat`| ColAndreas raycasting, silent-aim defense & UDP 7777 DDoS shield |
+| `@samp-architecture-sage` | Historical SA-MP (0.3c to 0.3.DL) vs open.mp authority & creative designs |
 | `@flutter-reviewer` | Flutter 3, Riverpod, BLoC & Clean Architecture |
 | `@dart-build-resolver` | Dart / Flutter compilation & pub dependency triage |
 | `@react-reviewer` | Next.js 15 App Router, React 19, Server Actions & RSC |
@@ -224,7 +228,7 @@ Semua agen siap dipanggil di prompt obrolan menggunakan sintaks `@<nama-agent>`:
 
 ---
 
-## 🧰 Katalog 574 Modular Skills
+## 🧰 Katalog 584 Modular Skills
 
 Pustaka skills mengikuti standar resmi **AgentSkills** (`.agents/skills/<name>/SKILL.md`):
 
@@ -254,11 +258,14 @@ Pustaka skills mengikuti standar resmi **AgentSkills** (`.agents/skills/<name>/S
    * `autonomous-swe-loop-healer`, `clean-code-anti-slop`, `mutation-testing-stryker-mutmut`
    * `sast-dast-container-cve-scanner`, `secret-management-vault-infisical`, `e2e-testing`
 
-6. **GTA SA-MP & open.mp Server Engineering (13 specialized skills):**
+6. **GTA SA-MP & open.mp Supreme Engineering (20 specialized skills):**
+   * `samp-vs-openmp-encyclopedia`, `samp-roleplay-systems-bible`, `samp-high-performance-tuning`
    * `openmp-cpp-component-sdk`, `samp-legacy-openmp-migrator`, `samp-crashdetect-debugger`
-   * `samp-filterscript-engineering`, `samp-include-library-design`, `samp-pawn-scripting`
-   * `samp-server-configuration`, `samp-mysql-database`, `samp-streamer-plugin`
-   * `samp-dialog-system`, `samp-anticheat-system`, `samp-ysi-framework`, `samp-gamemode-architecture`
+   * `samp-filterscript-engineering`, `samp-include-library-design`, `samp-textdraw-ui-craft`
+   * `samp-voice-spatial-audio`, `samp-colandreas-physics`, `samp-raknet-packet-sync`
+   * `samp-custom-models-cdn`, `samp-discord-connector`, `samp-inventory-item-system`
+   * `samp-pawn-scripting`, `samp-server-configuration`, `samp-mysql-database`
+   * `samp-streamer-plugin`, `samp-dialog-system`, `samp-anticheat-system`, `samp-ysi-framework`, `samp-gamemode-architecture`
 
 ---
 

@@ -69,8 +69,8 @@ else
   fi
 fi
 
-TOTAL_AGENTS=$(ls -1 "$SOURCE_DIR/superpower/agents" 2>/dev/null | wc -l || echo "90")
-TOTAL_SKILLS=$(ls -1 "$SOURCE_DIR/superpower/skills" 2>/dev/null | wc -l || echo "574")
+TOTAL_AGENTS=$(ls -1 "$SOURCE_DIR/superpower/agents" 2>/dev/null | wc -l || echo "94")
+TOTAL_SKILLS=$(ls -1 "$SOURCE_DIR/superpower/skills" 2>/dev/null | wc -l || echo "584")
 
 # 2. Install All CLI binaries and helpers
 echo -e "${C_BLUE}⚙️  [2/5] Memasang seluruh suite CLI binary ke $INSTALL_BIN_DIR...${C_RESET}"
@@ -176,7 +176,7 @@ echo -e "\n${C_GREEN}${C_BOLD}==================================================
 echo -e "${C_GREEN}${C_BOLD}🎉 INSTALASI SUKSES 100%! (${TOTAL_AGENTS} AGENTS, ${TOTAL_SKILLS} SKILLS & PROXY ENGINE)${C_RESET}"
 echo -e "${C_GREEN}${C_BOLD}========================================================================${C_RESET}"
 echo -e "\n🔥 Sekarang di folder mana pun kamu bisa langsung ketik:"
-echo -e "  \033[0;36m\033[1mfreebuff-power start\033[0m       \033[2m# Injeksi instan 90 agents, anti-detect & mulai koding\033[0m"
+echo -e "  \033[0;36m\033[1mfreebuff-power start\033[0m       \033[2m# Injeksi instan 94 agents, anti-detect & mulai koding\033[0m"
 echo -e "  \033[0;36m\033[1mfreebuff-power local\033[0m       \033[2m# Koding offline 100% gratis via Ollama lokal (kebal ban)\033[0m"
 echo -e "  \033[0;36m\033[1mfreebuff-power heal\033[0m        \033[2m# Autonomous SWE repair loop: perbaiki bug & test otomatis\033[0m"
 echo -e "  \033[0;36m\033[1mfreebuff-power antislop audit .\033[0m \033[2m# Pindai 40 aturan anti-slop, gradien ungu, & buzzwords\033[0m"
