@@ -32,15 +32,18 @@ C_RESET='\033[0m'
 
 show_help() {
   echo -e "${C_CYAN}${C_BOLD}========================================================================================${C_RESET}"
-  echo -e "${C_YELLOW}${C_BOLD}⚡ FREEBUFF-POWER SUPREME — Autonomous Cognitive Swarm (v11.0-ECC)${C_RESET}"
+  echo -e "${C_YELLOW}${C_BOLD}⚡ FREEBUFF-POWER & FREEPI-POWER SUPREME — Autonomous Swarm Suite (v11.0-ECC)${C_RESET}"
+  echo -e "${C_DIM}Dual Suite: Freebuff Cognitive Swarm + FreePi (freepi.ai) Terminal Coding Agent${C_RESET}"
   echo -e "${C_CYAN}${C_BOLD}========================================================================================${C_RESET}\n"
   echo -e "${C_BOLD}PENGGUNAAN:${C_RESET}"
-  echo -e "  ${C_GREEN}freebuff-power${C_RESET} ${C_YELLOW}<command>${C_RESET} [arguments] [options]\n"
+  echo -e "  ${C_GREEN}freebuff-power${C_RESET} ${C_YELLOW}<command>${C_RESET} [arguments] [options]"
+  echo -e "  ${C_GREEN}freepi-power${C_RESET}   ${C_YELLOW}<command>${C_RESET} [arguments] [options]\n"
 
   echo -e "${C_PURPLE}${C_BOLD}🔥 PERINTAH UTAMA & PELUNCURAN KODING:${C_RESET}"
   echo -e "  ${C_GREEN}start / go / full${C_RESET}     ${C_BOLD}[REKOMENDASI] One-Shot Launch:${C_RESET}"
   echo -e "                        Reset Telemetry (Anti-Ban) + Injeksi 94 Production Agents & 584 Skills"
   echo -e "                        + Langsung buka sesi interaktif Freebuff siap koding!"
+  echo -e "  ${C_GREEN}pi / freepi [args]${C_RESET}    ${C_BOLD}[FREEPI.AI]${C_RESET} Luncurkan FreePi CLI (free ad-supported terminal agent)."
   echo -e "  ${C_GREEN}local [model]${C_RESET}         ${C_BOLD}[ZERO-TOKEN]${C_RESET} Koding offline 100% gratis via Ollama lokal (kebal ban)."
   echo -e "  ${C_GREEN}heal [test_cmd]${C_RESET}       ${C_BOLD}[AUTONOMOUS HEALER]${C_RESET} Jalankan test runner & perbaiki error kode otomatis."
   echo -e "  ${C_GREEN}ui / tui${C_RESET}              Buka Interactive Terminal TUI Dashboard (pilih agen/skill visual)."
@@ -58,6 +61,12 @@ show_help() {
   echo -e "  ${C_GREEN}antislop [audit|check]${C_RESET} Pindai 40 aturan AI slop, gradien ungu, buzzwords, komentar sampah."
   echo -e "  ${C_GREEN}design [init]${C_RESET}          Settle direction before building: buat file DESIGN.md bertaraf studio."
   echo -e "  ${C_GREEN}contrast <fg> <bg>${C_RESET}     Hitung matematis rasio kontras WCAG 2.2 AA/AAA (Wajib lolos 4.5:1 / 7:1).\n"
+
+  echo -e "${C_PURPLE}${C_BOLD}🎮 GTA SA-MP & OPEN.MP GAME SERVER SUITE:${C_RESET}"
+  echo -e "  ${C_GREEN}samp audit [dir]${C_RESET}      Pindai kejahatan lag di OnPlayerUpdate, loop lambat & SQL injection."
+  echo -e "  ${C_GREEN}samp heal [script]${C_RESET}    Kompilasi Pawn & perbaiki error syntax / missing includes otomatis."
+  echo -e "  ${C_GREEN}samp new [openmp|rp]${C_RESET}  Scaffold gamemode open.mp / roleplay modular lengkap 1-detik."
+  echo -e "  ${C_GREEN}samp vs${C_RESET}               Buka kitab perbandingan teknis SA-MP legacy vs open.mp modern.\n"
 
   echo -e "${C_PURPLE}${C_BOLD}👥 MULTI-ACCOUNT VAULT & QUOTA ROTATION:${C_RESET}"
   echo -e "  ${C_GREEN}account new <nama>${C_RESET}    ${C_BOLD}[WIZARD 1-CLICK]${C_RESET} Onboard Akun Baru (Anti-Ban, Chrome Sandbox & Vault)."
@@ -418,6 +427,36 @@ case "$COMMAND" in
   heal|auto-heal|fix)
     shift || true
     exec "$SCRIPT_DIR/heal.sh" "$@"
+    ;;
+
+  samp|openmp)
+    shift || true
+    SUB_CMD="${1:-audit}"
+    case "$SUB_CMD" in
+      audit|check|lint)
+        shift || true
+        exec "$SCRIPT_DIR/samp-audit.sh" "$@"
+        ;;
+      heal|fix|compile|build)
+        shift || true
+        exec "$SCRIPT_DIR/samp-heal.sh" "$@"
+        ;;
+      new|init)
+        shift || true
+        exec "$SCRIPT_DIR/scaffolder.sh" "openmp" "$@"
+        ;;
+      vs|compare)
+        exec "$SCRIPT_DIR/info.sh" "samp-vs-openmp-encyclopedia"
+        ;;
+      *)
+        exec "$SCRIPT_DIR/samp-audit.sh" "$@"
+        ;;
+    esac
+    ;;
+
+  pi|freepi|free-pi)
+    shift || true
+    exec "$SCRIPT_DIR/freepi-runner.sh" "$@"
     ;;
 
   local|ollama)

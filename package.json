@@ -1,25 +1,33 @@
 {
   "name": "freebuff-power",
-  "version": "8.5.0",
-  "description": "Supreme Autonomous Cognitive Swarm v8.5-Titanium: 82 Sub-Agents, 1,106 Skills, Auto-Failover Quota Rotator, Deep Anti-Ban & Multi-IDE Exporter",
+  "version": "11.0.0",
+  "description": "Freebuff-Power & FreePi-Power Supreme Dual Suite (v11.0): 94 Production Agents, 584 Skills, GTA SA-MP / open.mp Studio, freepi.ai Terminal Engine, Anti-Ban & Multi-IDE Exporter",
   "main": "bin/freebuff-power",
   "bin": {
-    "freebuff-power": "./bin/freebuff-power"
+    "freebuff-power": "./bin/freebuff-power",
+    "freepi-power": "./bin/freepi-power",
+    "freepi": "./bin/freepi-runner.sh"
   },
   "scripts": {
     "install:local": "./install.sh",
     "doctor": "./bin/freebuff-power doctor",
+    "doctor:freepi": "./bin/freepi-power doctor",
     "test": "./bin/freebuff-power doctor",
     "eval": "node bin/eval.js"
   },
   "keywords": [
     "freebuff",
+    "freepi",
+    "freepi.ai",
+    "free-pi-cli",
     "ai-agent",
     "multi-agent",
     "coding-agent",
     "subagents",
     "skills",
-    "hallmark",
+    "samp",
+    "openmp",
+    "pawn",
     "anti-slop",
     "anti-ban",
     "tdd",
@@ -30,6 +38,6 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/firman/freebuff-power.git"
+    "url": "https://github.com/FerzDevZ/freebuff-power.git"
   }
 }

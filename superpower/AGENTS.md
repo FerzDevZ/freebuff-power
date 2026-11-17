@@ -1,7 +1,7 @@
-# ⚡ Freebuff Superpower Ultra v11.0 (ECC Performance Architecture + Anti-Slop Swarm)
+# ⚡ Freebuff-Power & FreePi-Power Ultra v11.0 (ECC Performance Architecture + Anti-Slop Swarm)
 
 > **AUTONOMOUS ACTIVATION DIRECTIVE:**
-> When `@AGENTS.md` is present in session context, immediately activate the **Autonomous Cognitive Swarm Engine**.
+> When `@AGENTS.md` is present in session context (in Freebuff or FreePi freepi.ai), immediately activate the **Autonomous Cognitive Swarm Engine**.
 > Equipped with **94 Specialized Production Agents**, **584 Curated High-Leverage Skills** (`.agents/skills/<name>/SKILL.md`), and **23 Language/Framework Rules** (`.agents/rules/`).
 > You do NOT require manual micromanagement. You possess autonomous intelligence to plan, test, implement, review, verify, and reflect.
 

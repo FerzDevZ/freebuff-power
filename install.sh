@@ -1,7 +1,11 @@
 #!/usr/bin/env bash
 # ==============================================================================
-# ⚡ FREEBUFF-POWER & PROXY SUPREME UNIVERSAL INSTALLER (v11.0-Superpower)
+# ⚡ FREEBUFF-POWER & FREEPI-POWER SUPREME SUITE — Universal Dual Installer (v11.0)
 # ==============================================================================
+# Dual-Identity Architecture:
+#   - FreePi Engine   : Free terminal coding powered by freepi.ai (free-pi-cli)
+#   - Freebuff Engine : 94 Specialized Agents, 584 Curated Skills, Anti-Ban & SA-MP
+#
 # Usage:
 #   curl -fsSL https://raw.githubusercontent.com/FerzDevZ/freebuff-power/main/install.sh | bash
 #   wget -qO- https://raw.githubusercontent.com/FerzDevZ/freebuff-power/main/install.sh | bash
@@ -20,11 +24,13 @@ C_RESET='\033[0m'
 
 clear 2>/dev/null || true
 echo -e "${C_CYAN}${C_BOLD}========================================================================${C_RESET}"
-echo -e "${C_YELLOW}${C_BOLD}⚡ FREEBUFF-POWER SUPREME & PROXY SUITE — Universal Installer (v11.0)${C_RESET}"
+echo -e "${C_YELLOW}${C_BOLD}⚡ FREEBUFF-POWER & FREEPI-POWER SUPREME DUAL SUITE (v11.0)${C_RESET}"
+echo -e "${C_DIM}FreePi (freepi.ai) + Freebuff Cognitive Swarm (94 Agents & 584 Skills)${C_RESET}"
 echo -e "${C_CYAN}${C_BOLD}========================================================================${C_RESET}\n"
 
 INSTALL_BIN_DIR="$HOME/.local/bin"
 SUPERPOWER_DIR="$HOME/.freebuff-superpower"
+FREEPI_SUPERPOWER_DIR="$HOME/.freepi-superpower"
 REPO_CACHE_DIR="$HOME/.freebuff-power-src"
 POWER_REPO_URL="https://github.com/FerzDevZ/freebuff-power.git"
 PROXY_REPO_URL="https://github.com/FerzDevZ/freebuff-proxy.git"
@@ -57,7 +63,7 @@ if [ -d "$CURRENT_SCRIPT_DIR/bin" ] && [ -d "$CURRENT_SCRIPT_DIR/superpower" ]; 
 else
   echo -e "${C_BLUE}📦 [1/5] Mengunduh repository & pustaka Superpower...${C_RESET}"
   if [ -d "$REPO_CACHE_DIR/.git" ]; then
-    echo -e "${C_DIM}Menyinkronkan pembaruan freebuff-power...${C_RESET}"
+    echo -e "${C_DIM}Menyinkronkan pembaruan freebuff-power & freepi-power...${C_RESET}"
     git -C "$REPO_CACHE_DIR" fetch --depth 1 origin main --quiet 2>/dev/null || true
     git -C "$REPO_CACHE_DIR" reset --hard origin/main --quiet 2>/dev/null || {
       rm -rf "$REPO_CACHE_DIR"
@@ -73,7 +79,7 @@ TOTAL_AGENTS=$(ls -1 "$SOURCE_DIR/superpower/agents" 2>/dev/null | wc -l || echo
 TOTAL_SKILLS=$(ls -1 "$SOURCE_DIR/superpower/skills" 2>/dev/null | wc -l || echo "584")
 
 # 2. Install All CLI binaries and helpers
-echo -e "${C_BLUE}⚙️  [2/5] Memasang seluruh suite CLI binary ke $INSTALL_BIN_DIR...${C_RESET}"
+echo -e "${C_BLUE}⚙️  [2/5] Memasang seluruh suite dual CLI binary ke $INSTALL_BIN_DIR...${C_RESET}"
 for bin_file in "$SOURCE_DIR/bin/"*; do
   dest="$INSTALL_BIN_DIR/$(basename "$bin_file")"
   if [ -L "$dest" ] || [ -f "$dest" ]; then
@@ -83,7 +89,16 @@ for bin_file in "$SOURCE_DIR/bin/"*; do
   fi
   cp -rf "$bin_file" "$dest" 2>/dev/null || true
 done
-chmod +x "$INSTALL_BIN_DIR"/freebuff-power "$INSTALL_BIN_DIR"/zcode-power "$INSTALL_BIN_DIR"/*.sh "$INSTALL_BIN_DIR"/*.js "$INSTALL_BIN_DIR"/*.py 2>/dev/null || true
+
+chmod +x "$INSTALL_BIN_DIR"/freebuff-power \
+         "$INSTALL_BIN_DIR"/freepi-power \
+         "$INSTALL_BIN_DIR"/freepi-runner.sh \
+         "$INSTALL_BIN_DIR"/samp-audit.sh \
+         "$INSTALL_BIN_DIR"/samp-heal.sh \
+         "$INSTALL_BIN_DIR"/zcode-power \
+         "$INSTALL_BIN_DIR"/*.sh \
+         "$INSTALL_BIN_DIR"/*.js \
+         "$INSTALL_BIN_DIR"/*.py 2>/dev/null || true
 chmod -R +x "$INSTALL_BIN_DIR"/shims 2>/dev/null || true
 
 # Compile hardware virtualization stealth hook if gcc is present
@@ -92,8 +107,9 @@ if command -v gcc >/dev/null 2>&1 && [ -f "$SOURCE_DIR/src/stealth/libfreebuff-s
   cp -f "$INSTALL_BIN_DIR/libfreebuff-stealth.so" "$SOURCE_DIR/bin/libfreebuff-stealth.so" 2>/dev/null || true
 fi
 
-# Link universal freebuff command to stealth wrapper
+# Link universal aliases & shortcuts
 ln -sf "$INSTALL_BIN_DIR/freebuff-wrapper.sh" "$INSTALL_BIN_DIR/freebuff" 2>/dev/null || true
+ln -sf "$INSTALL_BIN_DIR/freepi-runner.sh" "$INSTALL_BIN_DIR/freepi" 2>/dev/null || true
 
 # 3. Install Superpower templates, ECC Architecture & Anti-Slop Skills
 echo -e "${C_BLUE}🧰 [3/5] Menyinkronkan ${TOTAL_AGENTS} Sub-Agents & ${TOTAL_SKILLS} Modular Skills ke $SUPERPOWER_DIR dan ~/.agents...${C_RESET}"
@@ -101,7 +117,7 @@ echo -e "${C_BLUE}🧰 [3/5] Menyinkronkan ${TOTAL_AGENTS} Sub-Agents & ${TOTAL_
 rm -rf "$SUPERPOWER_DIR/skills" "$SUPERPOWER_DIR/agents" "$SUPERPOWER_DIR/rules" "$SUPERPOWER_DIR/.freebuff" 2>/dev/null || true
 cp -rf "$SOURCE_DIR/superpower/"* "$SUPERPOWER_DIR/"
 
-# Populate ~/.agents/ (Freebuff & Codebuff Native Skill Registry)
+# Populate ~/.agents/ (Universal AgentSkills & FreePi/Codebuff Registry)
 mkdir -p "$HOME/.agents/skills" "$HOME/.agents/agents" "$HOME/.agents/rules"
 if [ -d "$SUPERPOWER_DIR/skills" ]; then
   rm -rf "$HOME/.agents/skills"/* 2>/dev/null || true
@@ -120,6 +136,11 @@ fi
 mkdir -p "$SUPERPOWER_DIR/.freebuff/agents" "$SUPERPOWER_DIR/.freebuff/skills"
 cp -rf "$SUPERPOWER_DIR/skills/"* "$SUPERPOWER_DIR/.freebuff/skills/" 2>/dev/null || true
 cp -rf "$SUPERPOWER_DIR/agents/"* "$SUPERPOWER_DIR/.freebuff/agents/" 2>/dev/null || true
+
+# Symlink ~/.freepi-superpower to ~/.freebuff-superpower
+if [ ! -d "$FREEPI_SUPERPOWER_DIR" ] && [ ! -L "$FREEPI_SUPERPOWER_DIR" ]; then
+  ln -sf "$SUPERPOWER_DIR" "$FREEPI_SUPERPOWER_DIR" 2>/dev/null || true
+fi
 
 # 4. Install & Build Standalone freebuff-proxy Suite
 echo -e "${C_BLUE}🌐 [4/5] Memeriksa & menyinkronkan Freebuff Proxy Engine di $PROXY_DIR...${C_RESET}"
@@ -154,17 +175,22 @@ AUTH_INIT_EOF
   chmod +x "$PROXY_DIR"/*.sh 2>/dev/null || true
 fi
 
-# 5. Ensure Core Freebuff CLI Engine is Installed
+# 5. Ensure Core Engines are Installed (freebuff & free-pi-cli)
+echo -e "${C_BLUE}⚡ [5/5] Memeriksa engine Freebuff & FreePi CLI (freepi.ai)...${C_RESET}"
 if ! command -v freebuff >/dev/null 2>&1; then
-  echo -e "${C_YELLOW}⚡ Core Engine 'freebuff' belum terpasang. Memasang via npm...${C_RESET}"
+  echo -e "${C_YELLOW}⚡ Memasang Core Engine 'freebuff' via npm...${C_RESET}"
   sudo npm install -g freebuff >/dev/null 2>&1 || npm install -g freebuff >/dev/null 2>&1 || true
 fi
 
-# 6. Auto-Enforce Anti-Watermark Stealth Hooks & Pre-Push Secret Guard
-echo -e "${C_BLUE}🛡️  [5/5] Mengaktifkan Git Stealth Hooks, Pre-Push Secret Guard & Telemetri Anti-Ban...${C_RESET}"
+if ! command -v free-pi-cli >/dev/null 2>&1; then
+  echo -e "${C_YELLOW}⚡ Memasang Core Engine 'free-pi-cli' (freepi.ai) via npm...${C_RESET}"
+  sudo npm install -g free-pi-cli >/dev/null 2>&1 || npm install -g free-pi-cli >/dev/null 2>&1 || true
+fi
+
+# Auto-Enforce Anti-Watermark Stealth Hooks & Pre-Push Secret Guard
 "$INSTALL_BIN_DIR/clean.sh" >/dev/null 2>&1 || true
 
-# 7. Ensure Shell PATH for all shells
+# Ensure Shell PATH for all shells
 for rc in "$HOME/.bashrc" "$HOME/.zshrc" "$HOME/.profile"; do
   if [ -f "$rc" ] && ! grep -q '\.local/bin' "$rc" 2>/dev/null; then
     echo 'export PATH="$HOME/.local/bin:$PATH"' >> "$rc"
@@ -173,14 +199,28 @@ done
 export PATH="$HOME/.local/bin:$PATH"
 
 echo -e "\n${C_GREEN}${C_BOLD}========================================================================${C_RESET}"
-echo -e "${C_GREEN}${C_BOLD}🎉 INSTALASI SUKSES 100%! (${TOTAL_AGENTS} AGENTS, ${TOTAL_SKILLS} SKILLS & PROXY ENGINE)${C_RESET}"
+echo -e "${C_GREEN}${C_BOLD}🎉 DUAL INSTALASI SUKSES 100%! (FREEBUFF-POWER & FREEPI-POWER READY)${C_RESET}"
 echo -e "${C_GREEN}${C_BOLD}========================================================================${C_RESET}"
-echo -e "\n🔥 Sekarang di folder mana pun kamu bisa langsung ketik:"
-echo -e "  \033[0;36m\033[1mfreebuff-power start\033[0m       \033[2m# Injeksi instan 94 agents, anti-detect & mulai koding\033[0m"
-echo -e "  \033[0;36m\033[1mfreebuff-power local\033[0m       \033[2m# Koding offline 100% gratis via Ollama lokal (kebal ban)\033[0m"
-echo -e "  \033[0;36m\033[1mfreebuff-power heal\033[0m        \033[2m# Autonomous SWE repair loop: perbaiki bug & test otomatis\033[0m"
-echo -e "  \033[0;36m\033[1mfreebuff-power antislop audit .\033[0m \033[2m# Pindai 40 aturan anti-slop, gradien ungu, & buzzwords\033[0m"
-echo -e "  \033[0;36m\033[1mfreebuff-power sync\033[0m        \033[2m# Ekspor seluruh swarm ke Cursor, Windsurf & Claude Code\033[0m"
-echo -e "  \033[0;36m\033[1mfreebuff-power run proxy\033[0m   \033[2m# Pilih model FREE (GLM 5.3 / DeepSeek) & koding via proxy\033[0m"
-echo -e "  \033[0;36m\033[1mfreebuff-power ui\033[0m          \033[2m# Buka Interactive Terminal TUI Dashboard\033[0m"
-echo -e "  \033[0;36m\033[1mfreebuff-power --help\033[0m      \033[2m# Lihat panduan lengkap perintah v11.0\033[0m\n"
+echo -e "\n🔥 Sekarang kamu bisa menggunakan kedua perintah secara bebas di folder mana pun:\n"
+
+echo -e "  ${C_CYAN}${C_BOLD}[ FREEPI-POWER (freepi.ai) ]${C_RESET}"
+echo -e "  \033[0;36m\033[1mfreepi-power start\033[0m            \033[2m# Koding free via freepi.ai + injeksi 94 agents & 584 skills\033[0m"
+echo -e "  \033[0;36m\033[1mfreepi-power pi\033[0m               \033[2m# Langsung luncurkan FreePi CLI engine di terminal\033[0m"
+echo -e "  \033[0;36m\033[1mfreepi-power doctor\033[0m           \033[2m# Cek kesehatan FreePi, Freebuff, dan superpower\033[0m\n"
+
+echo -e "  ${C_YELLOW}${C_BOLD}[ FREEBUFF-POWER & ANTI-BAN ]${C_RESET}"
+echo -e "  \033[0;33m\033[1mfreebuff-power start\033[0m          \033[2m# Koding via Freebuff dengan Anti-Ban & Multi-Account Vault\033[0m"
+echo -e "  \033[0;33m\033[1mfreebuff-power local\033[0m          \033[2m# Koding offline 100% gratis via Ollama lokal (zero-token)\033[0m"
+echo -e "  \033[0;33m\033[1mfreebuff-power heal\033[0m           \033[2m# Autonomous SWE repair loop: perbaiki bug otomatis\033[0m"
+echo -e "  \033[0;33m\033[1mfreebuff-power ui\033[0m             \033[2m# Buka Interactive Terminal TUI Dashboard\033[0m\n"
+
+echo -e "  ${C_PURPLE}${C_BOLD}[ GTA SA-MP & OPEN.MP DEVELOPER SUITE ]${C_RESET}"
+echo -e "  \033[0;35m\033[1mfreepi-power samp audit .\033[0m     \033[2m# Deep code linter: OnPlayerUpdate lag, strcmp, SQL Injection\033[0m"
+echo -e "  \033[0;35m\033[1mfreepi-power samp heal main.pwn\033[0m \033[2m# Autonomous Pawn compiler & syntax error healer\033[0m"
+echo -e "  \033[0;35m\033[1mfreepi-power samp new openmp\033[0m   \033[2m# Scaffold open.mp gamemode modern (YSI 5 + MySQL)\033[0m"
+echo -e "  \033[0;35m\033[1mfreepi-power samp vs\033[0m          \033[2m# Kitab perbandingan teknis SA-MP legacy vs open.mp\033[0m\n"
+
+echo -e "  ${C_GREEN}${C_BOLD}[ ANTI-SLOP & HUMAN DESIGN ]${C_RESET}"
+echo -e "  \033[0;32m\033[1mfreepi-power antislop audit .\033[0m \033[2m# Pindai 40 aturan AI slop, gradien ungu, & buzzwords\033[0m"
+echo -e "  \033[0;32m\033[1mfreepi-power design init\033[0m      \033[2m# Buat file DESIGN.md bertaraf studio\033[0m"
+echo -e "  \033[0;32m\033[1mfreepi-power contrast #000 #fff\033[0m \033[2m# Validasi matematis kontras WCAG 2.2 AAA\033[0m\n"

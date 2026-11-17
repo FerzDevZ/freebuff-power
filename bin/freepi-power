@@ -1,0 +1,213 @@
+#!/usr/bin/env bash
+# ==============================================================================
+# ⚡ FREEPI-POWER SUPREME — FreePi (freepi.ai) & Cognitive Swarm Suite (v11.0)
+# ==============================================================================
+# Dual-Engine Architecture:
+#   1. FreePi Engine  : Free ad-supported inference in terminal (freepi.ai)
+#   2. Freebuff Engine: 94 Autonomous Cognitive Agents, 584 Skills, Anti-Ban & SA-MP
+# ==============================================================================
+set -euo pipefail
+
+SOURCE="${BASH_SOURCE[0]}"
+while [ -h "$SOURCE" ]; do
+  DIR="$( cd -P "$( dirname "$SOURCE" )" >/dev/null 2>&1 && pwd )"
+  SOURCE="$(readlink "$SOURCE")"
+  [[ $SOURCE != /* ]] && SOURCE="$DIR/$SOURCE"
+done
+SCRIPT_DIR="$( cd -P "$( dirname "$SOURCE" )" >/dev/null 2>&1 && pwd )"
+
+GLOBAL_SUPERPOWER_DIR="$HOME/.freebuff-superpower"
+if [ ! -d "$GLOBAL_SUPERPOWER_DIR" ]; then
+  mkdir -p "$GLOBAL_SUPERPOWER_DIR"
+  if [ -d "$SCRIPT_DIR/../superpower" ]; then
+    cp -rf "$SCRIPT_DIR/../superpower/"* "$GLOBAL_SUPERPOWER_DIR/"
+  fi
+fi
+
+# Ensure ~/.freepi-superpower links to the same superpower store
+if [ ! -d "$HOME/.freepi-superpower" ] && [ ! -L "$HOME/.freepi-superpower" ]; then
+  ln -sf "$GLOBAL_SUPERPOWER_DIR" "$HOME/.freepi-superpower" 2>/dev/null || true
+fi
+
+C_CYAN='\033[0;36m'
+C_GREEN='\033[0;32m'
+C_YELLOW='\033[0;33m'
+C_PURPLE='\033[0;35m'
+C_RED='\033[0;31m'
+C_BLUE='\033[0;34m'
+C_BOLD='\033[1m'
+C_DIM='\033[2m'
+C_RESET='\033[0m'
+
+show_help() {
+  echo -e "${C_CYAN}${C_BOLD}========================================================================================${C_RESET}"
+  echo -e "${C_YELLOW}${C_BOLD}⚡ FREEPI-POWER SUPREME — Autonomous Cognitive Swarm & Free AI Agent (v11.0)${C_RESET}"
+  echo -e "${C_DIM}Powered by FreePi (freepi.ai) + Freebuff Cognitive Architecture (94 Agents & 584 Skills)${C_RESET}"
+  echo -e "${C_CYAN}${C_BOLD}========================================================================================${C_RESET}\n"
+  echo -e "${C_BOLD}PENGGUNAAN:${C_RESET}"
+  echo -e "  ${C_GREEN}freepi-power${C_RESET} ${C_YELLOW}<command>${C_RESET} [arguments] [options]\n"
+
+  echo -e "${C_PURPLE}${C_BOLD}🔥 PERINTAH UTAMA & PELUNCURAN KODING:${C_RESET}"
+  echo -e "  ${C_GREEN}start / go [args]${C_RESET}     ${C_BOLD}[REKOMENDASI] One-Shot Launch:${C_RESET}"
+  echo -e "                        Injeksi 94 Production Agents & 584 Skills + Buka sesi FreePi (freepi.ai)!"
+  echo -e "  ${C_GREEN}pi / freepi [args]${C_RESET}    Luncurkan FreePi CLI engine (free ad-supported terminal agent)."
+  echo -e "  ${C_GREEN}freebuff [args]${C_RESET}       Luncurkan engine Freebuff dengan proteksi anti-ban & multi-account."
+  echo -e "  ${C_GREEN}local [model]${C_RESET}         ${C_BOLD}[ZERO-TOKEN]${C_RESET} Koding offline 100% gratis via Ollama lokal (kebal ban)."
+  echo -e "  ${C_GREEN}heal [test_cmd]${C_RESET}       ${C_BOLD}[AUTONOMOUS HEALER]${C_RESET} Jalankan test runner & perbaiki error kode otomatis."
+  echo -e "  ${C_GREEN}ui / tui${C_RESET}              Buka Interactive Terminal TUI Dashboard (pilih agen/skill visual)."
+  echo -e "  ${C_GREEN}compose <task> [-r]${C_RESET}   ${C_BOLD}[POWER COMPOSER]${C_RESET} Analisis arsitektur & racik agen/skills terbaik."
+  echo -e "  ${C_GREEN}spawn <agent> [task]${C_RESET}  Luncurkan coding agent dengan persona spesifik (Contoh: spawn architect)."
+  echo -e "  ${C_GREEN}init [dir]${C_RESET}            Injeksi AGENTS.md & katalog .agents/ ke folder aktif tanpa buka sesi."
+  echo -e "  ${C_GREEN}sync / export${C_RESET}         ${C_BOLD}[IDE MATRIX]${C_RESET} Ekspor 94 Agents & 584 Skills ke Cursor, Windsurf, Claude."
+  echo -e "  ${C_GREEN}doctor${C_RESET}                ${C_BOLD}[SYSTEM DOCTOR]${C_RESET} Periksa kesehatan FreePi, Freebuff, dan superpower.\n"
+
+  echo -e "${C_PURPLE}${C_BOLD}🎨 ANTI-SLOP SUITE & HUMAN DESIGN PURGER:${C_RESET}"
+  echo -e "  ${C_GREEN}antislop [audit|check]${C_RESET} Pindai 40 aturan AI slop, gradien ungu, buzzwords, komentar sampah."
+  echo -e "  ${C_GREEN}design [init]${C_RESET}          Settle direction before building: buat file DESIGN.md bertaraf studio."
+  echo -e "  ${C_GREEN}contrast <fg> <bg>${C_RESET}     Hitung matematis rasio kontras WCAG 2.2 AA/AAA (Wajib lolos 4.5:1 / 7:1).\n"
+
+  echo -e "${C_PURPLE}${C_BOLD}🎮 GTA SA-MP & OPEN.MP GAME SERVER SUITE:${C_RESET}"
+  echo -e "  ${C_GREEN}samp audit [dir]${C_RESET}      Pindai kejahatan lag di OnPlayerUpdate, loop lambat & SQL injection."
+  echo -e "  ${C_GREEN}samp heal [script]${C_RESET}    Kompilasi Pawn & perbaiki error syntax / missing includes otomatis."
+  echo -e "  ${C_GREEN}samp new [openmp|rp]${C_RESET}  Scaffold gamemode open.mp / roleplay modular lengkap 1-detik."
+  echo -e "  ${C_GREEN}samp vs${C_RESET}               Buka kitab perbandingan teknis SA-MP legacy vs open.mp modern.\n"
+
+  echo -e "${C_PURPLE}${C_BOLD}🛠️ PRO-TOOLING & DEVOPS:${C_RESET}"
+  echo -e "  ${C_GREEN}new <preset> [name]${C_RESET}   Scaffold proyek baru (openmp / samp-rp / saas / flutter / go)."
+  echo -e "  ${C_GREEN}commit${C_RESET}                AI Conventional Commit Assistant otomatis berdasarkan git diff."
+  echo -e "  ${C_GREEN}pentest [dir]${C_RESET}         Pindai celah OWASP, kebocoran secret, & CVE dependensi."
+  echo -e "  ${C_GREEN}clean-code${C_RESET}            Pindai file mati (dead-code) & dependensi yang tidak terpakai."
+  echo -e "  ${C_GREEN}proxy [cmd]${C_RESET}           Kelola Proxy Engine Freebuff (start/stop/status/models)."
+  echo -e "  ${C_GREEN}update${C_RESET}                Perbarui library superpower, FreePi CLI, dan proxy engine.\n"
+  exit 0
+}
+
+if [ $# -eq 0 ]; then
+  show_help
+fi
+
+CMD="${1:-help}"
+
+case "$CMD" in
+  help|--help|-h)
+    show_help
+    ;;
+
+  start|go|full)
+    shift || true
+    # Jalankan FreePi dengan injeksi superpower
+    exec "$SCRIPT_DIR/freepi-runner.sh" "$@"
+    ;;
+
+  pi|freepi|free-pi)
+    shift || true
+    exec "$SCRIPT_DIR/freepi-runner.sh" "$@"
+    ;;
+
+  freebuff)
+    shift || true
+    exec "$SCRIPT_DIR/freebuff-power" start "$@"
+    ;;
+
+  samp|openmp)
+    shift || true
+    SUB_CMD="${1:-audit}"
+    case "$SUB_CMD" in
+      audit|check|lint)
+        shift || true
+        exec "$SCRIPT_DIR/samp-audit.sh" "$@"
+        ;;
+      heal|fix|compile|build)
+        shift || true
+        exec "$SCRIPT_DIR/samp-heal.sh" "$@"
+        ;;
+      new|init)
+        shift || true
+        exec "$SCRIPT_DIR/scaffolder.sh" "openmp" "$@"
+        ;;
+      vs|compare)
+        exec "$SCRIPT_DIR/info.sh" "samp-vs-openmp-encyclopedia"
+        ;;
+      *)
+        exec "$SCRIPT_DIR/samp-audit.sh" "$@"
+        ;;
+    esac
+    ;;
+
+  antislop|slop)
+    shift || true
+    exec "$SCRIPT_DIR/antislop.sh" "$@"
+    ;;
+
+  design)
+    shift || true
+    exec "$SCRIPT_DIR/design.sh" "$@"
+    ;;
+
+  contrast)
+    shift || true
+    exec "$SCRIPT_DIR/contrast.sh" "$@"
+    ;;
+
+  heal|auto-heal|fix)
+    shift || true
+    exec "$SCRIPT_DIR/heal.sh" "$@"
+    ;;
+
+  local|ollama)
+    shift || true
+    exec "$SCRIPT_DIR/local.sh" "$@"
+    ;;
+
+  ui|tui)
+    exec "$SCRIPT_DIR/tui.sh"
+    ;;
+
+  new|scaffold)
+    shift || true
+    exec "$SCRIPT_DIR/scaffolder.sh" "$@"
+    ;;
+
+  doctor)
+    exec "$SCRIPT_DIR/doctor.sh"
+    ;;
+
+  clean)
+    exec "$SCRIPT_DIR/clean.sh"
+    ;;
+
+  update)
+    exec "$SCRIPT_DIR/update.sh"
+    ;;
+
+  export|sync)
+    shift || true
+    exec node "$SCRIPT_DIR/exporter.js" "$@"
+    ;;
+
+  search)
+    shift || true
+    exec "$SCRIPT_DIR/search.sh" "$@"
+    ;;
+
+  info)
+    shift || true
+    exec "$SCRIPT_DIR/info.sh" "$@"
+    ;;
+
+  list)
+    exec "$SCRIPT_DIR/list.sh"
+    ;;
+
+  init)
+    shift || true
+    TARGET_DIR="${1:-.}"
+    echo -e "${C_CYAN}🧰 [FREEPI-POWER] Menginjeksi 94 Agents & 584 Skills ke $TARGET_DIR...${C_RESET}"
+    exec "$SCRIPT_DIR/freebuff-power" init "$TARGET_DIR"
+    ;;
+
+  *)
+    # Default: teruskan ke freebuff-power engine jika perintah dikenali di sana
+    exec "$SCRIPT_DIR/freebuff-power" "$CMD" "$@"
+    ;;
+esac
