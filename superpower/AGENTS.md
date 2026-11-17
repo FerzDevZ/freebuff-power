@@ -2,7 +2,7 @@
 
 > **AUTONOMOUS ACTIVATION DIRECTIVE:**
 > When `@AGENTS.md` is present in session context, immediately activate the **Autonomous Cognitive Swarm Engine**.
-> Equipped with **87 Specialized Production Agents**, **569 Curated High-Leverage Skills** (`.agents/skills/<name>/SKILL.md`), and **23 Language/Framework Rules** (`.agents/rules/`).
+> Equipped with **90 Specialized Production Agents**, **574 Curated High-Leverage Skills** (`.agents/skills/<name>/SKILL.md`), and **23 Language/Framework Rules** (`.agents/rules/`).
 > You do NOT require manual micromanagement. You possess autonomous intelligence to plan, test, implement, review, verify, and reflect.
 
 ---
@@ -67,6 +67,9 @@ Specialized personas located in `.agents/agents/<name>.md`. Adopt or spawn proac
 | **`@samp-server-admin`** | server.cfg / config.json, Linux systemd, anti-cheat | Server setup, plugin troubleshooting, deployment |
 | **`@samp-pawn-wizard`** | Advanced PAWN, YSI5 framework, ALS, RakNet, hooks | Complex PAWN patterns, y_commands, y_hooks, optimization |
 | **`@samp-gamemode-architect`** | Full gamemode system design & economy architecture | Roleplay systems, economy, factions, properties, MySQL |
+| **`@openmp-plugin-creator`** | C++ open.mp SDK components & native AMX plugins | Modern C++ component dev, event dispatchers, CMake/Conan |
+| **`@samp-legacy-migrator`** | SA-MP 0.3.7 to open.mp migration & crash triage | Runtime error 19, memory hack removal, YSI 5 upgrade |
+| **`@samp-filterscript-master`** | Standalone filterscripts, IPC & include libraries | Dynamic load/unload safety, CallRemoteFunction, ALS hooks |
 
 ---
 
@@ -128,6 +131,11 @@ Use the native **`skill({ name: "<skill-name>" })`** tool or read on-demand to l
 - **`samp-anticheat-system`** — Server-side speedhack, teleport, weapon injection, health/armour hack detection.
 - **`samp-ysi-framework`** — YSI5 ecosystem: y_commands, y_hooks, y_iterate (foreach), y_bit, y_inline, y_timers.
 - **`samp-gamemode-architecture`** — Modular feature-based roleplay gamemode design, entity pools, CI/CD pipeline.
+- **`openmp-cpp-component-sdk`** — C++ open.mp SDK components, event dispatcher subscriptions, AMX native binding.
+- **`samp-legacy-openmp-migrator`** — Triage runtime error 19, memory hack crashes, FCNPC replacement, YSI 5 upgrade.
+- **`samp-crashdetect-debugger`** — Decode AMX runtime errors (4, 19, 20, 26), native stack dumps, compiler -d3 flags.
+- **`samp-filterscript-engineering`** — Standalone hot-reloadable filterscripts, CallRemoteFunction IPC, resource cleanup.
+- **`samp-include-library-design`** — Reusable community includes, ALS hook chaining, tag safety, sampctl publishing.
 
 ---
 
