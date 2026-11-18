@@ -44,7 +44,7 @@ echo -e "📦 Superpower Cache     : $SUPERPOWER_DIR"
 echo -e "👥 Production Agents    : ${C_GREEN}${C_BOLD}${AGENTS_COUNT} Agents${C_RESET} (Status: Sehat)"
 echo -e "🧰 Modular Skills       : ${C_GREEN}${C_BOLD}${SKILLS_COUNT} Skills${C_RESET} (Status: Sehat)"
 
-# 2. Periksa FreePi (freepi.ai) CLI Engine
+# 2. Periksa FreePi (freepi.ai) CLI Engine & Native Registry
 if command -v free-pi-cli >/dev/null 2>&1; then
   FREEPI_VER=$(free-pi-cli --version 2>/dev/null || echo "terpasang")
   echo -e "⚡ FreePi Core Engine   : ${C_GREEN}${C_BOLD}$(which free-pi-cli)${C_RESET} (${FREEPI_VER}) (Online)"
@@ -53,6 +53,11 @@ elif [ -f "$HOME/.nvm/versions/node/$(node -v 2>/dev/null || echo '')/bin/free-p
 else
   echo -e "⚠️ FreePi Core Engine   : ${C_YELLOW}Belum terpasang (Bisa dijalankan via 'npx free-pi-cli' atau 'npm install -g free-pi-cli')${C_RESET}"
 fi
+
+FREEPI_PROMPTS=$(ls -1 "$HOME/.free-pi/agent/prompts"/*.md 2>/dev/null | wc -l || echo "0")
+FREEPI_SKILLS=$(ls -1 "$HOME/.free-pi/agent/skills" 2>/dev/null | wc -l || echo "0")
+FREEPI_SESSIONS=$(find "$HOME/.free-pi/agent/sessions" -name "*.jsonl" 2>/dev/null | wc -l || echo "0")
+echo -e "📂 FreePi Native Store  : ${C_GREEN}${FREEPI_PROMPTS} Slash Agents${C_RESET} | ${C_GREEN}${FREEPI_SKILLS} Active Skills${C_RESET} | ${C_CYAN}${FREEPI_SESSIONS} Saved Sessions${C_RESET}"
 
 # 3. Periksa Freebuff Core Binary
 if command -v freebuff >/dev/null 2>&1; then

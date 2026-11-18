@@ -1,10 +1,9 @@
 #!/usr/bin/env bash
 # ==============================================================================
-# ⚡ FREEPI-POWER SUPREME — FreePi (freepi.ai) & Cognitive Swarm Suite (v11.0)
+# ⚡ FREEPI-POWER SUPREME — Native FreePi (freepi.ai) Cognitive Swarm Suite (v11.1)
 # ==============================================================================
-# Dual-Engine Architecture:
-#   1. FreePi Engine  : Free ad-supported inference in terminal (freepi.ai)
-#   2. Freebuff Engine: 94 Autonomous Cognitive Agents, 584 Skills, Anti-Ban & SA-MP
+# Native FreePi Engine + 97 Specialized Agents + 588 Skills + SA-MP 2026 Studio
+# Never silently leaks commands to freebuff!
 # ==============================================================================
 set -euo pipefail
 
@@ -24,7 +23,6 @@ if [ ! -d "$GLOBAL_SUPERPOWER_DIR" ]; then
   fi
 fi
 
-# Ensure ~/.freepi-superpower links to the same superpower store
 if [ ! -d "$HOME/.freepi-superpower" ] && [ ! -L "$HOME/.freepi-superpower" ]; then
   ln -sf "$GLOBAL_SUPERPOWER_DIR" "$HOME/.freepi-superpower" 2>/dev/null || true
 fi
@@ -41,44 +39,91 @@ C_RESET='\033[0m'
 
 show_help() {
   echo -e "${C_CYAN}${C_BOLD}========================================================================================${C_RESET}"
-  echo -e "${C_YELLOW}${C_BOLD}⚡ FREEPI-POWER SUPREME — Autonomous Cognitive Swarm & Free AI Agent (v11.0)${C_RESET}"
-  echo -e "${C_DIM}Powered by FreePi (freepi.ai) + Freebuff Cognitive Architecture (94 Agents & 584 Skills)${C_RESET}"
+  echo -e "${C_YELLOW}${C_BOLD}⚡ FREEPI-POWER SUPREME — Native FreePi (freepi.ai) Swarm Suite (v11.1)${C_RESET}"
+  echo -e "${C_DIM}Powered by FreePi (free-pi-cli) + 97 Production Agents + 588 Skills + SA-MP 2026 Studio${C_RESET}"
   echo -e "${C_CYAN}${C_BOLD}========================================================================================${C_RESET}\n"
   echo -e "${C_BOLD}PENGGUNAAN:${C_RESET}"
   echo -e "  ${C_GREEN}freepi-power${C_RESET} ${C_YELLOW}<command>${C_RESET} [arguments] [options]\n"
 
-  echo -e "${C_PURPLE}${C_BOLD}🔥 PERINTAH UTAMA & PELUNCURAN KODING:${C_RESET}"
-  echo -e "  ${C_GREEN}start / go [args]${C_RESET}     ${C_BOLD}[REKOMENDASI] One-Shot Launch:${C_RESET}"
-  echo -e "                        Injeksi 94 Production Agents & 584 Skills + Buka sesi FreePi (freepi.ai)!"
-  echo -e "  ${C_GREEN}pi / freepi [args]${C_RESET}    Luncurkan FreePi CLI engine (free ad-supported terminal agent)."
-  echo -e "  ${C_GREEN}freebuff [args]${C_RESET}       Luncurkan engine Freebuff dengan proteksi anti-ban & multi-account."
-  echo -e "  ${C_GREEN}local [model]${C_RESET}         ${C_BOLD}[ZERO-TOKEN]${C_RESET} Koding offline 100% gratis via Ollama lokal (kebal ban)."
-  echo -e "  ${C_GREEN}heal [test_cmd]${C_RESET}       ${C_BOLD}[AUTONOMOUS HEALER]${C_RESET} Jalankan test runner & perbaiki error kode otomatis."
-  echo -e "  ${C_GREEN}ui / tui${C_RESET}              Buka Interactive Terminal TUI Dashboard (pilih agen/skill visual)."
-  echo -e "  ${C_GREEN}compose <task> [-r]${C_RESET}   ${C_BOLD}[POWER COMPOSER]${C_RESET} Analisis arsitektur & racik agen/skills terbaik."
-  echo -e "  ${C_GREEN}spawn <agent> [task]${C_RESET}  Luncurkan coding agent dengan persona spesifik (Contoh: spawn architect)."
-  echo -e "  ${C_GREEN}init [dir]${C_RESET}            Injeksi AGENTS.md & katalog .agents/ ke folder aktif tanpa buka sesi."
-  echo -e "  ${C_GREEN}sync / export${C_RESET}         ${C_BOLD}[IDE MATRIX]${C_RESET} Ekspor 94 Agents & 584 Skills ke Cursor, Windsurf, Claude."
-  echo -e "  ${C_GREEN}doctor${C_RESET}                ${C_BOLD}[SYSTEM DOCTOR]${C_RESET} Periksa kesehatan FreePi, Freebuff, dan superpower.\n"
+  echo -e "${C_PURPLE}${C_BOLD}🔥 PERINTAH NATIVE FREEPI (freepi.ai — 100% langsung ke free-pi-cli):${C_RESET}"
+  echo -e "  ${C_GREEN}start / go / run${C_RESET}      Mulai sesi FreePi + injeksi AGENTS.md, 97 Agents & Skills."
+  echo -e "  ${C_GREEN}session [id]${C_RESET}          Tanpa ID: tampilkan daftar semua sesi FreePi tersimpan."
+  echo -e "                        Dengan ID: lanjutkan sesi spesifik (free-pi-cli --session <id>)."
+  echo -e "  ${C_GREEN}continue / resume${C_RESET}     Lanjutkan sesi FreePi terakhir di folder aktif (--continue)."
+  echo -e "  ${C_GREEN}fresh / --new${C_RESET}         Mulai sesi FreePi baru yang bersih di folder aktif (--new)."
+  echo -e "  ${C_GREEN}import [claude|codex]${C_RESET} Impor & lanjutkan sesi dari Claude Code atau Codex (--import)."
+  echo -e "  ${C_GREEN}login / device-login${C_RESET}  Login GitHub via device code di terminal (--device-login)."
+  echo -e "  ${C_GREEN}logout${C_RESET}                Hapus token login FreePi tersimpan."
+  echo -e "  ${C_GREEN}redeem <code>${C_RESET}         Tukarkan kode kredit FreePi (FREEPI-XXXX-XXXX)."
+  echo -e "  ${C_GREEN}mcp <add|list|remove>${C_RESET} Kelola MCP server FreePi (~/.free-pi/agent/mcp.json)."
+  echo -e "  ${C_GREEN}hive / remote${C_RESET}         Aktifkan mode kolaborasi /hive (web) atau /remote (Telegram)."
+  echo -e "  ${C_GREEN}commands${C_RESET}              Tampilkan seluruh daftar /slash command di dalam FreePi."
+  echo -e "  ${C_GREEN}pack [samp|web|list]${C_RESET}  Aktifkan skill pack native di ~/.free-pi/agent/skills (hemat token).\n"
 
-  echo -e "${C_PURPLE}${C_BOLD}🎨 ANTI-SLOP SUITE & HUMAN DESIGN PURGER:${C_RESET}"
-  echo -e "  ${C_GREEN}antislop [audit|check]${C_RESET} Pindai 40 aturan AI slop, gradien ungu, buzzwords, komentar sampah."
-  echo -e "  ${C_GREEN}design [init]${C_RESET}          Settle direction before building: buat file DESIGN.md bertaraf studio."
-  echo -e "  ${C_GREEN}contrast <fg> <bg>${C_RESET}     Hitung matematis rasio kontras WCAG 2.2 AA/AAA (Wajib lolos 4.5:1 / 7:1).\n"
+  echo -e "${C_PURPLE}${C_BOLD}🎮 GTA SA-MP & OPEN.MP MODERN 2026 STUDIO:${C_RESET}"
+  echo -e "  ${C_GREEN}samp audit [dir]${C_RESET}      Pindai lag OnPlayerUpdate, loop MAX_PLAYERS, strcmp & SQLi."
+  echo -e "  ${C_GREEN}samp heal [script]${C_RESET}    Kompilasi Pawn & perbaiki syntax/include error otomatis."
+  echo -e "  ${C_GREEN}samp new [openmp|rp]${C_RESET}  Scaffold gamemode open.mp / roleplay 2026 modular 1-detik."
+  echo -e "  ${C_GREEN}samp vs${C_RESET}               Kitab perbandingan teknis SA-MP legacy vs open.mp modern."
+  echo -e "  ${C_GREEN}info samp-textdraw-fivem-modern-design${C_RESET}"
+  echo -e "                        Buka panduan master TextDraw FiveM / NoPixel / Ox_lib."
+  echo -e "  ${C_GREEN}info samp-modern-jobs-2026-logic${C_RESET}"
+  echo -e "                        Buka arsitektur logic job modern 2026 (FSM, minigame, ekonomi).\n"
 
-  echo -e "${C_PURPLE}${C_BOLD}🎮 GTA SA-MP & OPEN.MP GAME SERVER SUITE:${C_RESET}"
-  echo -e "  ${C_GREEN}samp audit [dir]${C_RESET}      Pindai kejahatan lag di OnPlayerUpdate, loop lambat & SQL injection."
-  echo -e "  ${C_GREEN}samp heal [script]${C_RESET}    Kompilasi Pawn & perbaiki error syntax / missing includes otomatis."
-  echo -e "  ${C_GREEN}samp new [openmp|rp]${C_RESET}  Scaffold gamemode open.mp / roleplay modular lengkap 1-detik."
-  echo -e "  ${C_GREEN}samp vs${C_RESET}               Buka kitab perbandingan teknis SA-MP legacy vs open.mp modern.\n"
+  echo -e "${C_PURPLE}${C_BOLD}🎨 ANTI-SLOP, OFFLINE & PRO-TOOLING:${C_RESET}"
+  echo -e "  ${C_GREEN}antislop [audit|check]${C_RESET} Pindai 40 aturan anti-slop AI & kualitas kode."
+  echo -e "  ${C_GREEN}design [init]${C_RESET}          Buat panduan DESIGN.md bertaraf studio."
+  echo -e "  ${C_GREEN}contrast <fg> <bg>${C_RESET}     Hitung matematis rasio kontras WCAG 2.2 AA/AAA."
+  echo -e "  ${C_GREEN}local [model]${C_RESET}          Koding offline 100% gratis via Ollama lokal."
+  echo -e "  ${C_GREEN}heal [test_cmd]${C_RESET}        Autonomous SWE repair loop: perbaiki error & test otomatis."
+  echo -e "  ${C_GREEN}new <preset> [name]${C_RESET}    Scaffold proyek baru (openmp / samp-rp / saas / flutter / go)."
+  echo -e "  ${C_GREEN}init [dir]${C_RESET}             Injeksi AGENTS.md & .agents/ ke proyek aktif."
+  echo -e "  ${C_GREEN}search / info / list${C_RESET}   Cari & baca katalog 97 Agents & 588 Skills."
+  echo -e "  ${C_GREEN}doctor${C_RESET}                 Cek kesehatan FreePi, Freebuff, 97 Agents & 588 Skills."
+  echo -e "  ${C_GREEN}freebuff [args]${C_RESET}        [OPSIONAL] Panggil engine Freebuff secara eksplisit.\n"
+  exit 0
+}
 
-  echo -e "${C_PURPLE}${C_BOLD}🛠️ PRO-TOOLING & DEVOPS:${C_RESET}"
-  echo -e "  ${C_GREEN}new <preset> [name]${C_RESET}   Scaffold proyek baru (openmp / samp-rp / saas / flutter / go)."
-  echo -e "  ${C_GREEN}commit${C_RESET}                AI Conventional Commit Assistant otomatis berdasarkan git diff."
-  echo -e "  ${C_GREEN}pentest [dir]${C_RESET}         Pindai celah OWASP, kebocoran secret, & CVE dependensi."
-  echo -e "  ${C_GREEN}clean-code${C_RESET}            Pindai file mati (dead-code) & dependensi yang tidak terpakai."
-  echo -e "  ${C_GREEN}proxy [cmd]${C_RESET}           Kelola Proxy Engine Freebuff (start/stop/status/models)."
-  echo -e "  ${C_GREEN}update${C_RESET}                Perbarui library superpower, FreePi CLI, dan proxy engine.\n"
+show_freepi_commands() {
+  echo -e "${C_CYAN}${C_BOLD}========================================================================================${C_RESET}"
+  echo -e "${C_YELLOW}${C_BOLD}📖 FREEPI COMPLETE COMMAND CHEATSHEET (CLI + In-Session Slash Commands)${C_RESET}"
+  echo -e "${C_CYAN}${C_BOLD}========================================================================================${C_RESET}\n"
+
+  echo -e "${C_PURPLE}${C_BOLD}1. PERINTAH CLI TERMINAL (freepi-power):${C_RESET}"
+  echo -e "  ${C_GREEN}freepi-power start${C_RESET}                  Mulai sesi FreePi di folder aktif"
+  echo -e "  ${C_GREEN}freepi-power session${C_RESET}                Lihat semua sesi tersimpan + ID & preview prompt"
+  echo -e "  ${C_GREEN}freepi-power session <id>${C_RESET}           Lanjutkan sesi berdasarkan UUID"
+  echo -e "  ${C_GREEN}freepi-power continue${C_RESET}               Lanjutkan sesi terakhir di folder aktif"
+  echo -e "  ${C_GREEN}freepi-power fresh${C_RESET}                  Mulai sesi baru yang bersih (--new)"
+  echo -e "  ${C_GREEN}freepi-power import claude|codex${C_RESET}    Impor sesi dari Claude Code / Codex"
+  echo -e "  ${C_GREEN}freepi-power login${C_RESET}                  Login GitHub via device code"
+  echo -e "  ${C_GREEN}freepi-power logout${C_RESET}                 Keluar & hapus token tersimpan"
+  echo -e "  ${C_GREEN}freepi-power redeem FREEPI-XXX${C_RESET}      Tukarkan kode kredit email"
+  echo -e "  ${C_GREEN}freepi-power mcp list|add|remove${C_RESET}    Kelola MCP servers"
+  echo -e "  ${C_GREEN}freepi-power pack samp${C_RESET}              Aktifkan pack SA-MP 2026 & FiveM TextDraw ke FreePi\n"
+
+  echo -e "${C_PURPLE}${C_BOLD}2. SLASH COMMANDS DI DALAM SESI FREEPI (ketik saat chat aktif):${C_RESET}"
+  echo -e "  ${C_CYAN}/model${C_RESET}                      Pilih model AI (DeepSeek V4, Claude Haiku, GPT-6, GLM 5.3, Kimi, Qwen)"
+  echo -e "  ${C_CYAN}/usage${C_RESET}                      Cek sisa kredit gratis harian & jam reset"
+  echo -e "  ${C_CYAN}/resume${C_RESET}                     Pilih & buka ulang sesi sebelumnya secara interaktif"
+  echo -e "  ${C_CYAN}/compact${C_RESET}                    Ringkas percakapan panjang agar hemat context"
+  echo -e "  ${C_CYAN}/todos${C_RESET}                      Lihat daftar todo yang sedang dikerjakan agen"
+  echo -e "  ${C_CYAN}/tools${C_RESET}                      Ubah tampilan tool output (compact / full / hidden)"
+  echo -e "  ${C_CYAN}/import${C_RESET}                     Impor sesi Claude Code atau Codex"
+  echo -e "  ${C_CYAN}/buy-credits${C_RESET}                Beli tambahan kredit jika jatah harian habis"
+  echo -e "  ${C_CYAN}/redeem <code>${C_RESET}              Tukarkan kode kredit"
+  echo -e "  ${C_CYAN}/invite${C_RESET} & ${C_CYAN}/referrals${C_RESET}        Dapatkan link referral (+5k kredit/hari)"
+  echo -e "  ${C_CYAN}/close-other-session${C_RESET}        Tutup sesi FreePi yang nyangkut di terminal lain"
+  echo -e "  ${C_CYAN}/reverse-engineer-anything${C_RESET}  Muat tools Reverse Engineering (APK, binary, web)"
+  echo -e "  ${C_CYAN}/whats-new${C_RESET} & ${C_CYAN}/update${C_RESET}        Cek changelog & update free-pi-cli"
+  echo -e "  ${C_CYAN}/help${C_RESET} & ${C_CYAN}/exit${C_RESET}               Bantuan & keluar dari FreePi\n"
+
+  echo -e "${C_PURPLE}${C_BOLD}3. SLASH COMMANDS AGENT SUPERPOWER (otomatis di ~/.free-pi/agent/prompts/):${C_RESET}"
+  echo -e "  ${C_YELLOW}/samp-textdraw-fivem-master${C_RESET} Aktifkan persona Master TextDraw FiveM/NoPixel/Ox_lib"
+  echo -e "  ${C_YELLOW}/samp-modern-jobs-architect${C_RESET} Aktifkan persona Arsitek Job Modern 2026 & Ekonomi"
+  echo -e "  ${C_YELLOW}/samp-creator-2026${C_RESET}          Aktifkan persona Full-Stack Creator Server SA-MP 2026"
+  echo -e "  ${C_YELLOW}/openmp-plugin-creator${C_RESET}      Aktifkan persona Pembuat Komponen C++ open.mp"
+  echo -e "  ${C_YELLOW}/samp-legacy-migrator${C_RESET}       Aktifkan persona Migrasi SA-MP 0.3.7 ke open.mp\n"
   exit 0
 }
 
@@ -86,29 +131,92 @@ if [ $# -eq 0 ]; then
   show_help
 fi
 
-CMD="${1:-help}"
+CMD="$1"
 
 case "$CMD" in
   help|--help|-h)
     show_help
     ;;
 
-  start|go|full)
+  commands|cheatsheet|slash)
+    show_freepi_commands
+    ;;
+
+  version|--version|-v)
+    echo -e "${C_YELLOW}${C_BOLD}freepi-power${C_RESET} v11.1 (Dual-Engine Superpower Suite)"
+    "$SCRIPT_DIR/freepi-runner.sh" --version
+    ;;
+
+  # --- Native FreePi Core Commands (100% routed to free-pi-cli) ---
+  start|go|full|run|pi|freepi|free-pi)
     shift || true
-    # Jalankan FreePi dengan injeksi superpower
     exec "$SCRIPT_DIR/freepi-runner.sh" "$@"
     ;;
 
-  pi|freepi|free-pi)
+  session|sessions)
     shift || true
+    exec "$SCRIPT_DIR/freepi-sessions.sh" "$@"
+    ;;
+
+  continue|resume)
+    shift || true
+    exec "$SCRIPT_DIR/freepi-runner.sh" --continue "$@"
+    ;;
+
+  fresh)
+    shift || true
+    exec "$SCRIPT_DIR/freepi-runner.sh" --new "$@"
+    ;;
+
+  import)
+    shift || true
+    exec "$SCRIPT_DIR/freepi-runner.sh" --import "$@"
+    ;;
+
+  login|device-login)
+    shift || true
+    exec "$SCRIPT_DIR/freepi-runner.sh" --device-login "$@"
+    ;;
+
+  logout)
+    exec "$SCRIPT_DIR/freepi-runner.sh" logout
+    ;;
+
+  redeem)
+    shift || true
+    if [ -z "${1:-}" ]; then
+      echo -e "${C_RED}❌ Masukkan kode redeem. Contoh: freepi-power redeem FREEPI-XXXX-XXXX${C_RESET}"
+      exit 1
+    fi
+    exec "$SCRIPT_DIR/freepi-runner.sh" --redeem "$@"
+    ;;
+
+  mcp)
+    shift || true
+    exec "$SCRIPT_DIR/freepi-runner.sh" mcp "$@"
+    ;;
+
+  hive)
+    shift || true
+    FREEPI_HIVE=1 exec "$SCRIPT_DIR/freepi-runner.sh" "$@"
+    ;;
+
+  remote)
+    shift || true
+    FREEPI_REMOTE=1 exec "$SCRIPT_DIR/freepi-runner.sh" "$@"
+    ;;
+
+  pack|packs|skill|skills)
+    shift || true
+    exec "$SCRIPT_DIR/freepi-pack.sh" "$@"
+    ;;
+
+  # --- Pass any FreePi CLI flag (--session, --continue, --new, --import, --ref, --src, etc.) directly ---
+  --session|--session=*|--continue|--resume|--new|--import|--import=*|--device-login|--redeem|--redeem=*|--ref|--ref=*|--src|--src=*)
     exec "$SCRIPT_DIR/freepi-runner.sh" "$@"
     ;;
 
-  freebuff)
-    shift || true
-    exec "$SCRIPT_DIR/freebuff-power" start "$@"
-    ;;
-
+  # --- GTA SA-MP & open.mp Modern 2026 Studio ---
   samp|openmp)
     shift || true
     SUB_CMD="${1:-audit}"
@@ -123,7 +231,13 @@ case "$CMD" in
         ;;
       new|init)
         shift || true
-        exec "$SCRIPT_DIR/scaffolder.sh" "openmp" "$@"
+        PRESET="${1:-openmp}"
+        if [ "$PRESET" = "openmp" ] || [ "$PRESET" = "samp-rp" ]; then
+          shift || true
+          exec "$SCRIPT_DIR/scaffolder.sh" "$PRESET" "$@"
+        else
+          exec "$SCRIPT_DIR/scaffolder.sh" "openmp" "$PRESET" "$@"
+        fi
         ;;
       vs|compare)
         exec "$SCRIPT_DIR/info.sh" "samp-vs-openmp-encyclopedia"
@@ -134,6 +248,7 @@ case "$CMD" in
     esac
     ;;
 
+  # --- Anti-Slop, Design & Shared Superpower Tooling ---
   antislop|slop)
     shift || true
     exec "$SCRIPT_DIR/antislop.sh" "$@"
@@ -165,7 +280,19 @@ case "$CMD" in
 
   new|scaffold)
     shift || true
+    if [ $# -eq 0 ]; then
+      # 'freepi-power new' with no args -> start a fresh FreePi session!
+      exec "$SCRIPT_DIR/freepi-runner.sh" --new
+    fi
     exec "$SCRIPT_DIR/scaffolder.sh" "$@"
+    ;;
+
+  init)
+    shift || true
+    TARGET_DIR="${1:-.}"
+    echo -e "${C_CYAN}🧰 [FREEPI-POWER] Menginjeksi AGENTS.md & katalog .agents/ ke $TARGET_DIR...${C_RESET}"
+    "$SCRIPT_DIR/init.sh" "$TARGET_DIR"
+    "$SCRIPT_DIR/freepi-pack.sh" sync-prompts >/dev/null 2>&1 || true
     ;;
 
   doctor)
@@ -182,7 +309,13 @@ case "$CMD" in
 
   export|sync)
     shift || true
+    "$SCRIPT_DIR/freepi-pack.sh" sync-prompts >/dev/null 2>&1 || true
     exec node "$SCRIPT_DIR/exporter.js" "$@"
+    ;;
+
+  pentest|sec|security)
+    shift || true
+    exec "$SCRIPT_DIR/pentest.sh" "$@"
     ;;
 
   search)
@@ -199,15 +332,50 @@ case "$CMD" in
     exec "$SCRIPT_DIR/list.sh"
     ;;
 
-  init)
+  snapshot)
     shift || true
-    TARGET_DIR="${1:-.}"
-    echo -e "${C_CYAN}🧰 [FREEPI-POWER] Menginjeksi 94 Agents & 584 Skills ke $TARGET_DIR...${C_RESET}"
-    exec "$SCRIPT_DIR/freebuff-power" init "$TARGET_DIR"
+    exec "$SCRIPT_DIR/snapshot.sh" "$@"
     ;;
 
+  rollback)
+    exec "$SCRIPT_DIR/snapshot.sh" rollback
+    ;;
+
+  share|tunnel)
+    shift || true
+    exec "$SCRIPT_DIR/share.sh" "$@"
+    ;;
+
+  pair|collaborate)
+    shift || true
+    exec "$SCRIPT_DIR/pair.sh" "$@"
+    ;;
+
+  commit|docker|bench|theme|env|seed|readme|release|explain|clean-code|compose)
+    exec "$SCRIPT_DIR/freebuff-power" "$@"
+    ;;
+
+  # --- Explicit Freebuff Bridge (ONLY when user asks for freebuff!) ---
+  freebuff)
+    shift || true
+    exec "$SCRIPT_DIR/freebuff-power" "$@"
+    ;;
+
+  # --- Any other flag goes directly to free-pi-cli ---
+  -*)
+    exec "$SCRIPT_DIR/freepi-runner.sh" "$@"
+    ;;
+
+  # --- Unknown command: NEVER silently hijack to freebuff! ---
   *)
-    # Default: teruskan ke freebuff-power engine jika perintah dikenali di sana
-    exec "$SCRIPT_DIR/freebuff-power" "$CMD" "$@"
+    echo -e "${C_RED}${C_BOLD}❌ Perintah '${CMD}' tidak dikenali di freepi-power.${C_RESET}\n"
+    echo -e "Mungkin maksud kamu salah satu dari ini:"
+    echo -e "  ${C_GREEN}freepi-power start${C_RESET}             Mulai sesi koding FreePi (freepi.ai)"
+    echo -e "  ${C_GREEN}freepi-power session${C_RESET}           Lihat & lanjutkan sesi FreePi tersimpan"
+    echo -e "  ${C_GREEN}freepi-power continue${C_RESET}          Lanjutkan sesi FreePi terakhir di folder aktif"
+    echo -e "  ${C_GREEN}freepi-power commands${C_RESET}          Lihat semua perintah CLI & /slash command FreePi"
+    echo -e "  ${C_GREEN}freepi-power pack samp${C_RESET}         Aktifkan skill pack SA-MP 2026 & FiveM TextDraw"
+    echo -e "  ${C_GREEN}freepi-power --help${C_RESET}            Lihat menu bantuan lengkap\n"
+    exit 1
     ;;
 esac

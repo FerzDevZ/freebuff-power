@@ -24,8 +24,8 @@ C_RESET='\033[0m'
 
 clear 2>/dev/null || true
 echo -e "${C_CYAN}${C_BOLD}========================================================================${C_RESET}"
-echo -e "${C_YELLOW}${C_BOLD}⚡ FREEBUFF-POWER & FREEPI-POWER SUPREME DUAL SUITE (v11.0)${C_RESET}"
-echo -e "${C_DIM}FreePi (freepi.ai) + Freebuff Cognitive Swarm (94 Agents & 584 Skills)${C_RESET}"
+echo -e "${C_YELLOW}${C_BOLD}⚡ FREEBUFF-POWER & FREEPI-POWER SUPREME DUAL SUITE (v11.1)${C_RESET}"
+echo -e "${C_DIM}FreePi (freepi.ai) + Freebuff Cognitive Swarm (97 Agents & 588 Skills)${C_RESET}"
 echo -e "${C_CYAN}${C_BOLD}========================================================================${C_RESET}\n"
 
 INSTALL_BIN_DIR="$HOME/.local/bin"
@@ -93,6 +93,8 @@ done
 chmod +x "$INSTALL_BIN_DIR"/freebuff-power \
          "$INSTALL_BIN_DIR"/freepi-power \
          "$INSTALL_BIN_DIR"/freepi-runner.sh \
+         "$INSTALL_BIN_DIR"/freepi-sessions.sh \
+         "$INSTALL_BIN_DIR"/freepi-pack.sh \
          "$INSTALL_BIN_DIR"/samp-audit.sh \
          "$INSTALL_BIN_DIR"/samp-heal.sh \
          "$INSTALL_BIN_DIR"/zcode-power \
@@ -140,6 +142,15 @@ cp -rf "$SUPERPOWER_DIR/agents/"* "$SUPERPOWER_DIR/.freebuff/agents/" 2>/dev/nul
 # Symlink ~/.freepi-superpower to ~/.freebuff-superpower
 if [ ! -d "$FREEPI_SUPERPOWER_DIR" ] && [ ! -L "$FREEPI_SUPERPOWER_DIR" ]; then
   ln -sf "$SUPERPOWER_DIR" "$FREEPI_SUPERPOWER_DIR" 2>/dev/null || true
+fi
+
+# Populate FreePi Native Slash-Command Prompts (~/.free-pi/agent/prompts) & Lean Default Skill Pack
+mkdir -p "$HOME/.free-pi/agent/prompts" "$HOME/.free-pi/agent/skills"
+if [ -d "$SUPERPOWER_DIR/agents" ]; then
+  cp -f "$SUPERPOWER_DIR/agents/"*.md "$HOME/.free-pi/agent/prompts/" 2>/dev/null || true
+fi
+if [ -x "$INSTALL_BIN_DIR/freepi-pack.sh" ] && [ -z "$(ls -A "$HOME/.free-pi/agent/skills" 2>/dev/null)" ]; then
+  "$INSTALL_BIN_DIR/freepi-pack.sh" samp >/dev/null 2>&1 || true
 fi
 
 # 4. Install & Build Standalone freebuff-proxy Suite
@@ -203,10 +214,12 @@ echo -e "${C_GREEN}${C_BOLD}🎉 DUAL INSTALASI SUKSES 100%! (FREEBUFF-POWER & F
 echo -e "${C_GREEN}${C_BOLD}========================================================================${C_RESET}"
 echo -e "\n🔥 Sekarang kamu bisa menggunakan kedua perintah secara bebas di folder mana pun:\n"
 
-echo -e "  ${C_CYAN}${C_BOLD}[ FREEPI-POWER (freepi.ai) ]${C_RESET}"
-echo -e "  \033[0;36m\033[1mfreepi-power start\033[0m            \033[2m# Koding free via freepi.ai + injeksi 94 agents & 584 skills\033[0m"
-echo -e "  \033[0;36m\033[1mfreepi-power pi\033[0m               \033[2m# Langsung luncurkan FreePi CLI engine di terminal\033[0m"
-echo -e "  \033[0;36m\033[1mfreepi-power doctor\033[0m           \033[2m# Cek kesehatan FreePi, Freebuff, dan superpower\033[0m\n"
+echo -e "  ${C_CYAN}${C_BOLD}[ FREEPI-POWER (freepi.ai — Native CLI) ]${C_RESET}"
+echo -e "  \033[0;36m\033[1mfreepi-power start\033[0m            \033[2m# Mulai sesi FreePi + injeksi 97 agents & 588 skills\033[0m"
+echo -e "  \033[0;36m\033[1mfreepi-power session\033[0m          \033[2m# Lihat semua sesi FreePi tersimpan & lanjutkan via ID\033[0m"
+echo -e "  \033[0;36m\033[1mfreepi-power continue\033[0m         \033[2m# Lanjutkan sesi terakhir di folder aktif\033[0m"
+echo -e "  \033[0;36m\033[1mfreepi-power commands\033[0m         \033[2m# Lihat seluruh perintah CLI & /slash command FreePi\033[0m"
+echo -e "  \033[0;36m\033[1mfreepi-power pack samp\033[0m        \033[2m# Aktifkan pack SA-MP 2026 + FiveM TextDraw + Modern Jobs\033[0m\n"
 
 echo -e "  ${C_YELLOW}${C_BOLD}[ FREEBUFF-POWER & ANTI-BAN ]${C_RESET}"
 echo -e "  \033[0;33m\033[1mfreebuff-power start\033[0m          \033[2m# Koding via Freebuff dengan Anti-Ban & Multi-Account Vault\033[0m"

@@ -1,15 +1,15 @@
 <div align="center">
 
-# ⚡ FREEBUFF-POWER & FREEPI-POWER SUPREME SUITE (v11.0)
-### Autonomous Cognitive Swarm with 94 Production Agents, 584 Curated Skills, FreePi (freepi.ai) Engine, GTA SA-MP / open.mp Studio, Anti-Slop Linter & Enterprise Anti-Ban
+# ⚡ FREEBUFF-POWER & FREEPI-POWER SUPREME SUITE (v11.1)
+### Autonomous Cognitive Swarm with 97 Production Agents, 588 Curated Skills, Native FreePi (freepi.ai) Engine, GTA SA-MP / open.mp 2026 & FiveM TextDraw Studio, Anti-Slop Linter & Enterprise Anti-Ban
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![FreePi: freepi.ai](https://img.shields.io/badge/FreePi-freepi.ai%20Integrated-blue.svg)](https://freepi.ai)
-[![Sub-Agents: 94](https://img.shields.io/badge/Sub--Agents-94%20Specialized-blueviolet.svg)](#-roster-94-specialized-production-agents)
-[![Modular Skills: 584](https://img.shields.io/badge/Modular%20Skills-584%20Curated-emerald.svg)](#-katalog-584-modular-skills)
-[![SA-MP & open.mp](https://img.shields.io/badge/SA--MP%20%26%20open.mp-Full%20Suite-orange.svg)](#8--gta-sa-mp--openmp-supreme-suite)
+[![FreePi: freepi.ai](https://img.shields.io/badge/FreePi-freepi.ai%20Native%20CLI-blue.svg)](https://freepi.ai)
+[![Sub-Agents: 97](https://img.shields.io/badge/Sub--Agents-97%20Specialized-blueviolet.svg)](#-roster-97-specialized-production-agents)
+[![Modular Skills: 588](https://img.shields.io/badge/Modular%20Skills-588%20Curated-emerald.svg)](#-katalog-588-modular-skills)
+[![SA-MP & open.mp 2026](https://img.shields.io/badge/SA--MP%20%26%20open.mp-2026%20Modern%20Suite-orange.svg)](#3--gta-sa-mp--openmp-modern-2026-studio)
 [![Swarm Score: 100/100 A+](https://img.shields.io/badge/Swarm%20Rating-100%2F100%20Grade%20A%2B-brightgreen.svg)](#-autonomous-swe-bench-evaluator)
-[![Anti-Ban: Active](https://img.shields.io/badge/Anti--Ban%20Shield-Active%20v11.0-brightgreen.svg)](#-proteksi-anti-ban--stealth-sandbox)
+[![Anti-Ban: Active](https://img.shields.io/badge/Anti--Ban%20Shield-Active%20v11.1-brightgreen.svg)](#-proteksi-anti-ban--stealth-sandbox)
 [![Platform: Linux & macOS](https://img.shields.io/badge/Platform-Linux%20%7C%20macOS-informational.svg)](#-instalasi-instan-1-line-universal-dual-installer)
 
 ```
@@ -69,17 +69,18 @@ graph TD
 
 ## 🌟 Fitur Unggulan v11.0
 
-### 1. ⚡ Integrasi FreePi (freepi.ai) & Dual-Identity
-* **No Wallet Required:** Inferensi model AI coding canggih (DeepSeek V3, Claude Sonnet, dll) gratis langsung di terminal Anda didukung oleh iklan terminal halus via [freepi.ai](https://freepi.ai/).
-* **Dual-Command Parity:** Gunakan perintah `freebuff-power` atau `freepi-power` secara bergantian dengan fitur dan kemampuan 100% identik:
+### 1. ⚡ Integrasi Native FreePi (freepi.ai) & Session Manager
+* **100% Native FreePi Routing (Zero Leakage ke Freebuff):** Seluruh perintah `freepi-power` langsung mengarah ke `free-pi-cli` (termasuk `session`, `continue`, `fresh`, `import`, `login`, `logout`, `redeem`, `mcp`, `hive`, `remote`).
+* **FreePi Session Manager & Skill Packs:**
   ```bash
-  # Koding instan via engine FreePi dengan seluruh superpower terinjeksi:
-  freepi-power start
-  # atau langsung panggil FreePi CLI:
-  freepi-power pi
-  # atau gunakan freebuff-power:
-  freebuff-power pi
+  freepi-power start                 # Mulai sesi FreePi + injeksi AGENTS.md & 97 slash agents
+  freepi-power session               # Lihat daftar semua sesi FreePi tersimpan (ID, model, prompt)
+  freepi-power session <uuid>        # Lanjutkan sesi FreePi spesifik berdasarkan UUID
+  freepi-power continue              # Lanjutkan sesi terakhir di folder aktif (--continue)
+  freepi-power commands              # Cheatsheet lengkap CLI & /slash command di dalam FreePi
+  freepi-power pack samp             # Aktifkan 8 skill inti SA-MP 2026 & FiveM TextDraw (hemat kredit)
   ```
+* **Native Slash-Command Agents di Dalam FreePi:** Seluruh 97 agen tersinkron otomatis ke `~/.free-pi/agent/prompts/` sehingga bisa langsung dipanggil saat chat FreePi dengan `/samp-textdraw-fivem-master`, `/samp-modern-jobs-architect`, atau `/samp-creator-2026`.
 
 ### 2. 🎨 Studio Anti-Slop & Human Design Purger
 * **Audit Anti-Slop 40 Aturan:** Pindai kode, styling, dan teks dari elemen generik AI (*purple/indigo gradient, 3-card layout, stubs `// TODO`, buzzwords*) via:
@@ -167,21 +168,23 @@ Suite terintegrasi terlengkap di dunia untuk pengembang server SA-MP dan open.mp
 
 ---
 
-## 📋 CLI Command Palette (v11.0)
-
-> **Catatan:** Seluruh perintah di bawah dapat dijalankan menggunakan awalan `freepi-power` ataupun `freebuff-power`.
+## 📋 CLI Command Palette (v11.1)
 
 | Kategori | Perintah | Deskripsi & Fungsi |
 |---|---|---|
-| **FreePi & Koding** | `freepi-power start` | **[REKOMENDASI]** Injeksi 94 agents & 584 skills + buka sesi koding FreePi (freepi.ai). |
-| | `freepi-power pi [args]` | Luncurkan FreePi CLI engine di terminal (free inference ad-supported). |
-| | `freebuff-power start` | **[STEALTH]** Reset telemetry + injeksi 94 agents & 584 skills + sesi Freebuff. |
+| **FreePi Native CLI** | `freepi-power start` | **[REKOMENDASI]** Mulai sesi FreePi + injeksi AGENTS.md & 97 slash agents. |
+| | `freepi-power session [id]` | Tanpa ID: daftar semua sesi tersimpan; dengan ID: lanjutkan `--session <id>`. |
+| | `freepi-power continue` | Lanjutkan sesi FreePi terakhir di folder aktif (`--continue`). |
+| | `freepi-power fresh` | Mulai sesi FreePi baru yang bersih (`--new`). |
+| | `freepi-power import [claude\|codex]` | Impor & lanjutkan sesi Claude Code / Codex ke FreePi. |
+| | `freepi-power login` / `logout` | Login GitHub via device code (`--device-login`) atau keluar. |
+| | `freepi-power mcp <cmd>` | Kelola MCP server FreePi (`add`, `list`, `remove`, `login`). |
+| | `freepi-power commands` | Tampilkan semua CLI flag & `/slash` command di dalam FreePi. |
+| | `freepi-power pack [samp\|web\|list]` | Aktifkan skill pack native ke `~/.free-pi/agent/skills/` (hemat kredit). |
+| **Freebuff & Offline** | `freebuff-power start` | **[STEALTH]** Reset telemetry + injeksi 97 agents & 588 skills + sesi Freebuff. |
 | | `freepi-power local [model]` | **[OFFLINE]** Koding 100% gratis via Ollama lokal tanpa kuota dan kebal ban. |
 | | `freepi-power heal [test_cmd]`| **[AUTO-HEALER]** Jalankan test runner & perbaiki error kode secara mandiri. |
 | | `freepi-power ui` | Buka Interactive Terminal TUI Dashboard (pilih agen/skill visual). |
-| | `freepi-power compose <task>` | Analisis arsitektur tugas & racik kombinasi skill paling relevan. |
-| | `freepi-power spawn <agent>` | Luncurkan sesi koding dengan persona spesifik (misal: `spawn architect`). |
-| | `freepi-power run proxy [model]`| Pilih model FREE (GLM 5.3 / DeepSeek) & koding via proxy lokal. |
 | **GTA SA-MP & open.mp** | `freepi-power samp audit [dir]` | Pindai OnPlayerUpdate lag, strcmp kuno, dan kerentanan SQL injection. |
 | | `freepi-power samp heal [file]` | Kompilasi Pawn via pawncc & perbaiki syntax / missing include otomatis. |
 | | `freepi-power samp new openmp` | Scaffold open.mp gamemode modern (YSI 5 + MySQL R41-4 + Bcrypt). |
@@ -190,36 +193,33 @@ Suite terintegrasi terlengkap di dunia untuk pengembang server SA-MP dan open.mp
 | **Anti-Slop & Desain** | `freepi-power antislop audit .`| Pindai 40 aturan AI slop, gradien ungu, buzzwords, dan komentar sampah. |
 | | `freepi-power design init` | Settle direction before building: buat file `DESIGN.md` bertaraf studio. |
 | | `freepi-power contrast <fg> <bg>`| Hitung matematis rasio kontras WCAG 2.2 AA/AAA (Wajib 4.5:1 / 7:1). |
-| **Multi-Account Vault** | `freebuff-power account new <nama>`| Wizard 1-Click onboard akun baru (Chrome Sandbox + Vault). |
-| | `freebuff-power account save <nama>`| Simpan sesi login akun aktif ke dalam vault aman. |
-| | `freebuff-power account list` | Lihat daftar akun tersimpan di vault beserta status kuotanya. |
-| | `freebuff-power account switch <nama>`| Beralih ke akun lain dalam 0.1 detik (Instant Quota Swap). |
-| | `freebuff-power rotate` | Putar ke akun berikutnya secara otomatis (Round-Robin Rotator). |
-| | `freebuff-power reset-full` | **Reset TOTAL 7-Fase** seluruh token login, sesi, hardware & browser. |
 | **Keamanan & DevOps** | `freepi-power pentest [dir]` | Pindai celah OWASP Top 10, kebocoran secret API, dan CVE dependensi. |
-| | `freepi-power sync / export` | Ekspor 94 agents & 584 skills ke Cursor, Windsurf, Claude Code, Cline. |
+| | `freepi-power sync / export` | Ekspor 97 agents & 588 skills ke Cursor, Windsurf, Claude Code, FreePi. |
 | | `freepi-power snapshot save <nama>`| Buat checkpoint shadow proyek sebelum AI merombak kode. |
 | | `freepi-power rollback` | Batalkan kesalahan AI & pulihkan proyek ke kondisi semula (0.5 detik). |
-| | `freepi-power doctor` | Pemeriksaan kesehatan sistem (FreePi, Freebuff, 94 agents, 584 skills). |
+| | `freepi-power doctor` | Pemeriksaan kesehatan sistem (FreePi, Freebuff, 97 agents, 588 skills). |
 
 ---
 
-## 👥 Roster 94 Specialized Production Agents
+## 👥 Roster 97 Specialized Production Agents
 
-Katalog lengkap persona spesialis dalam `.agents/agents/<nama>.md`:
+Katalog lengkap persona spesialis dalam `.agents/agents/<nama>.md` (dan otomatis tersedia sebagai `/slash-command` di dalam FreePi!):
 
-### 🎮 GTA SA-MP & open.mp Master Suite (11 Agents)
-1. **`@samp-developer`**: Lead Developer SA-MP & open.mp (Pawn & modern architecture).
-2. **`@samp-server-admin`**: Sysadmin & Server Operations (Linux systemd, `server.cfg`, `config.json`).
-3. **`@samp-pawn-wizard`**: Expert Advanced PAWN (YSI 5 framework, ALS hooks, RakNet, y_timers).
-4. **`@samp-gamemode-architect`**: Gamemode Systems Architect (Heavy RP, economy, MySQL pooling).
-5. **`@openmp-plugin-creator`**: Native C++ Component & Plugin Developer (open.mp SDK, CMake).
-6. **`@samp-legacy-migrator`**: Migration Specialist (SA-MP 0.3.7 $\rightarrow$ open.mp, error 19 triage).
-7. **`@samp-filterscript-master`**: Filterscript Engineer (Dynamic hot-reloading, IPC, ALS chaining).
-8. **`@samp-textdraw-ui-designer`**: UI/UX Designer (640x480 responsive TextDraws, preview models).
-9. **`@samp-voice-audio-engineer`**: 3D Spatial Audio & Voice Engineer (sampvoice, walkie-talkie).
-10. **`@samp-security-anticheat`**: Server-Side Anti-Cheat Engineer (ColAndreas raycasting, packet validation).
-11. **`@samp-architecture-sage`**: Historical Authority & Tech Encyclopedist (SA-MP vs open.mp breaking changes).
+### 🎮 GTA SA-MP & open.mp Master 2026 Suite (14 Agents)
+1. **`@samp-textdraw-fivem-master`**: Master TextDraw FiveM / NoPixel / QBox / Ox_lib (rounded `LD_BEAT:chit`, 16:9 math, HUD, Speedo, Toast, Skill-Check).
+2. **`@samp-modern-jobs-architect`**: Arsitek Job Modern 2026 & Ekonomi Tertutup (FSM multi-stage jobs, minigame, Co-op Party, dynamic market, anti-exploit).
+3. **`@samp-creator-2026`**: Full-Stack Server Creator 2026 (FiveM UX di PAWN, `[E]`/`[Y]` proximity interaction, Smartphone/MDT, PC + SA-MP Mobile Android).
+4. **`@samp-developer`**: Lead Developer SA-MP & open.mp (Pawn & modern architecture).
+5. **`@samp-server-admin`**: Sysadmin & Server Operations (Linux systemd, `server.cfg`, `config.json`).
+6. **`@samp-pawn-wizard`**: Expert Advanced PAWN (YSI 5 framework, ALS hooks, RakNet, y_timers).
+7. **`@samp-gamemode-architect`**: Gamemode Systems Architect (Heavy RP, economy, MySQL pooling).
+8. **`@openmp-plugin-creator`**: Native C++ Component & Plugin Developer (open.mp SDK, CMake).
+9. **`@samp-legacy-migrator`**: Migration Specialist (SA-MP 0.3.7 $\rightarrow$ open.mp, error 19 triage).
+10. **`@samp-filterscript-master`**: Filterscript Engineer (Dynamic hot-reloading, IPC, ALS chaining).
+11. **`@samp-textdraw-ui-designer`**: UI/UX Designer (640x480 responsive TextDraws, preview models).
+12. **`@samp-voice-audio-engineer`**: 3D Spatial Audio & Voice Engineer (sampvoice, walkie-talkie).
+13. **`@samp-security-anticheat`**: Server-Side Anti-Cheat Engineer (ColAndreas raycasting, packet validation).
+14. **`@samp-architecture-sage`**: Historical Authority & Tech Encyclopedist (SA-MP vs open.mp breaking changes).
 
 ### 🏛️ Core Architecture & Planning (6 Agents)
 12. **`@planner`**: Task decomposition & dependency graph.
@@ -249,11 +249,11 @@ Katalog lengkap persona spesialis dalam `.agents/agents/<nama>.md`:
 
 ---
 
-## 🧰 Katalog 584 Modular Skills
+## 🧰 Katalog 588 Modular Skills
 
 Seluruh skill tersimpan rapi mengikuti standar resmi **AgentSkills** di `.agents/skills/<nama>/SKILL.md`:
 
-* **GTA SA-MP & open.mp (20 Skills):** `samp-vs-openmp-encyclopedia`, `samp-roleplay-systems-bible`, `samp-high-performance-tuning`, `samp-textdraw-ui-craft`, `samp-voice-spatial-audio`, `samp-colandreas-physics`, `samp-raknet-packet-sync`, `samp-custom-models-cdn`, `samp-discord-connector`, `samp-inventory-item-system`, `openmp-cpp-component-sdk`, `samp-legacy-openmp-migrator`, `samp-crashdetect-debugger`, `samp-filterscript-engineering`, `samp-include-library-design`, `samp-pawn-scripting`, `samp-server-configuration`, `samp-mysql-database`, `samp-streamer-plugin`, `samp-anticheat-system`.
+* **GTA SA-MP & open.mp 2026 (27 Skills):** `samp-textdraw-fivem-modern-design`, `samp-modern-jobs-2026-logic`, `samp-modern-creator-2026`, `samp-mobile-android-cef-ui`, `samp-vs-openmp-encyclopedia`, `samp-roleplay-systems-bible`, `samp-high-performance-tuning`, `samp-textdraw-ui-craft`, `samp-voice-spatial-audio`, `samp-colandreas-physics`, `samp-raknet-packet-sync`, `samp-custom-models-cdn`, `samp-discord-connector`, `samp-inventory-item-system`, `openmp-cpp-component-sdk`, `samp-legacy-openmp-migrator`, `samp-crashdetect-debugger`, `samp-filterscript-engineering`, `samp-include-library-design`, `samp-pawn-scripting`, `samp-server-configuration`, `samp-mysql-database`, `samp-streamer-plugin`, `samp-dialog-system`, `samp-anticheat-system`, `samp-ysi-framework`, `samp-gamemode-architecture`.
 * **Anti-Slop & Desain (10 Skills):** `antislop`, `antislop-ui`, `antislop-code`, `antislop-copywriting`, `antislop-human`, `antislop-layoutmobile`, `shadcn-radix-headless-craft`, `tailwind-fluid-typography-master`, `framer-motion-animation-wizard`, `deck-swiss-international`.
 * **Frontend & Web Apps (50+ Skills):** `nextjs-turbopack`, `frontend-patterns`, `react19-nextjs15-modern-craft`, `threejs-webgl-3d-experience`, `bento-grid-dashboard-ui`, `canvas-charting-high-frequency`.
 * **Backend & Systems (70+ Skills):** `bun-runtime-hyper-fast-apis`, `cloudflare-edge-workers-caching`, `golang-concurrency-patterns`, `fastapi-patterns`, `duckdb-embedded-olap-sql`, `redis-distributed-locking-caching`.

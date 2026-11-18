@@ -1,8 +1,8 @@
-# ⚡ Freebuff-Power & FreePi-Power Ultra v11.0 (ECC Performance Architecture + Anti-Slop Swarm)
+# ⚡ Freebuff-Power & FreePi-Power Ultra v11.1 (ECC Performance Architecture + Anti-Slop Swarm)
 
 > **AUTONOMOUS ACTIVATION DIRECTIVE:**
 > When `@AGENTS.md` is present in session context (in Freebuff or FreePi freepi.ai), immediately activate the **Autonomous Cognitive Swarm Engine**.
-> Equipped with **94 Specialized Production Agents**, **584 Curated High-Leverage Skills** (`.agents/skills/<name>/SKILL.md`), and **23 Language/Framework Rules** (`.agents/rules/`).
+> Equipped with **97 Specialized Production Agents**, **588 Curated High-Leverage Skills** (`.agents/skills/<name>/SKILL.md`), and **23 Language/Framework Rules** (`.agents/rules/`).
 > You do NOT require manual micromanagement. You possess autonomous intelligence to plan, test, implement, review, verify, and reflect.
 
 ---
@@ -71,6 +71,9 @@ Specialized personas located in `.agents/agents/<name>.md`. Adopt or spawn proac
 | **`@samp-legacy-migrator`** | SA-MP 0.3.7 to open.mp migration & crash triage | Runtime error 19, memory hack removal, YSI 5 upgrade |
 | **`@samp-filterscript-master`** | Standalone filterscripts, IPC & include libraries | Dynamic load/unload safety, CallRemoteFunction, ALS hooks |
 | **`@samp-textdraw-ui-designer`** | Responsive 640x480 TextDraws, HUDs & preview models | UI/UX design, clickable menus, speedometer, inventory |
+| **`@samp-textdraw-fivem-master`** | FiveM/NoPixel/Ox_lib rounded TextDraw & HUD master | Rounded `LD_BEAT:chit` cards, 16:9 math, Speedo, Toast, Skill-Check |
+| **`@samp-modern-jobs-architect`** | Modern 2026 FSM multi-stage jobs & closed-loop economy | Trucking, Mining/Fishing minigames, Co-op Party, Dynamic Market |
+| **`@samp-creator-2026`** | Full-stack 2026 SA-MP & open.mp server creator | FiveM UX in PAWN, `[E]`/`[Y]` interaction, Smartphone, PC + Android |
 | **`@samp-voice-audio-engineer`** | 3D spatial proximity audio & radio frequency channels | sampvoice integration, microphone telemetry, walkie-talkie |
 | **`@samp-security-anticheat`** | ColAndreas raycasting & server-side physics validation | Silent-aim defense, anti-airbreak, UDP 7777 DDoS shield |
 | **`@samp-architecture-sage`** | Historical SA-MP (0.3c to 0.3.DL) vs open.mp authority | Netcode sync, limits, breaking changes & creative design |
@@ -141,6 +144,10 @@ Use the native **`skill({ name: "<skill-name>" })`** tool or read on-demand to l
 - **`samp-filterscript-engineering`** — Standalone hot-reloadable filterscripts, CallRemoteFunction IPC, resource cleanup.
 - **`samp-include-library-design`** — Reusable community includes, ALS hook chaining, tag safety, sampctl publishing.
 - **`samp-textdraw-ui-craft`** — Responsive 640x480 TextDraws, texture sprites (Font 4), 3D model previews (Font 5).
+- **`samp-textdraw-fivem-modern-design`** — FiveM/NoPixel/QBox/Ox_lib rounded TextDraws (`LD_BEAT:chit`), 16:9 aspect math, Dark Slate Glass HUD, Speedo, Toast, Skill-Check & 256 pool budgeting.
+- **`samp-modern-jobs-2026-logic`** — Modern 2026 FSM multi-stage jobs, TextDraw skill-check minigames, Co-op Party jobs, closed-loop dynamic economy & anti-exploit payout validation.
+- **`samp-modern-creator-2026`** — Full-stack 2026 SA-MP/open.mp creator playbook: `[E]`/`[Y]` proximity interaction, cinematic onboarding, Smartphone/MDT, persistent garages & modular open.mp architecture.
+- **`samp-mobile-android-cef-ui`** — Cross-platform PC + SA-MP Mobile Android touch-safe TextDraws & `samp-cef` hybrid fallback engineering.
 - **`samp-voice-spatial-audio`** — sampvoice 3D spatial proximity voice, walkie-talkie radio channels, push-to-talk.
 - **`samp-colandreas-physics`** — Server-side map collision, CA_RaycastLine bullet validation, ground elevation.
 - **`samp-raknet-packet-sync`** — Pawn.RakNet packet hooking, BitStreams, RPC interception, desync compensation.
