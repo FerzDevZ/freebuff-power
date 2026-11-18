@@ -39,8 +39,8 @@ C_RESET='\033[0m'
 
 show_help() {
   echo -e "${C_CYAN}${C_BOLD}========================================================================================${C_RESET}"
-  echo -e "${C_YELLOW}${C_BOLD}⚡ FREEPI-POWER SUPREME — Native FreePi (freepi.ai) Swarm Suite (v11.1)${C_RESET}"
-  echo -e "${C_DIM}Powered by FreePi (free-pi-cli) + 97 Production Agents + 588 Skills + SA-MP 2026 Studio${C_RESET}"
+  echo -e "${C_YELLOW}${C_BOLD}⚡ FREEPI-POWER SUPREME — Native FreePi (freepi.ai) Swarm Suite (v11.2)${C_RESET}"
+  echo -e "${C_DIM}Powered by FreePi (free-pi-cli) + 99 Production Agents + 591 Skills + FiveM-Style SA-MP 2026${C_RESET}"
   echo -e "${C_CYAN}${C_BOLD}========================================================================================${C_RESET}\n"
   echo -e "${C_BOLD}PENGGUNAAN:${C_RESET}"
   echo -e "  ${C_GREEN}freepi-power${C_RESET} ${C_YELLOW}<command>${C_RESET} [arguments] [options]\n"
@@ -119,11 +119,13 @@ show_freepi_commands() {
   echo -e "  ${C_CYAN}/help${C_RESET} & ${C_CYAN}/exit${C_RESET}               Bantuan & keluar dari FreePi\n"
 
   echo -e "${C_PURPLE}${C_BOLD}3. SLASH COMMANDS AGENT SUPERPOWER (otomatis di ~/.free-pi/agent/prompts/):${C_RESET}"
-  echo -e "  ${C_YELLOW}/samp-textdraw-fivem-master${C_RESET} Aktifkan persona Master TextDraw FiveM/NoPixel/Ox_lib"
-  echo -e "  ${C_YELLOW}/samp-modern-jobs-architect${C_RESET} Aktifkan persona Arsitek Job Modern 2026 & Ekonomi"
-  echo -e "  ${C_YELLOW}/samp-creator-2026${C_RESET}          Aktifkan persona Full-Stack Creator Server SA-MP 2026"
-  echo -e "  ${C_YELLOW}/openmp-plugin-creator${C_RESET}      Aktifkan persona Pembuat Komponen C++ open.mp"
-  echo -e "  ${C_YELLOW}/samp-legacy-migrator${C_RESET}       Aktifkan persona Migrasi SA-MP 0.3.7 ke open.mp\n"
+  echo -e "  ${C_YELLOW}/samp-textdraw-fivem-master${C_RESET}   Master TextDraw FiveM/NoPixel/Ox_lib (rounded, 16:9, radial, hotbar)"
+  echo -e "  ${C_YELLOW}/samp-mapping-mlo-architect${C_RESET}   Master MLO Mapping, Dynamic Objects, Retexture, ox_doorlock & Actors"
+  echo -e "  ${C_YELLOW}/samp-fivem-systems-engineer${C_RESET}  Master FiveM ox_target, ox_lib, ox_inventory Metadata & QBox di PAWN"
+  echo -e "  ${C_YELLOW}/samp-modern-jobs-architect${C_RESET}   Arsitek Job Modern 2026 (FSM, minigame, Co-op Party, dynamic economy)"
+  echo -e "  ${C_YELLOW}/samp-creator-2026${C_RESET}            Full-Stack Creator Server SA-MP/open.mp 2026 (PC + Android Mobile)"
+  echo -e "  ${C_YELLOW}/openmp-plugin-creator${C_RESET}        Pembuat Komponen C++ open.mp SDK"
+  echo -e "  ${C_YELLOW}/samp-legacy-migrator${C_RESET}         Migrasi SA-MP 0.3.7 ke open.mp\n"
   exit 0
 }
 
@@ -143,7 +145,7 @@ case "$CMD" in
     ;;
 
   version|--version|-v)
-    echo -e "${C_YELLOW}${C_BOLD}freepi-power${C_RESET} v11.1 (Dual-Engine Superpower Suite)"
+    echo -e "${C_YELLOW}${C_BOLD}freepi-power${C_RESET} v11.2 (Dual-Engine FiveM-Style 2026 Superpower Suite)"
     "$SCRIPT_DIR/freepi-runner.sh" --version
     ;;
 

@@ -1,15 +1,15 @@
 <div align="center">
 
-# ⚡ FREEBUFF-POWER & FREEPI-POWER SUPREME SUITE (v11.1)
-### Autonomous Cognitive Swarm with 97 Production Agents, 588 Curated Skills, Native FreePi (freepi.ai) Engine, GTA SA-MP / open.mp 2026 & FiveM TextDraw Studio, Anti-Slop Linter & Enterprise Anti-Ban
+# ⚡ FREEBUFF-POWER & FREEPI-POWER SUPREME SUITE (v11.2)
+### Autonomous Cognitive Swarm with 99 Production Agents, 591 Curated Skills, Native FreePi (freepi.ai) Engine, FiveM-Style SA-MP / open.mp 2026 Studio (MLO, ox_target, ox_lib, ox_inventory, FiveM TextDraw) & Anti-Ban
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![FreePi: freepi.ai](https://img.shields.io/badge/FreePi-freepi.ai%20Native%20CLI-blue.svg)](https://freepi.ai)
-[![Sub-Agents: 97](https://img.shields.io/badge/Sub--Agents-97%20Specialized-blueviolet.svg)](#-roster-97-specialized-production-agents)
-[![Modular Skills: 588](https://img.shields.io/badge/Modular%20Skills-588%20Curated-emerald.svg)](#-katalog-588-modular-skills)
-[![SA-MP & open.mp 2026](https://img.shields.io/badge/SA--MP%20%26%20open.mp-2026%20Modern%20Suite-orange.svg)](#3--gta-sa-mp--openmp-modern-2026-studio)
+[![Sub-Agents: 99](https://img.shields.io/badge/Sub--Agents-99%20Specialized-blueviolet.svg)](#-roster-99-specialized-production-agents)
+[![Modular Skills: 591](https://img.shields.io/badge/Modular%20Skills-591%20Curated-emerald.svg)](#-katalog-591-modular-skills)
+[![SA-MP & open.mp 2026](https://img.shields.io/badge/SA--MP%20%26%20open.mp-FiveM--Style%202026-orange.svg)](#3--gta-sa-mp--openmp-supreme-suite)
 [![Swarm Score: 100/100 A+](https://img.shields.io/badge/Swarm%20Rating-100%2F100%20Grade%20A%2B-brightgreen.svg)](#-autonomous-swe-bench-evaluator)
-[![Anti-Ban: Active](https://img.shields.io/badge/Anti--Ban%20Shield-Active%20v11.1-brightgreen.svg)](#-proteksi-anti-ban--stealth-sandbox)
+[![Anti-Ban: Active](https://img.shields.io/badge/Anti--Ban%20Shield-Active%20v11.2-brightgreen.svg)](#-proteksi-anti-ban--stealth-sandbox)
 [![Platform: Linux & macOS](https://img.shields.io/badge/Platform-Linux%20%7C%20macOS-informational.svg)](#-instalasi-instan-1-line-universal-dual-installer)
 
 ```
@@ -201,14 +201,16 @@ Suite terintegrasi terlengkap di dunia untuk pengembang server SA-MP dan open.mp
 
 ---
 
-## 👥 Roster 97 Specialized Production Agents
+## 👥 Roster 99 Specialized Production Agents
 
 Katalog lengkap persona spesialis dalam `.agents/agents/<nama>.md` (dan otomatis tersedia sebagai `/slash-command` di dalam FreePi!):
 
-### 🎮 GTA SA-MP & open.mp Master 2026 Suite (14 Agents)
-1. **`@samp-textdraw-fivem-master`**: Master TextDraw FiveM / NoPixel / QBox / Ox_lib (rounded `LD_BEAT:chit`, 16:9 math, HUD, Speedo, Toast, Skill-Check).
-2. **`@samp-modern-jobs-architect`**: Arsitek Job Modern 2026 & Ekonomi Tertutup (FSM multi-stage jobs, minigame, Co-op Party, dynamic market, anti-exploit).
-3. **`@samp-creator-2026`**: Full-Stack Server Creator 2026 (FiveM UX di PAWN, `[E]`/`[Y]` proximity interaction, Smartphone/MDT, PC + SA-MP Mobile Android).
+### 🎮 GTA SA-MP & open.mp FiveM-Style 2026 Master Suite (16 Agents)
+1. **`@samp-textdraw-fivem-master`**: Master TextDraw FiveM / NoPixel / QBox / Ox_lib (rounded `LD_BEAT:chit`, 16:9 math, HUD, Speedo, Toast, Skill-Check, Polar Radial Wheel, Hotbar `[1-5]`).
+2. **`@samp-mapping-mlo-architect`**: Master MLO Mapping & Dynamic Objects (`SetDynamicObjectMaterial`/`MaterialText`, anti-fall `Streamer_UpdateEx`, `ox_doorlock`, Dynamic Actors, vehicle/player props, live furniture editor).
+3. **`@samp-fivem-systems-engineer`**: Master FiveM-to-PAWN Systems (`ox_target` Third-Eye camera raycast, `ox_lib` Notify/ProgressBar/SkillCheck/Radial, `ox_inventory` Grid+Metadata+Hotbar+Anti-Dupe & `QBox` state guards).
+4. **`@samp-modern-jobs-architect`**: Arsitek Job Modern 2026 & Ekonomi Tertutup (FSM multi-stage jobs, minigame, Co-op Party, dynamic market, anti-exploit).
+5. **`@samp-creator-2026`**: Full-Stack Server Creator 2026 (FiveM UX di PAWN, `[E]`/`[Y]` proximity interaction, Smartphone/MDT, PC + SA-MP Mobile Android).
 4. **`@samp-developer`**: Lead Developer SA-MP & open.mp (Pawn & modern architecture).
 5. **`@samp-server-admin`**: Sysadmin & Server Operations (Linux systemd, `server.cfg`, `config.json`).
 6. **`@samp-pawn-wizard`**: Expert Advanced PAWN (YSI 5 framework, ALS hooks, RakNet, y_timers).
@@ -249,11 +251,11 @@ Katalog lengkap persona spesialis dalam `.agents/agents/<nama>.md` (dan otomatis
 
 ---
 
-## 🧰 Katalog 588 Modular Skills
+## 🧰 Katalog 591 Modular Skills
 
 Seluruh skill tersimpan rapi mengikuti standar resmi **AgentSkills** di `.agents/skills/<nama>/SKILL.md`:
 
-* **GTA SA-MP & open.mp 2026 (27 Skills):** `samp-textdraw-fivem-modern-design`, `samp-modern-jobs-2026-logic`, `samp-modern-creator-2026`, `samp-mobile-android-cef-ui`, `samp-vs-openmp-encyclopedia`, `samp-roleplay-systems-bible`, `samp-high-performance-tuning`, `samp-textdraw-ui-craft`, `samp-voice-spatial-audio`, `samp-colandreas-physics`, `samp-raknet-packet-sync`, `samp-custom-models-cdn`, `samp-discord-connector`, `samp-inventory-item-system`, `openmp-cpp-component-sdk`, `samp-legacy-openmp-migrator`, `samp-crashdetect-debugger`, `samp-filterscript-engineering`, `samp-include-library-design`, `samp-pawn-scripting`, `samp-server-configuration`, `samp-mysql-database`, `samp-streamer-plugin`, `samp-dialog-system`, `samp-anticheat-system`, `samp-ysi-framework`, `samp-gamemode-architecture`.
+* **GTA SA-MP & open.mp FiveM-Style 2026 (30 Skills):** `samp-mapping-dynamic-objects-pro`, `samp-fivem-oxlib-target-logic`, `samp-fivem-inventory-metadata`, `samp-textdraw-fivem-modern-design`, `samp-modern-jobs-2026-logic`, `samp-modern-creator-2026`, `samp-mobile-android-cef-ui`, `samp-vs-openmp-encyclopedia`, `samp-roleplay-systems-bible`, `samp-high-performance-tuning`, `samp-textdraw-ui-craft`, `samp-voice-spatial-audio`, `samp-colandreas-physics`, `samp-raknet-packet-sync`, `samp-custom-models-cdn`, `samp-discord-connector`, `samp-inventory-item-system`, `openmp-cpp-component-sdk`, `samp-legacy-openmp-migrator`, `samp-crashdetect-debugger`, `samp-filterscript-engineering`, `samp-include-library-design`, `samp-pawn-scripting`, `samp-server-configuration`, `samp-mysql-database`, `samp-streamer-plugin`, `samp-dialog-system`, `samp-anticheat-system`, `samp-ysi-framework`, `samp-gamemode-architecture`.
 * **Anti-Slop & Desain (10 Skills):** `antislop`, `antislop-ui`, `antislop-code`, `antislop-copywriting`, `antislop-human`, `antislop-layoutmobile`, `shadcn-radix-headless-craft`, `tailwind-fluid-typography-master`, `framer-motion-animation-wizard`, `deck-swiss-international`.
 * **Frontend & Web Apps (50+ Skills):** `nextjs-turbopack`, `frontend-patterns`, `react19-nextjs15-modern-craft`, `threejs-webgl-3d-experience`, `bento-grid-dashboard-ui`, `canvas-charting-high-frequency`.
 * **Backend & Systems (70+ Skills):** `bun-runtime-hyper-fast-apis`, `cloudflare-edge-workers-caching`, `golang-concurrency-patterns`, `fastapi-patterns`, `duckdb-embedded-olap-sql`, `redis-distributed-locking-caching`.

@@ -202,10 +202,28 @@ stock PlayerText:CreateFiveMButton(playerid, Float:x, Float:y, Float:w, Float:h,
   - Crisp status indicators: `ENG` | `LCK` | `BELT` | `LGT` (color flips between `UI_TEXT_MUTED` and `UI_ACCENT_PRIMARY`).
   - Update timer: `150ms`–`200ms` while in vehicle (`PLAYER_STATE_DRIVER`), destroy on exit!
 
-### D. Context Interaction Prompt (`[E] Open Garage`)
+### D. Context Interaction Prompt (`[E] Open Garage`) & `ox_target` Third-Eye Reticle
 - Small floating pill at lower-center or left-center (`x = 275.0, y = 425.0`):
-  - Bright keycap badge (`[Y]` or `[E]` or touch button on mobile) + dark glass pill with action text (`Open Mechanic Menu`).
-  - Replaces legacy `/cmd` guesswork with instant FiveM ergonomics!
+  - Bright keycap badge (`[Y]` or `[E]` or clickable touch pill on mobile) + dark glass pill with action text (`Open Mechanic Menu`).
+- **Third-Eye Reticle (`[ALT]` Target Mode):**
+  - Center dot (`LD_BEAT:chit`, `x = 317.75, y = 237.0, w = 4.5, h = 6.0` — 16:9 corrected circle!).
+  - Idle color `0xFFFFFFAA`, flips to Emerald `0x10B981FF` when camera raycast locks onto a Dynamic Object / Actor / Vehicle, spawning 1–4 sleek stacked action pills at `x = 330.0, y = 232.0 + (i * 18.0)`.
+
+### E. Polar Radial Menu (`[F1]` Wheel)
+- Place `N = 6` or `8` selectable rounded pill nodes in a circle around `(320.0, 240.0)` with `radiusY = 76.0` and `radiusX = 76.0 * 0.75 = 57.0`:
+  ```pawn
+  new Float:angle = (360.0 / float(count)) * float(i) - 90.0;
+  new Float:px = 320.0 + (57.0 * floatcos(angle, degrees)) - (pillW / 2.0);
+  new Float:py = 240.0 + (76.0 * floatsin(angle, degrees)) - (pillH / 2.0);
+  ```
+- Center hub (`LD_BEAT:chit` + `[X]` sprite) closes the wheel cleanly (critical for SA-MP Mobile!).
+
+### F. FiveM Quick Hotbar (`[1][2][3][4][5]`)
+- Bottom-center (`y = 434.0`), 5 square aspect-corrected tiles (`w = 27.0, h = 36.0`, gap `5.0`) displaying Font 5 3D item previews + top-left keycap badge (`1`..`5`) + 2px bottom durability bar.
+- Auto-fades out (`alpha -> 0x00`) after 4 seconds of inactivity unless player switches slot or opens inventory (true NoPixel 4.0 minimalism!).
+
+### G. Smooth Cubic Ease-Out Fade & Slide Animation
+- Animate Toast alpha (`0x00 -> 0xE6`) and Progress Bar width over `8` steps at `25ms` (`EaseOutCubic(t) = 1.0 - (1.0 - t)^3`) for buttery FiveM NUI motion without overloading server ticks.
 
 ---
 

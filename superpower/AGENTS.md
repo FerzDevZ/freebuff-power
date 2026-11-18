@@ -1,8 +1,8 @@
-# ⚡ Freebuff-Power & FreePi-Power Ultra v11.1 (ECC Performance Architecture + Anti-Slop Swarm)
+# ⚡ Freebuff-Power & FreePi-Power Ultra v11.2 (ECC Performance Architecture + Anti-Slop Swarm)
 
 > **AUTONOMOUS ACTIVATION DIRECTIVE:**
 > When `@AGENTS.md` is present in session context (in Freebuff or FreePi freepi.ai), immediately activate the **Autonomous Cognitive Swarm Engine**.
-> Equipped with **97 Specialized Production Agents**, **588 Curated High-Leverage Skills** (`.agents/skills/<name>/SKILL.md`), and **23 Language/Framework Rules** (`.agents/rules/`).
+> Equipped with **99 Specialized Production Agents**, **591 Curated High-Leverage Skills** (`.agents/skills/<name>/SKILL.md`), and **23 Language/Framework Rules** (`.agents/rules/`).
 > You do NOT require manual micromanagement. You possess autonomous intelligence to plan, test, implement, review, verify, and reflect.
 
 ---
@@ -71,7 +71,9 @@ Specialized personas located in `.agents/agents/<name>.md`. Adopt or spawn proac
 | **`@samp-legacy-migrator`** | SA-MP 0.3.7 to open.mp migration & crash triage | Runtime error 19, memory hack removal, YSI 5 upgrade |
 | **`@samp-filterscript-master`** | Standalone filterscripts, IPC & include libraries | Dynamic load/unload safety, CallRemoteFunction, ALS hooks |
 | **`@samp-textdraw-ui-designer`** | Responsive 640x480 TextDraws, HUDs & preview models | UI/UX design, clickable menus, speedometer, inventory |
-| **`@samp-textdraw-fivem-master`** | FiveM/NoPixel/Ox_lib rounded TextDraw & HUD master | Rounded `LD_BEAT:chit` cards, 16:9 math, Speedo, Toast, Skill-Check |
+| **`@samp-textdraw-fivem-master`** | FiveM/NoPixel/Ox_lib rounded TextDraw & HUD master | Rounded `LD_BEAT:chit` cards, 16:9 math, Speedo, Toast, Skill-Check, Radial Wheel |
+| **`@samp-mapping-mlo-architect`** | MLO custom mapping, dynamic objects & retexturing | `SetDynamicObjectMaterial`, anti-fall `Streamer_UpdateEx`, `ox_doorlock`, Actors |
+| **`@samp-fivem-systems-engineer`** | FiveM-to-PAWN `ox_target`, `ox_lib`, `ox_inventory` & QBox | Third-Eye raycast, ProgressBar/SkillCheck/Radial, Grid+Metadata+Hotbar+Anti-Dupe |
 | **`@samp-modern-jobs-architect`** | Modern 2026 FSM multi-stage jobs & closed-loop economy | Trucking, Mining/Fishing minigames, Co-op Party, Dynamic Market |
 | **`@samp-creator-2026`** | Full-stack 2026 SA-MP & open.mp server creator | FiveM UX in PAWN, `[E]`/`[Y]` interaction, Smartphone, PC + Android |
 | **`@samp-voice-audio-engineer`** | 3D spatial proximity audio & radio frequency channels | sampvoice integration, microphone telemetry, walkie-talkie |
@@ -144,7 +146,10 @@ Use the native **`skill({ name: "<skill-name>" })`** tool or read on-demand to l
 - **`samp-filterscript-engineering`** — Standalone hot-reloadable filterscripts, CallRemoteFunction IPC, resource cleanup.
 - **`samp-include-library-design`** — Reusable community includes, ALS hook chaining, tag safety, sampctl publishing.
 - **`samp-textdraw-ui-craft`** — Responsive 640x480 TextDraws, texture sprites (Font 4), 3D model previews (Font 5).
-- **`samp-textdraw-fivem-modern-design`** — FiveM/NoPixel/QBox/Ox_lib rounded TextDraws (`LD_BEAT:chit`), 16:9 aspect math, Dark Slate Glass HUD, Speedo, Toast, Skill-Check & 256 pool budgeting.
+- **`samp-textdraw-fivem-modern-design`** — FiveM/NoPixel/QBox/Ox_lib rounded TextDraws (`LD_BEAT:chit`), 16:9 aspect math, Dark Slate Glass HUD, Speedo, Toast, Skill-Check, Polar Radial Wheel, Hotbar `[1-5]` & 256 pool budgeting.
+- **`samp-mapping-dynamic-objects-pro`** — Modern MLO mapping, `SetDynamicObjectMaterial`/`MaterialText` retexturing, anti-fall `Streamer_UpdateEx` floor preloading, `SetDynamicObjectNoCameraCol`, `ox_doorlock` animated doors, vehicle/player props, `EditDynamicObject` furniture editor & Dynamic Actors.
+- **`samp-fivem-oxlib-target-logic`** — FiveM `ox_target` Third-Eye camera raycast targeting, `ox_lib` Notify/ProgressBar/SkillCheck/RadialMenu framework & `QBox` event-driven state guards in PAWN.
+- **`samp-fivem-inventory-metadata`** — FiveM `ox_inventory` dual-panel visual grid, integer gram weight, rich per-slot metadata (weapon serial/durability, vehicle keys, IDs), Hotbar `[1-5]`, 3D drop bags & anti-dupe stash mutex.
 - **`samp-modern-jobs-2026-logic`** — Modern 2026 FSM multi-stage jobs, TextDraw skill-check minigames, Co-op Party jobs, closed-loop dynamic economy & anti-exploit payout validation.
 - **`samp-modern-creator-2026`** — Full-stack 2026 SA-MP/open.mp creator playbook: `[E]`/`[Y]` proximity interaction, cinematic onboarding, Smartphone/MDT, persistent garages & modular open.mp architecture.
 - **`samp-mobile-android-cef-ui`** — Cross-platform PC + SA-MP Mobile Android touch-safe TextDraws & `samp-cef` hybrid fallback engineering.

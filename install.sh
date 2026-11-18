@@ -24,8 +24,8 @@ C_RESET='\033[0m'
 
 clear 2>/dev/null || true
 echo -e "${C_CYAN}${C_BOLD}========================================================================${C_RESET}"
-echo -e "${C_YELLOW}${C_BOLD}⚡ FREEBUFF-POWER & FREEPI-POWER SUPREME DUAL SUITE (v11.1)${C_RESET}"
-echo -e "${C_DIM}FreePi (freepi.ai) + Freebuff Cognitive Swarm (97 Agents & 588 Skills)${C_RESET}"
+echo -e "${C_YELLOW}${C_BOLD}⚡ FREEBUFF-POWER & FREEPI-POWER SUPREME DUAL SUITE (v11.2)${C_RESET}"
+echo -e "${C_DIM}FreePi (freepi.ai) + Freebuff Cognitive Swarm (99 Agents & 591 Skills)${C_RESET}"
 echo -e "${C_CYAN}${C_BOLD}========================================================================${C_RESET}\n"
 
 INSTALL_BIN_DIR="$HOME/.local/bin"
@@ -149,8 +149,10 @@ mkdir -p "$HOME/.free-pi/agent/prompts" "$HOME/.free-pi/agent/skills"
 if [ -d "$SUPERPOWER_DIR/agents" ]; then
   cp -f "$SUPERPOWER_DIR/agents/"*.md "$HOME/.free-pi/agent/prompts/" 2>/dev/null || true
 fi
-if [ -x "$INSTALL_BIN_DIR/freepi-pack.sh" ] && [ -z "$(ls -A "$HOME/.free-pi/agent/skills" 2>/dev/null)" ]; then
-  "$INSTALL_BIN_DIR/freepi-pack.sh" samp >/dev/null 2>&1 || true
+if [ -x "$INSTALL_BIN_DIR/freepi-pack.sh" ]; then
+  if [ -z "$(ls -A "$HOME/.free-pi/agent/skills" 2>/dev/null)" ] || [ -d "$HOME/.free-pi/agent/skills/samp-textdraw-fivem-modern-design" ]; then
+    "$INSTALL_BIN_DIR/freepi-pack.sh" samp >/dev/null 2>&1 || true
+  fi
 fi
 
 # 4. Install & Build Standalone freebuff-proxy Suite
@@ -215,7 +217,7 @@ echo -e "${C_GREEN}${C_BOLD}====================================================
 echo -e "\n🔥 Sekarang kamu bisa menggunakan kedua perintah secara bebas di folder mana pun:\n"
 
 echo -e "  ${C_CYAN}${C_BOLD}[ FREEPI-POWER (freepi.ai — Native CLI) ]${C_RESET}"
-echo -e "  \033[0;36m\033[1mfreepi-power start\033[0m            \033[2m# Mulai sesi FreePi + injeksi 97 agents & 588 skills\033[0m"
+echo -e "  \033[0;36m\033[1mfreepi-power start\033[0m            \033[2m# Mulai sesi FreePi + injeksi ${TOTAL_AGENTS} agents & ${TOTAL_SKILLS} skills\033[0m"
 echo -e "  \033[0;36m\033[1mfreepi-power session\033[0m          \033[2m# Lihat semua sesi FreePi tersimpan & lanjutkan via ID\033[0m"
 echo -e "  \033[0;36m\033[1mfreepi-power continue\033[0m         \033[2m# Lanjutkan sesi terakhir di folder aktif\033[0m"
 echo -e "  \033[0;36m\033[1mfreepi-power commands\033[0m         \033[2m# Lihat seluruh perintah CLI & /slash command FreePi\033[0m"

@@ -1,7 +1,7 @@
 {
   "name": "freebuff-power",
-  "version": "11.1.0",
-  "description": "Freebuff-Power & FreePi-Power Supreme Dual Suite (v11.1): 97 Production Agents, 588 Skills, GTA SA-MP / open.mp 2026 & FiveM TextDraw Studio, Native freepi.ai CLI Engine, Anti-Ban & Multi-IDE Exporter",
+  "version": "11.2.0",
+  "description": "Freebuff-Power & FreePi-Power Supreme Dual Suite (v11.2): 99 Production Agents, 591 Skills, FiveM-Style SA-MP/open.mp 2026 Studio (MLO Mapping, ox_target, ox_lib, ox_inventory, TextDraw FiveM), Native freepi.ai CLI Engine & Anti-Ban",
   "main": "bin/freebuff-power",
   "bin": {
     "freebuff-power": "./bin/freebuff-power",
