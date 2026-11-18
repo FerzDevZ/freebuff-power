@@ -437,6 +437,14 @@ case "$COMMAND" in
         shift || true
         exec "$SCRIPT_DIR/samp-audit.sh" "$@"
         ;;
+      td-preview|preview|td)
+        shift || true
+        exec node "$SCRIPT_DIR/samp-td-preview.js" "$@"
+        ;;
+      map-upgrade|map|mlo)
+        shift || true
+        exec node "$SCRIPT_DIR/samp-map-upgrade.js" "$@"
+        ;;
       heal|fix|compile|build)
         shift || true
         exec "$SCRIPT_DIR/samp-heal.sh" "$@"
@@ -452,6 +460,10 @@ case "$COMMAND" in
         exec "$SCRIPT_DIR/samp-audit.sh" "$@"
         ;;
     esac
+    ;;
+
+  test|selftest|verify)
+    exec "$SCRIPT_DIR/self-test.sh"
     ;;
 
   pi|freepi|free-pi)

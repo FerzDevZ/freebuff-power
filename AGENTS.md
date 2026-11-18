@@ -1,8 +1,8 @@
-# ⚡ Freebuff-Power & FreePi-Power Ultra v11.2 (ECC Performance Architecture + Anti-Slop Swarm)
+# ⚡ Freebuff-Power & FreePi-Power Ultra v11.3 (ECC Performance Architecture + Anti-Slop Swarm)
 
 > **AUTONOMOUS ACTIVATION DIRECTIVE:**
 > When `@AGENTS.md` is present in session context (in Freebuff or FreePi freepi.ai), immediately activate the **Autonomous Cognitive Swarm Engine**.
-> Equipped with **99 Specialized Production Agents**, **591 Curated High-Leverage Skills** (`.agents/skills/<name>/SKILL.md`), and **23 Language/Framework Rules** (`.agents/rules/`).
+> Equipped with **101 Specialized Production Agents**, **599 Curated High-Leverage Skills** (`.agents/skills/<name>/SKILL.md`), and **23 Language/Framework Rules** (`.agents/rules/`).
 > You do NOT require manual micromanagement. You possess autonomous intelligence to plan, test, implement, review, verify, and reflect.
 
 ---
@@ -74,6 +74,8 @@ Specialized personas located in `.agents/agents/<name>.md`. Adopt or spawn proac
 | **`@samp-textdraw-fivem-master`** | FiveM/NoPixel/Ox_lib rounded TextDraw & HUD master | Rounded `LD_BEAT:chit` cards, 16:9 math, Speedo, Toast, Skill-Check, Radial Wheel |
 | **`@samp-mapping-mlo-architect`** | MLO custom mapping, dynamic objects & retexturing | `SetDynamicObjectMaterial`, anti-fall `Streamer_UpdateEx`, `ox_doorlock`, Actors |
 | **`@samp-fivem-systems-engineer`** | FiveM-to-PAWN `ox_target`, `ox_lib`, `ox_inventory` & QBox | Third-Eye raycast, ProgressBar/SkillCheck/Radial, Grid+Metadata+Hotbar+Anti-Dupe |
+| **`@samp-crime-faction-architect`** | FiveM Heist FSM, Gang Turf, Police MDT/CAD & EMS Medical | Bank/Store Heists, Dirty Money Laundering, 911 Dispatch, Last-Stand Revive |
+| **`@samp-ucp-fullstack-engineer`** | Next.js 15 UCP Web + Discord Bot + open.mp Shared MySQL | Discord OAuth2 Whitelist, `ucp_delivery_queue` VIP Sync, Staff RBAC Dashboard |
 | **`@samp-modern-jobs-architect`** | Modern 2026 FSM multi-stage jobs & closed-loop economy | Trucking, Mining/Fishing minigames, Co-op Party, Dynamic Market |
 | **`@samp-creator-2026`** | Full-stack 2026 SA-MP & open.mp server creator | FiveM UX in PAWN, `[E]`/`[Y]` interaction, Smartphone, PC + Android |
 | **`@samp-voice-audio-engineer`** | 3D spatial proximity audio & radio frequency channels | sampvoice integration, microphone telemetry, walkie-talkie |
@@ -150,6 +152,14 @@ Use the native **`skill({ name: "<skill-name>" })`** tool or read on-demand to l
 - **`samp-mapping-dynamic-objects-pro`** — Modern MLO mapping, `SetDynamicObjectMaterial`/`MaterialText` retexturing, anti-fall `Streamer_UpdateEx` floor preloading, `SetDynamicObjectNoCameraCol`, `ox_doorlock` animated doors, vehicle/player props, `EditDynamicObject` furniture editor & Dynamic Actors.
 - **`samp-fivem-oxlib-target-logic`** — FiveM `ox_target` Third-Eye camera raycast targeting, `ox_lib` Notify/ProgressBar/SkillCheck/RadialMenu framework & `QBox` event-driven state guards in PAWN.
 - **`samp-fivem-inventory-metadata`** — FiveM `ox_inventory` dual-panel visual grid, integer gram weight, rich per-slot metadata (weapon serial/durability, vehicle keys, IDs), Hotbar `[1-5]`, 3D drop bags & anti-dupe stash mutex.
+- **`samp-fivem-smartphone-mdt`** — FiveM LB-Phone/iPhone apps (`SMS/Call`, `M-Banking`, `Ads`, `Garage/GPS`, `Darkweb`), Police MDT/Dispatch CAD & EMS Last-Stand/Revive medical system.
+- **`samp-fivem-vehicle-tuning-garage`** — Persistent Garage/Valet/Impound, Vehicle Keys metadata, Fuel/Mileage/Part Wear, Flatbed Towing, Seatbelt, Cruise Control & Tuning persistence.
+- **`samp-fivem-heist-crime-gang`** — Multi-stage Heist FSM (`24/7`, `Jewelry`, `Bank Vault`), Police MDT alarms, min-police & cooldown guards, Dirty Money laundering, Gang Turf & Drug pipeline.
+- **`samp-fivem-housing-business-crafting`** — MLO Housing, `EditDynamicObject` furniture editor, closed-loop Player Businesses feeding Trucking jobs & Blueprint Crafting Benches.
+- **`samp-fivem-character-cinema-anim`** — Cinematic login camera, 3D Multi-Character Studio, Spawn Selector Map, Accessory Editor (`EditAttachedObject`) & Prop/Shared Emotes.
+- **`samp-ucp-web-panel-bridge`** — Next.js 15 Web UCP + Discord Bot + `ucp_delivery_queue` race-condition-free donation/VIP sync with open.mp MySQL R41-4.
+- **`samp-textdraw-studio-converter`** — Exact Figma `1920x1080` -> SA-MP `640x480` formulas & 5-step TDEditor/TDW modular refactoring + `td-preview` 16:9 Canvas verification.
+- **`openmp-modern-2026-api`** — Authoritative `<open.mp>` strict tag system, built-in modern natives (zero YSF/SKY hacks), `artwork.cdn` FastDL, `pawncc 3.10.10+` flags & `config.json` hardening.
 - **`samp-modern-jobs-2026-logic`** — Modern 2026 FSM multi-stage jobs, TextDraw skill-check minigames, Co-op Party jobs, closed-loop dynamic economy & anti-exploit payout validation.
 - **`samp-modern-creator-2026`** — Full-stack 2026 SA-MP/open.mp creator playbook: `[E]`/`[Y]` proximity interaction, cinematic onboarding, Smartphone/MDT, persistent garages & modular open.mp architecture.
 - **`samp-mobile-android-cef-ui`** — Cross-platform PC + SA-MP Mobile Android touch-safe TextDraws & `samp-cef` hybrid fallback engineering.

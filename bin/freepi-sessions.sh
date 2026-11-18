@@ -128,6 +128,57 @@ console.log(`  ${C.green}freepi-power session new${C.reset}       Mulai sesi bar
 '
     ;;
 
+  pick|select|open)
+    SESSION_LIST=$(node -e '
+const fs = require("fs");
+const path = require("path");
+const os = require("os");
+const root = path.join(os.homedir(), ".free-pi", "agent", "sessions");
+if (!fs.existsSync(root)) process.exit(0);
+const out = [];
+for (const d of fs.readdirSync(root, { withFileTypes: true })) {
+  if (!d.isDirectory()) continue;
+  for (const f of fs.readdirSync(path.join(root, d.name), { withFileTypes: true })) {
+    if (!f.isFile() || !f.name.endsWith(".jsonl")) continue;
+    const fp = path.join(root, d.name, f.name);
+    const stat = fs.statSync(fp);
+    let id = f.name.replace(/\.jsonl$/, "").split("_").pop();
+    let cwd = d.name, model = "-";
+    try {
+      for (const line of fs.readFileSync(fp, "utf8").split("\n").slice(0, 15)) {
+        if (!line.trim()) continue;
+        const o = JSON.parse(line);
+        if (o.type === "session") { if (o.id) id = o.id; if (o.cwd) cwd = o.cwd; }
+        else if (o.type === "model_change" && o.modelId) model = o.modelId;
+      }
+    } catch {}
+    out.push({ id, cwd, model, mtime: stat.mtimeMs });
+  }
+}
+out.sort((a, b) => b.mtime - a.mtime);
+out.slice(0, 15).forEach((s, i) => console.log(`${i + 1}|${s.id}|${s.cwd}|${s.model}`));
+')
+    if [ -z "$SESSION_LIST" ]; then
+      echo -e "\033[0;33mBelum ada sesi FreePi tersimpan. Jalankan 'freepi-power start'.\033[0m"
+      exit 0
+    fi
+    echo -e "\033[0;36m\033[1m📂 PILIH SESI FREEPI UNTUK DILANJUTKAN:\033[0m\n"
+    while IFS='|' read -r idx sid scwd smodel; do
+      echo -e "  \033[0;32m\033[1m[${idx}]\033[0m ${sid}  \033[2m(${smodel})\033[0m — \033[0;36m${scwd}\033[0m"
+    done <<< "$SESSION_LIST"
+    echo ""
+    read -r -p "Masukkan nomor sesi (1-15, atau Enter untuk batal): " CHOICE
+    if [ -z "${CHOICE:-}" ]; then
+      exit 0
+    fi
+    SELECTED_ID=$(echo "$SESSION_LIST" | awk -F'|' -v n="$CHOICE" '$1 == n { print $2; exit }')
+    if [ -z "$SELECTED_ID" ]; then
+      echo -e "\033[0;31m❌ Nomor sesi tidak valid: $CHOICE\033[0m"
+      exit 1
+    fi
+    exec "$SCRIPT_DIR/freepi-runner.sh" --session "$SELECTED_ID"
+    ;;
+
   continue|resume|last)
     exec "$SCRIPT_DIR/freepi-runner.sh" --continue
     ;;
@@ -139,6 +190,7 @@ console.log(`  ${C.green}freepi-power session new${C.reset}       Mulai sesi bar
   -h|--help|help)
     echo -e "\033[1mPenggunaan freepi-power session:\033[0m"
     echo -e "  \033[0;32mfreepi-power session\033[0m           Tampilkan daftar semua sesi FreePi tersimpan"
+    echo -e "  \033[0;32mfreepi-power session pick\033[0m      Pilih sesi lewat nomor urut interaktif (tanpa copy UUID)"
     echo -e "  \033[0;32mfreepi-power session <id>\033[0m      Buka & lanjutkan sesi dengan ID tertentu"
     echo -e "  \033[0;32mfreepi-power session continue\033[0m  Lanjutkan sesi terakhir di folder aktif"
     echo -e "  \033[0;32mfreepi-power session new\033[0m       Mulai sesi baru yang bersih"

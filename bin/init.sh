@@ -87,7 +87,7 @@ check_pattern() {
   local pattern="$1"
   local desc="$2"
   local matches
-  matches=$(git diff origin/main..HEAD 2>/dev/null | grep -E "^\+" | grep -E "$pattern" || true)
+  matches=$(git diff origin/main..HEAD 2>/dev/null | grep -E "^\+" | grep -E -e "$pattern" || true)
   if [ -n "$matches" ]; then
     echo -e "\033[0;31m[CRITICAL LEAK DETECTED] $desc\033[0m"
     LEAKS=$((LEAKS + 1))

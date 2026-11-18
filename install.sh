@@ -24,8 +24,8 @@ C_RESET='\033[0m'
 
 clear 2>/dev/null || true
 echo -e "${C_CYAN}${C_BOLD}========================================================================${C_RESET}"
-echo -e "${C_YELLOW}${C_BOLD}⚡ FREEBUFF-POWER & FREEPI-POWER SUPREME DUAL SUITE (v11.2)${C_RESET}"
-echo -e "${C_DIM}FreePi (freepi.ai) + Freebuff Cognitive Swarm (99 Agents & 591 Skills)${C_RESET}"
+echo -e "${C_YELLOW}${C_BOLD}⚡ FREEBUFF-POWER & FREEPI-POWER SUPREME DUAL SUITE (v11.3)${C_RESET}"
+echo -e "${C_DIM}FreePi (freepi.ai) + Freebuff Cognitive Swarm (101 Agents & 599 Skills)${C_RESET}"
 echo -e "${C_CYAN}${C_BOLD}========================================================================${C_RESET}\n"
 
 INSTALL_BIN_DIR="$HOME/.local/bin"
@@ -229,11 +229,13 @@ echo -e "  \033[0;33m\033[1mfreebuff-power local\033[0m          \033[2m# Koding
 echo -e "  \033[0;33m\033[1mfreebuff-power heal\033[0m           \033[2m# Autonomous SWE repair loop: perbaiki bug otomatis\033[0m"
 echo -e "  \033[0;33m\033[1mfreebuff-power ui\033[0m             \033[2m# Buka Interactive Terminal TUI Dashboard\033[0m\n"
 
-echo -e "  ${C_PURPLE}${C_BOLD}[ GTA SA-MP & OPEN.MP DEVELOPER SUITE ]${C_RESET}"
-echo -e "  \033[0;35m\033[1mfreepi-power samp audit .\033[0m     \033[2m# Deep code linter: OnPlayerUpdate lag, strcmp, SQL Injection\033[0m"
-echo -e "  \033[0;35m\033[1mfreepi-power samp heal main.pwn\033[0m \033[2m# Autonomous Pawn compiler & syntax error healer\033[0m"
-echo -e "  \033[0;35m\033[1mfreepi-power samp new openmp\033[0m   \033[2m# Scaffold open.mp gamemode modern (YSI 5 + MySQL)\033[0m"
-echo -e "  \033[0;35m\033[1mfreepi-power samp vs\033[0m          \033[2m# Kitab perbandingan teknis SA-MP legacy vs open.mp\033[0m\n"
+echo -e "  ${C_PURPLE}${C_BOLD}[ GTA SA-MP & OPEN.MP FIVE-M STYLE 2026 STUDIO ]${C_RESET}"
+echo -e "  \033[0;35m\033[1mfreepi-power samp audit .\033[0m           \033[2m# 10-point linter (<a_samp>, 1239, ARGB, 256 TD, OnPlayerUpdate)\033[0m"
+echo -e "  \033[0;35m\033[1mfreepi-power samp td-preview ui.pwn\033[0m \033[2m# Render visual HTML5 16:9 TextDraw mockup + hitboxes\033[0m"
+echo -e "  \033[0;35m\033[1mfreepi-power samp map-upgrade m.pwn\033[0m \033[2m# Auto-upgrade CreateObject kuno -> MLO 2026 + Streamer_UpdateEx\033[0m"
+echo -e "  \033[0;35m\033[1mfreepi-power samp heal main.pwn\033[0m     \033[2m# Autonomous Pawn compiler & syntax error healer\033[0m"
+echo -e "  \033[0;35m\033[1mfreepi-power samp new openmp\033[0m        \033[2m# Scaffold open.mp gamemode modern (YSI 5 + MySQL)\033[0m"
+echo -e "  \033[0;35m\033[1mfreepi-power test\033[0m                   \033[2m# Jalankan self-test CI suite (syntax, parity, smoke-tests)\033[0m\n"
 
 echo -e "  ${C_GREEN}${C_BOLD}[ ANTI-SLOP & HUMAN DESIGN ]${C_RESET}"
 echo -e "  \033[0;32m\033[1mfreepi-power antislop audit .\033[0m \033[2m# Pindai 40 aturan AI slop, gradien ungu, & buzzwords\033[0m"

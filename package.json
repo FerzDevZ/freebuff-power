@@ -1,7 +1,7 @@
 {
   "name": "freebuff-power",
-  "version": "11.2.0",
-  "description": "Freebuff-Power & FreePi-Power Supreme Dual Suite (v11.2): 99 Production Agents, 591 Skills, FiveM-Style SA-MP/open.mp 2026 Studio (MLO Mapping, ox_target, ox_lib, ox_inventory, TextDraw FiveM), Native freepi.ai CLI Engine & Anti-Ban",
+  "version": "11.3.0",
+  "description": "Freebuff-Power & FreePi-Power Supreme Dual Suite (v11.3): 101 Production Agents, 599 Skills, Full FiveM-Style SA-MP/open.mp 2026 Studio (MLO, ox_target, ox_lib, ox_inventory, Phone/MDT, Heist, Garage, UCP, TD Previewer), Native freepi.ai CLI & Anti-Ban",
   "main": "bin/freebuff-power",
   "bin": {
     "freebuff-power": "./bin/freebuff-power",
@@ -12,7 +12,7 @@
     "install:local": "./install.sh",
     "doctor": "./bin/freebuff-power doctor",
     "doctor:freepi": "./bin/freepi-power doctor",
-    "test": "./bin/freebuff-power doctor",
+    "test": "./bin/self-test.sh",
     "eval": "node bin/eval.js"
   },
   "keywords": [

@@ -53,13 +53,15 @@ case "$CMD" in
     sync_prompts
     ;;
 
-  samp|samp-modern|fivem)
-    echo -e "${C_CYAN}${C_BOLD}🎮 Mengaktifkan Skill Pack: SA-MP & open.mp FiveM-Style 2026 Master (10 Skills)...${C_RESET}"
+  samp|samp-modern|fivem|openmp)
+    echo -e "${C_CYAN}${C_BOLD}🎮 Mengaktifkan Skill Pack: open.mp & SA-MP FiveM-Style 2026 Core (12 Skills)...${C_RESET}"
     for s in \
+      openmp-modern-2026-api \
       samp-mapping-dynamic-objects-pro \
       samp-fivem-oxlib-target-logic \
       samp-fivem-inventory-metadata \
       samp-textdraw-fivem-modern-design \
+      samp-textdraw-studio-converter \
       samp-textdraw-ui-craft \
       samp-modern-jobs-2026-logic \
       samp-modern-creator-2026 \
@@ -71,8 +73,49 @@ case "$CMD" in
     sync_prompts
     ;;
 
+  samp-rp|fivem-rp)
+    echo -e "${C_CYAN}${C_BOLD}🏙️ Mengaktifkan Skill Pack: Full FiveM RP 2026 + open.mp Suite (18 Skills)...${C_RESET}"
+    for s in \
+      openmp-modern-2026-api \
+      samp-mapping-dynamic-objects-pro \
+      samp-fivem-oxlib-target-logic \
+      samp-fivem-inventory-metadata \
+      samp-fivem-smartphone-mdt \
+      samp-fivem-vehicle-tuning-garage \
+      samp-fivem-heist-crime-gang \
+      samp-fivem-housing-business-crafting \
+      samp-fivem-character-cinema-anim \
+      samp-textdraw-fivem-modern-design \
+      samp-textdraw-studio-converter \
+      samp-textdraw-ui-craft \
+      samp-modern-jobs-2026-logic \
+      samp-modern-creator-2026 \
+      samp-mobile-android-cef-ui \
+      samp-ucp-web-panel-bridge \
+      samp-streamer-plugin \
+      samp-vs-openmp-encyclopedia; do
+      install_skill "$s"
+    done
+    sync_prompts
+    ;;
+
+  ucp)
+    echo -e "${C_CYAN}${C_BOLD}🌐 Mengaktifkan Skill Pack: UCP Web Next.js + Discord + open.mp Bridge...${C_RESET}"
+    for s in \
+      samp-ucp-web-panel-bridge \
+      samp-mysql-database \
+      samp-discord-connector \
+      openmp-modern-2026-api \
+      nextjs-turbopack \
+      antislop-ui \
+      tailwind-v4-shadcn-system; do
+      install_skill "$s"
+    done
+    sync_prompts
+    ;;
+
   samp-full)
-    echo -e "${C_CYAN}${C_BOLD}🎮 Mengaktifkan Skill Pack: SA-MP & open.mp FULL (30 Skills)...${C_RESET}"
+    echo -e "${C_CYAN}${C_BOLD}🎮 Mengaktifkan Skill Pack: SA-MP & open.mp FULL (38 Skills)...${C_RESET}"
     for dir in "$SUPERPOWER_DIR/skills"/samp-* "$SUPERPOWER_DIR/skills"/openmp-*; do
       [ -d "$dir" ] && install_skill "$(basename "$dir")"
     done
@@ -131,10 +174,12 @@ case "$CMD" in
     fi
     echo -e "\n⚡ Slash-Command Prompts: ${C_GREEN}${PROMPT_COUNT} Agents${C_RESET} di ${C_CYAN}$FREEPI_PROMPTS_DIR${C_RESET}"
     echo -e "\n${C_BOLD}PACK TERSEDIA (hemat kredit harian FreePi):${C_RESET}"
-    echo -e "  ${C_GREEN}freepi-power pack samp${C_RESET}          Aktifkan 10 skill FiveM-Style 2026 (Mapping MLO, ox_target, ox_lib, ox_inventory, TextDraw FiveM)"
-    echo -e "  ${C_GREEN}freepi-power pack samp-full${C_RESET}     Aktifkan seluruh 30 skill SA-MP & open.mp"
+    echo -e "  ${C_GREEN}freepi-power pack samp${C_RESET}          Aktifkan 12 skill Core FiveM-Style + open.mp 2026"
+    echo -e "  ${C_GREEN}freepi-power pack samp-rp${C_RESET}       Aktifkan 18 skill Full FiveM RP (Phone, MDT, Garage, Heist, Housing, UCP)"
+    echo -e "  ${C_GREEN}freepi-power pack ucp${C_RESET}           Aktifkan skill Web UCP Next.js + Discord + open.mp Bridge"
+    echo -e "  ${C_GREEN}freepi-power pack samp-full${C_RESET}     Aktifkan seluruh 38 skill SA-MP & open.mp"
     echo -e "  ${C_GREEN}freepi-power pack web${C_RESET}           Aktifkan skill Web Modern + Anti-Slop"
-    echo -e "  ${C_GREEN}freepi-power pack enable <nama>${C_RESET} Aktifkan 1 skill tertentu dari 591 katalog"
+    echo -e "  ${C_GREEN}freepi-power pack enable <nama>${C_RESET} Aktifkan 1 skill tertentu dari 599 katalog"
     echo -e "  ${C_GREEN}freepi-power pack clear${C_RESET}         Kosongkan skill aktif untuk hemat token maksimal\n"
     ;;
 esac
