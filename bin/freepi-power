@@ -39,8 +39,8 @@ C_RESET='\033[0m'
 
 show_help() {
   echo -e "${C_CYAN}${C_BOLD}========================================================================================${C_RESET}"
-  echo -e "${C_YELLOW}${C_BOLD}⚡ FREEPI-POWER SUPREME — Native FreePi (freepi.ai) Swarm Suite (v11.3)${C_RESET}"
-  echo -e "${C_DIM}Powered by FreePi (free-pi-cli) + 101 Production Agents + 599 Skills + open.mp FiveM 2026${C_RESET}"
+  echo -e "${C_YELLOW}${C_BOLD}⚡ FREEPI-POWER SUPREME — Multi-Domain Autonomous Swarm Suite (v12.0)${C_RESET}"
+  echo -e "${C_DIM}FreePi (freepi.ai) + 113 Production Agents + 611 Skills (AI/ML, Web, Cloud, Mobile, Systems, open.mp)${C_RESET}"
   echo -e "${C_CYAN}${C_BOLD}========================================================================================${C_RESET}\n"
   echo -e "${C_BOLD}PENGGUNAAN:${C_RESET}"
   echo -e "  ${C_GREEN}freepi-power${C_RESET} ${C_YELLOW}<command>${C_RESET} [arguments] [options]\n"
@@ -116,16 +116,17 @@ show_freepi_commands() {
   echo -e "  ${C_CYAN}/whats-new${C_RESET} & ${C_CYAN}/update${C_RESET}        Cek changelog & update free-pi-cli"
   echo -e "  ${C_CYAN}/help${C_RESET} & ${C_CYAN}/exit${C_RESET}               Bantuan & keluar dari FreePi\n"
 
-  echo -e "${C_PURPLE}${C_BOLD}3. SLASH COMMANDS AGENT SUPERPOWER (otomatis di ~/.free-pi/agent/prompts/):${C_RESET}"
-  echo -e "  ${C_YELLOW}/samp-textdraw-fivem-master${C_RESET}   Master TextDraw FiveM/NoPixel/Ox_lib (rounded, 16:9, radial, hotbar)"
-  echo -e "  ${C_YELLOW}/samp-mapping-mlo-architect${C_RESET}   Master MLO Mapping, Dynamic Objects, Retexture, ox_doorlock & Actors"
-  echo -e "  ${C_YELLOW}/samp-fivem-systems-engineer${C_RESET}  Master FiveM ox_target, ox_lib, ox_inventory Metadata & QBox di PAWN"
-  echo -e "  ${C_YELLOW}/samp-crime-faction-architect${C_RESET} Master Heist FSM, Gang Turf, Police MDT/CAD & EMS Last-Stand"
-  echo -e "  ${C_YELLOW}/samp-ucp-fullstack-engineer${C_RESET}  Master UCP Web Next.js + Discord Bot + open.mp Shared MySQL Queue"
-  echo -e "  ${C_YELLOW}/samp-modern-jobs-architect${C_RESET}   Arsitek Job Modern 2026 (FSM, minigame, Co-op Party, dynamic economy)"
-  echo -e "  ${C_YELLOW}/samp-creator-2026${C_RESET}            Full-Stack Creator Server SA-MP/open.mp 2026 (PC + Android Mobile)"
-  echo -e "  ${C_YELLOW}/openmp-plugin-creator${C_RESET}        Pembuat Komponen C++ open.mp SDK"
-  echo -e "  ${C_YELLOW}/samp-legacy-migrator${C_RESET}         Migrasi SA-MP 0.3.7 ke open.mp\n"
+  echo -e "${C_PURPLE}${C_BOLD}3. SLASH COMMANDS AGENT SUPERPOWER (113 Agents di ~/.free-pi/agent/prompts/):${C_RESET}"
+  echo -e "  ${C_YELLOW}/fullstack-web-2026-architect${C_RESET} Full-Stack Next.js 15 / React 19 / SaaS / Auth / Billing"
+  echo -e "  ${C_YELLOW}/ml-ai-architect${C_RESET}              PyTorch 2.x, LoRA/QLoRA/GRPO, vLLM/SGLang & MLOps"
+  echo -e "  ${C_YELLOW}/ai-agent-systems-engineer${C_RESET}    AI Agents, MCP Servers, Context Caching & Evals"
+  echo -e "  ${C_YELLOW}/data-engineer-pro${C_RESET}            Polars, DuckDB, Iceberg, dbt, Kafka & ClickHouse"
+  echo -e "  ${C_YELLOW}/devops-sre-architect${C_RESET}         Distroless Docker, Kubernetes, Terraform/OpenTofu & OTel"
+  echo -e "  ${C_YELLOW}/cybersecurity-redteam-pro${C_RESET}    OWASP/API Top 10, BOLA/SSRF, Threat Modeling & AppSec"
+  echo -e "  ${C_YELLOW}/distributed-systems-architect${C_RESET} Outbox/CDC, Idempotency, Rate Limit & High-Scale APIs"
+  echo -e "  ${C_YELLOW}/mobile-crossplatform-architect${C_RESET} Flutter 3, React Native, Android/iOS Offline-First Sync"
+  echo -e "  ${C_YELLOW}/systems-rust-cpp-engineer${C_RESET}    Rust Tokio/Axum/PyO3, C++20/23, Zig & Linux eBPF"
+  echo -e "  ${C_YELLOW}/samp-creator-2026${C_RESET}            Full-Stack Creator SA-MP/open.mp 2026 + FiveM TextDraw/MLO\n"
   exit 0
 }
 
@@ -145,7 +146,7 @@ case "$CMD" in
     ;;
 
   version|--version|-v)
-    echo -e "${C_YELLOW}${C_BOLD}freepi-power${C_RESET} v11.3 (Dual-Engine FiveM-Style + open.mp 2026 Suite)"
+    echo -e "${C_YELLOW}${C_BOLD}freepi-power${C_RESET} v12.0 (Multi-Domain Autonomous Swarm — 113 Agents & 611 Skills)"
     "$SCRIPT_DIR/freepi-runner.sh" --version
     ;;
 

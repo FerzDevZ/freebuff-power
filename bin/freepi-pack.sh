@@ -122,16 +122,72 @@ case "$CMD" in
     sync_prompts
     ;;
 
-  web|frontend|antislop)
-    echo -e "${C_CYAN}${C_BOLD}🎨 Mengaktifkan Skill Pack: Modern Web + Anti-Slop...${C_RESET}"
+  ai|ml|llm)
+    echo -e "${C_CYAN}${C_BOLD}🧠 Mengaktifkan Skill Pack: AI, Machine Learning, LLM Agents & Multimodal 2026...${C_RESET}"
     for s in \
+      deep-learning-pytorch-2026 \
+      mlops-production-pipelines \
+      ai-agent-mcp-orchestration-2026 \
+      llm-evals-observability-2026 \
+      computer-vision-multimodal-ai \
+      local-llm-ollama-vllm-deploy \
+      prompt-injection-defense-guardrails; do
+      install_skill "$s"
+    done
+    sync_prompts
+    ;;
+
+  fullstack|saas|web|frontend|antislop)
+    echo -e "${C_CYAN}${C_BOLD}🌐 Mengaktifkan Skill Pack: Full-Stack Web & SaaS 2026 + Anti-Slop...${C_RESET}"
+    for s in \
+      fullstack-saas-2026-blueprint \
+      distributed-systems-scale-2026 \
+      cybersecurity-appsec-redteam-2026 \
       antislop \
       antislop-ui \
       antislop-code \
-      frontend-patterns \
-      nextjs-turbopack \
-      shadcn-radix-headless-craft \
+      react19-nextjs15-modern-craft \
       tailwind-v4-shadcn-system; do
+      install_skill "$s"
+    done
+    sync_prompts
+    ;;
+
+  devops|cloud|sre|data)
+    echo -e "${C_CYAN}${C_BOLD}☁️  Mengaktifkan Skill Pack: DevOps, Kubernetes, Data Lakehouse & Cybersecurity...${C_RESET}"
+    for s in \
+      devops-sre-kubernetes-iac \
+      data-lakehouse-polars-iceberg \
+      distributed-systems-scale-2026 \
+      cybersecurity-appsec-redteam-2026 \
+      distributed-tracing-opentelemetry \
+      zero-downtime-migration-expand-contract; do
+      install_skill "$s"
+    done
+    sync_prompts
+    ;;
+
+  mobile|flutter|android)
+    echo -e "${C_CYAN}${C_BOLD}📱 Mengaktifkan Skill Pack: Cross-Platform Mobile & Offline-First 2026...${C_RESET}"
+    for s in \
+      mobile-offline-first-sync-2026 \
+      dart-flutter-patterns \
+      flutter-clean-architecture-tdd \
+      android-clean-architecture \
+      bottom-sheet-touch-gestures-mobile; do
+      install_skill "$s"
+    done
+    sync_prompts
+    ;;
+
+  systems|rust|cpp|go)
+    echo -e "${C_CYAN}${C_BOLD}⚙️  Mengaktifkan Skill Pack: Low-Latency Systems (Rust, C++, Go, eBPF)...${C_RESET}"
+    for s in \
+      systems-rust-tokio-production \
+      rust-wasm-systems-engineer \
+      cpp-modern-low-latency \
+      golang-concurrency-patterns \
+      ebpf-linux-kernel-observability; do
       install_skill "$s"
     done
     sync_prompts
@@ -174,12 +230,16 @@ case "$CMD" in
     fi
     echo -e "\n⚡ Slash-Command Prompts: ${C_GREEN}${PROMPT_COUNT} Agents${C_RESET} di ${C_CYAN}$FREEPI_PROMPTS_DIR${C_RESET}"
     echo -e "\n${C_BOLD}PACK TERSEDIA (hemat kredit harian FreePi):${C_RESET}"
-    echo -e "  ${C_GREEN}freepi-power pack samp${C_RESET}          Aktifkan 12 skill Core FiveM-Style + open.mp 2026"
-    echo -e "  ${C_GREEN}freepi-power pack samp-rp${C_RESET}       Aktifkan 18 skill Full FiveM RP (Phone, MDT, Garage, Heist, Housing, UCP)"
-    echo -e "  ${C_GREEN}freepi-power pack ucp${C_RESET}           Aktifkan skill Web UCP Next.js + Discord + open.mp Bridge"
-    echo -e "  ${C_GREEN}freepi-power pack samp-full${C_RESET}     Aktifkan seluruh 38 skill SA-MP & open.mp"
-    echo -e "  ${C_GREEN}freepi-power pack web${C_RESET}           Aktifkan skill Web Modern + Anti-Slop"
-    echo -e "  ${C_GREEN}freepi-power pack enable <nama>${C_RESET} Aktifkan 1 skill tertentu dari 599 katalog"
+    echo -e "  ${C_GREEN}freepi-power pack ai${C_RESET}            AI, Machine Learning, PyTorch, MLOps, Agents/MCP & Vision"
+    echo -e "  ${C_GREEN}freepi-power pack fullstack${C_RESET}     Full-Stack Web/SaaS 2026, Next.js 15, Distributed & Anti-Slop"
+    echo -e "  ${C_GREEN}freepi-power pack devops${C_RESET}        DevOps, K8s, IaC, Data Lakehouse (Polars/Iceberg) & AppSec"
+    echo -e "  ${C_GREEN}freepi-power pack mobile${C_RESET}        Flutter, React Native, Android & Offline-First SQLite Sync"
+    echo -e "  ${C_GREEN}freepi-power pack systems${C_RESET}       Rust Tokio, C++20/23, Go Concurrency & Linux eBPF"
+    echo -e "  ${C_GREEN}freepi-power pack samp${C_RESET}          12 skill Core FiveM-Style + open.mp 2026"
+    echo -e "  ${C_GREEN}freepi-power pack samp-rp${C_RESET}       18 skill Full FiveM RP (Phone, MDT, Garage, Heist, Housing, UCP)"
+    echo -e "  ${C_GREEN}freepi-power pack ucp${C_RESET}           Web UCP Next.js + Discord + open.mp Bridge"
+    echo -e "  ${C_GREEN}freepi-power pack samp-full${C_RESET}     Seluruh 38 skill SA-MP & open.mp"
+    echo -e "  ${C_GREEN}freepi-power pack enable <nama>${C_RESET} Aktifkan 1 skill tertentu dari 611 katalog"
     echo -e "  ${C_GREEN}freepi-power pack clear${C_RESET}         Kosongkan skill aktif untuk hemat token maksimal\n"
     ;;
 esac

@@ -24,8 +24,8 @@ C_RESET='\033[0m'
 
 clear 2>/dev/null || true
 echo -e "${C_CYAN}${C_BOLD}========================================================================${C_RESET}"
-echo -e "${C_YELLOW}${C_BOLD}⚡ FREEBUFF-POWER & FREEPI-POWER SUPREME DUAL SUITE (v11.3)${C_RESET}"
-echo -e "${C_DIM}FreePi (freepi.ai) + Freebuff Cognitive Swarm (101 Agents & 599 Skills)${C_RESET}"
+echo -e "${C_YELLOW}${C_BOLD}⚡ FREEBUFF-POWER & FREEPI-POWER SUPREME DUAL SUITE (v12.0)${C_RESET}"
+echo -e "${C_DIM}FreePi (freepi.ai) + Multi-Domain Cognitive Swarm (113 Agents & 611 Skills)${C_RESET}"
 echo -e "${C_CYAN}${C_BOLD}========================================================================${C_RESET}\n"
 
 INSTALL_BIN_DIR="$HOME/.local/bin"
