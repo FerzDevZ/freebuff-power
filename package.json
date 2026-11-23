@@ -1,7 +1,7 @@
 {
   "name": "freebuff-power",
   "version": "12.0.0",
-  "description": "Freebuff-Power & FreePi-Power Supreme Dual Suite (v12.0): 113 Production Agents, 611 Curated Skills across Full-Stack Web, AI/ML/LLM, Data Lakehouse, DevOps/K8s/SRE, Cybersecurity, Mobile, Rust/C++/Go Systems & SA-MP/open.mp 2026 Studio",
+  "description": "Freebuff-Power & FreePi-Power Supreme Dual Suite (v12.0): 126 Production Agents, 630 Curated Skills across Full-Stack Web, AI/ML/LLM, Data Lakehouse, DevOps/K8s/SRE, Cybersecurity, Mobile, Rust/C++/Go Systems & SA-MP/open.mp 2026 Studio",
   "main": "bin/freebuff-power",
   "bin": {
     "freebuff-power": "./bin/freebuff-power",
