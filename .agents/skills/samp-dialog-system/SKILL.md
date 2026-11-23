@@ -97,6 +97,49 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 }
 ```
 
+## Guarded dialog state machine (`samp_dialog_guard.inc`)
+
+Tracking `playerid -> dialogid` in a variable is not enough: the client can send
+any id, any item index, at any time, twice. `resources/samp_dialog_guard.inc`
+tracks what the server actually showed and answers "may this response be
+handled?" with a reason code:
+
+| Reason | Meaning |
+|---|---|
+| `DG_REASON_OK` | matches the open dialog, in range, fresh |
+| `DG_REASON_NO_DIALOG` | nothing is open for this player |
+| `DG_REASON_WRONG_ID` | spoofed or stale dialog id |
+| `DG_REASON_EXPIRED` | past the per-dialog deadline |
+| `DG_REASON_REPLAY` | same id answered again inside the replay window |
+| `DG_REASON_BAD_ITEM` | `listitem` outside the shown list (or not a button) |
+
+```pawn
+DG_Open(playerid, DIALOG_BANK_WITHDRAW, 4, GetTickCount(), 30000);
+
+public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
+{
+    new reason;
+    if (!DG_Accept(playerid, dialogid, listitem, GetTickCount(), reason))
+    {
+        ReportDialogAnomaly(playerid, reason);
+        return 1;
+    }
+    if (!response) return 1;
+    // only now is this an answer the server asked for
+    return 1;
+}
+```
+
+Call `DG_Reset(playerid)` in `OnPlayerDisconnect` so a recycled slot cannot
+inherit an open dialog or replay memory. `DG_IsCleanInput` rejects empty,
+overlong, and control-byte input; `DG_ParseAmount` accepts digits only and
+refuses ten-digit values instead of wrapping.
+
+`resources/demo_dialog_adversarial.pwn` is an executed corpus (55 assertions):
+id spoofing, second dialog over the first, out-of-range and negative items,
+deadline boundary (exact tick valid, +1 expired), replay inside and outside the
+window, message-box buttons, reset, invalid arguments, and input parsing.
+
 ## TABLIST_HEADERS Example (Dynamic Car Dealership)
 ```pawn
 stock ShowDealershipMenu(playerid) {
