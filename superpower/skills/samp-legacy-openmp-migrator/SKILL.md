@@ -25,6 +25,29 @@ open.mp maintains backward compatibility with SA-MP AMX bytecode. However, plugi
 
 ## Step-by-Step Migration Playbook
 
+### Step 0: Classify every source file before touching it
+
+Do not start editing on an assumption. Run the detector and record the verdict:
+
+```bash
+node bin/samp-detect.js gamemodes/ --json > /tmp/target-map.json
+```
+
+- `LEGACY` files are the migration input: they compile against `<a_samp>`.
+- `MODERN` files are already migrated; treating them as legacy reintroduces old
+  syntax and break the build.
+- `COMPAT` files are legacy source running on the open.mp core (`SAMP_COMPAT`).
+  They are not migrated yet, but they can call modern natives.
+- `MIXED` / `UNKNOWN` must be resolved first: a file with both `<a_samp>` and
+  `<open.mp>` cannot build on either target, and an include-less library needs its
+  real target stated before a rewrite.
+
+For any native whose name you are unsure about, check
+`docs/NATIVE-PARITY.md` (generated from the installed stdlibs) instead of
+remembering. Names that exist in both may still be **reshaped** (a new `bool:`
+return), and removed ones like `GetPlayerPoolSize` survive only as deprecated
+`stock` shims.
+
 ### Step 1: Migrate Server Configuration (`server.cfg` → `config.json`)
 Run `omp-server --default-config` to generate a base template, then map your settings:
 

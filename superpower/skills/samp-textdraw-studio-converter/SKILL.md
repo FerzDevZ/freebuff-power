@@ -1,49 +1,84 @@
 ---
 name: samp-textdraw-studio-converter
-description: Professional TextDraw Production Workflow for open.mp & SA-MP — converting Figma/FiveM mockups (1920x1080 -> 640x480) and refactoring raw TDEditor/iTD/TDW exports into clean, modular, anchor-based open.mp PAWN code with automatic Global vs PlayerTextDraw splitting, loop compression, and visual HTML5 16:9 preview verification.
+description: Figma/MTA-style mockup and TDEditor/iTD/TDW export conversion into maintainable open.mp & SA-MP TextDraw modules — exact 1920x1080 to 640x480 mapping, anchor extraction, global-vs-player splitting, loop compression, preview-mirror blocks, and a compile+preview gate before the code reaches a server.
 ---
 
-# TextDraw Studio & Figma-to-PAWN Conversion Workflow (open.mp 2026)
+# Mockup → PAWN TextDraw Conversion (open.mp 2026)
 
-Stop shipping ugly 400-line raw `Textdraw0..Textdraw99` exports from old TDEditor tools! Use a repeatable studio pipeline to turn **Figma FiveM mockups** or **TDEditor/iTD/TDW exports** into clean, maintainable, pool-safe `open.mp` modules.
+Turns a design (Figma, Photoshop, a FiveM screenshot, or a raw editor dump) into
+a module that renders the same in game. Geometry rules live in
+`samp-textdraw-ui-craft`; this skill is the conversion procedure.
 
 ---
 
-## 1. Exact Figma `1920x1080` -> SA-MP `640x480` Conversion Formulas
+## 1. Design frame → grid
 
-Design your FiveM-style HUD, Inventory, Phone, or Speedometer comfortably in **Figma on a `1920 x 1080` frame**, then map every pixel mathematically:
+Design at **1920 × 1080** and convert arithmetically:
 
 ```text
-sampX = (figmaX / 1920.0) * 640.0    // Simply divide Figma X by 3.0!
-sampY = (figmaY / 1080.0) * 480.0    // Multiply Figma Y by 0.4444!
-sampW = (figmaW / 1920.0) * 640.0    // Already preserves exact 16:9 proportions!
-sampH = (figmaH / 1080.0) * 480.0
+sampX = figmaX / 3.0          // 1920 -> 640
+sampY = figmaY * (4.0 / 9.0)  // 1080 -> 480
+sampW = figmaW / 3.0
+sampH = figmaH * (4.0 / 9.0)
 ```
-> **Magical Benefit:** Because `(640/1920) / (480/1080) = 0.3333 / 0.4444 = 0.75`, dividing Figma X/W by `3.0` and multiplying Figma Y/H by `4/9` (`0.4444`) **AUTOMATICALLY applies the 16:9 aspect-ratio correction**! A `60x60px` circle in Figma (`1920x1080`) becomes `w = 20.0, h = 26.67` in SA-MP — rendering as a **perfect circle** on 16:9 monitors!
 
-### Typography Size Mapping (Figma `px` -> SA-MP `LetterSize`)
-| Figma Font Size (1080p) | Recommended SA-MP `LetterSize(x, y)` | Typical Usage |
+A 60×60 px circle becomes `w = 20.0, h = 26.67`. That is correct: 20 grid units
+on a 16:9 screen is 60 px wide and 26.67 units is 60 px tall. Do **not** "fix"
+the aspect by multiplying the result by 0.75 again — the conversion already
+carries it. `TD_ASPECT_16_9` is only for hand-authored circles measured in grid
+units directly.
+
+Font size: `LetterSize.y ≈ figmaPx / 32` on a 1080p frame (`16 px ≈ 0.50` is too
+large at 640×480 — verify with `td-preview`, not with arithmetic alone).
+
+## 2. Convert in this order
+
+1. **Classify each layer** — surface / text / icon / value.
+   Surface → font-4 sprite. Text → font 1 or 2, no box. Icon → sprite or font 5.
+2. **Extract anchors** — one base constant per component:
+   `#define GARAGE_X (470.0)` / `#define GARAGE_Y (20.0)`; every child is
+   `GARAGE_X + dx`. A component must be movable by editing two numbers.
+3. **Split global vs player** — static frames → global `Text:` created once;
+   per-player values, fills and clickable slots → `PlayerText:`.
+4. **Compress loops** — 20 inventory slots become two nested `for` loops over a
+   `new PlayerText:slot[MAX_SLOTS]` array.
+5. **Emit kit calls** — `TD_Sprite` / `TD_Text` / `TD_RoundedCard` / `TD_Bar`.
+6. **Add a preview mirror** — `td-preview` only parses inline
+   `CreatePlayerTextDraw`, so repeat the final coordinates in a
+   `#if defined TD_PREVIEW_MIRROR` block (see
+   `samp-textdraw-ui-craft/resources/fixture_ui.pwn`).
+
+## 3. Refactoring a raw TDEditor / iTD / TDW dump
+
+Raw dumps fail in four predictable ways:
+
+| Dump smell | Consequence | Fix |
 |---|---|---|
-| `12px` – `14px` | `(0.15, 0.72)` – `(0.17, 0.80)` | Micro badges, hotbar numbers, subtle hints |
-| `16px` – `18px` | `(0.19, 0.88)` – `(0.21, 0.96)` | Body text, button labels, toast copy |
-| `22px` – `26px` | `(0.25, 1.15)` – `(0.29, 1.32)` | Card headers, modal titles |
-| `44px` – `56px` | `(0.48, 2.05)` – `(0.58, 2.40)` | Digital Speedometer digits |
+| `Textdraw0 .. Textdraw87` globals | per-player state leaks between players | move dynamic values to `PlayerText:` |
+| `TextDrawTextSize(td, 120.0, 18.0)` with left alignment | box renders from createX to 120 | pass `createX + 120` (or use the kit) |
+| `SetOutline(1)` + `SetShadow(1)` everywhere | muddy 2012 look | 0/0 for flat UI |
+| no `BackgroundColor` | black strip behind each label | transparent (`TD_C_TRANSPARENT`) |
+| repeated identical slots | 400 unmaintainable lines | loop + array |
 
----
+Never paste a dump straight into a gamemode. Convert, then delete the dump.
 
-## 2. The 5-Step Refactoring Protocol for Raw TDEditor / iTD / TDW Dumps
+## 4. Gate
 
-Whenever you inherit or export raw TextDraw code:
-1. **Extract Semantic Anchor Constants:**
-   - Replace `CreatePlayerTextDraw(playerid, 482.5, 312.0, ...)` with `const Float:HUD_X = 482.5; const Float:HUD_Y = 312.0;` and write every child element relative to `HUD_X + dx, HUD_Y + dy`.
-2. **Split Static vs Dynamic (Global vs PlayerTD):**
-   - Static backgrounds, rounded frames, dividers, headers, and static icons -> **`Text:` Global TextDraw** (`OnGameModeInit`).
-   - Dynamic values, clickable per-player slots, and progress fills -> **`PlayerText:`** (created on open, destroyed on close).
-3. **Compress Repeated Grid Elements into Loops:**
-   - Turn 20 copy-pasted inventory slots (220 lines) into a clean 15-line `for (new row = 0; row < 4; row++) for (new col = 0; col < 5; col++)` loop!
-4. **Normalize Aesthetics & Hitboxes:**
-   - Strip `SetOutline(1)` / `SetShadow(1)` bloat -> set `Outline(0)`, `Shadow(0)`, `Proportional(1)`.
-   - Replace centered-text click boxes with `LD_SPAC:white` sprite buttons so hitboxes never misalign.
-   - Replace raw hex numbers with named palette `#define`s (`UI_BG_GLASS_DARK`, `UI_ACCENT_PRIMARY`).
-5. **Visual Verification Before Entering GTA SA:**
-   - Run **`freepi-power samp td-preview <file.pwn>`** to render an instant 16:9 HTML5 Canvas mockup showing every element, bounding box, clickable hitbox, and total PlayerTD budget!
+```bash
+pawncc ui.pwn -i"$OMP_INCLUDE" -d3 -o/tmp/ui.amx          # 0 warnings
+freepi-power samp td-preview ui.pwn                       # layout diagnostics
+freepi-power samp audit .                                 # legacy patterns
+```
+
+`td-preview` refuses to run silently on 0 elements: if your layout lives inside
+`stock` helpers, add the mirror block or you get no verification at all.
+
+## 5. Acceptance checklist
+
+- Changing one anchor moves the whole component without overlap.
+- `td-preview` reports 0 errors and 0 warnings.
+- Player TD count for the screen ≤ 140 with ≥ 60 headroom.
+- Every tappable element is a sprite with `TextSize` set and outside the mobile
+  dead zone.
+- Static layers are global; only dynamic layers are per-player.
+- Both-target compile clean; no `#include <a_samp>` left in an open.mp project.

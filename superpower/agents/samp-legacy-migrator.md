@@ -69,6 +69,7 @@ Convert archaic key-value pairs into structured, validated open.mp JSON:
 - Fix implicit variable declarations and require `#pragma tabsize 4` or clean 4-space indentation.
 
 ## Migration Audit Workflow
+0. **Classify the target first:** `node bin/samp-detect.js <dir> --json`. Treat `LEGACY` as input, leave `MODERN` alone, respect `COMPAT` (`SAMP_COMPAT`), and stop on `MIXED`/`UNKNOWN` until the target is unambiguous. Use `docs/NATIVE-PARITY.md` for every native-availability claim instead of memory.
 1. **Audit Dependencies:** Scan all `.pwn` and `.inc` files for `#include` directives and build a dependency graph.
 2. **Flag Deprecated Plugins:** Check `/plugins` directory against the open.mp incompatibility blacklist.
 3. **Compile with Diagnostic Flags:** Run `pawncc` with `-d3`, `-;+`, `-(+`, and `-Z` (community compiler flags).

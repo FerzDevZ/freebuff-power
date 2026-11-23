@@ -15,7 +15,14 @@ Incognito's Streamer Plugin is the spatial backbone of every modern open.mp / SA
 #include <open.mp>
 #include <streamer>
 ```
-In `config.json` (`open.mp`):
+Deployment differs by build (2026):
+- **Legacy plugin** (Incognito, SA-MP build) on an open.mp server → `plugins/streamer.so` + `config.json`
+  `"pawn": { "legacy_plugins": ["streamer"] }`.
+- **Native component port** (`OpenSamp/omp-streamer-component`) → drop the binary in
+  `components/`, remove it from `legacy_plugins`, keep the same `#include <streamer>`
+  and native calls.
+
+Never run both at once: two streamers means two entity pools and duplicated objects.
 ```json
 "pawn": {
   "legacy_plugins": ["streamer"]
