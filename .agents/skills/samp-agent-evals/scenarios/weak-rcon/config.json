@@ -1,0 +1,5 @@
+{
+  "name": "Scenario Server",
+  "rcon": { "password": "changeme" },
+  "pawn": { "main_scripts": ["gm"] }
+}

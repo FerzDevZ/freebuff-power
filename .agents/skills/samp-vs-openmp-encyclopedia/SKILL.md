@@ -5,6 +5,69 @@ description: The Definitive Encyclopedia of SA-MP vs open.mp — side-by-side te
 
 # SA-MP vs open.mp Definitive Technical Encyclopedia
 
+## 0. Which target is this? Decide before writing one line
+
+Legacy SA-MP 0.3.7 and open.mp read almost the same, so a plausible-looking
+snippet can be wrong for the tree it lands in. Two tools in this repo settle it
+with evidence instead of vibes:
+
+```bash
+# one file, or a whole gamemode directory
+node bin/samp-detect.js gamemodes/main.pwn
+node bin/samp-detect.js gamemodes/ --json
+
+# rebuild the ownership matrix from the stdlibs actually installed
+node bin/native-parity.js --legacy "$SAMP_STDLIB" --modern "$OMP_STDLIB" \
+  --out docs/NATIVE-PARITY.md --json bin/data/native-ownership.json
+```
+
+`samp-detect` returns one of five verdicts per file:
+
+| Verdict | Meaning | What to do |
+|---|---|---|
+| `LEGACY` | Builds against 0.3.7 `<a_samp>` | Keep legacy syntax; never call an open.mp-only native |
+| `MODERN` | Builds against `<open.mp>` | Use unified header, `bool:` returns, const-correctness |
+| `COMPAT` | `SAMP_COMPAT` + `<a_samp>` on the open.mp core | Legacy source allowed; modern natives callable |
+| `DUAL` | One header per `#if` branch (dual-target fixture/library) | Compile both branches; keep them in sync |
+| `MIXED` | Both `<open.mp>`/`omp_*` and `<a_samp>` in one file, unguarded | Split the file or pick a target — it cannot build on either |
+| `UNKNOWN` | No include or symbol decides | Add the real include; do not guess |
+
+Rules the detector enforces, and you should follow by hand:
+
+- **Includes decide the target.** A legacy include plus a modern native is
+  `LEGACY` **with an error**, not "mixed". Symbol usage never silently flips a
+  build target.
+- **`SAMP_COMPAT` overrides everything.** It is a legacy-source-on-open.mp-core
+  build; record it as such instead of "migrating later".
+- **Unverifiable is not modern.** `floatround`, `format`, `strcmp` live in
+  modules a trimmed legacy stdlib often lacks; the matrix puts those in an
+  `unverified` bucket instead of claiming open.mp owns them.
+- Detector is static: it strips comments/strings, never expands macros, and does
+  not evaluate `#if defined` branches. A guard-heavy file needs a human read.
+
+Matrix from the stdlibs shipped here (rebuild for yours): **512 legacy and 1044
+modern declarations, 463 shared, 485 open.mp-only, 49 legacy-only, 330 reshaped,
+96 unverifiable**. Reshaped means the same name has a different
+contract — mostly `bool:`/`void:` return tags — so copy-pasted calls need a
+second look even when the name exists in both.
+
+### Syntax you can and cannot mix
+
+| Concern | Legacy 0.3.7 | Modern open.mp |
+|---|---|---|
+| Header | `#include <a_samp>` (+ `a_players`, `a_vehicles`, …) | `#include <open.mp>` (or `omp_player`, …) |
+| Function returns | untagged `1`/`0` | `bool:` / `void:` tags |
+| Out params | `&Float:health` (same) | same, but checked by the compiler |
+| Command parsing | `strtok`/`dcmd` idioms | still allowed, but not native and not secure |
+| Config | `server.cfg` | `config.json` with a `pawn` block |
+| Extensions | `.so`/`.dll` plugins | components (+ `legacy_plugins` bridge) |
+| Removed symbols | — | `GetPlayerPoolSize`, `GetVehiclePoolSize`, `GetActorPoolSize` are deprecated `stock` shims |
+
+Fixtures that prove the split live in `fixtures/`: `legacy_min.pwn` compiles on
+0.3.7 only, `modern_min.pwn` on open.mp only (it fails on legacy with fatal
+error 100, missing `open.mp`), and `compat_min.pwn` proves the `SAMP_COMPAT`
+bridge builds warning-free. `bin/self-test.sh` compiles each on its own target.
+
 ## 1. Executive Comparison
 
 ```text
@@ -114,12 +177,13 @@ stream_rate 1000
 // 1. One unified include header for all core game subsystems.
 // 2. Strict const-correctness on string arguments:
 //    stock SendClientMessage(playerid, color, const message[]);
-// 3. New native functions:
-//    - IsValidVehicle(vehicleid)
+// 3. Native functions open.mp adds (verified by bin/native-parity.js):
 //    - GetVehicleDriver(vehicleid)
-//    - GetPlayerVehicleSeat(playerid)
 //    - GetPlayerRawIp(playerid)
 //    - IsPlayerUsingOfficialClient(playerid)
+//    - GetWeather()
+//    Note: IsValidVehicle and GetPlayerVehicleSeat already exist in 0.3.7 —
+//    they are NOT open.mp-only. Check docs/NATIVE-PARITY.md before claiming.
 ```
 
 ---

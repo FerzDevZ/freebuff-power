@@ -1,0 +1,9 @@
+{
+  "name": "Vulnerable Config",
+  "rcon": {
+    "password": "123"
+  },
+  "pawn": {
+    "main_scripts": ["gm"]
+  }
+}

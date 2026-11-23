@@ -1,0 +1,1 @@
+{ "ask": "Apakah GetPlayerPoolSize masih native di open.mp dan seberapa serius?", "verdict": "MODERN", "errorFindings": 0, "rules": ["poolsize-loop"] }

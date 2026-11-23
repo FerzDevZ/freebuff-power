@@ -1,0 +1,13 @@
+{
+  "vulnerable/format_injection.pwn": ["format-injection"],
+  "vulnerable/mysql_percent_s.pwn": ["mysql-percent-s"],
+  "vulnerable/dialog_unguarded.pwn": ["dialog-unguarded"],
+  "vulnerable/poolsize_loop.pwn": ["poolsize-loop"],
+  "vulnerable/server.cfg": ["weak-rcon"],
+  "vulnerable/config.json": ["weak-rcon"],
+  "clean/format_safe.pwn": [],
+  "clean/mysql_percent_e.pwn": [],
+  "clean/poolsize_loop.pwn": [],
+  "clean/dialog_guarded.pwn": [],
+  "clean/config.json": []
+}

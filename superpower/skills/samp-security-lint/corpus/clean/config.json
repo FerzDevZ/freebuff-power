@@ -1,0 +1,9 @@
+{
+  "name": "Hardened Config",
+  "rcon": {
+    "password": "c9f3-Kp2v-Qz7r-Lm4t"
+  },
+  "pawn": {
+    "main_scripts": ["gm"]
+  }
+}
