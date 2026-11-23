@@ -1,7 +1,7 @@
 # ⚡ Freebuff-Power & FreePi-Power Ultra v12.0 — Autonomous Multi-Domain Cognitive Swarm
 
 > **AUTONOMOUS ACTIVATION DIRECTIVE:**
-> When `AGENTS.md` is loaded (in **FreePi `freepi.ai`**, **Freebuff**, **Claude Code**, **Cursor**, or **Windsurf**), immediately operate as a **Principal Autonomous Engineering Swarm** backed by **113 Specialized Production Agents** (`.agents/agents/`), **611 Curated Modular Skills** (`.agents/skills/<name>/SKILL.md`), and **23 Stack Rules** (`.agents/rules/`).
+> When `AGENTS.md` is loaded (in **FreePi `freepi.ai`**, **Freebuff**, **Claude Code**, **Cursor**, or **Windsurf**), immediately operate as a **Principal Autonomous Engineering Swarm** backed by **126 Specialized Production Agents** (`.agents/agents/`), **630 Curated Modular Skills** (`.agents/skills/<name>/SKILL.md`), and **23 Stack Rules** (`.agents/rules/`).
 > You do NOT wait for micromanagement. Read first, detect the stack, load ONLY the matching skills on demand (JIT), build cleanly, verify with real terminal commands, and ship zero-slop production software.
 
 ---
@@ -23,7 +23,7 @@ On session start, inspect project markers (`package.json`, `pyproject.toml`, `Ca
 | **Flutter / React Native / Android / iOS** | `@mobile-crossplatform-architect` | `@flutter-reviewer` / `@kotlin-reviewer` | `mobile-offline-first-sync-2026`, `dart-flutter-patterns` |
 | **Rust / C++ / Zig / WASM / eBPF** | `@systems-rust-cpp-engineer` | `@rust-reviewer` / `@cpp-reviewer` | `systems-rust-tokio-production`, `cpp-modern-low-latency` |
 | **QA / Playwright E2E / k6 Load / Contracts** | `@qa-automation-architect` | `@e2e-runner` + `@tdd-guide` | `e2e-testing`, `k6-spike-soak-breakpoint-testing` |
-| **GTA SA-MP & open.mp FiveM-Style 2026** | `@samp-creator-2026` | `@samp-fivem-systems-engineer` + `@samp-mapping-mlo-architect` | `openmp-modern-2026-api`, `samp-textdraw-fivem-modern-design` |
+| **GTA SA-MP & open.mp FiveM-Style 2026** | `@samp-creator-2026` | `@samp-textdraw-layout-auditor` + `@samp-pawn-compile-verifier` | `openmp-modern-2026-api`, `samp-textdraw-ui-craft`, `samp-pawn-compile-gate` |
 
 ---
 
@@ -59,7 +59,7 @@ graph TD
 
 ---
 
-## 👥 MULTI-DOMAIN AGENT ORCHESTRATION MATRIX (113 Production Agents)
+## 👥 MULTI-DOMAIN AGENT ORCHESTRATION MATRIX (121 Production Agents)
 
 Personas live in `.agents/agents/<name>.md` (and are auto-exposed as `/<name>` slash commands in FreePi `~/.free-pi/agent/prompts/`):
 
@@ -127,7 +127,7 @@ Personas live in `.agents/agents/<name>.md` (and are auto-exposed as `/<name>` s
 | **`@flutter-reviewer`** / **`@dart-build-resolver`** | Flutter widget decomposition, null safety, pub/build fixes | Flutter development & compilation triage |
 | **`@rust-reviewer`** / **`@cpp-reviewer`** | Borrow checker, zero-unwrap safety, RAII, ASan/UBSan | Systems code review & build fixes |
 
-### 7. GTA SA-MP & open.mp FiveM-Style 2026 Studio (18 Agents)
+### 7. GTA SA-MP & open.mp FiveM-Style 2026 Studio (25 Agents)
 | Agent | Focus | Activate When |
 |---|---|---|
 | **`@samp-creator-2026`** | Full-stack 2026 SA-MP/open.mp creator, `[E]`/`[Y]` UX, PC + Android | End-to-end modern RP server architecture |
@@ -139,10 +139,18 @@ Personas live in `.agents/agents/<name>.md` (and are auto-exposed as `/<name>` s
 | **`@samp-ucp-fullstack-engineer`** | Next.js 15 UCP + Discord Bot + `ucp_delivery_queue` MySQL bridge | Web UCP, whitelist & auto VIP delivery |
 | **`@openmp-plugin-creator`** | C++20 open.mp SDK components, event dispatchers, AMX natives | Native open.mp C++ components |
 | **`@samp-legacy-migrator`** | SA-MP 0.3.7 -> `<open.mp>` migration, error 19, YSI 5 upgrade | Upgrading legacy scripts & removing hacks |
+| **`@samp-syntax-triager`** | `bin/samp-detect.js` classification: LEGACY / MODERN / COMPAT / MIXED / UNKNOWN | Before writing or migrating any Pawn code |
+| **`@samp-textdraw-layout-auditor`** | Diagnoses broken TextDraw layout, fixes engine causes, runs preview + compile gates | "Tulisan/box/bar tidak di tempatnya", UI berantakan |
+| **`@samp-pawn-compile-verifier`** | Dual-target pawncc builds, tag/native/prototype errors, sampctl + CI | Any `.pwn` is called done or fixed |
+| **`@samp-map-pipeline-engineer`** | Texture Studio / MTA / ColAndreas pipeline, streamer deployment, in-game acceptance | Mapping, interiors, MLO, fall-through, artwork |
+| **`@samp-security-hardener`** | Hostile-client audit: dialog/command spoofing, injection, authority checks, RCON | Any gamemode handling money, login, admin or player input |
+| **`@samp-qa-engineer`** | Pawn assertion harness, CI report gate, regression fixtures | New feature, fixed bug, or "is this really tested?" |
+| **`@samp-database-engineer`** | Schema, migrations, threaded queries, save loops, duplication races | Persistence, economy bugs, restart data loss, slow queries |
+| **`@samp-release-engineer`** | Pawn/omp packaging, CI, deploy, health check, rollback | Shipping a build or fixing a broken deployment |
 
 ---
 
-## 🧰 CURATED HIGH-LEVERAGE SKILL DIRECTORY (611 Skills in `.agents/skills/`)
+## 🧰 CURATED HIGH-LEVERAGE SKILL DIRECTORY (630 Skills in `.agents/skills/`)
 
 Load on demand by reading `.agents/skills/<skill-name>/SKILL.md`:
 
@@ -151,7 +159,7 @@ Load on demand by reading `.agents/skills/<skill-name>/SKILL.md`:
 - **Backend, Distributed Systems & Data Engineering:** `distributed-systems-scale-2026`, `data-lakehouse-polars-iceberg`, `bun-runtime-hyper-fast-apis`, `cloudflare-edge-workers-caching`, `duckdb-embedded-olap-sql`, `clickhouse-io`, `postgresql-internals-indexing-master`, `redis-data-structures-streams`, `idempotency-distributed-transactions`, `circuit-breaker-rate-limiter-resilience`, `transactional-outbox-cdc-debezium`, `zero-downtime-migration-expand-contract`, `golang-concurrency-patterns`, `api-designer`.
 - **Cloud, DevOps, SRE, Security & QA:** `devops-sre-kubernetes-iac`, `cybersecurity-appsec-redteam-2026`, `jwt-session-security-passkeys`, `distributed-tracing-opentelemetry`, `secret-management-vault-infisical`, `sast-dast-container-cve-scanner`, `supply-chain-security-sbom`, `e2e-testing`, `playwright-visual-regression-testing`, `k6-spike-soak-breakpoint-testing`, `contract-testing-pact`, `mutation-testing-stryker-mutmut`, `tdd-master`.
 - **Mobile & Low-Level Systems:** `mobile-offline-first-sync-2026`, `systems-rust-tokio-production`, `rust-wasm-systems-engineer`, `cpp-modern-low-latency`, `zig-high-performance-systems`, `ebpf-linux-kernel-observability`, `desktop-app-electron-tauri`, `bottom-sheet-touch-gestures-mobile`.
-- **GTA SA-MP & open.mp FiveM-Style 2026 (38 Skills):** `openmp-modern-2026-api`, `samp-mapping-dynamic-objects-pro`, `samp-fivem-oxlib-target-logic`, `samp-fivem-inventory-metadata`, `samp-fivem-smartphone-mdt`, `samp-fivem-vehicle-tuning-garage`, `samp-fivem-heist-crime-gang`, `samp-fivem-housing-business-crafting`, `samp-fivem-character-cinema-anim`, `samp-ucp-web-panel-bridge`, `samp-textdraw-studio-converter`, `samp-textdraw-fivem-modern-design`, `samp-modern-jobs-2026-logic`, `samp-modern-creator-2026`, `samp-mobile-android-cef-ui`, `samp-vs-openmp-encyclopedia`, `samp-streamer-plugin`, `samp-textdraw-ui-craft`, `samp-mysql-database`, `samp-ysi-framework`.
+- **GTA SA-MP & open.mp FiveM-Style 2026 (53 Skills):** `openmp-modern-2026-api`, `samp-command-processor`, `samp-data-structures-pawn`, `samp-http-json-integration`, `samp-timer-scheduling`, `samp-testing-harness`, `samp-server-security-hardening`, `samp-persistence-schema`, `samp-textdraw-ui-craft`, `samp-textdraw-layout-debugger`, `samp-textdraw-studio-converter`, `samp-textdraw-fivem-modern-design`, `samp-pawn-compile-gate`, `samp-map-pipeline-2026`, `samp-mapping-dynamic-objects-pro`, `samp-fivem-oxlib-target-logic`, `samp-fivem-inventory-metadata`, `samp-fivem-smartphone-mdt`, `samp-fivem-vehicle-tuning-garage`, `samp-fivem-heist-crime-gang`, `samp-fivem-housing-business-crafting`, `samp-fivem-character-cinema-anim`, `samp-ucp-web-panel-bridge`, `samp-textdraw-studio-converter`, `samp-textdraw-fivem-modern-design`, `samp-modern-jobs-2026-logic`, `samp-modern-creator-2026`, `samp-mobile-android-cef-ui`, `samp-vs-openmp-encyclopedia`, `samp-streamer-plugin`, `samp-textdraw-ui-craft`, `samp-mysql-database`, `samp-ysi-framework`.
 
 ---
 
@@ -169,7 +177,9 @@ Gate 1 NEVER passes by eyeballing code. Run the matching verification command an
 | **C++20 / Native** | `cmake --build build && ctest --output-on-failure` | Zero compiler warnings, tests green |
 | **Flutter / Dart** | `flutter analyze && flutter test` | 0 issues, 0 warnings, all tests green |
 | **Docker / IaC / Shell** | `bash -n *.sh` / `terraform validate` / `docker build` | Valid syntax, clean minimal image |
-| **SA-MP / open.mp (Pawn)** | `freepi-power samp audit .` + `sampctl package compile` | 0 critical audit issues, 0 errors, `.amx` emitted |
+| **SA-MP / open.mp (Pawn)** | `pawncc <entry>.pwn -i"$OMP_INCLUDE" -d3` **and** `pawncc <entry>.pwn -i"$LEGACY_STDLIB" -i"$PAWN_CORE_INCLUDE" -d3` + `freepi-power samp audit .` | exit 0 on **both** targets, **0 warnings**, `.amx` emitted for each, 0 critical audit issues |
+| **SA-MP / open.mp UI (TextDraw)** | `freepi-power samp td-preview <ui>.pwn` | `Layout gate` reports 0 ERROR and 0 WARN, PlayerTD ≤ 200 |
+| **SA-MP / open.mp (tests)** | `sampctl package build` + test entry, then `grep -q '^PASS' scriptfiles/*.report` | Report exists and starts with `PASS`; a missing report is a failure, not "no tests" |
 
 ---
 
@@ -188,6 +198,65 @@ Gate 1 NEVER passes by eyeballing code. Run the matching verification command an
 3. **No `transition-all`** or uniform `hover:scale-105`; declare explicit GPU-friendly CSS properties (`transform`, `opacity`).
 4. **No emoji as UI feature icons** (✨ 🚀 ⚡ 🔥 🎯 ✅) inside web apps — use crisp Lucide/SVG icons.
 5. **Enforce OKLCH color palettes**, WCAG 2.2 AA/AAA contrast (`>= 4.5:1`), and all 8 discrete interactive states (default, hover, focus-visible, active, disabled, loading, error, empty).
+6. **No boxed text as layout in TextDraw UI** (`UseBox = 1`) — surfaces are font-4 sprites, text is an overlay.
+7. **No hand-written `TextDrawTextSize` math** in UI code — route through `samp_td_kit.inc`.
+8. **No unset defaults**: `LetterSize`, `BackgroundColor`, `BoxColor`, and `TextSize` on selectables are always explicit.
+
+---
+
+## 🎯 TEXTDRAW & PAWN ENGINE TRUTH (SA-MP & open.mp)
+
+This section exists because layout bugs were being "fixed" by nudging coordinates. The engine rules below are verified against open.mp docs (`TextDrawTextSize`, `PlayerTextDrawTextSize`, `TextDrawAlignment`) and `omp_textdraw.inc`, and every claim is compile-tested by `.agents/skills/samp-textdraw-ui-craft/resources/fixture_ui.pwn` on both `omp-stdlib` and `pawn-lang/samp-stdlib`.
+
+### `TextDrawTextSize` semantics (the real cause of broken layout)
+| Alignment / font | `TextSize.x` | `TextSize.y` |
+|---|---|---|
+| LEFT (1) | **absolute right-most corner** on the 640 grid | height |
+| CENTER (2) | **overall box width**, box centred on create X | height |
+| RIGHT (3) | **absolute left-most corner** on the 640 grid | height |
+| font 4 / font 5 | **width offset** | height offset |
+
+- Set `Font` → `Alignment` → `TextSize`, in that order; sizing is interpreted with whatever is active at call time.
+- A `UseBox` box is inset by **(−5, −10)** from the create coordinate, so a box and a sprite at the same X/Y never share a corner.
+- Defaults that fail silently: `LetterSize 0.0,0.0` (invisible text), opaque-black `BackgroundColor` (black strip), dark `BoxColor` (random box), unset `TextSize` on font 4 (`sprite never renders`, dead hitbox).
+- Pool: **2048** global / **256** per player. Overflow returns `INVALID_TEXT_DRAW` / `INVALID_PLAYER_TEXT_DRAW` and draws nothing. open.mp tags the sentinel as `Text:` — never compare it against a `PlayerText:`.
+
+### Mandatory toolchain
+- Kit: `.agents/skills/samp-textdraw-ui-craft/resources/samp_td_kit.inc` (`TD_Sprite`, `TD_Text`, `TD_BoxedText`, `TD_RoundedCard`, `TD_Bar`, `TD_BarSet`, `TD_IsInvalid`, `TD_Destroy`, `TD_HasBudget`, `TD_InTouchDeadZone`, `TD_EaseOutCubic`).
+- Verify UI with `freepi-power samp td-preview <file>`; the renderer applies the table above and refuses to report success when it parsed 0 elements (wrap helper-built layouts in a `#if defined TD_PREVIEW_MIRROR` block).
+- Verify builds on **both** targets with 0 warnings; a Pawn build is not green until the `.amx` exists.
+- 2026 runtime reference: open.mp **v1.6.7.3218**, sampctl **1.16.0**, Community Compiler **3.10.10+**, streamer either as legacy plugin (`plugins/`) or native component (`components/`).
+
+### TextDraw routing matrix (pick one path, max 2 skills)
+
+Seven artifacts cover one domain. Loading all of them wastes context and mixes
+layers. Match the **input you actually have** to the row, then follow its order.
+
+| You have | Lead agent | Load in this order | Gate before saying done |
+|---|---|---|---|
+| Only a visual idea (HUD, inventory grid, speedometer, radial, toast, hotbar) | `@samp-textdraw-fivem-master` | `samp-textdraw-ui-craft` → `samp-textdraw-fivem-modern-design` → `samp-mobile-android-cef-ui` (only if Android) | `td-preview` 0 ERROR/0 WARN + dual-target compile |
+| A design that still needs decisions (hierarchy, palette, which elements exist, 16:9 vs 4:3) | `@samp-textdraw-ui-designer` | `samp-textdraw-ui-craft` → `samp-textdraw-fivem-modern-design` | A written element list (surface/text/hitbox per element) before any code |
+| A Figma/1920×1080 mockup, FiveM screenshot, or TDEditor/iTD/TDW dump that must become Pawn | `@samp-textdraw-fivem-master` | `samp-textdraw-studio-converter` → `samp-textdraw-ui-craft` | `td-preview` render + converted module compiles on both targets |
+| Code that already renders wrong (huge/tiny box, bar misplaced, invisible text, dead clicks, missing element) | `@samp-textdraw-layout-auditor` | `samp-textdraw-layout-debugger` (symptom → cause) → `samp-textdraw-ui-craft` (engine rule) | Cause named, one minimal patch, `td-preview` clean after the fix |
+| `INVALID_PLAYER_TEXT_DRAW` / ~256 PlayerTD hit / UI survives death or disconnect | `@samp-textdraw-layout-auditor` | `samp-textdraw-ui-craft` (pool rules) → `samp-textdraw-fivem-modern-design` (static layers → Global `Text:`) | PlayerTD ≤ 200 after opening every screen, destroy on close/death/disconnect |
+| An old 2012-style UI (boxed text, rainbow outline, `SelectTextDraw` spam) to modernize | `@samp-textdraw-ui-designer` | `samp-textdraw-fivem-modern-design` → `samp-textdraw-ui-craft` | Boxed text eliminated, surfaces are sprites, 0 WARN |
+| Nothing to build — you just need proof before a commit | `@samp-pawn-compile-verifier` | `samp-pawn-compile-gate` | Both builds exit 0 with `.amx` emitted and 0 warnings |
+
+Non-negotiable precedence when two artifacts disagree:
+
+1. **`samp-textdraw-ui-craft` wins on engine behaviour.** It is the only one
+   verified against `omp_textdraw.inc` and compile-tested. Design skills never
+   override alignment/`TextSize` semantics.
+2. **`samp-textdraw-layout-debugger` wins on "what is broken"** — it maps a
+   symptom to one cause. Do not edit coordinates until the cause is named.
+3. **`0.75` has two different jobs.** Apply `TD_ASPECT_16_9` only to shapes you
+   authored directly in 640×480 grid units (circle radius, icon width). A
+   Figma 1920×1080 conversion already carries the aspect in its arithmetic —
+   multiplying again by `0.75` is the bug `samp-textdraw-studio-converter` §1
+   exists to prevent.
+4. **One UI owner per screen.** `fivem-master` builds, `ui-designer` decides,
+   `layout-auditor` repairs. Never run build and repair in the same pass; you
+   lose the ability to tell which change fixed it.
 
 ---
 

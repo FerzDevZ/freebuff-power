@@ -1,0 +1,24 @@
+{
+  "note": "Baseline cakupan fixture skill SA-MP/open.mp. Regenerate: node bin/skill-coverage.js --update",
+  "total": 53,
+  "fixtures": [
+    "samp-command-processor",
+    "samp-data-structures-pawn",
+    "samp-dialog-system",
+    "samp-entity-lifecycle",
+    "samp-http-json-integration",
+    "samp-testing-harness",
+    "samp-textdraw-ui-craft",
+    "samp-timer-scheduling",
+    "samp-vs-openmp-encyclopedia"
+  ],
+  "runtime": [
+    "samp-command-processor",
+    "samp-data-structures-pawn",
+    "samp-dialog-system",
+    "samp-entity-lifecycle",
+    "samp-http-json-integration",
+    "samp-testing-harness",
+    "samp-textdraw-ui-craft"
+  ]
+}

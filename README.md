@@ -1,13 +1,13 @@
 <div align="center">
 
 # ⚡ FREEBUFF-POWER & FREEPI-POWER SUPREME SUITE (v12.0)
-### Multi-Domain Autonomous Cognitive Swarm: 113 Production Agents & 611 Curated Skills across Full-Stack Web, AI/ML/LLM, Data Lakehouse, DevOps/K8s/SRE, Cybersecurity, Mobile, Rust/C++ Systems & GTA SA-MP/open.mp 2026 Studio
+### Multi-Domain Autonomous Cognitive Swarm: 126 Production Agents & 630 Curated Skills across Full-Stack Web, AI/ML/LLM, Data Lakehouse, DevOps/K8s/SRE, Cybersecurity, Mobile, Rust/C++ Systems & GTA SA-MP/open.mp 2026 Studio
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![FreePi: freepi.ai](https://img.shields.io/badge/FreePi-freepi.ai%20Native%20CLI-blue.svg)](https://freepi.ai)
-[![Sub-Agents: 113](https://img.shields.io/badge/Sub--Agents-113%20Specialized-blueviolet.svg)](#-roster-113-specialized-production-agents)
-[![Modular Skills: 611](https://img.shields.io/badge/Modular%20Skills-611%20Curated-emerald.svg)](#-katalog-611-modular-skills)
-[![Domains: Web • AI/ML • Cloud • Mobile • Systems • open.mp](https://img.shields.io/badge/Domains-Full%20Engineering%202026-orange.svg)](#-roster-113-specialized-production-agents)
+[![Sub-Agents: 126](https://img.shields.io/badge/Sub--Agents-126%20Specialized-blueviolet.svg)](#-roster-126-specialized-production-agents)
+[![Modular Skills: 630](https://img.shields.io/badge/Modular%20Skills-630%20Curated-emerald.svg)](#-katalog-630-modular-skills)
+[![Domains: Web • AI/ML • Cloud • Mobile • Systems • open.mp](https://img.shields.io/badge/Domains-Full%20Engineering%202026-orange.svg)](#-roster-126-specialized-production-agents)
 [![Swarm Score: 100/100 A+](https://img.shields.io/badge/Swarm%20Rating-100%2F100%20Grade%20A%2B-brightgreen.svg)](#-autonomous-swe-bench-evaluator)
 [![Anti-Ban: Active](https://img.shields.io/badge/Anti--Ban%20Shield-Active%20v12.0-brightgreen.svg)](#-proteksi-anti-ban--stealth-sandbox)
 [![Platform: Linux & macOS](https://img.shields.io/badge/Platform-Linux%20%7C%20macOS-informational.svg)](#-instalasi-instan-1-line-universal-dual-installer)
@@ -21,9 +21,9 @@
  |_|    |_|  \_\______|______|_|   |_____|    |_|     \____/   \/  \/   |______|_|  \_\
 ```
 
-**Freebuff-Power & FreePi-Power v11.0** menghadirkan arsitektur **Dual-Identity Cognitive Swarm** paling komprehensif di dunia: menggabungkan inferensi cloud gratis tanpa dompet dari [FreePi (freepi.ai)](https://freepi.ai/) dengan kekuatan engine Freebuff yang dilengkapi **94 Specialized Production Agents**, **584 Curated Modular Skills**, **GTA SA-MP & open.mp Supreme Suite**, **40-Rule Anti-Slop Linter**, **Autonomous SWE-Healer**, **Local Offline Zero-Token Ollama Engine**, **Multi-Account Vault**, dan **Stealth Anti-Detect Sandbox**.
+**Freebuff-Power & FreePi-Power v11.0** menghadirkan arsitektur **Dual-Identity Cognitive Swarm** paling komprehensif di dunia: menggabungkan inferensi cloud gratis tanpa dompet dari [FreePi (freepi.ai)](https://freepi.ai/) dengan kekuatan engine Freebuff yang dilengkapi **126 Specialized Production Agents**, **630 Curated Modular Skills**, **GTA SA-MP & open.mp Supreme Suite**, **40-Rule Anti-Slop Linter**, **Autonomous SWE-Healer**, **Local Offline Zero-Token Ollama Engine**, **Multi-Account Vault**, dan **Stealth Anti-Detect Sandbox**.
 
-[Instalasi Dual 1 Baris](#-instalasi-instan-1-line-universal-dual-installer) • [Integrasi FreePi](#1--integrasi-freepi-freepiai--dual-identity) • [GTA SA-MP & open.mp Suite](#8--gta-sa-mp--openmp-supreme-suite) • [Panduan CLI Lengkap](#-cli-command-palette-v110) • [Roster 94 Sub-Agents](#-roster-94-specialized-production-agents) • [Katalog 584 Skills](#-katalog-584-modular-skills)
+[Instalasi Dual 1 Baris](#-instalasi-instan-1-line-universal-dual-installer) • [Integrasi FreePi](#1--integrasi-freepi-freepiai--dual-identity) • [GTA SA-MP & open.mp Suite](#8--gta-sa-mp--openmp-supreme-suite) • [Panduan CLI Lengkap](#-cli-command-palette-v110) • [Roster 126 Sub-Agents](#-roster-126-specialized-production-agents) • [Katalog 630 Skills](#-katalog-630-modular-skills)
 
 </div>
 
@@ -31,7 +31,7 @@
 
 ## ⚡ Instalasi Instan (1-Line Universal Dual Installer)
 
-Cukup jalankan **satu baris perintah** berikut di terminal Linux atau macOS Anda. Perintah ini otomatis memasang **KEDUA CLI** (`freebuff-power` dan `freepi-power`) sekaligus beserta seluruh 94 agents dan 584 skills:
+Cukup jalankan **satu baris perintah** berikut di terminal Linux atau macOS Anda. Perintah ini otomatis memasang **KEDUA CLI** (`freebuff-power` dan `freepi-power`) sekaligus beserta seluruh 126 agents dan 630 skills:
 
 ### Menggunakan cURL:
 ```bash
@@ -43,7 +43,7 @@ curl -fsSL https://raw.githubusercontent.com/FerzDevZ/freebuff-power/main/instal
 wget -qO- https://raw.githubusercontent.com/FerzDevZ/freebuff-power/main/install.sh | bash
 ```
 
-> **Catatan:** Skrip installer otomatis mendeteksi shell (`bash`, `zsh`, `profile`), menyinkronkan 94 agen & 584 skills ke `~/.agents/` dan `~/.freebuff-superpower/`, menyambungkan engine FreePi (`free-pi-cli`), mengompilasi hook stealth anti-ban C, dan mengekspor `$PATH` secara instan tanpa perlu reboot.
+> **Catatan:** Skrip installer otomatis mendeteksi shell (`bash`, `zsh`, `profile`), menyinkronkan 126 agen & 630 skills ke `~/.agents/` dan `~/.freebuff-superpower/`, menyambungkan engine FreePi (`free-pi-cli`), mengompilasi hook stealth anti-ban C, dan mengekspor `$PATH` secara instan tanpa perlu reboot.
 
 ---
 
@@ -160,7 +160,7 @@ Suite terintegrasi terlengkap di dunia untuk pengembang server SA-MP dan open.mp
   Otomatis memalsukan Canvas, WebGL, AudioContext farbling, WebRTC leak shield, dan auto-wipe tanpa bekas saat ditutup.
 
 ### 8. 🔄 Universal IDE Matrix Sync (`sync`)
-* Ekspor seluruh 94 Sub-Agents dan 584 Skills ke seluruh editor AI di laptop Anda:
+* Ekspor seluruh 126 Sub-Agents dan 630 Skills ke seluruh editor AI di laptop Anda:
   ```bash
   freepi-power sync --all
   ```
@@ -204,7 +204,7 @@ Suite terintegrasi terlengkap di dunia untuk pengembang server SA-MP dan open.mp
 
 ---
 
-## 👥 Roster 113 Specialized Production Agents
+## 👥 Roster 126 Specialized Production Agents
 
 Katalog lengkap persona spesialis dalam `.agents/agents/<nama>.md` (otomatis tersedia sebagai `/slash-command` di dalam FreePi!):
 
@@ -270,7 +270,7 @@ Katalog lengkap persona spesialis dalam `.agents/agents/<nama>.md` (otomatis ter
 
 ---
 
-## 🧰 Katalog 611 Modular Skills
+## 🧰 Katalog 630 Modular Skills
 
 Seluruh skill tersimpan rapi mengikuti standar resmi **AgentSkills** di `.agents/skills/<nama>/SKILL.md`:
 

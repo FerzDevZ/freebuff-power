@@ -239,7 +239,7 @@ case "$CMD" in
     echo -e "  ${C_GREEN}freepi-power pack samp-rp${C_RESET}       18 skill Full FiveM RP (Phone, MDT, Garage, Heist, Housing, UCP)"
     echo -e "  ${C_GREEN}freepi-power pack ucp${C_RESET}           Web UCP Next.js + Discord + open.mp Bridge"
     echo -e "  ${C_GREEN}freepi-power pack samp-full${C_RESET}     Seluruh 38 skill SA-MP & open.mp"
-    echo -e "  ${C_GREEN}freepi-power pack enable <nama>${C_RESET} Aktifkan 1 skill tertentu dari 611 katalog"
+    echo -e "  ${C_GREEN}freepi-power pack enable <nama>${C_RESET} Aktifkan 1 skill tertentu dari 630 katalog"
     echo -e "  ${C_GREEN}freepi-power pack clear${C_RESET}         Kosongkan skill aktif untuk hemat token maksimal\n"
     ;;
 esac
