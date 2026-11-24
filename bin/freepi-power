@@ -40,7 +40,7 @@ C_RESET='\033[0m'
 show_help() {
   echo -e "${C_CYAN}${C_BOLD}========================================================================================${C_RESET}"
   echo -e "${C_YELLOW}${C_BOLD}⚡ FREEPI-POWER SUPREME — Multi-Domain Autonomous Swarm Suite (v12.0)${C_RESET}"
-  echo -e "${C_DIM}FreePi (freepi.ai) + 113 Production Agents + 611 Skills (AI/ML, Web, Cloud, Mobile, Systems, open.mp)${C_RESET}"
+  echo -e "${C_DIM}FreePi (freepi.ai) + 126 Production Agents + 655 Skills (AI/ML, Web, Cloud, Mobile, Systems, open.mp)${C_RESET}"
   echo -e "${C_CYAN}${C_BOLD}========================================================================================${C_RESET}\n"
   echo -e "${C_BOLD}PENGGUNAAN:${C_RESET}"
   echo -e "  ${C_GREEN}freepi-power${C_RESET} ${C_YELLOW}<command>${C_RESET} [arguments] [options]\n"
@@ -116,7 +116,7 @@ show_freepi_commands() {
   echo -e "  ${C_CYAN}/whats-new${C_RESET} & ${C_CYAN}/update${C_RESET}        Cek changelog & update free-pi-cli"
   echo -e "  ${C_CYAN}/help${C_RESET} & ${C_CYAN}/exit${C_RESET}               Bantuan & keluar dari FreePi\n"
 
-  echo -e "${C_PURPLE}${C_BOLD}3. SLASH COMMANDS AGENT SUPERPOWER (113 Agents di ~/.free-pi/agent/prompts/):${C_RESET}"
+  echo -e "${C_PURPLE}${C_BOLD}3. SLASH COMMANDS AGENT SUPERPOWER (126 Agents di ~/.free-pi/agent/prompts/):${C_RESET}"
   echo -e "  ${C_YELLOW}/fullstack-web-2026-architect${C_RESET} Full-Stack Next.js 15 / React 19 / SaaS / Auth / Billing"
   echo -e "  ${C_YELLOW}/ml-ai-architect${C_RESET}              PyTorch 2.x, LoRA/QLoRA/GRPO, vLLM/SGLang & MLOps"
   echo -e "  ${C_YELLOW}/ai-agent-systems-engineer${C_RESET}    AI Agents, MCP Servers, Context Caching & Evals"
@@ -146,7 +146,7 @@ case "$CMD" in
     ;;
 
   version|--version|-v)
-    echo -e "${C_YELLOW}${C_BOLD}freepi-power${C_RESET} v12.0 (Multi-Domain Autonomous Swarm — 113 Agents & 611 Skills)"
+    echo -e "${C_YELLOW}${C_BOLD}freepi-power${C_RESET} v13.0 (Multi-Domain Autonomous Swarm — 126 Agents & 655 Skills)"
     "$SCRIPT_DIR/freepi-runner.sh" --version
     ;;
 

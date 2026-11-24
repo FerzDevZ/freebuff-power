@@ -270,7 +270,7 @@ RP_MAIN
 esac
 
 # Injeksi Superpower otomatis ke folder baru
-echo -e "\n🧰 Menyuntikkan 94 Sub-Agents & 584 Modular Skills..."
+echo -e "\n🧰 Menyuntikkan 126 Sub-Agents & 655 Modular Skills..."
 freebuff-power init .
 
 echo -e "\n${C_GREEN}${C_BOLD}🎉 PROYEK '$NAME' BERHASIL DISCAFFOLD!${C_RESET}"
