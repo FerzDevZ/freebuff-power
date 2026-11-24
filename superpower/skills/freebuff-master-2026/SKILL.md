@@ -85,7 +85,7 @@ This is the **single entry point** for all development. When a user requests any
 ### By Domain
 | Domain | Skills | Key Skills |
 |--------|--------|------------|
-| SA-MP/open.mp | 57 | `samp-master-2026`, `samp-textdraw-fivem-modern-design`, `samp-mapping-dynamic-objects-pro` |
+| SA-MP/open.mp | 74 | `samp-master-2026`, `samp-textdraw-fivem-modern-design`, `samp-mapping-dynamic-objects-pro` |
 | Web Frontend | ~30 | `react19-nextjs15-modern-craft`, `tailwind-v4-shadcn-system`, `frontend-design` |
 | Backend | ~25 | `node-typescript-backend`, `python-fastapi-backend`, `golang-microservices` |
 | Mobile | ~15 | `crossplatform-mobile-flutter-rn`, `mobile-offline-first-sync-2026` |

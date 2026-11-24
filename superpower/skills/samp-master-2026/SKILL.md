@@ -91,7 +91,7 @@ freepi-power samp audit .                  # 0 critical issues
 # Floor height check: no fall-through at Z-2.0
 ```
 
-## 5. Skill Inventory (52 skills, 2026)
+## 5. Skill Inventory (74 skills, 2026)
 
 ### Core Engine
 | Skill | Purpose |
