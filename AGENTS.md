@@ -1,415 +1,109 @@
-# ⚡ Freebuff-Power & FreePi-Power Ultra v13.0 — Autonomous Multi-Domain Cognitive Swarm
+# Freebuff-Power & FreePi-Power — AGENTS.md (v13.0)
 
-> **AUTONOMOUS ACTIVATION DIRECTIVE:**
-> When `AGENTS.md` is loaded (in **FreePi `freepi.ai`**, **Freebuff**, **Claude Code**, **Cursor**, or **Windsurf**), immediately operate as a **Principal Autonomous Engineering Swarm** backed by **126 Specialized Production Agents** (`.agents/agents/`), **661 Curated Modular Skills** (`.agents/skills/<name>/SKILL.md`), and **23 Stack Rules** (`.agents/rules/`).
-> You do NOT wait for micromanagement. Read first, detect the stack, load ONLY the matching skills on demand (JIT), build cleanly, verify with real terminal commands, and ship zero-slop production software.
+Short on purpose: this file is read every session. Depth lives in `.agents/skills/` (661), personas in `.agents/agents/` (126), stack rules in `.agents/rules/` (23). Load 1–3 matching skills Just-In-Time (JIT) — never bulk-load.
 
----
+## 1. Route the stack, then work
 
-## 🧭 PHASE 0 — INSTANT STACK AUTO-DETECTION & ROUTING
-
-On session start, inspect project markers (`package.json`, `pyproject.toml`, `Cargo.toml`, `go.mod`, `pubspec.yaml`, `Dockerfile`, `*.tf`, `pawn.json`, `config.json`, `MEMORY.md`) and immediately route to the matching specialist triad (**Architect → Builder → Reviewer/Verifier**):
-
-| Detected Project Signal | Primary Lead Agent | Paired Verifier / Specialist | Default Skill Pack |
-|---|---|---|---|
-| **Next.js / React / TS / SaaS Web** | `@fullstack-web-2026-architect` | `@react-reviewer` + `@antislop-auditor` | `fullstack-saas-2026-blueprint`, `antislop-ui` |
-| **PyTorch / ML / Fine-Tuning / MLOps** | `@ml-ai-architect` | `@mle-reviewer` + `@python-reviewer` | `deep-learning-pytorch-2026`, `mlops-production-pipelines` |
-| **LLM Agents / MCP / RAG / Evals** | `@ai-agent-systems-engineer` | `@rag-pipeline-reviewer` + `@security-reviewer` | `ai-agent-mcp-orchestration-2026`, `llm-evals-observability-2026` |
-| **Vision / OCR / Voice / Multimodal** | `@computer-vision-multimodal-engineer` | `@ml-ai-architect` + `@performance-optimizer` | `computer-vision-multimodal-ai`, `mlops-production-pipelines` |
-| **Polars / DuckDB / Iceberg / Kafka / dbt** | `@data-engineer-pro` | `@database-reviewer` + `@python-reviewer` | `data-lakehouse-polars-iceberg`, `clickhouse-io` |
-| **Microservices / High-Scale API / Go / Node** | `@distributed-systems-architect` | `@go-reviewer` / `@database-reviewer` | `distributed-systems-scale-2026`, `api-design` |
-| **Docker / K8s / Terraform / CI-CD / SRE** | `@devops-sre-architect` | `@cybersecurity-redteam-pro` | `devops-sre-kubernetes-iac`, `distributed-tracing-opentelemetry` |
-| **Security Audit / Auth / Pentest / Threat** | `@cybersecurity-redteam-pro` | `@security-reviewer` | `cybersecurity-appsec-redteam-2026`, `jwt-session-security-passkeys` |
-| **Flutter / React Native / Android / iOS** | `@mobile-crossplatform-architect` | `@flutter-reviewer` / `@kotlin-reviewer` | `mobile-offline-first-sync-2026`, `dart-flutter-patterns` |
-| **Rust / C++ / Zig / WASM / eBPF** | `@systems-rust-cpp-engineer` | `@rust-reviewer` / `@cpp-reviewer` | `systems-rust-tokio-production`, `cpp-modern-low-latency` |
-| **QA / Playwright E2E / k6 Load / Contracts** | `@qa-automation-architect` | `@e2e-runner` + `@tdd-guide` | `e2e-testing`, `k6-spike-soak-breakpoint-testing` |
-| **GTA SA-MP & open.mp FiveM-Style 2026** | `@samp-creator-2026` | `@samp-textdraw-layout-auditor` + `@samp-pawn-compile-verifier` | `openmp-modern-2026-api`, `samp-textdraw-ui-craft`, `samp-pawn-compile-gate`, `samp-openmp-modern-guide` |
-
----
-
-## 🧠 TRI-PHASE AUTONOMOUS ENGINEERING CYCLE
-
-```text
-1. DISCOVER & PLAN  ──▶ Read real files + MEMORY.md -> Decompose task -> For UI: settle DESIGN.md first
-2. SURGICAL BUILD   ──▶ JIT-load 1–3 relevant skills -> Write typed, tested, minimal-diff production code
-3. DUAL-GATE VERIFY ──▶ Gate 1: Run real compiler/tests | Gate 2: Security + Anti-Slop + Diff Audit | Gate 3: Log root-cause invariants to MEMORY.md
-```
-
-```mermaid
-graph TD
-    Prompt([User Task + AGENTS.md]) --> Sense[0. Auto-Sense Stack & Read MEMORY.md]
-    Sense --> Route[1. Activate Lead Agent + JIT Load 1-3 Skills]
-    Route --> Plan[2. Plan & Settle Contracts / DESIGN.md]
-    Plan --> Build[3. TDD + Surgical Implementation]
-    Build --> Gate1{Gate 1: Real Build & Tests Pass?}
-    Gate1 -->|Fail| Heal[Autonomous SWE-Healer + Root-Cause Fix]
-    Heal --> Reflect[Append Atomic Invariant to MEMORY.md]
-    Reflect --> Gate1
-    Gate1 -->|Pass| Gate2{Gate 2: Security & Anti-Slop Clean?}
-    Gate2 -->|Issues| Build
-    Gate2 -->|Cleared| Ship([Deliver Verified Output])
-```
-
-### Token-Smart & High-Velocity Operating Discipline
-- **Read Before Edit:** Never guess APIs, exports, file paths, or schema columns — read the real files first.
-- **Just-In-Time (JIT) Skill Loading:** Load ONLY the 1–3 skills directly relevant to the active subtask so context stays sharp and token usage stays lean.
-- **Parallel Independent Reads/Checks:** Batch independent file reads and searches concurrently instead of serial single-step probing.
-- **Chesterton's Fence & Minimal Diffs:** Understand why existing code exists before deleting or refactoring it; keep changes scoped cleanly to the task.
-- **Evidence Over Claims:** Never claim code compiles or tests pass without executing the real verification command and checking exit code 0.
-
----
-
-## 👥 MULTI-DOMAIN AGENT ORCHESTRATION MATRIX (126 Production Agents)
-
-Personas live in `.agents/agents/<name>.md` (and are auto-exposed as `/<name>` slash commands in FreePi `~/.free-pi/agent/prompts/`):
-
-### 1. Core Architecture, Planning, QA & Autonomous Healing
-| Agent | Focus | Activate When |
+| Signal in the repo | Lead agent | First skill |
 |---|---|---|
-| **`@planner`** | Task decomposition, dependency DAG & phased plans | Multi-file features, complex migrations |
-| **`@architect`** | High-level system design, ADRs, RFCs & tradeoffs | New architectures, DB/API contracts |
-| **`@swe-healer`** | Autonomous traceback triage & minimal AST patches | Failing test suites, compiler/build errors |
-| **`@code-reviewer`** | Principal-grade correctness, security & edge-case review | Before committing or shipping any PR |
-| **`@code-simplifier`** | Strip accidental complexity & flatten deep nesting | Post-implementation cleanup without behavior change |
-| **`@silent-failure-hunter`** | Hunt swallowed errors, bad fallbacks & silent data loss | Auditing reliability & error handling |
-| **`@qa-automation-architect`** | Playwright E2E, visual diffs, k6 load, Pact & mutation tests | End-to-end verification & load hardening |
-| **`@tdd-guide`** | Strict Red-Green-Refactor unit & integration tests | New features & regression-locked bug fixes |
+| Next.js / React / TS / SaaS | `@fullstack-web-2026-architect` | `fullstack-saas-2026-blueprint`, `antislop-ui` |
+| PyTorch / ML / fine-tuning | `@ml-ai-architect` | `deep-learning-pytorch-2026`, `mlops-production-pipelines` |
+| LLM agents / MCP / RAG / evals | `@ai-agent-systems-engineer` | `ai-agent-mcp-orchestration-2026`, `llm-evals-observability-2026` |
+| Vision / OCR / voice | `@computer-vision-multimodal-engineer` | `computer-vision-multimodal-ai` |
+| Polars / DuckDB / Iceberg / dbt | `@data-engineer-pro` | `data-lakehouse-polars-iceberg`, `clickhouse-io` |
+| Go / Node high-scale API | `@distributed-systems-architect` | `distributed-systems-scale-2026`, `api-design` |
+| Docker / K8s / Terraform / CI | `@devops-sre-architect` | `devops-sre-kubernetes-iac`, `distributed-tracing-opentelemetry` |
+| Auth / pentest / threat model | `@cybersecurity-redteam-pro` | `cybersecurity-appsec-redteam-2026`, `jwt-session-security-passkeys` |
+| Flutter / RN / Android / iOS | `@mobile-crossplatform-architect` | `mobile-offline-first-sync-2026`, `dart-flutter-patterns` |
+| Rust / C++ / Zig / WASM / eBPF | `@systems-rust-cpp-engineer` | `systems-rust-tokio-production`, `cpp-modern-low-latency` |
+| E2E / load / contracts | `@qa-automation-architect` | `e2e-testing`, `k6-spike-soak-breakpoint-testing` |
+| GTA SA-MP & open.mp | `@samp-creator-2026` | `openmp-modern-2026-api`, `samp-textdraw-ui-craft` |
+| Unknown / mixed | `@planner` | `codebase-onboarding` |
 
-### 2. AI, Machine Learning, LLM Agents & Multimodal
-| Agent | Focus | Activate When |
+**Loop:** DISCOVER (read real files + `MEMORY.md`) → BUILD (smallest correct diff, typed, tested) → VERIFY (Gate 1 + Gate 2) → REMEMBER (Gate 3).
+
+- **Read before edit.** No guessed APIs, exports, paths, or schema columns.
+- **Chesterton's Fence.** Know why code exists before deleting or reshaping it; keep the diff scoped to the task.
+- **Evidence over claims.** "Compiles" and "passes" require the real command, exit code 0, and the output inspected.
+- **Parallel by default.** Batch independent reads/searches; do not serialize what has no dependency.
+
+## 2. DUAL-GATE — EXECUTABLE VERIFICATION (Gate 1)
+
+Never pass Gate 1 by eyeballing code. Run the command for the active stack:
+
+| Stack | Command | Invariant |
 |---|---|---|
-| **`@ml-ai-architect`** | PyTorch 2.x, FSDP2, LoRA/QLoRA/DPO/GRPO, vLLM/SGLang, MLOps | Model training, fine-tuning, ML serving |
-| **`@ai-agent-systems-engineer`** | Multi-agent workflows, MCP servers, prompt caching, guardrails | Building AI agents, tool-calling, MCP |
-| **`@computer-vision-multimodal-engineer`** | RT-DETR/YOLO, SAM2, VLM OCR, Faster-Whisper/WebRTC, TensorRT | Vision, OCR, video & voice AI pipelines |
-| **`@graphrag-architect`** | Hybrid BM25 + pgvector/Qdrant + Neo4j Knowledge Graphs | Enterprise search & multi-hop RAG |
-| **`@local-llm-engineer`** | Ollama, vLLM, GGUF/AWQ private offline model serving | Zero-token private/on-prem LLM deployment |
-| **`@rag-pipeline-reviewer`** | Chunking, reranking, groundedness & retrieval evals | Reviewing or debugging RAG quality |
-| **`@mle-reviewer`** | Data leakage, reproducibility, train/serve skew & eval gates | Reviewing ML pipelines & notebooks |
+| TS / Node | `npx tsc --noEmit` + test runner | exit 0, no type errors |
+| Next / Vite | `npm run build` | clean bundle, no hydration break |
+| Python | `ruff check . && mypy . && pytest -q` | lint + types + green |
+| Go | `go vet ./... && go test -race ./...` | no races |
+| Rust | `cargo clippy --all-targets -- -D warnings && cargo test` | zero warnings |
+| C++ / native | `cmake --build build && ctest --output-on-failure` | zero warnings |
+| Flutter | `flutter analyze && flutter test` | 0 issues |
+| Shell / IaC | `bash -n *.sh` / `terraform validate` / `docker build` | valid syntax, minimal image |
+| Pawn (SA-MP/open.mp) | `freepi-power samp audit .` + `sampctl package compile` | 0 critical, `.amx` emitted, 0 warnings, **both** targets |
 
-### 3. Full-Stack Web, Product & Anti-Slop Design Craft
-| Agent | Focus | Activate When |
-|---|---|---|
-| **`@fullstack-web-2026-architect`** | Next.js 15/16 RSC, React 19, Zod, Drizzle/Prisma, Auth, Billing | End-to-end web apps & SaaS builds |
-| **`@product-growth-engineer`** | 0-to-1 MVPs, PostHog flags/A-B, Stripe/Midtrans, SEO/GEO | SaaS launches, conversion, monetization |
-| **`@design-director`** | Studio `DESIGN.md`, visual restraint & typography direction | New UI pages & design system setup |
-| **`@design-architect`** | Swiss grids, OKLCH color tokens, asymmetric Bento layouts | Visual hierarchy & brand aesthetics |
-| **`@antislop-auditor`** | 40-rule Anti-Slop visual/code/copy purge | Auditing frontend components before delivery |
-| **`@shadcn-craftsman`** | Tailwind CSS v4, Radix headless primitives, 8 component states | Accessible modals, palettes, forms, tables |
-| **`@motion-designer`** | Framer Motion spring physics, GSAP ScrollTrigger | Tactile micro-interactions & transitions |
-| **`@a11y-contrast-enforcer`** | WCAG 2.2 AA/AAA contrast math & keyboard focus traps | Color palettes, themes & a11y compliance |
-| **`@copy-editor`** | Plain-spoken, crisp copy with zero AI buzzwords | Headlines, CTAs, READMEs, microcopy |
+## 3. Invariants (Gate 2)
 
-### 4. Backend, Distributed Systems, Data & Databases
-| Agent | Focus | Activate When |
-|---|---|---|
-| **`@distributed-systems-architect`** | Outbox+CDC, Idempotency, Rate Limiting, Circuit Breakers, Sharding | High-scale APIs, payments, async messaging |
-| **`@data-engineer-pro`** | Polars, DuckDB, Apache Iceberg/Parquet, dbt, Kafka, ClickHouse | ETL pipelines, lakehouses, analytics |
-| **`@hono-edge-architect`** | Hono.js, Cloudflare Workers, Bun.serve() sub-5ms APIs | Ultra-fast edge microservices |
-| **`@database-reviewer`** | PostgreSQL EXPLAIN ANALYZE, indexing, locks, connection pooling | Schema design, slow queries, migrations |
-| **`@fastapi-reviewer`** / **`@python-reviewer`** | Async FastAPI, Pydantic v2, SQLAlchemy 2.0, pytest, typing | Python backends & services |
-| **`@go-reviewer`** / **`@go-build-resolver`** | Go concurrency, context timeouts, Gin/Fiber, `go vet` | Go microservices & high-throughput APIs |
-| **`@typescript-reviewer`** / **`@java-reviewer`** | Strict TS discriminated unions, Spring Boot 3 / Virtual Threads | Enterprise Node/TS & JVM backends |
+**Code & security — banned:** stubs (`// TODO`, `pass`, `...`); `any`, bare `except:`, force-unwrap `!`, `.unwrap()` in handlers; empty `catch`; unscoped queries (BOLA/IDOR); string-concatenated SQL; committed secrets. Required: parameterized queries, boundary validation (Zod/Pydantic/tags), typed errors, tenant/owner scoping, domain-specific names over `data`/`obj`/`temp`.
 
-### 5. Cloud, DevOps, SRE & Cybersecurity
-| Agent | Focus | Activate When |
-|---|---|---|
-| **`@devops-sre-architect`** | Distroless Docker, K8s/Helm, Terraform/OpenTofu, OIDC CI, OTel/SLO | Deployments, infra-as-code, observability |
-| **`@cybersecurity-redteam-pro`** | OWASP/API Top 10, BOLA/SSRF/SQLi, JWT/PKCE, SBOM, Threat Model | Adversarial security audits & hardening |
-| **`@security-reviewer`** | AuthFlow, input sanitization, secret leak checks | Pre-commit & auth/payment code review |
-| **`@performance-optimizer`** | Latency flamegraphs, heap leak profiling, bundle splitting | High CPU/RAM, slow requests, LCP/INP lag |
-| **`@stealth-browser-engineer`** | CDP automation, Playwright stealth, network interception | Browser automation & data extraction |
+**anti-ai-slop UI — banned:** violet/indigo gradient heroes and `bg-clip-text`; centered-everything or 3-equal-card rows; `transition-all` and uniform `hover:scale-105` (declare `transform`/`opacity` explicitly + `motion-reduce`); emoji as feature icons; `letter-spacing` on body text. Required: OKLCH tokens, WCAG 2.2 AA ≥ 4.5:1, all 8 states (default, hover, focus-visible, active, disabled, loading, error, empty), Lucide/SVG icons, asymmetric editorial/Bento layout.
 
-### 6. Mobile & Low-Level Systems
-| Agent | Focus | Activate When |
-|---|---|---|
-| **`@mobile-crossplatform-architect`** | Flutter 3/Riverpod, RN New Arch, Kotlin Compose, SwiftUI, Offline Sync | Cross-platform & native mobile apps |
-| **`@systems-rust-cpp-engineer`** | Rust Tokio/Axum/WASM/PyO3, C++20/23 SIMD, Zig, Linux eBPF | Low-latency native services & extensions |
-| **`@flutter-reviewer`** / **`@dart-build-resolver`** | Flutter widget decomposition, null safety, pub/build fixes | Flutter development & compilation triage |
-| **`@rust-reviewer`** / **`@cpp-reviewer`** | Borrow checker, zero-unwrap safety, RAII, ASan/UBSan | Systems code review & build fixes |
+## 4. Baselines 2026
 
-### 7. GTA SA-MP & open.mp FiveM-Style 2026 Studio (25 Agents)
-| Agent | Focus | Activate When |
-|---|---|---|
-| **`@samp-creator-2026`** | Full-stack 2026 SA-MP/open.mp creator, `[E]`/`[Y]` UX, PC + Android | End-to-end modern RP server architecture |
-| **`@samp-textdraw-fivem-master`** | FiveM/NoPixel/Ox_lib rounded TextDraw, 16:9 math, HUD, Radial, Hotbar | Modern TextDraw UIs & 256-pool budgeting |
-| **`@samp-mapping-mlo-architect`** | MLO mapping, `SetDynamicObjectMaterial`, `Streamer_UpdateEx`, `ox_doorlock` | Custom interiors, retexturing, props, Actors |
-| **`@samp-fivem-systems-engineer`** | `ox_target` Third-Eye, `ox_lib`, `ox_inventory` Grid+Metadata & `QBox` | FiveM-grade interaction & inventory in PAWN |
-| **`@samp-modern-jobs-architect`** | FSM multi-stage jobs, skill-check minigames, Co-op Party, dynamic market | Interactive jobs & closed-loop economy |
-| **`@samp-crime-faction-architect`** | Heist FSM, Gang Turf, Dirty Cash laundering, Police MDT & EMS Medical | Crime, law enforcement & medical RP |
-| **`@samp-ucp-fullstack-engineer`** | Next.js 15 UCP + Discord Bot + `ucp_delivery_queue` MySQL bridge | Web UCP, whitelist & auto VIP delivery |
-| **`@openmp-plugin-creator`** | C++20 open.mp SDK components, event dispatchers, AMX natives | Native open.mp C++ components |
-| **`@samp-legacy-migrator`** | SA-MP 0.3.7 -> `<open.mp>` migration, error 19, YSI 5 upgrade | Upgrading legacy scripts & removing hacks |
-| **`@samp-syntax-triager`** | `bin/samp-detect.js` classification: LEGACY / MODERN / COMPAT / MIXED / UNKNOWN | Before writing or migrating any Pawn code |
-| **`@samp-textdraw-layout-auditor`** | Diagnoses broken TextDraw layout, fixes engine causes, runs preview + compile gates | "Tulisan/box/bar tidak di tempatnya", UI berantakan |
-| **`@samp-pawn-compile-verifier`** | Dual-target pawncc builds, tag/native/prototype errors, sampctl + CI | Any `.pwn` is called done or fixed |
-| **`@samp-map-pipeline-engineer`** | Texture Studio / MTA / ColAndreas pipeline, streamer deployment, in-game acceptance | Mapping, interiors, MLO, fall-through, artwork |
-| **`@samp-security-hardener`** | Hostile-client audit: dialog/command spoofing, injection, authority checks, RCON | Any gamemode handling money, login, admin or player input |
-| **`@samp-qa-engineer`** | Pawn assertion harness, CI report gate, regression fixtures | New feature, fixed bug, or "is this really tested?" |
-| **`@samp-database-engineer`** | Schema, migrations, threaded queries, save loops, duplication races | Persistence, economy bugs, restart data loss, slow queries |
-| **`@samp-release-engineer`** | Pawn/omp packaging, CI, deploy, health check, rollback | Shipping a build or fixing a broken deployment |
+| Domain | Baseline |
+|---|---|
+| open.mp | v1.6.7.3218 · pawncc 3.10.10+ · sampctl 1.16.0 |
+| Plugins | Streamer v2.9.6+ · MySQL BlueG R41-4 · YSI 5.x · ColAndreas v1.5.0+ |
+| Legacy target | SA-MP 0.3.7-R2 / 0.3.DL only for backward compat |
+| Web | Next.js 15/16 App Router · React 19 · Tailwind v4 CSS-first · strict TS + Zod |
+| Scripting | Python 3.11+ (3.8/3.9 EOL) · Node 20+ LTS · Ruff + mypy strict |
 
----
+Pawn builds are not green until the `.amx` exists. Batch-compile both targets — never "it should compile".
 
-## 🧰 CURATED HIGH-LEVERAGE SKILL DIRECTORY (661 Skills in `.agents/skills/`)
+## 5. TextDraw engine truth (verified against `omp_textdraw.inc` + compile-tested fixtures)
 
-Load on demand by reading `.agents/skills/<skill-name>/SKILL.md`:
+`TextDrawTextSize` is where layout bugs are born; never fix them by nudging coordinates.
 
-- **AI, Machine Learning, Agents & Multimodal:** `deep-learning-pytorch-2026`, `mlops-production-pipelines`, `ai-agent-mcp-orchestration-2026`, `llm-evals-observability-2026`, `computer-vision-multimodal-ai`, `local-llm-ollama-vllm-deploy`, `llm-finetuning-lora-qlora-datasets`, `prompt-injection-defense-guardrails`, `mcp-server-developer`, `ai-observability-engineer`.
-- **Full-Stack Web, UI Craft & Anti-Slop:** `fullstack-saas-2026-blueprint`, `antislop`, `antislop-ui`, `antislop-code`, `antislop-copywriting`, `antislop-human`, `antislop-layoutmobile`, `react19-nextjs15-modern-craft`, `tailwind-v4-shadcn-system`, `shadcn-radix-headless-craft`, `framer-motion-animation-wizard`, `scroll-driven-animations-gsap`, `threejs-webgl-3d-experience`, `dark-mode-system-theming`, `web-performance-core-vitals-pro`, `core-web-vitals-inp-lcp-master`, `geo-ai-search-optimization-engine`.
-- **Backend, Distributed Systems & Data Engineering:** `distributed-systems-scale-2026`, `data-lakehouse-polars-iceberg`, `bun-runtime-hyper-fast-apis`, `cloudflare-edge-workers-caching`, `duckdb-embedded-olap-sql`, `clickhouse-io`, `postgresql-internals-indexing-master`, `redis-data-structures-streams`, `idempotency-distributed-transactions`, `circuit-breaker-rate-limiter-resilience`, `transactional-outbox-cdc-debezium`, `zero-downtime-migration-expand-contract`, `golang-concurrency-patterns`, `api-designer`.
-- **Cloud, DevOps, SRE, Security & QA:** `devops-sre-kubernetes-iac`, `cybersecurity-appsec-redteam-2026`, `jwt-session-security-passkeys`, `distributed-tracing-opentelemetry`, `secret-management-vault-infisical`, `sast-dast-container-cve-scanner`, `supply-chain-security-sbom`, `e2e-testing`, `playwright-visual-regression-testing`, `k6-spike-soak-breakpoint-testing`, `contract-testing-pact`, `mutation-testing-stryker-mutmut`, `tdd-master`.
-- **Mobile & Low-Level Systems:** `mobile-offline-first-sync-2026`, `systems-rust-tokio-production`, `rust-wasm-systems-engineer`, `cpp-modern-low-latency`, `zig-high-performance-systems`, `ebpf-linux-kernel-observability`, `desktop-app-electron-tauri`, `bottom-sheet-touch-gestures-mobile`.
-- **GTA SA-MP & open.mp FiveM-Style 2026 (74 Skills):** `openmp-modern-2026-api`, `samp-openmp-modern-guide`, `samp-command-processor`, `samp-data-structures-pawn`, `samp-http-json-integration`, `samp-timer-scheduling`, `samp-testing-harness`, `samp-server-security-hardening`, `samp-persistence-schema`, `samp-textdraw-ui-craft`, `samp-textdraw-layout-debugger`, `samp-textdraw-studio-converter`, `samp-textdraw-fivem-modern-design`, `samp-pawn-compile-gate`, `samp-map-pipeline-2026`, `samp-mapping-dynamic-objects-pro`, `samp-fivem-oxlib-target-logic`, `samp-fivem-inventory-metadata`, `samp-fivem-smartphone-mdt`, `samp-fivem-vehicle-tuning-garage`, `samp-fivem-heist-crime-gang`, `samp-fivem-housing-business-crafting`, `samp-fivem-character-cinema-anim`, `samp-ucp-web-panel-bridge`, `samp-modern-jobs-2026-logic`, `samp-modern-creator-2026`, `samp-mobile-android-cef-ui`, `samp-vs-openmp-encyclopedia`, `samp-streamer-plugin`, `samp-mysql-database`, `samp-ysi-framework`, `samp-npc-ai-behavior`, `samp-camera-cinematic`, `samp-sound-audio`, `samp-weather-time`, `samp-editor-ecosystem`, `samp-economy-simulation`, `samp-admin-moderation`, `samp-chat-system`, `samp-vehicle-system`, `samp-banking-system`, `samp-property-system`, `samp-medical-ems`, `samp-police-system`, `samp-gang-faction`, `samp-spawn-system`, `samp-logging-audit`, `samp-anticheat-deep`, `samp-clothing-accessories`, `samp-death-respawn`, `samp-crafting-system`, `samp-phone-system`, `samp-teleport-system`, `samp-entity-lifecycle`, `samp-textdraw-ui-designer`.
-
----
-
-## 🛠️ GATE 1 — EXECUTABLE VERIFICATION MATRIX (NO EXCUSES, RUN REAL COMMANDS)
-
-Gate 1 NEVER passes by eyeballing code. Run the matching verification command and verify exit code `0`:
-
-| Active Tech Stack | Required Verification Command | Acceptance Invariant |
-|---|---|---|
-| **TypeScript / Node / Web** | `npx tsc --noEmit` (+ test runner) | Exit 0, zero type errors, tests green |
-| **Next.js / Vite Production** | `npm run build` | Clean production bundle, 0 build/hydration breaks |
-| **Python / FastAPI / ML** | `ruff check . && mypy . && pytest -q` | Lint + strict types + all tests green |
-| **Go Microservices** | `go vet ./... && go test -race ./...` | Vet clean, zero race conditions, tests green |
-| **Rust Systems** | `cargo clippy --all-targets -- -D warnings && cargo test` | Zero warnings, zero panics, all tests green |
-| **C++20 / Native** | `cmake --build build && ctest --output-on-failure` | Zero compiler warnings, tests green |
-| **Flutter / Dart** | `flutter analyze && flutter test` | 0 issues, 0 warnings, all tests green |
-| **Docker / IaC / Shell** | `bash -n *.sh` / `terraform validate` / `docker build` | Valid syntax, clean minimal image |
-| **SA-MP / open.mp (Pawn)** | `pawncc <entry>.pwn -i"$OMP_INCLUDE" -d3` **and** `pawncc <entry>.pwn -i"$LEGACY_STDLIB" -i"$PAWN_CORE_INCLUDE" -d3` + `freepi-power samp audit .` | exit 0 on **both** targets, **0 warnings**, `.amx` emitted for each, 0 critical audit issues |
-| **SA-MP / open.mp UI (TextDraw)** | `freepi-power samp td-preview <ui>.pwn` | `Layout gate` reports 0 ERROR and 0 WARN, PlayerTD ≤ 200 |
-| **SA-MP / open.mp (tests)** | `sampctl package build` + test entry, then `grep -q '^PASS' scriptfiles/*.report` | Report exists and starts with `PASS`; a missing report is a failure, not "no tests" |
-
----
-
-## 🥊 GATE 2 — HARD CODE, SECURITY & ANTI-SLOP INVARIANTS
-
-### Code & Security Invariants (❌ BANNED vs ✅ REQUIRED)
-- ❌ **No Stubs / Placeholders:** Never emit `// TODO: implement later`, `pass`, or omitted `...` ellipses.
-- ❌ **No Weak Typing:** Never use `any` in TypeScript, bare `except:` in Python, force unwrap `!` in Dart, or `.unwrap()` in Rust request handlers.
-- ❌ **No Generic Slop Names:** Avoid meaningless `data`, `item`, `res`, `temp`, `obj` where domain-specific identifiers (`verifiedOrder`, `activeSession`) clarify intent.
-- ❌ **No Silent Failures:** Never swallow exceptions in empty `catch` blocks; propagate typed errors or RFC 7807 structured responses.
-- ❌ **No Authorization / Injection Gaps:** Always scope queries by authenticated tenant/owner (zero BOLA/IDOR), use parameterized queries only, validate all external boundaries with Zod/Pydantic, and never commit secrets/tokens.
-
-### Visual Anti-AI-Slop Invariants (Frontend / UI / TextDraw)
-1. **No cliché violet/indigo gradients** or `bg-clip-text text-transparent` hero headlines.
-2. **No centered-everything landing pages** or uniform 3-equal-card rows — use asymmetric editorial/Bento grids.
-3. **No `transition-all`** or uniform `hover:scale-105`; declare explicit GPU-friendly CSS properties (`transform`, `opacity`).
-4. **No emoji as UI feature icons** (✨ 🚀 ⚡ 🔥 🎯 ✅) inside web apps — use crisp Lucide/SVG icons.
-5. **Enforce OKLCH color palettes**, WCAG 2.2 AA/AAA contrast (`>= 4.5:1`), and all 8 discrete interactive states (default, hover, focus-visible, active, disabled, loading, error, empty).
-6. **No boxed text as layout in TextDraw UI** (`UseBox = 1`) — surfaces are font-4 sprites, text is an overlay.
-7. **No hand-written `TextDrawTextSize` math** in UI code — route through `samp_td_kit.inc`.
-8. **No unset defaults**: `LetterSize`, `BackgroundColor`, `BoxColor`, and `TextSize` on selectables are always explicit.
-
----
-
-## 🎯 TEXTDRAW & PAWN ENGINE TRUTH (SA-MP & open.mp)
-
-This section exists because layout bugs were being "fixed" by nudging coordinates. The engine rules below are verified against open.mp docs (`TextDrawTextSize`, `PlayerTextDrawTextSize`, `TextDrawAlignment`) and `omp_textdraw.inc`, and every claim is compile-tested by `.agents/skills/samp-textdraw-ui-craft/resources/fixture_ui.pwn` on both `omp-stdlib` and `pawn-lang/samp-stdlib`.
-
-### `TextDrawTextSize` semantics (the real cause of broken layout)
 | Alignment / font | `TextSize.x` | `TextSize.y` |
 |---|---|---|
-| LEFT (1) | **absolute right-most corner** on the 640 grid | height |
-| CENTER (2) | **overall box width**, box centred on create X | height |
-| RIGHT (3) | **absolute left-most corner** on the 640 grid | height |
-| font 4 / font 5 | **width offset** | height offset |
+| LEFT (1) | absolute **right-most corner** on the 640 grid | height |
+| CENTER (2) | overall box width, box centered on create X | height |
+| RIGHT (3) | absolute **left-most corner** on the 640 grid | height |
+| font 4 / 5 | width offset | height offset |
 
-- Set `Font` → `Alignment` → `TextSize`, in that order; sizing is interpreted with whatever is active at call time.
-- A `UseBox` box is inset by **(−5, −10)** from the create coordinate, so a box and a sprite at the same X/Y never share a corner.
-- Defaults that fail silently: `LetterSize 0.0,0.0` (invisible text), opaque-black `BackgroundColor` (black strip), dark `BoxColor` (random box), unset `TextSize` on font 4 (`sprite never renders`, dead hitbox).
-- Pool: **2048** global / **256** per player. Overflow returns `INVALID_TEXT_DRAW` / `INVALID_PLAYER_TEXT_DRAW` and draws nothing. open.mp tags the sentinel as `Text:` — never compare it against a `PlayerText:`.
+Set `Font` → `Alignment` → `TextSize`, in that order. A `UseBox` box is inset (−5, −10) from the create coordinate. Silent failures: `LetterSize 0.0,0.0` (invisible), opaque `BackgroundColor` (black strip), unset `TextSize` on font 4 (sprite never renders, dead hitbox). Pool: **2048** global / **256** per player, sentinel `INVALID_TEXT_DRAW` / `INVALID_PLAYER_TEXT_DRAW` — `Text:` and `PlayerText:` sentinels are never interchangeable.
 
-### Mandatory toolchain
-- Kit: `.agents/skills/samp-textdraw-ui-craft/resources/samp_td_kit.inc` (`TD_Sprite`, `TD_Text`, `TD_BoxedText`, `TD_RoundedCard`, `TD_Bar`, `TD_BarSet`, `TD_IsInvalid`, `TD_Destroy`, `TD_HasBudget`, `TD_InTouchDeadZone`, `TD_EaseOutCubic`).
-- Verify UI with `freepi-power samp td-preview <file>`; the renderer applies the table above and refuses to report success when it parsed 0 elements (wrap helper-built layouts in a `#if defined TD_PREVIEW_MIRROR` block).
-- Verify builds on **both** targets with 0 warnings; a Pawn build is not green until the `.amx` exists.
-- 2026 runtime reference: open.mp **v1.6.7.3218**, sampctl **1.16.0**, Community Compiler **3.10.10+**, streamer either as legacy plugin (`plugins/`) or native component (`components/`).
+**Legacy editor dump → modern module.** A TDEditor/iTD/TDW export is not modern code; convert every row (`samp-textdraw-studio-converter` owns the procedure, `samp-textdraw-ui-craft` owns the engine rules):
 
-### TextDraw routing matrix (pick one path, max 2 skills)
+| Legacy dump (jadul) | Modern 2026 module |
+|---|---|
+| `Textdraw0..87` global `Text:` | `PlayerText:ptd_Component[playerid]` arrays |
+| decimal color `303174399` | hex ARGB `0x121212FF` behind a `TD_C_*` constant |
+| `SetOutline(1)` + `SetShadow(1)` | `0` + `0` (flat) |
+| `BackgroundColor(td, 255)` | `TD_C_TRANSPARENT` (`0x00000000`) |
+| hardcoded coords per element | one `#define` anchor per component + offsets |
+| 50 copy-pasted slots | nested `for` loop over a slot array |
+| no `Destroy` / no `Hide` | `PlayerTextDrawHide` + `Destroy` + `INVALID_TEXT_DRAW` reset |
+| no click support | `SetSelectable(1)` + `OnPlayerClickPlayerTextDraw` |
 
-Seven artifacts cover one domain. Loading all of them wastes context and mixes layers. Match the **input you actually have** to the row, then follow its order.
+Rounded corners come from the `LD_BEAT:chit` 4-corner technique, surfaces are font-4 sprites, text is overlay — boxed text is not layout. Verify UI with `freepi-power samp td-preview <file>`; it refuses to report success when it parsed 0 elements.
 
-| You have | Lead agent | Load in this order | Gate before saying done |
-|---|---|---|---|
-| Only a visual idea (HUD, inventory grid, speedometer, radial, toast, hotbar) | `@samp-textdraw-fivem-master` | `samp-textdraw-ui-craft` → `samp-textdraw-fivem-modern-design` → `samp-mobile-android-cef-ui` (only if Android) | `td-preview` 0 ERROR/0 WARN + dual-target compile |
-| A design that still needs decisions (hierarchy, palette, which elements exist, 16:9 vs 4:3) | `@samp-textdraw-ui-designer` | `samp-textdraw-ui-craft` → `samp-textdraw-fivem-modern-design` | A written element list (surface/text/hitbox per element) before any code |
-| A Figma/1920×1080 mockup, FiveM screenshot, or TDEditor/iTD/TDW dump that must become Pawn | `@samp-textdraw-fivem-master` | `samp-textdraw-studio-converter` → `samp-textdraw-ui-craft` | `td-preview` render + converted module compiles on both targets |
-| Code that already renders wrong (huge/tiny box, bar misplaced, invisible text, dead clicks, missing element) | `@samp-textdraw-layout-auditor` | `samp-textdraw-layout-debugger` (symptom → cause) → `samp-textdraw-ui-craft` (engine rule) | Cause named, one minimal patch, `td-preview` clean after the fix |
-| `INVALID_PLAYER_TEXT_DRAW` / ~256 PlayerTD hit / UI survives death or disconnect | `@samp-textdraw-layout-auditor` | `samp-textdraw-ui-craft` (pool rules) → `samp-textdraw-fivem-modern-design` (static layers → Global `Text:`) | PlayerTD ≤ 200 after opening every screen, destroy on close/death/disconnect |
-| An old 2012-style UI (boxed text, rainbow outline, `SelectTextDraw` spam) to modernize | `@samp-textdraw-ui-designer` | `samp-textdraw-fivem-modern-design` → `samp-textdraw-ui-craft` | Boxed text eliminated, surfaces are sprites, 0 WARN |
-| Nothing to build — you just need proof before a commit | `@samp-pawn-compile-verifier` | `samp-pawn-compile-gate` | Both builds exit 0 with `.amx` emitted and 0 warnings |
+## 6. REMEMBER (Gate 3)
 
-Non-negotiable precedence when two artifacts disagree:
+Every non-trivial bug, build failure, or gotcha fixed earns one atomic invariant appended to `MEMORY.md`:
 
-1. **`samp-textdraw-ui-craft` wins on engine behaviour.** It is the only one verified against `omp_textdraw.inc` and compile-tested. Design skills never override alignment/`TextSize` semantics.
-2. **`samp-textdraw-layout-debugger` wins on "what is broken"** — it maps a symptom to one cause. Do not edit coordinates until the cause is named.
-3. **`0.75` has two different jobs.** Apply `TD_ASPECT_16_9` only to shapes you authored directly in 640×480 grid units (circle radius, icon width). A Figma 1920×1080 conversion already carries the aspect in its arithmetic — multiplying again by `0.75` is the bug `samp-textdraw-studio-converter` §1 exists to prevent.
-4. **One UI owner per screen.** `fivem-master` builds, `ui-designer` decides, `layout-auditor` repairs. Never run build and repair in the same pass; you lose the ability to tell which change fixed it.
+```markdown
+- **[YY-MM-DD · Component]**: <symptom> → **Root Cause**: <exact cause> → **Invariant Rule**: <permanent rule>.
+```
 
----
+Read `MEMORY.md` at session start so the same mistake is never made twice.
 
-## 🔄 GATE 3 — SELF-EVOLVING REFLEXION LOOP (`MEMORY.md`)
+## 7. Where things live
 
-Whenever a non-trivial bug, build failure, or architectural gotcha is diagnosed and fixed:
-1. Extract an **Atomic Invariant** (symptom → technical root cause → permanent prevention rule).
-2. Append it to `MEMORY.md`:
-   ```markdown
-   - **[YY-MM-DD · Component]**: <Brief symptom> → **Root Cause**: <Exact technical cause> → **Invariant Rule**: <Permanent rule>.
-   ```
-3. Consult `MEMORY.md` at session start so the swarm never repeats the same mistake twice.
+Agents `.agents/agents/<name>.md` · skills `.agents/skills/<name>/SKILL.md` · rules `.agents/rules/` · verified Pawn fixtures `samp-textdraw-ui-craft/resources/` (`samp_td_kit.inc`, `fixture_ui.pwn`) · repo gate `npm test` (`bin/self-test.sh`).
 
----
-
-## 🏗️ SA-MP/OPEN.MP DEVELOPMENT CONSTITUTION
-
-### Core Principles
-1. **Server-side authority** — Never trust client input. Validate everything server-side.
-2. **Dual-target compile** — Every `.pwn` must compile on BOTH open.mp and legacy SA-MP with 0 warnings.
-3. **Zero-stub policy** — No `// TODO`, no `pass`, no `...` ellipses. Full implementation or nothing.
-4. **Tag safety** — Use strict tags (`Text:`, `PlayerText:`, `Float:`, `bool:`). open.mp enforces these.
-5. **YSI framework** — Use `y_commands`, `y_hooks`, `y_iterate`, `y_timers`, `y_groups` for all modules.
-6. **Streamer plugin** — Use Incognito streamer for objects, areas, pickups, actors beyond native limits.
-7. **MySQL prepared statements** — Never concatenate SQL. Use `%e` or prepared statements.
-8. **Pool management** — PlayerTD ≤ 200, destroy on close/death/disconnect. Global TD ≤ 2048.
-9. **Anti-exploit** — Check jail, event, cooldown, admin level before any sensitive action.
-10. **Logging** — Log all admin actions, economy transactions, and security events.
-
-### SA-MP/open.mp Skill Quick Reference
-
-| Task | Primary Skill | Secondary Skills |
-|---|---|---|
-| TextDraw UI | `samp-textdraw-ui-craft` | `samp-textdraw-fivem-modern-design`, `samp-openmp-modern-guide` |
-| Map/Interior | `samp-mapping-dynamic-objects-pro` | `samp-openmp-modern-guide` |
-| Vehicle System | `samp-vehicle-system` | `samp-fivem-vehicle-tuning-garage` |
-| Economy/Banking | `samp-banking-system` | `samp-economy-simulation` |
-| Job System | `samp-modern-jobs-2026-logic` | `samp-modern-jobs-architect` |
-| Crime/Faction | `samp-gang-faction` | `samp-fivem-heist-crime-gang`, `samp-crime-faction-architect` |
-| Police/EMS | `samp-police-system`, `samp-medical-ems` | `samp-fivem-smartphone-mdt` |
-| Housing/Property | `samp-property-system` | `samp-fivem-housing-business-crafting` |
-| Phone/Chat | `samp-phone-system`, `samp-chat-system` | `samp-fivem-smartphone-mdt` |
-| Spawn/Teleport | `samp-spawn-system`, `samp-teleport-system` | `samp-camera-cinematic` |
-| Admin/Moderation | `samp-admin-moderation` | `samp-anticheat-deep`, `samp-logging-audit` |
-| NPC/AI | `samp-npc-ai-behavior` | `samp-fivem-character-cinema-anim` |
-| Weather/Time | `samp-weather-time` | `samp-sound-audio` |
-| Clothing | `samp-clothing-accessories` | `samp-death-respawn` |
-| Crafting | `samp-crafting-system` | `samp-inventory-item-system` |
-| UCP/Web | `samp-ucp-web-panel-bridge` | `samp-ucp-fullstack-engineer` |
-| Database | `samp-mysql-database` | `samp-persistence-schema`, `samp-database-engineer` |
-| Security | `samp-server-security-hardening` | `samp-security-hardener`, `samp-anticheat-deep` |
-| Performance | `samp-high-performance-tuning` | `samp-streamer-plugin` |
-| Migration | `samp-legacy-openmp-migrator` | `samp-legacy-migrator` |
-| Open.mp Core | `samp-openmp-modern-guide` | `openmp-modern-2026-api`, `samp-vs-openmp-encyclopedia` |
-
-### open.mp v1.6.7.3218 Runtime Reference
-- **Server**: v1.6.7.3218 (Oct 2026)
-- **pawncc**: 3.10.10+ (Community Compiler)
-- **sampctl**: 1.16.0
-- **Streamer**: v2.9.6+ (Incognito) — legacy plugin or native component
-- **MySQL**: R41-4 (BlueG) or native component
-- **YSI**: 5.x (y_commands, y_hooks, y_iterate, y_bit, y_inline, y_timers, y_groups)
-- **ColAndreas**: v1.5.0+ (collision/raycasting)
-- **SA-MP Legacy**: 0.3.7-R2 / 0.3.DL (backward compat)
-
-### Compile Commands
 ```bash
-# open.mp target
-pawncc -i. -i/home/aegisx/samp-sdk/omp-stdlib -d3 -o/tmp/test.amx file.pwn
-
-# legacy SA-MP target
-pawncc -i. -i/tmp/sampstdlib -i/home/aegisx/samp-sdk/omp-stdlib -d3 -o/tmp/test.amx file.pwn
-
-# With streamer include
-pawncc -i. -i/home/aegisx/samp-sdk/omp-stdlib -i/home/aegisx/.config/sampctl/packages/github.com/samp-incognito/samp-streamer-plugin/default -d3 -o/tmp/test.amx file.pwn
+pawncc -i. -i$HOME/samp-sdk/omp-stdlib -d3 -o/tmp/out.amx file.pwn                    # open.mp
+pawncc -i. -i/tmp/sampstdlib -i$HOME/samp-sdk/omp-stdlib -d3 -o/tmp/out.amx file.pwn   # legacy
 ```
-
-### TextDraw Design Rules (Modern 2026)
-1. **No boxed text as layout** (`UseBox = 1`) — surfaces are font-4 sprites, text is overlay
-2. **No hand-written TextSize math** — route through `samp_td_kit.inc`
-3. **No unset defaults** — `LetterSize`, `BackgroundColor`, `BoxColor`, `TextSize` always explicit
-4. **No default white on black** — use color palette (charcoal + dodger blue)
-5. **No font 0/1 for UI** — use font 2 (clean) or 3 (bold)
-6. **No outline 1 + shadow 1** — modern = outline 0, shadow 0 or 1
-7. **Use sprites for icons** — `LD_BEAT:chit`, `LD_SPAC:white`, custom TXD
-8. **Glassmorphism** — semi-transparent boxes (alpha < 0xFF)
-9. **Rounded corners** — `LD_BEAT:chit` 4-corner technique
-10. **8 interactive states** — default, hover, focus, active, disabled, loading, error, empty
-
-### Modern TextDraw Color Palette
-```
-Background:  0x1C1C1CFF (charcoal)
-Surface:     0x2D2D2DFF (dark gray)
-Primary:     0x1E90FFFF (dodger blue)
-Success:     0x2ECC71FF (emerald)
-Warning:     0xF39C12FF (orange)
-Error:       0xE74C3CFF (red)
-Text:        0xFFFFFFFF (white) / 0xB0B0B0FF (gray)
-Accent:      0x9B59B6FF (purple)
-Glass:       0x1C1C1C88 (53% opacity)
-```
-
-### Interior IDs Quick Reference
-| ID | Interior | Example |
-|----|----------|---------|
-| 0 | Exterior | Streets |
-| 1 | 24/7 Shop | Convenience store |
-| 2 | Ammu-Nation | Gun shop |
-| 3 | Barber | Hair salon |
-| 5 | Burglary House | Various houses |
-| 6 | LSPD | Police HQ |
-| 7 | Cluckin' Bell | Fast food |
-| 8 | Hospital | Medical |
-| 10 | Gym | Fitness |
-| 12 | Motel Room | Budget inn |
-| 15 | Tattoo Parlor | Tattoos |
-| 16 | Warehouse | Storage |
-
-### PAWN Best Practices (2026)
-1. **Use tags** — `Text:`, `PlayerText:`, `Float:`, `bool:`
-2. **Use YSI** — y_commands, y_hooks, y_iterate, y_timers, y_groups
-3. **Use streamer** — objects, areas, pickups, actors beyond native limits
-4. **Use MySQL prepared statements** — never concatenate SQL
-5. **Use foreach** — instead of for loops over MAX_PLAYERS
-6. **Use stock** — for helper functions (no unused warnings)
-7. **Use const** — for immutable values
-8. **Use enum** — for structured data (not parallel arrays)
-9. **Use timer** — for recurring tasks (not SetTimer with string)
-10. **Use hook** — for callbacks (not direct override)
-11. **Use samp_td_kit.inc** — for all TextDraw creation
-12. **Use ColAndreas** — for collision/raycasting, not manual Z checks
-
-### Naming Convention
-```
-g_ prefix: global variables (gPlayerData)
-s_ prefix: static variables (sTimerCount)
-E_ prefix: enums (E_PLAYER_DATA)
-TD_ prefix: textdraw variables (TD_HealthBar)
-p_ prefix: player-specific (pName, pScore)
-```
-
-### File Structure (SA-MP/open.mp)
-```
-gamemodes/
-  main.pwn          # entry point
-  core/             # core systems (player, vehicle, object)
-  features/         # feature modules (banking, jobs, crime)
-  ui/               # textdraws, dialogs, menus
-  data/             # database, cache, config
-filterscripts/      # hot-reloadable scripts
-include/            # shared includes
-plugins/            # .so/.dll plugins
-scriptfiles/        # runtime data files
-```
-
----
-
-## 🔄 GATE 3 — SELF-EVOLVING REFLEXION LOOP (`MEMORY.md`)
-
-Whenever a non-trivial bug, build failure, or architectural gotcha is diagnosed and fixed:
-1. Extract an **Atomic Invariant** (symptom → technical root cause → permanent prevention rule).
-2. Append it to `MEMORY.md`:
-   ```markdown
-   - **[YY-MM-DD · Component]**: <Brief symptom> → **Root Cause**: <Exact technical cause> → **Invariant Rule**: <Permanent rule>.
-   ```
-3. Consult `MEMORY.md` at session start so the swarm never repeats the same mistake twice.
