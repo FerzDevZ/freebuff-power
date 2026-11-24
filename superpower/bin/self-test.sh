@@ -236,6 +236,21 @@ else
     pass "SKIP: contoh TextDraw tidak dikompilasi — butuh pawncc + stdlib open.mp dan legacy"
   fi
 
+  # YSI gate: upstream ships Windows separators, so the patch script is the only
+  # thing standing between the repo and an unbuildable y_* mandate. Skips loudly
+  # (never silently passes) when the package is not installed.
+  YSI_SRC="$HOME/.config/sampctl/packages/github.com/pawn-lang/YSI-Includes/default"
+  if [ -f "$YSI_SRC/YSI_Data/y_iterate.inc" ]; then
+    if "$ROOT_DIR/bin/ysi-linux-patch.sh" --verify >"$TMP_DIR/ysi.log" 2>&1; then
+      pass "patch YSI Linux: y_iterate terkompilasi bersih di .sdk/ysi (0 warning)"
+    else
+      fail "patch YSI Linux gagal: $(tail -3 "$TMP_DIR/ysi.log" | tr '\n' ' ')"
+      PAWN_FAILED=1
+    fi
+  else
+    pass "SKIP: paket YSI tidak terpasang — patch Linux TIDAK diverifikasi"
+  fi
+
   if [ -z "$PAWN_SUMMARY" ]; then
     fail "Tidak ada fixture Pawn yang ditemukan — gate tidak membuktikan apa pun"
   elif [ "$PAWN_FAILED" -eq 0 ]; then

@@ -1,3 +1,6 @@
+# Local SDK copies (regenerate with bin/ysi-linux-patch.sh)
+/.sdk/
+
 # Logs & runtime caches
 *.log
 /tmp/
