@@ -1,0 +1,15 @@
+{
+  "manifest_version": 3,
+  "name": "Freebuff Chrome Stealth Shield",
+  "version": "1.0.0",
+  "description": "Enterprise-grade Anti-Detect, Canvas Farbling & WebGL Masking for Google Chrome",
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["stealth-inject.js"],
+      "run_at": "document_start",
+      "world": "MAIN",
+      "all_frames": true
+    }
+  ]
+}

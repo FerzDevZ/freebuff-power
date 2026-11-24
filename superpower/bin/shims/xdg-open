@@ -1,0 +1,38 @@
+#!/usr/bin/env bash
+# ==============================================================================
+# 🪝 FREEBUFF-POWER XDG-OPEN STEALTH INTERCEPTOR SHIM
+# Automatically diverts Codebuff/Freebuff auth URLs to Stealth Isolated Sandbox
+# ==============================================================================
+set -euo pipefail
+
+SHIM_DIR="$( cd -P "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+BIN_DIR="$( cd -P "$SHIM_DIR/.." >/dev/null 2>&1 && pwd )"
+
+TARGET="${1:-}"
+
+# Check if target is a Codebuff or Freebuff authentication URL
+if [[ "$TARGET" =~ (codebuff\.com|freebuff\.com) ]]; then
+  echo -e "\n\033[0;32m\033[1m🛡️ [STEALTH BROWSER INTERCEPTOR]\033[0m URL auth terdeteksi: mengalihkan ke Google Chrome Stealth Sandbox..." >&2
+  # Auto-copy full unbroken URL to system clipboard
+  if command -v wl-copy >/dev/null 2>&1; then
+    printf "%s" "$TARGET" | wl-copy 2>/dev/null || true
+  elif command -v xclip >/dev/null 2>&1; then
+    printf "%s" "$TARGET" | xclip -selection clipboard 2>/dev/null || true
+  elif command -v xsel >/dev/null 2>&1; then
+    printf "%s" "$TARGET" | xsel --clipboard --input 2>/dev/null || true
+  fi
+  # Terminal OSC 8 Hyperlink (immune to terminal 80-column line-wrap truncation)
+  echo -e "\033[0;36m📋 URL auth lengkap telah disalin ke Clipboard!\033[0m" >&2
+  echo -e "\033[1m🔗 Link Utuh (Klik/Ctrl+Klik): \033]8;;${TARGET}\033\\${TARGET}\033]8;;\033\\\033[0m\n" >&2
+  exec "$BIN_DIR/browser-stealth.sh" "$TARGET"
+fi
+
+# Fallback to system xdg-open for non-auth requests
+if [ -x /usr/bin/xdg-open ]; then
+  exec /usr/bin/xdg-open "$@"
+elif [ -x /bin/xdg-open ]; then
+  exec /bin/xdg-open "$@"
+else
+  echo -e "Tidak ada /usr/bin/xdg-open fallback." >&2
+  exit 1
+fi

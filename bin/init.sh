@@ -112,7 +112,7 @@ HOOK_EOF
   echo -e "\033[0;36m\033[1m========================================================================\033[0m"
   echo -e "📁 Target Folder  : \033[0;33m$TARGET_DIR\033[0m"
   echo -e "👥 Sub-Agents     : \033[0;32m126 Specialized Production Agents (.agents/agents/)\033[0m"
-  echo -e "🧰 Modular Skills : \033[0;32m655 Curated Skills (.agents/skills/)\033[0m"
+  echo -e "🧰 Modular Skills : \033[0;32m661 Curated Skills (.agents/skills/)\033[0m"
   echo -e "📜 Stack Rules    : \033[0;32m23 Language & Framework Rules (.agents/rules/)\033[0m"
   echo -e "🛡️ Stealth Hooks  : \033[0;32mGit Watermark Purge & Pre-Push Secret Guard Active\033[0m"
   echo -e "\n\033[1m💡 CARA MEMANGGIL DI CLI FREEBUFF:\033[0m"

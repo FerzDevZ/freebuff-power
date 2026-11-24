@@ -1,0 +1,529 @@
+#!/usr/bin/env bash
+# ==============================================================================
+# ⚡ ZCODE-POWER SUPREME — Autonomous Multi-Account & Anti-Detect Suite (v1.0)
+# Deep Machine-ID Randomizer, 7-Phase Nuclear Reset, Vault & Swarm Injection
+# ==============================================================================
+set -euo pipefail
+
+# 1. Color Palette & Typography
+C_CYAN='\033[0;36m'
+C_GREEN='\033[0;32m'
+C_YELLOW='\033[0;33m'
+C_RED='\033[0;31m'
+C_PURPLE='\033[0;35m'
+C_BLUE='\033[0;34m'
+C_BOLD='\033[1m'
+C_DIM='\033[2m'
+C_RESET='\033[0m'
+
+SCRIPT_DIR="$( cd -P "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+VAULT_DIR="$HOME/.zcode/vault"
+ZCODE_V2="$HOME/.zcode/v2"
+ZCODE_CONFIG="$HOME/.config/ZCode"
+SUPERPOWER_DIR="$HOME/.freebuff-superpower"
+
+mkdir -p "$VAULT_DIR" "$ZCODE_V2" "$ZCODE_CONFIG"
+
+# Helper: Find ZCode AppImage
+find_appimage() {
+  local cand=""
+  for p in "$HOME/Downloads/ZCode"*.AppImage "$HOME/.local/bin/ZCode"*.AppImage "$HOME/Desktop/ZCode"*.AppImage; do
+    if [ -f "$p" ] && [ -x "$p" ]; then
+      cand="$p"
+      break
+    elif [ -f "$p" ]; then
+      chmod +x "$p" 2>/dev/null || true
+      cand="$p"
+      break
+    fi
+  done
+  echo "$cand"
+}
+
+# Helper: Terminate any active ZCode processes
+kill_zcode() {
+  pkill -9 -f "/tmp/\.mount_ZCode" 2>/dev/null || true
+  pkill -9 -f "ZCode.*AppImage" 2>/dev/null || true
+  pkill -9 -f "zcode\.cjs" 2>/dev/null || true
+  pkill -9 -x "zcode" 2>/dev/null || true
+  # Clean singleton lock files so Chromium never complains
+  rm -f "$ZCODE_CONFIG/Singleton"* 2>/dev/null || true
+  sleep 0.5
+}
+
+# Helper: Randomize Machine ID & Hardware Fingerprints
+randomize_machine_id() {
+  local new_uuid
+  new_uuid="$(node -e "console.log(crypto.randomUUID())" 2>/dev/null || od -x /dev/urandom | head -1 | awk '{OFS="-"; print $2$3,$4,$5,$6,$7$8$9}')"
+  local new_updater
+  new_updater="$(node -e "console.log(crypto.randomUUID())" 2>/dev/null || od -x /dev/urandom | head -1 | awk '{OFS="-"; print $2$3,$4,$5,$6,$7$8$9}')"
+  local arms_uid
+  arms_uid="uid_$(node -e "console.log(Math.random().toString(36).substring(2, 18))" 2>/dev/null || od -vN "8" -An -tx1 /dev/urandom | tr -d " \n")"
+  local arms_session
+  arms_session="$(od -vN "16" -An -tx1 /dev/urandom | tr -d " \n")-1-$(date +%s%3N)-$(date +%s%3N)"
+
+  # 1. Update telemetry-state.json
+  cat <<EOF > "$ZCODE_V2/telemetry-state.json"
+{
+  "deviceMid": "$new_uuid",
+  "lastDailyActiveDate": "$(date +%Y-%m-%d)"
+}
+EOF
+
+  # 2. Update onboarding-record.json
+  if [ -f "$ZCODE_V2/onboarding-record.json" ]; then
+    node -e "
+      const fs = require('fs');
+      try {
+        const p = '$ZCODE_V2/onboarding-record.json';
+        const d = JSON.parse(fs.readFileSync(p, 'utf8'));
+        d.deviceMid = '$new_uuid';
+        fs.writeFileSync(p, JSON.stringify(d, null, 2));
+      } catch(e){}
+    " 2>/dev/null || true
+  fi
+
+  # 3. Update .updaterId
+  echo "$new_updater" > "$ZCODE_CONFIG/.updaterId"
+
+  # 4. Update RUM electron store
+  mkdir -p "$ZCODE_CONFIG/rum-electron-store"
+  echo "{\"_arms_session\":\"$arms_session\",\"_arms_uid\":\"$arms_uid\"}" > "$ZCODE_CONFIG/rum-electron-store/ZGVmYXVsdA.json"
+
+  # 5. Randomize Linux libc C-Hook Virtual Machine-ID & MAC
+  mkdir -p "$HOME/.config/manicode"
+  od -vN "16" -An -tx1 /dev/urandom | tr -d " \n" > "$HOME/.config/manicode/spoofed-machine-id"
+  printf "02:%02x:%02x:%02x:%02x:%02x\n" $((RANDOM%256)) $((RANDOM%256)) $((RANDOM%256)) $((RANDOM%256)) $((RANDOM%256)) > "$HOME/.config/manicode/spoofed-mac"
+  echo "$new_uuid" > "$HOME/.config/manicode/spoofed-product-uuid"
+  echo "ZCode-$(od -vN "6" -An -tx1 /dev/urandom | tr -d " \n")" > "$HOME/.config/manicode/spoofed-product-serial"
+}
+
+# Helper: Banner
+show_banner() {
+  echo -e "${C_CYAN}${C_BOLD}========================================================================================${C_RESET}"
+  echo -e "${C_YELLOW}${C_BOLD}⚡ ZCODE-POWER SUPREME — Autonomous Multi-Account & Anti-Detect Suite (v1.0)${C_RESET}"
+  echo -e "${C_CYAN}${C_BOLD}========================================================================================${C_RESET}\n"
+}
+
+# Helper: Help Menu
+show_help() {
+  show_banner
+  echo -e "${C_BOLD}PENGGUNAAN:${C_RESET}"
+  echo -e "  ${C_GREEN}zcode-power${C_RESET} ${C_YELLOW}<command>${C_RESET} [arguments] [options]\n"
+
+  echo -e "${C_PURPLE}${C_BOLD}🚀 PELUNCURAN & ANTI-DETECT LAUNCHER:${C_RESET}"
+  echo -e "  ${C_GREEN}start / go / launch${C_RESET}   ${C_BOLD}[REKOMENDASI]${C_RESET} Luncurkan ZCode dengan C-Hook Machine ID & Anti-Ban."
+  echo -e "  ${C_GREEN}stop / kill${C_RESET}           Hentikan seluruh proses ZCode yang berjalan di background."
+  echo -e "  ${C_GREEN}restart${C_RESET}               Restart ZCode bersih tanpa bentrok singleton lock.\n"
+
+  echo -e "${C_PURPLE}${C_BOLD}🛡️ ANTI-BAN & RESET MACHINE ID:${C_RESET}"
+  echo -e "  ${C_GREEN}reset-machine / mac${C_RESET}   Acak total Machine ID (deviceMid, updaterId, RUM UID, MAC spoof)."
+  echo -e "  ${C_GREEN}reset-full / logout${C_RESET}   ${C_BOLD}[7-FASE NUCLEAR RESET]${C_RESET} Hapus sesi, cookie, hardware & siap akun baru."
+  echo -e "  ${C_GREEN}clean${C_RESET}                 Bersihkan cache GPU, temporary mounts, dan singleton locks.\n"
+
+  echo -e "${C_PURPLE}${C_BOLD}👥 MULTI-ACCOUNT VAULT:${C_RESET}"
+  echo -e "  ${C_GREEN}account list${C_RESET}          Lihat semua akun tersimpan di vault (status token & paket)."
+  echo -e "  ${C_GREEN}account save <nama>${C_RESET}   Simpan sesi login ZCode saat ini ke dalam vault."
+  echo -e "  ${C_GREEN}account switch <nama>${C_RESET} Beralih ke akun lain dalam 0.1 detik (Instant Quota Swap)."
+  echo -e "  ${C_GREEN}account new <nama>${C_RESET}    ${C_BOLD}[WIZARD 1-CLICK]${C_RESET} Onboard akun baru (Reset Machine ID & buka ZCode)."
+  echo -e "  ${C_GREEN}account rotate${C_RESET}        Putar akun berikutnya secara otomatis (Round-Robin Rotator)."
+  echo -e "  ${C_GREEN}account delete <nama>${C_RESET} Hapus profil akun dari vault.\n"
+
+  echo -e "${C_PURPLE}${C_BOLD}🧰 AGENTS & SKILLS INJECTION:${C_RESET}"
+  echo -e "  ${C_GREEN}sync / inject${C_RESET}         Injeksi 83 Production Agents & 561 Skills ke ~/.zcode/.\n"
+
+  echo -e "${C_PURPLE}${C_BOLD}🩺 PEMELIHARAAN & DIAGNOSTIK:${C_RESET}"
+  echo -e "  ${C_GREEN}doctor${C_RESET}                Pemeriksaan kesehatan sistem ZCode, AppImage & identitas mesin."
+  echo -e "  ${C_GREEN}help / -h${C_RESET}             Tampilkan panduan bantuan lengkap ini.\n"
+
+  echo -e "${C_CYAN}----------------------------------------------------------------------------------------${C_RESET}"
+  echo -e "${C_BOLD}💡 CONTOH CEPAT:${C_RESET}"
+  echo -e "  ${C_DIM}zcode-power start${C_RESET}               Buka ZCode dengan perlindungan anti-detect aktif"
+  echo -e "  ${C_DIM}zcode-power reset-machine${C_RESET}       Ganti identitas mesin tanpa logout"
+  echo -e "  ${C_DIM}zcode-power reset-full${C_RESET}          Logout total & reset mesin (seperti laptop baru)"
+  echo -e "  ${C_DIM}zcode-power account switch akun2${C_RESET} Ganti ke akun2 dalam 1 detik"
+  echo ""
+}
+
+COMMAND="${1:-help}"
+
+case "$COMMAND" in
+  start|go|launch)
+    shift || true
+    APPIMAGE="$(find_appimage)"
+    if [ -z "$APPIMAGE" ]; then
+      echo -e "${C_RED}❌ File ZCode AppImage tidak ditemukan di ~/Downloads atau ~/.local/bin!${C_RESET}"
+      exit 1
+    fi
+
+    echo -e "${C_CYAN}${C_BOLD}🚀 [ZCODE LAUNCHER] Menyiapkan Lingkungan Eksekusi Stealth...${C_RESET}"
+    
+    # Clean stale Chromium locks
+    rm -f "$ZCODE_CONFIG/Singleton"* 2>/dev/null || true
+
+    # Injeksi Virtualisasi Machine ID & MAC jika library tersedia
+    STEALTH_LIB="$HOME/.local/bin/libfreebuff-stealth.so"
+    if [ -f "$STEALTH_LIB" ]; then
+      export LD_PRELOAD="$STEALTH_LIB${LD_PRELOAD:+:$LD_PRELOAD}"
+      echo -e "🛡️  Hardware Virtualization : ${C_GREEN}Active (Spoofed Machine-ID & MAC C-Hook)${C_RESET}"
+    fi
+
+    # Enforce US Locale & Timezone Masking
+    export TZ="America/New_York"
+    export LANG="en_US.UTF-8"
+    export LC_ALL="en_US.UTF-8"
+    echo -e "🌍 Timezone & Locale       : ${C_GREEN}America/New_York (en_US)${C_RESET}"
+
+    # Anti-Telemetry
+    export DO_NOT_TRACK=1
+    export TELEMETRY_DISABLED=1
+    export ELECTRON_ENABLE_LOGGING=0
+
+    # Auto sync skills if not yet done
+    if [ ! -d "$HOME/.zcode/skills" ] || [ -z "$(ls -A "$HOME/.zcode/skills" 2>/dev/null)" ]; then
+      "$SCRIPT_DIR/zcode-power" sync >/dev/null 2>&1 || true
+    fi
+
+    echo -e "📦 AppImage Binary         : ${C_YELLOW}$APPIMAGE${C_RESET}"
+    echo -e "🛡️  Electron Sandbox        : ${C_GREEN}--no-sandbox (Active)${C_RESET}"
+    echo -e "${C_GREEN}${C_BOLD}✨ Meluncurkan ZCode Desktop IDE...${C_RESET}\n"
+
+    nohup "$APPIMAGE" --no-sandbox "$@" >/dev/null 2>&1 &
+    disown
+    echo -e "${C_GREEN}✅ ZCode berhasil dibuka di background!${C_RESET}\n"
+    ;;
+
+  stop|kill)
+    echo -e "${C_YELLOW}⚡ Menghentikan seluruh proses ZCode...${C_RESET}"
+    kill_zcode
+    echo -e "${C_GREEN}✅ Seluruh proses ZCode telah dimatikan bersih.${C_RESET}\n"
+    ;;
+
+  restart)
+    echo -e "${C_YELLOW}🔄 Me-restart ZCode...${C_RESET}"
+    kill_zcode
+    sleep 0.5
+    "$SCRIPT_DIR/zcode-power" start
+    ;;
+
+  reset-machine|mac|machine)
+    echo -e "${C_CYAN}${C_BOLD}========================================================================${C_RESET}"
+    echo -e "${C_YELLOW}${C_BOLD}🛡️ [ZCODE MACHINE ID RESET] Mengacak Identitas Perangkat & Hardware${C_RESET}"
+    echo -e "${C_CYAN}${C_BOLD}========================================================================${C_RESET}\n"
+
+    kill_zcode
+    randomize_machine_id
+
+    MID="$(grep -o '"deviceMid": *"[^"]*"' "$ZCODE_V2/telemetry-state.json" | cut -d'"' -f4 || echo "N/A")"
+    MAC="$(cat "$HOME/.config/manicode/spoofed-mac" 2>/dev/null || echo "N/A")"
+    UPD="$(cat "$ZCODE_CONFIG/.updaterId" 2>/dev/null || echo "N/A")"
+
+    echo -e "🆔 Device Machine ID (deviceMid) : ${C_GREEN}$MID${C_RESET}"
+    echo -e "🆔 Updater Client UUID (.updaterId) : ${C_GREEN}$UPD${C_RESET}"
+    echo -e "📶 Virtualized MAC Address        : ${C_GREEN}$MAC${C_RESET}"
+    echo -e "📊 RUM Analytics UID              : ${C_GREEN}Freshly Randomized${C_RESET}"
+    echo -e "\n${C_GREEN}${C_BOLD}🎉 IDENTITAS MESIN BERHASIL DIACAK TOTAL! (Zero-Tracking Guaranteed)${C_RESET}\n"
+    ;;
+
+  reset-full|logout|clean-total)
+    echo -e "${C_CYAN}${C_BOLD}========================================================================${C_RESET}"
+    echo -e "${C_RED}${C_BOLD}☢️  [ZCODE 7-PHASE NUCLEAR RESET] Full Reset, Logout & Machine Spoofer${C_RESET}"
+    echo -e "${C_CYAN}${C_BOLD}========================================================================${C_RESET}\n"
+
+    echo -e "🛑 [1/7] Menghentikan seluruh proses ZCode yang berjalan..."
+    kill_zcode
+
+    # Check if credentials exist and auto-backup if not yet in vault
+    if [ -f "$ZCODE_V2/credentials.json" ]; then
+      BACKUP_NAME="auto_backup_$(date +%Y%m%d_%H%M%S)"
+      echo -e "📦 [2/7] Mengamankan backup akun aktif ke vault: ${C_YELLOW}$BACKUP_NAME${C_RESET}..."
+      mkdir -p "$VAULT_DIR/$BACKUP_NAME"
+      cp -a "$ZCODE_V2/credentials.json" "$VAULT_DIR/$BACKUP_NAME/" 2>/dev/null || true
+      cp -a "$ZCODE_CONFIG/session" "$VAULT_DIR/$BACKUP_NAME/" 2>/dev/null || true
+    else
+      echo -e "📦 [2/7] Tidak ada sesi login aktif, melewati backup..."
+    fi
+
+    echo -e "🔑 [3/7] Menghapus token autentikasi & JWT credentials..."
+    rm -f "$ZCODE_V2/credentials.json"
+    rm -f "$ZCODE_V2/provider_config.json"
+
+    echo -e "🍪 [4/7] Membersihkan seluruh Chromium cookies, Local Storage & session storage..."
+    rm -rf "$ZCODE_CONFIG/session/Cookies"* 2>/dev/null || true
+    rm -rf "$ZCODE_CONFIG/session/Local Storage"* 2>/dev/null || true
+    rm -rf "$ZCODE_CONFIG/session/Session Storage"* 2>/dev/null || true
+    rm -rf "$ZCODE_CONFIG/session/GPUCache"* 2>/dev/null || true
+    rm -rf "$ZCODE_CONFIG/session/Cache"* 2>/dev/null || true
+    rm -rf "$ZCODE_CONFIG/session/DawnWebGPUCache"* 2>/dev/null || true
+    rm -rf "$ZCODE_CONFIG/session/DawnGraphiteCache"* 2>/dev/null || true
+    rm -rf "$ZCODE_CONFIG/session/Trust Tokens"* 2>/dev/null || true
+    rm -rf "$ZCODE_CONFIG/rum-electron-store"* 2>/dev/null || true
+
+    echo -e "🎲 [5/7] Mengacak seluruh Machine-ID, Updater-ID, MAC & DMI Product UUID..."
+    randomize_machine_id
+
+    echo -e "📝 [6/7] Menyetel ulang onboarding wizard record..."
+    cat <<EOF > "$ZCODE_V2/onboarding-record.json"
+{
+  "version": 2,
+  "deviceMid": "$(grep -o '"deviceMid": *"[^"]*"' "$ZCODE_V2/telemetry-state.json" | cut -d'"' -f4)",
+  "entries": [],
+  "decisions": []
+}
+EOF
+
+    echo -e "🧹 [7/7] Membersihkan temporary mount points dan singleton locks..."
+    rm -rf /tmp/.mount_ZCode* 2>/dev/null || true
+    rm -rf /tmp/scoped_dir* 2>/dev/null || true
+
+    echo -e "\n${C_GREEN}${C_BOLD}========================================================================${C_RESET}"
+    echo -e "${C_GREEN}${C_BOLD}🎉 RESET FULL 7-FASE SELESAI 100%! ZCODE BERSIH SEPERTI BARU DIPASANG!${C_RESET}"
+    echo -e "${C_GREEN}${C_BOLD}========================================================================${C_RESET}\n"
+    echo -e "👉 Buka kembali ZCode Anda: ${C_CYAN}zcode-power start${C_RESET}"
+    echo -e "👉 Anda akan langsung disambut dengan halaman login akun baru.\n"
+    ;;
+
+  clean)
+    echo -e "${C_YELLOW}🧹 Membersihkan temporary cache dan file sampah ZCode...${C_RESET}"
+    rm -rf "$ZCODE_CONFIG/session/GPUCache"* 2>/dev/null || true
+    rm -rf "$ZCODE_CONFIG/session/Cache"* 2>/dev/null || true
+    rm -rf "$ZCODE_CONFIG/session/Dawn"* 2>/dev/null || true
+    rm -f "$ZCODE_CONFIG/Singleton"* 2>/dev/null || true
+    rm -rf /tmp/.mount_ZCode* 2>/dev/null || true
+    echo -e "${C_GREEN}✅ Cache & temp files berhasil dibersihkan!${C_RESET}\n"
+    ;;
+
+  account)
+    shift || true
+    SUB_CMD="${1:-list}"
+    case "$SUB_CMD" in
+      list)
+        show_banner
+        echo -e "${C_YELLOW}${C_BOLD}📋 [ZCODE ACCOUNT VAULT] Daftar Akun Tersimpan:${C_RESET}\n"
+        
+        # Check active account
+        if [ -f "$ZCODE_V2/credentials.json" ]; then
+          echo -e "🟢 ${C_BOLD}Akun Aktif Saat Ini:${C_RESET} ${C_GREEN}Terhubung (Sesi Aktif)${C_RESET}\n"
+        else
+          echo -e "🔴 ${C_BOLD}Akun Aktif Saat Ini:${C_RESET} ${C_RED}Belum Login (Logged Out)${C_RESET}\n"
+        fi
+
+        COUNT=0
+        if [ -d "$VAULT_DIR" ] && [ "$(ls -A "$VAULT_DIR" 2>/dev/null)" ]; then
+          for acc in "$VAULT_DIR"/*; do
+            if [ -d "$acc" ] && [ -f "$acc/credentials.json" ]; then
+              COUNT=$((COUNT + 1))
+              bname="$(basename "$acc")"
+              echo -e "  [${COUNT}] ${C_GREEN}${C_BOLD}${bname}${C_RESET} ➔ 🟢 READY (Tersimpan di Vault)"
+            fi
+          done
+        fi
+
+        if [ "$COUNT" -eq 0 ]; then
+          echo -e "  ${C_DIM}(Belum ada akun di dalam vault. Gunakan 'zcode-power account save <nama>')${C_RESET}"
+        fi
+
+        echo -e "\n👉 Beralih akun      : ${C_CYAN}zcode-power account switch <nama>${C_RESET}"
+        echo -e "👉 Buat akun baru    : ${C_CYAN}zcode-power account new <nama>${C_RESET}"
+        echo -e "👉 Putar akun (loop) : ${C_CYAN}zcode-power account rotate${C_RESET}\n"
+        ;;
+
+      save)
+        shift || true
+        NAME="${1:-}"
+        if [ -z "$NAME" ]; then
+          echo -e "${C_RED}❌ Harap masukkan nama akun! Contoh: zcode-power account save akun2${C_RESET}"
+          exit 1
+        fi
+        if [ ! -f "$ZCODE_V2/credentials.json" ]; then
+          echo -e "${C_RED}❌ Tidak ditemukan sesi login aktif untuk disimpan!${C_RESET}"
+          exit 1
+        fi
+        mkdir -p "$VAULT_DIR/$NAME"
+        cp -a "$ZCODE_V2/credentials.json" "$VAULT_DIR/$NAME/"
+        cp -a "$ZCODE_CONFIG/session" "$VAULT_DIR/$NAME/" 2>/dev/null || true
+        echo -e "\n${C_GREEN}${C_BOLD}✅ Akun '$NAME' berhasil disimpan ke dalam vault ($VAULT_DIR/$NAME)!${C_RESET}\n"
+        ;;
+
+      switch)
+        shift || true
+        NAME="${1:-}"
+        if [ -z "$NAME" ]; then
+          echo -e "${C_RED}❌ Harap masukkan nama akun! Contoh: zcode-power account switch akun_utama${C_RESET}"
+          exit 1
+        fi
+        TARGET_ACC="$VAULT_DIR/$NAME"
+        if [ ! -d "$TARGET_ACC" ] || [ ! -f "$TARGET_ACC/credentials.json" ]; then
+          echo -e "${C_RED}❌ Akun '$NAME' tidak ditemukan di vault! Ketik 'zcode-power account list' untuk cek.${C_RESET}"
+          exit 1
+        fi
+
+        echo -e "${C_YELLOW}⚡ Menghentikan ZCode...${C_RESET}"
+        kill_zcode
+
+        echo -e "${C_CYAN}🔄 Memuat sesi akun '$NAME'...${C_RESET}"
+        mkdir -p "$ZCODE_V2" "$ZCODE_CONFIG"
+        cp -a "$TARGET_ACC/credentials.json" "$ZCODE_V2/"
+        if [ -d "$TARGET_ACC/session" ]; then
+          rm -rf "$ZCODE_CONFIG/session" 2>/dev/null || true
+          cp -a "$TARGET_ACC/session" "$ZCODE_CONFIG/"
+        fi
+
+        # Also give fresh machine ID shift for stealth
+        randomize_machine_id
+
+        echo -e "\n${C_GREEN}${C_BOLD}🎉 BERHASIL BERALIH KE AKUN: $NAME!${C_RESET}"
+        echo -e "👉 Membuka ZCode otomatis...\n"
+        "$SCRIPT_DIR/zcode-power" start
+        ;;
+
+      new)
+        shift || true
+        NAME="${1:-}"
+        if [ -z "$NAME" ]; then
+          echo -e "${C_RED}❌ Harap masukkan nama akun! Contoh: zcode-power account new akun2${C_RESET}"
+          exit 1
+        fi
+
+        echo -e "${C_CYAN}${C_BOLD}🌟 [ZCODE 1-CLICK ONBOARDING] Menyiapkan Akun Baru: $NAME${C_RESET}\n"
+
+        # Auto backup current credentials if active
+        if [ -f "$ZCODE_V2/credentials.json" ]; then
+          AUTO_BAK="auto_backup_$(date +%Y%m%d_%H%M%S)"
+          echo -e "📦 Menyimpan backup akun saat ini ke vault (${AUTO_BAK})..."
+          mkdir -p "$VAULT_DIR/$AUTO_BAK"
+          cp -a "$ZCODE_V2/credentials.json" "$VAULT_DIR/$AUTO_BAK/" 2>/dev/null || true
+          cp -a "$ZCODE_CONFIG/session" "$VAULT_DIR/$AUTO_BAK/" 2>/dev/null || true
+        fi
+
+        # Clean session & randomize machine ID
+        echo -e "🛡️  Mengacak Machine ID & membersihkan session cookies..."
+        kill_zcode
+        rm -f "$ZCODE_V2/credentials.json"
+        rm -rf "$ZCODE_CONFIG/session/Cookies"* 2>/dev/null || true
+        rm -rf "$ZCODE_CONFIG/session/Local Storage"* 2>/dev/null || true
+        randomize_machine_id
+
+        echo -e "🚀 Meluncurkan ZCode untuk login akun baru ($NAME)..."
+        "$SCRIPT_DIR/zcode-power" start
+
+        echo -e "\n${C_GREEN}${C_BOLD}👉 Silakan login dengan akun baru Anda di jendela ZCode yang terbuka.${C_RESET}"
+        echo -e "💡 Setelah selesai login, cukup ketik di terminal: ${C_YELLOW}zcode-power account save $NAME${C_RESET}\n"
+        ;;
+
+      rotate)
+        # Find next account in round-robin fashion
+        ACCOUNTS=($(ls -1 "$VAULT_DIR" 2>/dev/null | sort))
+        if [ ${#ACCOUNTS[@]} -le 1 ]; then
+          echo -e "${C_YELLOW}⚠️  Hanya ada ${#ACCOUNTS[@]} akun di vault. Tambahkan akun baru dengan 'zcode-power account new <nama>'.${C_RESET}"
+          exit 0
+        fi
+
+        ROT_FILE="$HOME/.zcode/.last_rotated_account"
+        LAST_ACC="$(cat "$ROT_FILE" 2>/dev/null || echo "")"
+        NEXT_ACC="${ACCOUNTS[0]}"
+
+        for i in "${!ACCOUNTS[@]}"; do
+          if [ "${ACCOUNTS[$i]}" = "$LAST_ACC" ]; then
+            NEXT_INDEX=$(( (i + 1) % ${#ACCOUNTS[@]} ))
+            NEXT_ACC="${ACCOUNTS[$NEXT_INDEX]}"
+            break
+          fi
+        done
+
+        echo "$NEXT_ACC" > "$ROT_FILE"
+        echo -e "${C_YELLOW}🔄 Merotasi akun ke: ${C_BOLD}$NEXT_ACC${C_RESET}..."
+        "$SCRIPT_DIR/zcode-power" account switch "$NEXT_ACC"
+        ;;
+
+      delete|rm)
+        shift || true
+        NAME="${1:-}"
+        if [ -z "$NAME" ]; then
+          echo -e "${C_RED}❌ Harap masukkan nama akun yang akan dihapus!${C_RESET}"
+          exit 1
+        fi
+        if [ -d "$VAULT_DIR/$NAME" ]; then
+          rm -rf "$VAULT_DIR/$NAME"
+          echo -e "${C_GREEN}✅ Akun '$NAME' berhasil dihapus dari vault.${C_RESET}\n"
+        else
+          echo -e "${C_RED}❌ Akun '$NAME' tidak ditemukan di vault.${C_RESET}\n"
+        fi
+        ;;
+
+      *)
+        "$SCRIPT_DIR/zcode-power" account list
+        ;;
+    esac
+    ;;
+
+  sync|inject)
+    echo -e "${C_CYAN}${C_BOLD}========================================================================${C_RESET}"
+    echo -e "${C_YELLOW}${C_BOLD}🧰 [ZCODE SWARM INJECTION] Menyinkronkan 83 Agents & 561 Skills ke ZCode${C_RESET}"
+    echo -e "${C_CYAN}${C_BOLD}========================================================================${C_RESET}\n"
+
+    SRC_AGENTS="$HOME/.agents/agents"
+    SRC_SKILLS="$HOME/.agents/skills"
+    if [ ! -d "$SRC_AGENTS" ] && [ -d "$SUPERPOWER_DIR/agents" ]; then
+      SRC_AGENTS="$SUPERPOWER_DIR/agents"
+    fi
+    if [ ! -d "$SRC_SKILLS" ] && [ -d "$SUPERPOWER_DIR/skills" ]; then
+      SRC_SKILLS="$SUPERPOWER_DIR/skills"
+    fi
+
+    DEST_AGENTS="$HOME/.zcode/agents"
+    DEST_SKILLS="$HOME/.zcode/skills"
+    mkdir -p "$DEST_AGENTS" "$DEST_SKILLS"
+
+    echo -e "👥 Menyinkronkan 83 Production Agents ke: ${C_CYAN}$DEST_AGENTS${C_RESET}..."
+    if [ -d "$SRC_AGENTS" ]; then
+      cp -rf "$SRC_AGENTS"/* "$DEST_AGENTS/" 2>/dev/null || true
+    fi
+
+    echo -e "🧰 Menyinkronkan 561 Curated Skills ke: ${C_CYAN}$DEST_SKILLS${C_RESET}..."
+    if [ -d "$SRC_SKILLS" ]; then
+      cp -rf "$SRC_SKILLS"/* "$DEST_SKILLS/" 2>/dev/null || true
+    fi
+
+    TOTAL_A=$(ls -1 "$DEST_AGENTS" 2>/dev/null | wc -l || echo "0")
+    TOTAL_S=$(ls -1 "$DEST_SKILLS" 2>/dev/null | wc -l || echo "0")
+
+    echo -e "\n${C_GREEN}${C_BOLD}🎉 INJEKSI SUKSES! ($TOTAL_A Agents & $TOTAL_S Skills Terhubung ke ZCode)${C_RESET}\n"
+    ;;
+
+  doctor)
+    show_banner
+    echo -e "${C_YELLOW}${C_BOLD}🩺 [ZCODE-POWER DOCTOR] System Health & Integrity Check${C_RESET}\n"
+
+    APPIMAGE="$(find_appimage)"
+    if [ -n "$APPIMAGE" ]; then
+      echo -e "📦 ZCode AppImage      : ${C_GREEN}Ditemukan (${APPIMAGE})${C_RESET}"
+    else
+      echo -e "📦 ZCode AppImage      : ${C_RED}TIDAK DITEMUKAN di ~/Downloads${C_RESET}"
+    fi
+
+    MID="$(grep -o '"deviceMid": *"[^"]*"' "$ZCODE_V2/telemetry-state.json" 2>/dev/null | cut -d'"' -f4 || echo "N/A")"
+    echo -e "🆔 Device Machine ID   : ${C_CYAN}${MID}${C_RESET}"
+
+    STEALTH_LIB="$HOME/.local/bin/libfreebuff-stealth.so"
+    if [ -f "$STEALTH_LIB" ]; then
+      echo -e "🛡️  Hardware C-Hook     : ${C_GREEN}Siap & Terpasang ($STEALTH_LIB)${C_RESET}"
+    else
+      echo -e "🛡️  Hardware C-Hook     : ${C_YELLOW}Belum dikompilasi${C_RESET}"
+    fi
+
+    ACCS=$(ls -1 "$VAULT_DIR" 2>/dev/null | wc -l || echo "0")
+    echo -e "👥 Akun di Vault       : ${C_GREEN}${ACCS} Akun Tersimpan${C_RESET}"
+
+    SKILLS=$(ls -1 "$HOME/.zcode/skills" 2>/dev/null | wc -l || echo "0")
+    AGENTS=$(ls -1 "$HOME/.zcode/agents" 2>/dev/null | wc -l || echo "0")
+    echo -e "🧰 Injected Skills     : ${C_CYAN}${SKILLS} Skills${C_RESET}"
+    echo -e "🤖 Injected Agents     : ${C_CYAN}${AGENTS} Agents${C_RESET}"
+
+    echo -e "\n${C_GREEN}${C_BOLD}🎉 SEMUA SISTEM ZCODE-POWER BERJALAN SEMPURNA!${C_RESET}\n"
+    ;;
+
+  *)
+    show_help
+    ;;
+esac

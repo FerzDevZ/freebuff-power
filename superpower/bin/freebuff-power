@@ -1,0 +1,522 @@
+#!/usr/bin/env bash
+# ==============================================================================
+# ⚡ FREEBUFF-POWER SUPREME — Omnipotent Multi-Agent & Modular Skills Suite (v13.0)
+# ==============================================================================
+set -euo pipefail
+
+SOURCE="${BASH_SOURCE[0]}"
+while [ -h "$SOURCE" ]; do
+  DIR="$( cd -P "$( dirname "$SOURCE" )" >/dev/null 2>&1 && pwd )"
+  SOURCE="$(readlink "$SOURCE")"
+  [[ $SOURCE != /* ]] && SOURCE="$DIR/$SOURCE"
+done
+SCRIPT_DIR="$( cd -P "$( dirname "$SOURCE" )" >/dev/null 2>&1 && pwd )"
+
+GLOBAL_SUPERPOWER_DIR="$HOME/.freebuff-superpower"
+if [ ! -d "$GLOBAL_SUPERPOWER_DIR" ]; then
+  mkdir -p "$GLOBAL_SUPERPOWER_DIR"
+  if [ -d "$SCRIPT_DIR/../superpower" ]; then
+    cp -rf "$SCRIPT_DIR/../superpower/"* "$GLOBAL_SUPERPOWER_DIR/"
+  fi
+fi
+
+C_CYAN='\033[0;36m'
+C_GREEN='\033[0;32m'
+C_YELLOW='\033[0;33m'
+C_PURPLE='\033[0;35m'
+C_RED='\033[0;31m'
+C_BLUE='\033[0;34m'
+C_BOLD='\033[1m'
+C_DIM='\033[2m'
+C_RESET='\033[0m'
+
+show_help() {
+  echo -e "${C_CYAN}${C_BOLD}========================================================================================${C_RESET}"
+  echo -e "${C_YELLOW}${C_BOLD}⚡ FREEBUFF-POWER & FREEPI-POWER SUPREME — Autonomous Swarm Suite (v13.0-ECC)${C_RESET}"
+  echo -e "${C_DIM}Dual Suite: Freebuff Cognitive Swarm + FreePi (freepi.ai) Terminal Coding Agent${C_RESET}"
+  echo -e "${C_CYAN}${C_BOLD}========================================================================================${C_RESET}\n"
+  echo -e "${C_BOLD}PENGGUNAAN:${C_RESET}"
+  echo -e "  ${C_GREEN}freebuff-power${C_RESET} ${C_YELLOW}<command>${C_RESET} [arguments] [options]"
+  echo -e "  ${C_GREEN}freepi-power${C_RESET}   ${C_YELLOW}<command>${C_RESET} [arguments] [options]\n"
+
+  echo -e "${C_PURPLE}${C_BOLD}🔥 PERINTAH UTAMA & PELUNCURAN KODING:${C_RESET}"
+  echo -e "  ${C_GREEN}start / go / full${C_RESET}     ${C_BOLD}[REKOMENDASI] One-Shot Launch:${C_RESET}"
+  echo -e "                        Reset Telemetry (Anti-Ban) + Injeksi 126 Production Agents & 661 Skills"
+  echo -e "                        + Langsung buka sesi interaktif Freebuff siap koding!"
+  echo -e "  ${C_GREEN}pi / freepi [args]${C_RESET}    ${C_BOLD}[FREEPI.AI]${C_RESET} Luncurkan FreePi CLI (free ad-supported terminal agent)."
+  echo -e "  ${C_GREEN}local [model]${C_RESET}         ${C_BOLD}[ZERO-TOKEN]${C_RESET} Koding offline 100% gratis via Ollama lokal (kebal ban)."
+  echo -e "  ${C_GREEN}heal [test_cmd]${C_RESET}       ${C_BOLD}[AUTONOMOUS HEALER]${C_RESET} Jalankan test runner & perbaiki error kode otomatis."
+  echo -e "  ${C_GREEN}ui / tui${C_RESET}              Buka Interactive Terminal TUI Dashboard (pilih agen/skill visual)."
+  echo -e "  ${C_GREEN}compose <task> [-r]${C_RESET}   ${C_BOLD}[POWER COMPOSER 2.0]${C_RESET} Analisis arsitektur & racik agen/skills terbaik."
+  echo -e "  ${C_GREEN}spawn <agent> [task]${C_RESET}  Luncurkan Freebuff dengan persona spesifik (Contoh: spawn architect)."
+  echo -e "  ${C_GREEN}init [dir]${C_RESET}            Injeksi AGENTS.md & katalog .agents/ ke folder aktif tanpa buka sesi."
+  echo -e "  ${C_GREEN}run [args]${C_RESET}            Jalankan sesi Freebuff biasa dengan proteksi Anti-Ban aktif."
+  echo -e "  ${C_GREEN}run proxy [model]${C_RESET}     ${C_BOLD}[FREE MODELS]${C_RESET} Pilih model FREE Freebuff & buka sesi koding."
+  echo -e "  ${C_GREEN}proxy [cmd]${C_RESET}           ${C_BOLD}[PROXY ENGINE]${C_RESET} Kelola Proxy (start/stop/restart/status/models/acc/add)."
+  echo -e "  ${C_GREEN}sync / export${C_RESET}         ${C_BOLD}[IDE MATRIX]${C_RESET} Ekspor 126 Agents & 661 Skills ke Cursor, Windsurf, Claude."
+  echo -e "  ${C_GREEN}pentest [dir]${C_RESET}         ${C_BOLD}[APPSEC AUDIT]${C_RESET} Pindai celah OWASP, kebocoran secret, & CVE dependensi."
+  echo -e "  ${C_GREEN}update${C_RESET}                ${C_BOLD}[AUTO UPDATER]${C_RESET} Perbarui library superpower, CLI, dan proxy engine.\n"
+
+  echo -e "${C_PURPLE}${C_BOLD}🎨 ANTI-SLOP SUITE & HUMAN DESIGN PURGER:${C_RESET}"
+  echo -e "  ${C_GREEN}antislop [audit|check]${C_RESET} Pindai 40 aturan AI slop, gradien ungu, buzzwords, komentar sampah."
+  echo -e "  ${C_GREEN}design [init]${C_RESET}          Settle direction before building: buat file DESIGN.md bertaraf studio."
+  echo -e "  ${C_GREEN}contrast <fg> <bg>${C_RESET}     Hitung matematis rasio kontras WCAG 2.2 AA/AAA (Wajib lolos 4.5:1 / 7:1).\n"
+
+  echo -e "${C_PURPLE}${C_BOLD}🎮 GTA SA-MP & OPEN.MP GAME SERVER SUITE:${C_RESET}"
+  echo -e "  ${C_GREEN}samp audit [dir]${C_RESET}      Pindai kejahatan lag di OnPlayerUpdate, loop lambat & SQL injection."
+  echo -e "  ${C_GREEN}samp heal [script]${C_RESET}    Kompilasi Pawn & perbaiki error syntax / missing includes otomatis."
+  echo -e "  ${C_GREEN}samp new [openmp|rp]${C_RESET}  Scaffold gamemode open.mp / roleplay modular lengkap 1-detik."
+  echo -e "  ${C_GREEN}samp vs${C_RESET}               Buka kitab perbandingan teknis SA-MP legacy vs open.mp modern.\n"
+
+  echo -e "${C_PURPLE}${C_BOLD}👥 MULTI-ACCOUNT VAULT & QUOTA ROTATION:${C_RESET}"
+  echo -e "  ${C_GREEN}account new <nama>${C_RESET}    ${C_BOLD}[WIZARD 1-CLICK]${C_RESET} Onboard Akun Baru (Anti-Ban, Chrome Sandbox & Vault)."
+  echo -e "  ${C_GREEN}account save <nama>${C_RESET}   Simpan sesi login akun aktif ke dalam vault aman."
+  echo -e "  ${C_GREEN}account list${C_RESET}          Lihat daftar akun tersimpan di vault beserta status aktif."
+  echo -e "  ${C_GREEN}account switch <nama>${C_RESET} Beralih ke akun lain dalam 0.1 detik (Instant Quota Swap)."
+  echo -e "  ${C_GREEN}account auto${C_RESET}          Otomatis pilih akun pertama yang berstatus READY aktif."
+  echo -e "  ${C_GREEN}account rotate${C_RESET}        Putar ke akun berikutnya secara otomatis (Round-Robin Rotator)."
+  echo -e "  ${C_GREEN}reset-full / logout${C_RESET}   Reset TOTAL 7-Fase seluruh token login, sesi, hardware & browser.\n"
+
+  echo -e "${C_PURPLE}${C_BOLD}🛠️ ENTERPRISE DEVOPS, SECURITY & PRO-TOOLING:${C_RESET}"
+  echo -e "  ${C_GREEN}release${C_RESET}               Otomasi Semantic Versioning, update CHANGELOG.md & siapkan tag."
+  echo -e "  ${C_GREEN}seed [count] [file]${C_RESET}   Hasilkan ribuan data dummy realistis Indonesia (nama, alamat, IDR)."
+  echo -e "  ${C_GREEN}bench [url]${C_RESET}           Uji throughput (RPS), p95 latency & response time API backend."
+  echo -e "  ${C_GREEN}theme [name]${C_RESET}          Generate OKLCH modern color palette & token Tailwind CSS v4."
+  echo -e "  ${C_GREEN}env${C_RESET}                   Verifikasi kelengkapan variabel .env vs .env.example."
+  echo -e "  ${C_GREEN}clean-code${C_RESET}            Pindai file mati (dead-code) & dependensi yang tidak terpakai."
+  echo -e "  ${C_GREEN}readme${C_RESET}                Generate README.md standar internasional + diagram Mermaid.js."
+  echo -e "  ${C_GREEN}audit / review${C_RESET}        Pindai kebocoran secret API Key, celah OWASP & hapus AI-slop."
+  echo -e "  ${C_GREEN}commit${C_RESET}                AI Conventional Commit Assistant otomatis berdasarkan git diff."
+  echo -e "  ${C_GREEN}explain <file>${C_RESET}        Bedah arsitektur kode file target & beri rekomendasi swarm persona."
+  echo -e "  ${C_GREEN}docker${C_RESET}                Buat Dockerfile multi-stage (< 50MB) & docker-compose.yml siap pakai."
+  echo -e "  ${C_GREEN}docs <library>${C_RESET}        Ingest dokumentasi resmi framework terbaru ke dalam konteks AI."
+  echo -e "  ${C_GREEN}new <preset> [name]${C_RESET}   Scaffold proyek baru instan (saas / flutter / go) + injeksi 584 skills.\n"
+
+  echo -e "${C_PURPLE}${C_BOLD}🌐 LIVE COLLABORATION, PREVIEW & SAFETY:${C_RESET}"
+  echo -e "  ${C_GREEN}pair [port]${C_RESET}           Buka Sesi Live Pair-Programming Real-Time (Bagikan link ke tim)."
+  echo -e "  ${C_GREEN}share [port]${C_RESET}          Buka HTTPS Public Tunnel & Live Preview ke HP (via Cloudflare)."
+  echo -e "  ${C_GREEN}snapshot save <label>${C_RESET} Buat checkpoint snapshot proyek sebelum AI melakukan refactor."
+  echo -e "  ${C_GREEN}snapshot list${C_RESET}         Tampilkan seluruh riwayat snapshot checkpoint proyek."
+  echo -e "  ${C_GREEN}snapshot restore [id]${C_RESET} Pulihkan seluruh file proyek ke checkpoint snapshot pilihan."
+  echo -e "  ${C_GREEN}rollback${C_RESET}              Shortcut instan: Pulihkan proyek ke snapshot terakhir (1 detik)."
+  echo -e "  ${C_GREEN}export [--cursor|--claude|--windsurf|--all]${C_RESET}"
+  echo -e "                        Ekspor 126 Production Agents & 661 Skills ke semua format AI IDE."
+  echo -e "  ${C_GREEN}eval${C_RESET}                  Jalankan Autonomous SWE-Bench Swarm Evaluator (Scorecard A+).\n"
+
+  echo -e "${C_PURPLE}${C_BOLD}💬 MANAJEMEN SESI & CHAT:${C_RESET}"
+  echo -e "  ${C_GREEN}continue / resume${C_RESET}     Lanjutkan sesi percakapan/coding terakhir tanpa kehilangan konteks."
+  echo -e "  ${C_GREEN}session list${C_RESET}          Tampilkan daftar histori proyek dan riwayat sesi chat.\n"
+
+  echo -e "${C_PURPLE}${C_BOLD}🛡️ ANTI-BAN, BROWSER ANTI-DETECT & PEMELIHARAAN:${C_RESET}"
+  echo -e "  ${C_GREEN}chrome [url]${C_RESET}          Luncurkan Google Chrome Stealth Sandbox + Farbling Shield (Anti-Detect)."
+  echo -e "  ${C_GREEN}login / auth${C_RESET}          Login aman bebas verifikasi HP via Stealth Browser Sandbox."
+  echo -e "  ${C_GREEN}browser clean${C_RESET}         Musnahkan total cookie pelacak & web storage di Chrome, Brave & Chromium."
+  echo -e "  ${C_GREEN}browser stealth [url]${C_RESET} Luncurkan Disposable Sandbox Anti-Detect Browser (0 Bekas Jejak)."
+  echo -e "  ${C_GREEN}stealth / ghost${C_RESET}       Protokol Hantu: Acak Mesin + Hapus Sesi + Wiped Browser + Putar IP."
+  echo -e "  ${C_GREEN}desktop [cmd]${C_RESET}         Kelola Freebuff Desktop Linux (status/reset/kill Machine ID & Sesi)."
+  echo -e "  ${C_GREEN}clean${C_RESET}                 Reset total anonymous UUID telemetry & lockfile (100% Anti-Ban)."
+  echo -e "  ${C_GREEN}doctor${C_RESET}                Pemeriksaan kesehatan sistem (integritas 94 agents & 584 skills)."
+  echo -e "  ${C_GREEN}update${C_RESET}                Perbarui pustaka Skills & Agents ke versi rilis terbaru dari GitHub.\n"
+
+  echo -e "${C_PURPLE}${C_BOLD}🔍 EKSPLORASI & PANDUAN:${C_RESET}"
+  echo -e "  ${C_GREEN}search <keyword>${C_RESET}      Cari Sub-Agent atau Modular Skills berdasarkan kata kunci."
+  echo -e "  ${C_GREEN}info <name>${C_RESET}           Buka dan baca SOP / instruksi lengkap dari Agent atau Skill."
+  echo -e "  ${C_GREEN}list${C_RESET}                  Tampilkan rekapitulasi 126 Production Agents & 661 Curated Skills."
+  echo -e "  ${C_GREEN}help / --help / -h${C_RESET}    Tampilkan panduan bantuan lengkap ini.\n"
+
+  echo -e "${C_CYAN}----------------------------------------------------------------------------------------${C_RESET}"
+  echo -e "${C_BOLD}💡 CONTOH SKENARIO PENGGUNAAN NYATA:${C_RESET}"
+  echo -e "  1. Mulai Koding Instan      : ${C_CYAN}$ freebuff-power start${C_RESET}"
+  echo -e "  2. Buka Visual Dashboard    : ${C_CYAN}$ freebuff-power ui${C_RESET}"
+  echo -e "  3. Live Terminal di Browser : ${C_CYAN}$ freebuff-power pair${C_RESET}"
+  echo -e "  4. Buat 20 Data Dummy       : ${C_CYAN}$ freebuff-power seed 20${C_RESET}"
+  echo -e "  5. Benchmark API Backend    : ${C_CYAN}$ freebuff-power bench http://localhost:3000${C_RESET}"
+  echo -e "  6. Cek Kelengkapan .env     : ${C_CYAN}$ freebuff-power env${C_RESET}"
+  echo -e "  7. Bersihkan Kode Mati      : ${C_CYAN}$ freebuff-power clean-code${C_RESET}"
+  echo -e "  8. Otomasi Semantic Release : ${C_CYAN}$ freebuff-power release${C_RESET}"
+  echo -e "  9. Checkpoint Sebelum AI    : ${C_CYAN}$ freebuff-power snapshot save 'sebelum refactor'${C_RESET}"
+  echo -e " 10. Batalkan Kesalahan AI    : ${C_CYAN}$ freebuff-power rollback${C_RESET}"
+  echo -e " 11. Putar Akun saat Limit    : ${C_CYAN}$ freebuff-power rotate${C_RESET}"
+  echo -e "${C_CYAN}========================================================================================${C_RESET}\n"
+}
+
+COMMAND="${1:-}"
+
+case "$COMMAND" in
+  ""|help|--help|-h)
+    show_help
+    ;;
+
+  start|go|full)
+    shift || true
+    "$SCRIPT_DIR/clean.sh" >/dev/null 2>&1 || true
+    "$SCRIPT_DIR/init.sh" . >/dev/null 2>&1 || true
+    # Auto-Checkpoint Sebelum AI Mulai (Fitur Anti-Nyesel)
+    "$SCRIPT_DIR/snapshot.sh" save "auto_before_session" >/dev/null 2>&1 || true
+    exec "$SCRIPT_DIR/run.sh" "$@"
+    ;;
+
+  ui|tui)
+    exec node "$SCRIPT_DIR/tui.js"
+    ;;
+
+  compose)
+    shift || true
+    exec node "$SCRIPT_DIR/composer.js" "$@"
+    ;;
+
+  spawn)
+    shift || true
+    exec "$SCRIPT_DIR/spawn.sh" "$@"
+    ;;
+
+  proxy)
+    shift || true
+    exec "$SCRIPT_DIR/proxy.sh" "$@"
+    ;;
+
+  init)
+    shift || true
+    if [ "${1:-}" = "proxy" ]; then
+      shift || true
+      exec "$SCRIPT_DIR/proxy.sh" init "$@"
+    fi
+    exec "$SCRIPT_DIR/init.sh" "$@"
+    ;;
+
+  run)
+    shift || true
+    if [ "${1:-}" = "proxy" ]; then
+      shift || true
+      exec "$SCRIPT_DIR/proxy.sh" run "$@"
+    fi
+    exec "$SCRIPT_DIR/run.sh" "$@"
+    ;;
+
+  account)
+    shift || true
+    exec "$SCRIPT_DIR/account.sh" "$@"
+    ;;
+
+  auto|failover|auto-rotate|ready)
+    exec "$SCRIPT_DIR/account.sh" auto
+    ;;
+
+  rotate)
+    exec "$SCRIPT_DIR/account.sh" rotate
+    ;;
+  rotate-ip|ip)
+    exec "$SCRIPT_DIR/rotate-ip.sh"
+    ;;
+  stealth|ghost)
+    exec "$SCRIPT_DIR/stealth.sh"
+    ;;
+  clean-git|stealth-git)
+    shift || true
+    echo -e "\033[0;36m\033[1m🧹 Menjalankan Pembersih Git Stealth & Anti-Watermark...\033[0m"
+    "$SCRIPT_DIR/clean.sh" >/dev/null 2>&1 || true
+    
+    if git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
+      LAST_MSG="$(git log -1 --pretty=%B 2>/dev/null || echo "")"
+      if echo "$LAST_MSG" | grep -Ei "(codebuff|freebuff|manicode|Co-Authored-By)" >/dev/null 2>&1; then
+        echo -e "\033[0;33m⚠️  Ditemukan watermark/co-author pada commit terakhir. Membersihkan...\033[0m"
+        CLEANED_MSG="$(echo "$LAST_MSG" | sed -E '/Co-Authored-By:.*(codebuff|freebuff|manicode)/Id' | sed -E '/(Generated with|Generated by|🤖).*([Cc]odebuff|[Ff]reebuff|[Mm]anicode)/Id' | sed -E '/<!--.*watermark.*-->/Id')"
+        git commit --amend -m "$CLEANED_MSG"
+        echo -e "\033[0;32m✅ Commit terakhir telah dibersihkan 100% dari watermark Codebuff/Freebuff!\033[0m"
+        echo -e "\033[0;36m👉 Silakan jalankan 'git push --force' jika commit sudah sempat ter-push ke remote.\033[0m"
+      else
+        echo -e "\033[0;32m✅ Commit terakhir sudah bersih dari watermark.\033[0m"
+      fi
+    else
+      echo -e "\033[0;32m✅ Git Hook Global telah diperbarui & aktif untuk semua repository!\033[0m"
+    fi
+    exit 0
+    ;;
+  vps)
+    shift || true
+    echo -e "\033[0;36m\033[1m🚀 Menghubungkan ke VPS US (54.184.103.61) — Full Access Activated...\033[0m"
+    exec sshpass -p "ubuntu" ssh -o StrictHostKeyChecking=no -t ubuntu@54.184.103.61 "freebuff-power start"
+    ;;
+  vps-tunnel)
+    shift || true
+    echo -e "\033[0;36m\033[1m🌐 Membuka SOCKS5 Tunnel Lokal ke VPS US di 127.0.0.1:1080...\033[0m"
+    pkill -f "ssh.*54.184.103.61" 2>/dev/null || true
+    sshpass -p "ubuntu" ssh -o StrictHostKeyChecking=no -D 1080 -N -f ubuntu@54.184.103.61
+    echo -e "\033[0;32m✅ SOCKS5 Proxy aktif di 127.0.0.1:1080 (US Oregon)\033[0m"
+    ;;
+
+  browser|stealth-browser)
+    shift || true
+    SUB="${1:-}"
+    if [ "$SUB" = "clean" ] || [ "$SUB" = "purge" ]; then
+      shift || true
+      exec python3 "$SCRIPT_DIR/browser-clean.py" "$@"
+    elif [ "$SUB" = "status" ] || [ "$SUB" = "scan" ]; then
+      exec python3 "$SCRIPT_DIR/browser-clean.py" --dry-run
+    else
+      if [ "$SUB" = "launch" ] || [ "$SUB" = "open" ] || [ "$SUB" = "stealth" ]; then
+        shift || true
+      fi
+      exec "$SCRIPT_DIR/browser-stealth.sh" "$@"
+    fi
+    ;;
+
+  chrome)
+    shift || true
+    exec "$SCRIPT_DIR/browser-stealth.sh" "$@"
+    ;;
+
+  new-account|add-account)
+    shift || true
+    exec "$SCRIPT_DIR/account.sh" new "$@"
+    ;;
+
+  login|login-stealth|auth)
+    shift || true
+    echo -e "\033[0;32m\033[1m🚀 [FREEBUFF-POWER] Mempersiapkan Lingkungan Login Stealth 100% Anti-Detect...\033[0m"
+    export BROWSER="$SCRIPT_DIR/browser-stealth.sh"
+    export PATH="$SCRIPT_DIR/shims:$PATH"
+    exec "$SCRIPT_DIR/run.sh" login "$@"
+    ;;
+
+  desktop)
+    shift || true
+    exec "$SCRIPT_DIR/desktop.sh" "$@"
+    ;;
+
+  reset-full|reset|logout)
+    exec "$SCRIPT_DIR/account.sh" reset-full
+    ;;
+
+  continue|resume)
+    shift || true
+    exec node "$SCRIPT_DIR/session.js" continue "$@"
+    ;;
+
+  session)
+    shift || true
+    exec node "$SCRIPT_DIR/session.js" "$@"
+    ;;
+
+  release)
+    exec "$SCRIPT_DIR/release.sh"
+    ;;
+
+  seed)
+    shift || true
+    exec node "$SCRIPT_DIR/seed.js" "$@"
+    ;;
+
+  bench)
+    shift || true
+    exec node "$SCRIPT_DIR/bench.js" "$@"
+    ;;
+
+  theme)
+    shift || true
+    exec node "$SCRIPT_DIR/theme.js" "$@"
+    ;;
+
+  env)
+    exec node "$SCRIPT_DIR/envcheck.js"
+    ;;
+
+  clean-code)
+    exec node "$SCRIPT_DIR/cleancode.js"
+    ;;
+
+  antislop|anti-slop)
+    shift || true
+    exec node "$SCRIPT_DIR/antislop.js" "$@"
+    ;;
+
+  context|ingest)
+    shift || true
+    exec node "$SCRIPT_DIR/context-extractor.js" "$@"
+    ;;
+
+  scan-secrets|secrets|pre-push)
+    shift || true
+    exec "$SCRIPT_DIR/pre-push-guard.sh" "$@"
+    ;;
+
+  readme)
+    shift || true
+    exec node "$SCRIPT_DIR/readme-gen.js" "$@"
+    ;;
+
+  vpn)
+    exec "$SCRIPT_DIR/vpn.sh"
+    ;;
+  warp|warp-setup)
+    shift || true
+    exec "$SCRIPT_DIR/warp-setup.sh" "$@"
+    ;;
+  hook)
+    exec "$SCRIPT_DIR/hook.sh"
+    ;;
+  ci)
+    exec "$SCRIPT_DIR/ci.sh"
+    ;;
+  pr)
+    exec node "$SCRIPT_DIR/pr.js"
+    ;;
+  explain)
+    shift || true
+    exec node "$SCRIPT_DIR/explain.js" "$@"
+    ;;
+
+  docker|dockerize)
+    exec "$SCRIPT_DIR/dockerize.sh"
+    ;;
+
+  audit|review)
+    shift || true
+    exec node "$SCRIPT_DIR/audit.js" "$@"
+    ;;
+
+  antislop|slop)
+    shift || true
+    exec python3 "$SCRIPT_DIR/antislop-cli.py" "$@"
+    ;;
+
+  contrast)
+    shift || true
+    exec python3 "$SCRIPT_DIR/antislop-cli.py" contrast "$@"
+    ;;
+
+  design)
+    shift || true
+    exec python3 "$SCRIPT_DIR/antislop-cli.py" design "$@"
+    ;;
+
+  commit)
+    shift || true
+    exec "$SCRIPT_DIR/commit.sh" "$@"
+    ;;
+
+  docs)
+    shift || true
+    exec node "$SCRIPT_DIR/docs.js" "$@"
+    ;;
+
+  new|scaffold)
+    shift || true
+    exec "$SCRIPT_DIR/scaffolder.sh" "$@"
+    ;;
+
+  pair|collaborate)
+    shift || true
+    exec "$SCRIPT_DIR/pair.sh" "$@"
+    ;;
+
+  share|tunnel)
+    shift || true
+    exec "$SCRIPT_DIR/share.sh" "$@"
+    ;;
+
+  snapshot)
+    shift || true
+    exec "$SCRIPT_DIR/snapshot.sh" "$@"
+    ;;
+
+  rollback)
+    exec "$SCRIPT_DIR/snapshot.sh" rollback
+    ;;
+
+  heal|auto-heal|fix)
+    shift || true
+    exec "$SCRIPT_DIR/heal.sh" "$@"
+    ;;
+
+  samp|openmp)
+    shift || true
+    SUB_CMD="${1:-audit}"
+    case "$SUB_CMD" in
+      audit|check|lint)
+        shift || true
+        exec "$SCRIPT_DIR/samp-audit.sh" "$@"
+        ;;
+      td-preview|preview|td)
+        shift || true
+        exec node "$SCRIPT_DIR/samp-td-preview.js" "$@"
+        ;;
+      map-upgrade|map|mlo)
+        shift || true
+        exec node "$SCRIPT_DIR/samp-map-upgrade.js" "$@"
+        ;;
+      heal|fix|compile|build)
+        shift || true
+        exec "$SCRIPT_DIR/samp-heal.sh" "$@"
+        ;;
+      new|init)
+        shift || true
+        exec "$SCRIPT_DIR/scaffolder.sh" "openmp" "$@"
+        ;;
+      vs|compare)
+        exec "$SCRIPT_DIR/info.sh" "samp-vs-openmp-encyclopedia"
+        ;;
+      *)
+        exec "$SCRIPT_DIR/samp-audit.sh" "$@"
+        ;;
+    esac
+    ;;
+
+  test|selftest|verify)
+    exec "$SCRIPT_DIR/self-test.sh"
+    ;;
+
+  pi|freepi|free-pi)
+    shift || true
+    exec "$SCRIPT_DIR/freepi-runner.sh" "$@"
+    ;;
+
+  local|ollama)
+    shift || true
+    exec "$SCRIPT_DIR/local.sh" "$@"
+    ;;
+
+  pentest|sec|security)
+    shift || true
+    exec "$SCRIPT_DIR/pentest.sh" "$@"
+    ;;
+
+  export|sync)
+    shift || true
+    exec node "$SCRIPT_DIR/exporter.js" "$@"
+    ;;
+
+  eval)
+    exec node "$SCRIPT_DIR/eval.js"
+    ;;
+
+  clean)
+    exec "$SCRIPT_DIR/clean.sh"
+    ;;
+
+  doctor)
+    exec "$SCRIPT_DIR/doctor.sh"
+    ;;
+
+  update)
+    exec "$SCRIPT_DIR/update.sh"
+    ;;
+
+  search)
+    shift || true
+    exec "$SCRIPT_DIR/search.sh" "$@"
+    ;;
+
+  info)
+    shift || true
+    exec "$SCRIPT_DIR/info.sh" "$@"
+    ;;
+
+  list)
+    exec "$SCRIPT_DIR/list.sh"
+    ;;
+
+  *)
+    exec "$SCRIPT_DIR/run.sh" "$@"
+    ;;
+esac

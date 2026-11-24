@@ -1,0 +1,174 @@
+#!/usr/bin/env bash
+# ==============================================================================
+# 🛡️ FREEBUFF-POWER SUPREME ANTI-BAN & IDENTITY HARDWARE SPOOFER (DEEP PURGE v8.5)
+# ==============================================================================
+set -euo pipefail
+
+SOURCE="${BASH_SOURCE[0]}"
+while [ -h "$SOURCE" ]; do
+  DIR="$( cd -P "$( dirname "$SOURCE" )" >/dev/null 2>&1 && pwd )"
+  SOURCE="$(readlink "$SOURCE")"
+  [[ $SOURCE != /* ]] && SOURCE="$DIR/$SOURCE"
+done
+SCRIPT_DIR="$( cd -P "$( dirname "$SOURCE" )" >/dev/null 2>&1 && pwd )"
+
+MANICODE_DIR="$HOME/.config/manicode"
+mkdir -p "$MANICODE_DIR"
+
+IS_DEEP_CLEAN=false
+if [ "${1:-}" = "--deep" ] || [ "${1:-}" = "--full" ] || [ "${1:-}" = "-f" ]; then
+  IS_DEEP_CLEAN=true
+fi
+
+# 1. Kill only zombie freebuff/manicode backend binaries (EXACT process match, NEVER kill self)
+pkill -9 -x "freebuff" 2>/dev/null || true
+pkill -9 -x "manicode" 2>/dev/null || true
+pgrep -f "node.*bin/freebuff" | grep -v "$$" | xargs -r kill -9 2>/dev/null || true
+
+# 2. Hapus seluruh session state, stale sockets, dan temporary locks
+rm -f "$MANICODE_DIR"/*.lock 2>/dev/null || true
+rm -f "$MANICODE_DIR"/*.sock 2>/dev/null || true
+rm -f "$MANICODE_DIR"/session-state*.json 2>/dev/null || true
+rm -f "$MANICODE_DIR"/telemetry-queue*.json 2>/dev/null || true
+rm -f "$MANICODE_DIR"/device-lock*.json 2>/dev/null || true
+rm -f "$MANICODE_DIR"/freebuff-instance-owner.json 2>/dev/null || true
+
+if [ "$IS_DEEP_CLEAN" = true ]; then
+  rm -f "$MANICODE_DIR/device-key.json" 2>/dev/null || true
+  rm -f "$MANICODE_DIR/settings.json" 2>/dev/null || true
+  rm -f "$MANICODE_DIR/message-history.json" 2>/dev/null || true
+  rm -rf "$HOME/.cache/@codebufffreebuff-desktop-updater" 2>/dev/null || true
+  if [ -f "$SCRIPT_DIR/browser-clean.py" ]; then
+    python3 "$SCRIPT_DIR/browser-clean.py" --silent || true
+  fi
+fi
+
+# 3. Generate Hardware & Machine Signature Spoofing (Deep UUIDs & Hashes)
+NEW_ANON_ID="$(cat /proc/sys/kernel/random/uuid 2>/dev/null || od -x /dev/urandom | head -1 | awk '{OFS="-"; print $2$3,$4,$5,$6,$7$8$9}')"
+NEW_MACHINE_ID="$(od -vN "16" -An -tx1 /dev/urandom | tr -d " \n")"
+NEW_DEVICE_HASH="$(od -vN "32" -An -tx1 /dev/urandom | tr -d " \n")"
+NEW_SESSION_SALT="$(od -vN "8" -An -tx1 /dev/urandom | tr -d " \n")"
+FAKE_MAC="52:54:00:$(printf '%02x:%02x:%02x' $((RANDOM%256)) $((RANDOM%256)) $((RANDOM%256)))"
+
+# Tulis file spoofing fisik untuk C-hook LD_PRELOAD
+echo "$NEW_MACHINE_ID" > "$MANICODE_DIR/spoofed-machine-id"
+echo "$FAKE_MAC" > "$MANICODE_DIR/spoofed-mac"
+echo "$NEW_ANON_ID" > "$MANICODE_DIR/spoofed-product-uuid"
+chmod 644 "$MANICODE_DIR/spoofed-machine-id" "$MANICODE_DIR/spoofed-mac" "$MANICODE_DIR/spoofed-product-uuid" 2>/dev/null || true
+
+# 4. Tulis file konfigurasi identitas baru (Zero Tracking Profile)
+cat << STATE_EOF > "$MANICODE_DIR/anonymous-id.json"
+{
+  "anonymousId": "$NEW_ANON_ID",
+  "machineId": "$NEW_MACHINE_ID",
+  "deviceHash": "$NEW_DEVICE_HASH",
+  "virtualMac": "$FAKE_MAC",
+  "salt": "$NEW_SESSION_SALT",
+  "spoofedAt": "$(date -u +"%Y-%m-%dT%H:%M:%SZ")",
+  "telemetryEnabled": false,
+  "crashReporting": false,
+  "analyticsOptOut": true
+}
+STATE_EOF
+chmod 600 "$MANICODE_DIR/anonymous-id.json" 2>/dev/null || true
+
+# Update analytics-id.json (Crucial for Freebuff binary hardware mapping)
+echo "{\"anonymousId\": \"anon_$NEW_ANON_ID\", \"deviceHash\": \"$NEW_DEVICE_HASH\"}" > "$MANICODE_DIR/analytics-id.json"
+chmod 600 "$MANICODE_DIR/analytics-id.json" 2>/dev/null || true
+
+# 5. Jika credentials.json ada, sinkronkan hardware fingerprint & tracking flags
+if [ -f "$MANICODE_DIR/credentials.json" ]; then
+  node -e "
+    const fs = require('fs');
+    const path = '$MANICODE_DIR/credentials.json';
+    try {
+      const data = JSON.parse(fs.readFileSync(path, 'utf8'));
+      data.deviceHash = '$NEW_DEVICE_HASH';
+      data.machineId = '$NEW_MACHINE_ID';
+      data.anonymousId = '$NEW_ANON_ID';
+      data.telemetryOptOut = true;
+      data.lastSessionReset = '$(date -u +"%Y-%m-%dT%H:%M:%SZ")';
+      if (data.default) {
+        data.default.deviceHash = '$NEW_DEVICE_HASH';
+        data.default.machineId = '$NEW_MACHINE_ID';
+        data.default.anonymousId = '$NEW_ANON_ID';
+      }
+      fs.writeFileSync(path, JSON.stringify(data, null, 2));
+    } catch(e) {}
+  " >/dev/null 2>&1 || true
+fi
+
+# 6. Bersihkan temporary files di /tmp
+rm -rf /tmp/manicode-* /tmp/codebuff-* /tmp/freebuff-* 2>/dev/null || true
+
+# 7. Auto-Enforce Stealth Git Hooks (Purge Codebuff/Freebuff Co-Author & Watermarks)
+GIT_HOOK_DIR="$HOME/.git-templates/hooks"
+mkdir -p "$GIT_HOOK_DIR"
+
+cat << 'HOOK_EOF' > "$GIT_HOOK_DIR/prepare-commit-msg"
+#!/usr/bin/env bash
+COMMIT_MSG_FILE="$1"
+[ -f "$COMMIT_MSG_FILE" ] || exit 0
+
+# Strip any Co-Authored-By / Attribution / Generated with Codebuff / Freebuff
+sed -i -E '/Co-Authored-By:.*(codebuff|freebuff|manicode)/Id' "$COMMIT_MSG_FILE"
+sed -i -E '/(Generated with|Generated by|🤖).*([Cc]odebuff|[Ff]reebuff|[Mm]anicode)/Id' "$COMMIT_MSG_FILE"
+sed -i -E '/<!--.*watermark.*-->/Id' "$COMMIT_MSG_FILE"
+HOOK_EOF
+
+cat << 'HOOK_EOF' > "$GIT_HOOK_DIR/commit-msg"
+#!/usr/bin/env bash
+COMMIT_MSG_FILE="$1"
+[ -f "$COMMIT_MSG_FILE" ] || exit 0
+
+# Double-guard commit message filter
+sed -i -E '/Co-Authored-By:.*(codebuff|freebuff|manicode)/Id' "$COMMIT_MSG_FILE"
+sed -i -E '/(Generated with|Generated by|🤖).*([Cc]odebuff|[Ff]reebuff|[Mm]anicode)/Id' "$COMMIT_MSG_FILE"
+HOOK_EOF
+
+cat << 'HOOK_EOF' > "$GIT_HOOK_DIR/pre-push"
+#!/usr/bin/env bash
+# Freebuff Pre-Push Secret Guard
+LEAKS=0
+check_pattern() {
+  local pattern="$1"
+  local desc="$2"
+  local matches
+  matches=$(git diff origin/main..HEAD 2>/dev/null | grep -E "^\+" | grep -E -e "$pattern" || true)
+  if [ -n "$matches" ]; then
+    echo -e "\033[0;31m[CRITICAL LEAK DETECTED] $desc\033[0m"
+    LEAKS=$((LEAKS + 1))
+  fi
+}
+check_pattern "(ghp_[a-zA-Z0-9]{36}|github_pat_[a-zA-Z0-9_]{82})" "GitHub Personal Access Token"
+check_pattern "(AKIA[0-9A-Z]{16})" "AWS Access Key ID"
+check_pattern "-----BEGIN (RSA|EC|OPENSSH|DSA) PRIVATE KEY-----" "Private Key / PEM Certificate"
+check_pattern "manicode-[a-zA-Z0-9]{32,}" "Freebuff / Manicode Auth Bearer Token"
+if [ "$LEAKS" -gt 0 ]; then
+  echo -e "\033[0;31m\033[1m❌ Git push dibatalkan karena terdeteksi potensi secret leak!\033[0m"
+  exit 1
+fi
+exit 0
+HOOK_EOF
+
+chmod +x "$GIT_HOOK_DIR/prepare-commit-msg" "$GIT_HOOK_DIR/commit-msg" "$GIT_HOOK_DIR/pre-push" 2>/dev/null || true
+
+git config --global init.templateDir "$HOME/.git-templates" 2>/dev/null || true
+git config --global core.hooksPath "$GIT_HOOK_DIR" 2>/dev/null || true
+
+# Auto-guard Git Identity (never allow fallback to default Linux user)
+CURRENT_GIT_USER=$(git config --global user.name 2>/dev/null || echo "")
+if [ -z "$CURRENT_GIT_USER" ] || [ "$CURRENT_GIT_USER" = "Ubuntu" ] || [ "$CURRENT_GIT_USER" = "root" ]; then
+  git config --global user.name "FerzDevZ" 2>/dev/null || true
+  git config --global user.email "ferdinandderosaputra200409@gmail.com" 2>/dev/null || true
+fi
+
+# If currently inside a git workspace, also link into local .git/hooks for absolute guarantee
+if [ -d ".git/hooks" ]; then
+  cp -f "$GIT_HOOK_DIR/prepare-commit-msg" .git/hooks/prepare-commit-msg
+  cp -f "$GIT_HOOK_DIR/commit-msg" .git/hooks/commit-msg
+  cp -f "$GIT_HOOK_DIR/pre-push" .git/hooks/pre-push
+  chmod +x .git/hooks/prepare-commit-msg .git/hooks/commit-msg .git/hooks/pre-push 2>/dev/null || true
+fi
+
+echo -e "\033[0;32m✅ Identitas perangkat, machine ID, Git Stealth Hook & Pre-Push Secret Guard aktif!\033[0m"

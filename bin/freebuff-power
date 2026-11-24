@@ -121,7 +121,7 @@ show_help() {
   echo -e "${C_PURPLE}${C_BOLD}🔍 EKSPLORASI & PANDUAN:${C_RESET}"
   echo -e "  ${C_GREEN}search <keyword>${C_RESET}      Cari Sub-Agent atau Modular Skills berdasarkan kata kunci."
   echo -e "  ${C_GREEN}info <name>${C_RESET}           Buka dan baca SOP / instruksi lengkap dari Agent atau Skill."
-  echo -e "  ${C_GREEN}list${C_RESET}                  Tampilkan rekapitulasi 126 Production Agents & 655 Curated Skills."
+  echo -e "  ${C_GREEN}list${C_RESET}                  Tampilkan rekapitulasi 126 Production Agents & 661 Curated Skills."
   echo -e "  ${C_GREEN}help / --help / -h${C_RESET}    Tampilkan panduan bantuan lengkap ini.\n"
 
   echo -e "${C_CYAN}----------------------------------------------------------------------------------------${C_RESET}"
