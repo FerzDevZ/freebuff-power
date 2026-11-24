@@ -10,7 +10,7 @@ Short by design; this is read every session. Depth: `.agents/skills/<name>/SKILL
 2. **Dual target** — compile on open.mp *and* legacy 0.3.7, 0 warnings, `.amx` emitted. A build without the artifact is not green.
 3. **Zero stubs** — no `// TODO`, no `pass`, no `...`. Full implementation or say it is missing.
 4. **Strict tags** — `Text:`, `PlayerText:`, `Float:`, `bool:`. Never compare a `Text:` sentinel against a `PlayerText:`.
-5. **YSI for structure** — `y_commands`, `y_hooks`, `y_iterate`, `y_timers`, `y_groups`; not hand-rolled command parsing or `for (MAX_PLAYERS)`.
+5. **Structure, without a dependency that may not build** — probe YSI before you rely on it: YSI 5 ships backslash includes (`<YSI_Data\y_foreach\...>`) that the Linux `pawncc` cannot resolve, so compile a 3-line `#include <YSI_Data/y_iterate>` file first. When it resolves, use `y_commands`, `y_hooks`, `y_iterate`, `y_timers`, `y_groups`. When it does not, one `SetTimerEx` per player (or your own player array) — never `for (MAX_PLAYERS)`, never `GetPlayerPoolSize` (open.mp flags it warning 234: *this function is broken*), and never hand-rolled command parsing.
 6. **Streamer for volume** — objects, areas, pickups, actors, 3D labels beyond native limits.
 7. **Prepared SQL only** — `%e` binding or prepared statements. Never concatenate player input.
 8. **Pool budget** — PlayerTD ≤ 200 live, 256 hard cap; global TD ≤ 2048. Destroy on close, death, disconnect.
@@ -41,7 +41,7 @@ Short by design; this is read every session. Depth: `.agents/skills/<name>/SKILL
 | Voice, 3D audio, radio | `@samp-voice-audio-engineer` | `samp-voice-spatial-audio` | stream created and destroyed, no leak |
 | Android client / CEF UI | `@samp-textdraw-fivem-master` | `samp-mobile-android-cef-ui` | touch targets + safe zones respected |
 | Native C++ component / plugin | `@openmp-plugin-creator` | `openmp-cpp-component-sdk` → `openmp-modern-2026-api` | builds, native registered, 0 warnings |
-| Anything, before you call it done | `@samp-pawn-compile-verifier` | `samp-pawn-compile-gate` → `samp-testing-harness` | `bin/self-test.sh` 20/20 |
+| Anything, before you call it done | `@samp-pawn-compile-verifier` | `samp-pawn-compile-gate` → `samp-testing-harness` | `bin/self-test.sh` all green |
 
 **Precedence when skills disagree:** `samp-textdraw-ui-craft` owns engine behaviour (it is compile-verified) · `samp-textdraw-layout-debugger` owns "what is broken" · `samp-vs-openmp-encyclopedia` owns "does this native exist on my target" · one owner per screen or module — never build and repair in the same pass, you lose the ability to tell which change fixed it.
 
@@ -66,7 +66,7 @@ Switch is one-way per task: load the lane's skills, drop the SA-MP ones, do not 
 
 | Stack | Command |
 |---|---|
-| Pawn (SA-MP / open.mp) | `bin/self-test.sh`, or `pawncc` on both targets with 0 warnings + `.amx` |
+| Pawn (SA-MP / open.mp) | `bin/self-test.sh`, or `pawncc` on both targets with 0 warnings + `.amx`. A warning is a failure — open.mp promotes deprecated natives to warning 234, and a deprecated native is a broken native |
 | Audit / lint | `bin/samp-audit.sh .` · `node bin/samp-lint.js` |
 | TS / Node | `npx tsc --noEmit` + test runner |
 | Python | `ruff check . && mypy . && pytest -q` |
@@ -82,8 +82,9 @@ Switch is one-way per task: load the lane's skills, drop the SA-MP ones, do not 
 | Domain | Baseline |
 |---|---|
 | open.mp | v1.6.7.3218 · pawncc 3.10.10+ · sampctl 1.16.0 |
-| Plugins | Streamer v2.9.6+ · MySQL BlueG R41-4 or native component · YSI 5.x · ColAndreas v1.5.0+ |
+| Plugins | Streamer v2.9.6+ · MySQL BlueG R41-4 or native component · ColAndreas v1.5.0+ · YSI 5.x *only where its includes resolve* |
 | Legacy | SA-MP 0.3.7-R2 / 0.3.DL for backward compat only |
+| Linux toolchain truth | `pawncc` cannot resolve `\` inside `#include`, so YSI 5 is unusable there until its paths are forward-slashed · `GetPlayerPoolSize` = warning 234 · `OnPlayerDeath` third param is `WEAPON:` on open.mp, untagged on 0.3.7 (branch on `_INC_open_mp`) |
 | Web | Next.js 15/16 App Router · React 19 · Tailwind v4 · strict TS + Zod |
 | Scripting | Python 3.11+ · Node 20+ LTS · Ruff + mypy strict |
 
@@ -134,6 +135,11 @@ Read `MEMORY.md` at session start. Never fix the same class of bug twice.
 ```bash
 pawncc -i. -i$HOME/samp-sdk/omp-stdlib -d3 -o/tmp/out.amx file.pwn                    # open.mp
 pawncc -i. -i/tmp/sampstdlib -i$HOME/samp-sdk/omp-stdlib -d3 -o/tmp/out.amx file.pwn   # legacy
+
+# YSI availability probe — run before writing any y_* code
+printf '#include <open.mp>\n#include <YSI_Data/y_iterate>\n' > /tmp/ysi.pwn \
+  && pawncc /tmp/ysi.pwn -i$HOME/.config/sampctl/packages/github.com/pawn-lang/YSI-Includes/default \
+       -i$HOME/samp-sdk/omp-stdlib -d3 -o/tmp/ysi.amx   # error 100/111 => no YSI here
 ```
 
 Verified UI kit: `samp-textdraw-ui-craft/resources/samp_td_kit.inc` (+ `fixture_ui.pwn`, `example_radio_ui.pwn`).

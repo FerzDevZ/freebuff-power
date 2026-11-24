@@ -219,6 +219,23 @@ else
     PAWN_SUMMARY="$PAWN_SUMMARY\n    $row"
   done < <(find "$ROOT_DIR/.agents/skills" -path '*/resources/*.pwn' | sort)
 
+  # Gate contoh TextDraw: `example_radio_ui.pwn` adalah UI kanonik yang dikirim
+  # ke user. Loop fixture di atas memberi label legacy=skip pada file ber-
+  # `<open.mp>` saja, padahal samp-stdlib menyediakan wrapper <open.mp> — jadi
+  # contoh kit ini sebenarnya dual-target. Buktikan di dua target, jangan
+  # dikecualikan.
+  TD_EXAMPLE="$ROOT_DIR/.agents/skills/samp-textdraw-ui-craft/resources/example_radio_ui.pwn"
+  if [ -n "$OMP_STDLIB" ] && [ -n "$SAMP_STDLIB" ] && [ -f "$TD_EXAMPLE" ]; then
+    if pawn_build "$TD_EXAMPLE" omp td_example && pawn_build "$TD_EXAMPLE" legacy td_example; then
+      pass "contoh TextDraw nyata example_radio_ui.pwn terkompilasi di open.mp + legacy 0.3.7 (0 warning, .amx)"
+    else
+      fail "contoh TextDraw example_radio_ui.pwn gagal: $PAWN_LAST_REASON"
+      PAWN_FAILED=1
+    fi
+  else
+    pass "SKIP: contoh TextDraw tidak dikompilasi — butuh pawncc + stdlib open.mp dan legacy"
+  fi
+
   if [ -z "$PAWN_SUMMARY" ]; then
     fail "Tidak ada fixture Pawn yang ditemukan — gate tidak membuktikan apa pun"
   elif [ "$PAWN_FAILED" -eq 0 ]; then
