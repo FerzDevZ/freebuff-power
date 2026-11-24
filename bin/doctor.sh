@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # ==============================================================================
-# 🩺 FREEBUFF-POWER & FREEPI-POWER HEALTH CHECK & INTEGRITY DOCTOR (v11.0)
+# 🩺 FREEBUFF-POWER & FREEPI-POWER HEALTH CHECK & INTEGRITY DOCTOR (v13.0)
 # ==============================================================================
 set -euo pipefail
 

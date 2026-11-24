@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # ==============================================================================
-# 🩺 FREEBUFF-POWER AUTONOMOUS SWE HEALER (v11.0)
+# 🩺 FREEBUFF-POWER AUTONOMOUS SWE HEALER (v13.0)
 # Automated Test-Driven Bug Repair Loop (Traceback -> Minimal Patch -> Green)
 # ==============================================================================
 set -euo pipefail

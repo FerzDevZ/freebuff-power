@@ -166,3 +166,18 @@ cmake --build . --config Release -j$(nproc)
 # Linux:   components/DiscordBridge.so
 # Windows: components/DiscordBridge.dll
 ```
+
+## Runtime (open.mp 2026)
+
+- **open.mp server**: v1.6.7.3218 (latest stable, Oct 2026)
+- **open.mp C++ SDK**: `openmultiplayer/open.mp-sdk` (C++20, component ABI stable across 1.6.x)
+- **Toolchain**: GCC 13+/Clang 17+ or MSVC 19.38+, `-m32` for the 32-bit server ABI
+- **CMake**: 3.28+ (`cmake --build build --config Release`), Conan 2.x optional
+- **Pawn side**: pawncc 3.10.10+ calling your natives; `-Z` treats warnings as errors
+
+### Component Build Gate
+```bash
+cmake -S . -B build -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_FLAGS="-m32 -Wall -Wextra -Wpedantic"
+cmake --build build --config Release -j"$(nproc)"
+# must emit components/<Name>.so (Linux) or .dll (Windows) with zero warnings
+```

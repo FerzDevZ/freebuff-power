@@ -42,7 +42,7 @@ Pair stark black-and-white layouts with hyper-saturated accent pops:
 ```tsx
 export function NeobrutalistCard({ title, tag, desc }: { title: string, tag: string, desc: string }) {
   return (
-    <div className="relative border-3 border-black bg-white p-6 shadow-[5px_5px_0px_0px_#000] transition-all hover:translate-x-[-2px] hover:translate-y-[-2px] hover:shadow-[7px_7px_0px_0px_#000]">
+    <div className="relative border-3 border-black bg-white p-6 shadow-[5px_5px_0px_0px_#000] transition-[translate,box-shadow] duration-150 ease-out motion-reduce:transition-none hover:translate-x-[-2px] hover:translate-y-[-2px] hover:shadow-[7px_7px_0px_0px_#000]">
       <div className="inline-block border-2 border-black bg-[#FFE600] px-3 py-1 text-xs font-black uppercase tracking-wider shadow-[2px_2px_0px_0px_#000]">
         {tag}
       </div>

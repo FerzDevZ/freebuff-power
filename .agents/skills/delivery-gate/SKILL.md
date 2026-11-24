@@ -114,7 +114,7 @@ The hook enforces the **habit** of touching learning libraries, not the **qualit
 
 ## Compatibility
 
-- Python 3.8+ (uses `from __future__ import annotations`)
+- Python 3.11+ (uses `from __future__ import annotations`)
 - Cross-platform: Windows, macOS, Linux
 - Zero dependencies beyond stdlib
 

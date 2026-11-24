@@ -46,7 +46,7 @@ This skill targets advanced size/startup optimization — not basic one-file "sc
 - **总体积**: 323 MB
 - **打包工具**: PyInstaller 4.7 (32位)
 - **主要依赖**: PySide2 (22.52 MB), OpenCV (62.38 MB), Playwright (76.74 MB)
-- **Python 版本**: Python 3.8 (32位)
+- **Python 版本**: Python 3.11 (32位)
 - **DLL 数量**: 71 个，总计 93.23 MB
 
 ### 关键优化策略

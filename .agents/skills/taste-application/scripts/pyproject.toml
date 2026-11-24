@@ -6,7 +6,7 @@ build-backend = "setuptools.build_meta"
 name = "ecc-tasteforge"
 version = "1.0.0"
 description = "ECC reusable TasteForge media contracts and creative adapters"
-requires-python = ">=3.9"
+requires-python = ">=3.11"
 license = {file = "LICENSE"}
 dependencies = []
 

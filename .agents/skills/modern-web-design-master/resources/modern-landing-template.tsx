@@ -22,10 +22,10 @@ export default function ModernHero() {
         </p>
 
         <div className="flex flex-col sm:flex-row items-center gap-4">
-          <button className="w-full sm:w-auto px-8 py-3.5 rounded-xl bg-white text-black font-semibold hover:bg-zinc-200 transition-all hover:scale-105 active:scale-95 shadow-xl shadow-white/10">
+          <button className="w-full sm:w-auto px-8 py-3.5 rounded-xl bg-white text-black font-semibold hover:bg-zinc-200 transition-[background-color,transform] duration-150 ease-out motion-reduce:transition-none active:scale-[0.98] shadow-xl shadow-white/10">
             Explore Skills
           </button>
-          <button className="w-full sm:w-auto px-8 py-3.5 rounded-xl bg-zinc-900 border border-white/10 text-white font-medium hover:bg-zinc-800 transition-all">
+          <button className="w-full sm:w-auto px-8 py-3.5 rounded-xl bg-zinc-900 border border-white/10 text-white font-medium hover:bg-zinc-800 transition-colors duration-150 ease-out motion-reduce:transition-none">
             Read Documentation
           </button>
         </div>

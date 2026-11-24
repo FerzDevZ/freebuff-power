@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # ==============================================================================
-# 💻 FREEBUFF-POWER LOCAL OFFLINE OLLAMA & VLLM ENGINE (v11.0)
+# 💻 FREEBUFF-POWER LOCAL OFFLINE OLLAMA & VLLM ENGINE (v13.0)
 # 100% Zero-Token, Zero-Latency, Zero-Cost & Anti-Ban Private AI Coding
 # ==============================================================================
 set -euo pipefail

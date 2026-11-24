@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # ==============================================================================
-# ✅ FREEPI-POWER & FREEBUFF-POWER AUTOMATED SELF-TEST & CI VERIFIER (v11.3)
+# ✅ FREEPI-POWER & FREEBUFF-POWER AUTOMATED SELF-TEST & CI VERIFIER (v13.0)
 # ==============================================================================
 set -euo pipefail
 
@@ -27,7 +27,7 @@ pass() { echo -e "  ${C_GREEN}✔${C_RESET} $1"; PASS=$((PASS + 1)); }
 fail() { echo -e "  ${C_RED}✖${C_RESET} $1"; FAIL=$((FAIL + 1)); }
 
 echo -e "${C_CYAN}${C_BOLD}========================================================================${C_RESET}"
-echo -e "${C_YELLOW}${C_BOLD}🧪 [SELF-TEST SUITE] FreePi-Power & Freebuff-Power Verification (v11.3)${C_RESET}"
+echo -e "${C_YELLOW}${C_BOLD}🧪 [SELF-TEST SUITE] FreePi-Power & Freebuff-Power Verification (v13.0)${C_RESET}"
 echo -e "${C_CYAN}${C_BOLD}========================================================================${C_RESET}\n"
 
 # 1. Bash syntax check
@@ -117,6 +117,18 @@ if [ -z "$SAMP_STDLIB" ]; then
     [ -d "$candidate" ] && SAMP_STDLIB="$candidate" && break
   done
 fi
+# Plugin includes (streamer/YSI/ColAndreas) live outside the stdlib; a fixture
+# that #include <streamer> must still compile. Auto-detect so the gate runs
+# instead of failing on a missing include path.
+STREAMER_INCLUDE="${STREAMER_INCLUDE:-}"
+if [ -z "$STREAMER_INCLUDE" ]; then
+  for candidate in \
+    "$ROOT_DIR/.sdk/streamer" \
+    "$HOME/.config/sampctl/packages/github.com/samp-incognito/samp-streamer-plugin/default" \
+    "$HOME/samp-sdk/streamer"; do
+    if [ -f "$candidate/streamer.inc" ]; then STREAMER_INCLUDE="$candidate"; break; fi
+  done
+fi
 
 PAWN_LAST_REASON=""
 pawn_build() {
@@ -126,6 +138,7 @@ pawn_build() {
   log="$TMP_DIR/$label.$target.log"
 
   includes+=("-i$(dirname "$src")")
+  [ -n "$STREAMER_INCLUDE" ] && includes+=("-i$STREAMER_INCLUDE")
   if [ "$target" = "legacy" ]; then
     # Legacy stdlib first so <a_samp> resolves to 0.3.7, not omp's wrapper.
     [ -n "$SAMP_STDLIB" ] && includes+=("-i$SAMP_STDLIB")

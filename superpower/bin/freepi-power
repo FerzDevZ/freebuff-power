@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # ==============================================================================
-# ⚡ FREEPI-POWER SUPREME — Native FreePi (freepi.ai) Cognitive Swarm Suite (v11.1)
+# ⚡ FREEPI-POWER SUPREME — Native FreePi (freepi.ai) Cognitive Swarm Suite (v13.0)
 # ==============================================================================
 # Native FreePi Engine + 97 Specialized Agents + 588 Skills + SA-MP 2026 Studio
 # Never silently leaks commands to freebuff!
@@ -39,7 +39,7 @@ C_RESET='\033[0m'
 
 show_help() {
   echo -e "${C_CYAN}${C_BOLD}========================================================================================${C_RESET}"
-  echo -e "${C_YELLOW}${C_BOLD}⚡ FREEPI-POWER SUPREME — Multi-Domain Autonomous Swarm Suite (v12.0)${C_RESET}"
+  echo -e "${C_YELLOW}${C_BOLD}⚡ FREEPI-POWER SUPREME — Multi-Domain Autonomous Swarm Suite (v13.0)${C_RESET}"
   echo -e "${C_DIM}FreePi (freepi.ai) + 126 Production Agents + 661 Skills (AI/ML, Web, Cloud, Mobile, Systems, open.mp)${C_RESET}"
   echo -e "${C_CYAN}${C_BOLD}========================================================================================${C_RESET}\n"
   echo -e "${C_BOLD}PENGGUNAAN:${C_RESET}"

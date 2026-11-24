@@ -119,3 +119,21 @@ Stop installing unstable YSF/SKY memory-hack plugins! open.mp gives you these na
 }
 ```
 > **Pro Tip:** Disable `rcon.enable` in production (use RBAC in-game Admin + Web UCP instead — eliminates RCON brute-force surface completely!), set `use_entry_exit_markers: false` (so ugly yellow GTA SA interior cones disappear in favor of your FiveM `[Y]`/`ox_doorlock` doors!), and set `use_stunt_bonuses: false` (eliminates accidental `$500` GTA stunt cash exploits!).
+
+## Runtime (open.mp 2026)
+
+- **open.mp server**: v1.6.7.3218 (latest stable, Oct 2026)
+- **pawncc**: 3.10.10+ (open.mp compiler, `-Z` for warnings-as-errors)
+- **Streamer Plugin**: v2.9.6+ (Incognito)
+- **MySQL**: BlueG R41-4 or open.mp native `mysql` component
+- **YSI 5.x**: y_commands, y_hooks, y_iterate, y_bit, y_inline, y_timers, y_groups
+- **ColAndreas**: v1.5.0+ for collision/raycasting
+
+### Compile Check (Gate)
+```bash
+# open.mp
+pawncc -i. -i/home/aegisx/samp-sdk/omp-stdlib -d3 -o/tmp/test.amx file.pwn
+# legacy (0.3.7-R2) backward-compat
+pawncc -i. -i/tmp/sampstdlib -i/home/aegisx/samp-sdk/omp-stdlib -d3 -o/tmp/test.amx file.pwn
+```
+Zero warnings, zero errors required.

@@ -140,6 +140,22 @@ client keeps drawing the old width (`TD_BarSet` already does this).
 - RGBA, alpha is the **low** byte (`0xRRGGBBAA`). `TD_WithAlpha()` handles it.
 - Static frames → global `Text:`; only per-player values → `PlayerText:`.
 
+### Legacy editor dump vs modern module
+
+A raw TDEditor/iTD/TDW export is not modern code. Convert every row of this table
+before it reaches a gamemode (`samp-textdraw-studio-converter` owns the procedure):
+
+| Legacy dump (jadul) | Modern 2026 module |
+|---|---|
+| `Textdraw0..Textdraw87` global `Text:` | `PlayerText:ptd_Component[playerid]` arrays |
+| decimal color `303174399` | hex ARGB `0x121212FF` behind a `TD_C_*` constant |
+| `SetOutline(1)` + `SetShadow(1)` | `0` + `0` (flat), proportional on text |
+| `BackgroundColor(td, 255)` | `TD_C_TRANSPARENT` (`0x00000000`) |
+| hardcoded coords per element | one `#define` anchor per component + offsets |
+| 50 copy-pasted slots | nested `for` loop over a slot array |
+| no `Destroy` / no `Hide` | `PlayerTextDrawHide` + `PlayerTextDrawDestroy` + `INVALID_TEXT_DRAW` reset |
+| no click support | `SetSelectable(1)` + `OnPlayerClickPlayerTextDraw` |
+
 ## 8. Compile-verified examples
 
 - `resources/example_radio_ui.pwn` — radio/phone UI (14 PlayerTD, signal bars,

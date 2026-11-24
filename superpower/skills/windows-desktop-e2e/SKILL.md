@@ -51,7 +51,7 @@ Your test (Python)
 ## Setup & Prerequisites
 
 ```bash
-# Python 3.8+, Windows only
+# Python 3.11+, Windows only
 pip install pywinauto pytest pytest-html Pillow pytest-timeout
 # Optional: screen recording
 # Install ffmpeg and add to PATH: https://ffmpeg.org/download.html

@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # ==============================================================================
-# ⚡ FREEBUFF-POWER & FREEPI-POWER SUPREME SUITE — Universal Dual Installer (v11.0)
+# ⚡ FREEBUFF-POWER & FREEPI-POWER SUPREME SUITE — Universal Dual Installer (v13.0)
 # ==============================================================================
 # Dual-Identity Architecture:
 #   - FreePi Engine   : Free terminal coding powered by freepi.ai (free-pi-cli)
