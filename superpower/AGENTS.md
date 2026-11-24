@@ -1,4 +1,4 @@
-# ⚡ Freebuff-Power & FreePi-Power Ultra v12.0 — Autonomous Multi-Domain Cognitive Swarm
+# ⚡ Freebuff-Power & FreePi-Power Ultra v13.0 — Autonomous Multi-Domain Cognitive Swarm
 
 > **AUTONOMOUS ACTIVATION DIRECTIVE:**
 > When `AGENTS.md` is loaded (in **FreePi `freepi.ai`**, **Freebuff**, **Claude Code**, **Cursor**, or **Windsurf**), immediately operate as a **Principal Autonomous Engineering Swarm** backed by **126 Specialized Production Agents** (`.agents/agents/`), **655 Curated Modular Skills** (`.agents/skills/<name>/SKILL.md`), and **23 Stack Rules** (`.agents/rules/`).
@@ -23,7 +23,7 @@ On session start, inspect project markers (`package.json`, `pyproject.toml`, `Ca
 | **Flutter / React Native / Android / iOS** | `@mobile-crossplatform-architect` | `@flutter-reviewer` / `@kotlin-reviewer` | `mobile-offline-first-sync-2026`, `dart-flutter-patterns` |
 | **Rust / C++ / Zig / WASM / eBPF** | `@systems-rust-cpp-engineer` | `@rust-reviewer` / `@cpp-reviewer` | `systems-rust-tokio-production`, `cpp-modern-low-latency` |
 | **QA / Playwright E2E / k6 Load / Contracts** | `@qa-automation-architect` | `@e2e-runner` + `@tdd-guide` | `e2e-testing`, `k6-spike-soak-breakpoint-testing` |
-| **GTA SA-MP & open.mp FiveM-Style 2026** | `@samp-creator-2026` | `@samp-textdraw-layout-auditor` + `@samp-pawn-compile-verifier` | `openmp-modern-2026-api`, `samp-textdraw-ui-craft`, `samp-pawn-compile-gate` |
+| **GTA SA-MP & open.mp FiveM-Style 2026** | `@samp-creator-2026` | `@samp-textdraw-layout-auditor` + `@samp-pawn-compile-verifier` | `openmp-modern-2026-api`, `samp-textdraw-ui-craft`, `samp-pawn-compile-gate`, `samp-openmp-modern-guide` |
 
 ---
 
@@ -59,7 +59,7 @@ graph TD
 
 ---
 
-## 👥 MULTI-DOMAIN AGENT ORCHESTRATION MATRIX (121 Production Agents)
+## 👥 MULTI-DOMAIN AGENT ORCHESTRATION MATRIX (126 Production Agents)
 
 Personas live in `.agents/agents/<name>.md` (and are auto-exposed as `/<name>` slash commands in FreePi `~/.free-pi/agent/prompts/`):
 
@@ -150,7 +150,7 @@ Personas live in `.agents/agents/<name>.md` (and are auto-exposed as `/<name>` s
 
 ---
 
-## 🧰 CURATED HIGH-LEVERAGE SKILL DIRECTORY (640 Skills in `.agents/skills/`)
+## 🧰 CURATED HIGH-LEVERAGE SKILL DIRECTORY (655 Skills in `.agents/skills/`)
 
 Load on demand by reading `.agents/skills/<skill-name>/SKILL.md`:
 
@@ -159,7 +159,7 @@ Load on demand by reading `.agents/skills/<skill-name>/SKILL.md`:
 - **Backend, Distributed Systems & Data Engineering:** `distributed-systems-scale-2026`, `data-lakehouse-polars-iceberg`, `bun-runtime-hyper-fast-apis`, `cloudflare-edge-workers-caching`, `duckdb-embedded-olap-sql`, `clickhouse-io`, `postgresql-internals-indexing-master`, `redis-data-structures-streams`, `idempotency-distributed-transactions`, `circuit-breaker-rate-limiter-resilience`, `transactional-outbox-cdc-debezium`, `zero-downtime-migration-expand-contract`, `golang-concurrency-patterns`, `api-designer`.
 - **Cloud, DevOps, SRE, Security & QA:** `devops-sre-kubernetes-iac`, `cybersecurity-appsec-redteam-2026`, `jwt-session-security-passkeys`, `distributed-tracing-opentelemetry`, `secret-management-vault-infisical`, `sast-dast-container-cve-scanner`, `supply-chain-security-sbom`, `e2e-testing`, `playwright-visual-regression-testing`, `k6-spike-soak-breakpoint-testing`, `contract-testing-pact`, `mutation-testing-stryker-mutmut`, `tdd-master`.
 - **Mobile & Low-Level Systems:** `mobile-offline-first-sync-2026`, `systems-rust-tokio-production`, `rust-wasm-systems-engineer`, `cpp-modern-low-latency`, `zig-high-performance-systems`, `ebpf-linux-kernel-observability`, `desktop-app-electron-tauri`, `bottom-sheet-touch-gestures-mobile`.
-- **GTA SA-MP & open.mp FiveM-Style 2026 (53 Skills):** `openmp-modern-2026-api`, `samp-command-processor`, `samp-data-structures-pawn`, `samp-http-json-integration`, `samp-timer-scheduling`, `samp-testing-harness`, `samp-server-security-hardening`, `samp-persistence-schema`, `samp-textdraw-ui-craft`, `samp-textdraw-layout-debugger`, `samp-textdraw-studio-converter`, `samp-textdraw-fivem-modern-design`, `samp-pawn-compile-gate`, `samp-map-pipeline-2026`, `samp-mapping-dynamic-objects-pro`, `samp-fivem-oxlib-target-logic`, `samp-fivem-inventory-metadata`, `samp-fivem-smartphone-mdt`, `samp-fivem-vehicle-tuning-garage`, `samp-fivem-heist-crime-gang`, `samp-fivem-housing-business-crafting`, `samp-fivem-character-cinema-anim`, `samp-ucp-web-panel-bridge`, `samp-textdraw-studio-converter`, `samp-textdraw-fivem-modern-design`, `samp-modern-jobs-2026-logic`, `samp-modern-creator-2026`, `samp-mobile-android-cef-ui`, `samp-vs-openmp-encyclopedia`, `samp-streamer-plugin`, `samp-textdraw-ui-craft`, `samp-mysql-database`, `samp-ysi-framework`.
+- **GTA SA-MP & open.mp FiveM-Style 2026 (74 Skills):** `openmp-modern-2026-api`, `samp-openmp-modern-guide`, `samp-command-processor`, `samp-data-structures-pawn`, `samp-http-json-integration`, `samp-timer-scheduling`, `samp-testing-harness`, `samp-server-security-hardening`, `samp-persistence-schema`, `samp-textdraw-ui-craft`, `samp-textdraw-layout-debugger`, `samp-textdraw-studio-converter`, `samp-textdraw-fivem-modern-design`, `samp-pawn-compile-gate`, `samp-map-pipeline-2026`, `samp-mapping-dynamic-objects-pro`, `samp-fivem-oxlib-target-logic`, `samp-fivem-inventory-metadata`, `samp-fivem-smartphone-mdt`, `samp-fivem-vehicle-tuning-garage`, `samp-fivem-heist-crime-gang`, `samp-fivem-housing-business-crafting`, `samp-fivem-character-cinema-anim`, `samp-ucp-web-panel-bridge`, `samp-modern-jobs-2026-logic`, `samp-modern-creator-2026`, `samp-mobile-android-cef-ui`, `samp-vs-openmp-encyclopedia`, `samp-streamer-plugin`, `samp-mysql-database`, `samp-ysi-framework`, `samp-npc-ai-behavior`, `samp-camera-cinematic`, `samp-sound-audio`, `samp-weather-time`, `samp-editor-ecosystem`, `samp-economy-simulation`, `samp-admin-moderation`, `samp-chat-system`, `samp-vehicle-system`, `samp-banking-system`, `samp-property-system`, `samp-medical-ems`, `samp-police-system`, `samp-gang-faction`, `samp-spawn-system`, `samp-logging-audit`, `samp-anticheat-deep`, `samp-clothing-accessories`, `samp-death-respawn`, `samp-crafting-system`, `samp-phone-system`, `samp-teleport-system`, `samp-entity-lifecycle`, `samp-textdraw-ui-designer`.
 
 ---
 
@@ -229,8 +229,7 @@ This section exists because layout bugs were being "fixed" by nudging coordinate
 
 ### TextDraw routing matrix (pick one path, max 2 skills)
 
-Seven artifacts cover one domain. Loading all of them wastes context and mixes
-layers. Match the **input you actually have** to the row, then follow its order.
+Seven artifacts cover one domain. Loading all of them wastes context and mixes layers. Match the **input you actually have** to the row, then follow its order.
 
 | You have | Lead agent | Load in this order | Gate before saying done |
 |---|---|---|---|
@@ -244,19 +243,164 @@ layers. Match the **input you actually have** to the row, then follow its order.
 
 Non-negotiable precedence when two artifacts disagree:
 
-1. **`samp-textdraw-ui-craft` wins on engine behaviour.** It is the only one
-   verified against `omp_textdraw.inc` and compile-tested. Design skills never
-   override alignment/`TextSize` semantics.
-2. **`samp-textdraw-layout-debugger` wins on "what is broken"** — it maps a
-   symptom to one cause. Do not edit coordinates until the cause is named.
-3. **`0.75` has two different jobs.** Apply `TD_ASPECT_16_9` only to shapes you
-   authored directly in 640×480 grid units (circle radius, icon width). A
-   Figma 1920×1080 conversion already carries the aspect in its arithmetic —
-   multiplying again by `0.75` is the bug `samp-textdraw-studio-converter` §1
-   exists to prevent.
-4. **One UI owner per screen.** `fivem-master` builds, `ui-designer` decides,
-   `layout-auditor` repairs. Never run build and repair in the same pass; you
-   lose the ability to tell which change fixed it.
+1. **`samp-textdraw-ui-craft` wins on engine behaviour.** It is the only one verified against `omp_textdraw.inc` and compile-tested. Design skills never override alignment/`TextSize` semantics.
+2. **`samp-textdraw-layout-debugger` wins on "what is broken"** — it maps a symptom to one cause. Do not edit coordinates until the cause is named.
+3. **`0.75` has two different jobs.** Apply `TD_ASPECT_16_9` only to shapes you authored directly in 640×480 grid units (circle radius, icon width). A Figma 1920×1080 conversion already carries the aspect in its arithmetic — multiplying again by `0.75` is the bug `samp-textdraw-studio-converter` §1 exists to prevent.
+4. **One UI owner per screen.** `fivem-master` builds, `ui-designer` decides, `layout-auditor` repairs. Never run build and repair in the same pass; you lose the ability to tell which change fixed it.
+
+---
+
+## 🔄 GATE 3 — SELF-EVOLVING REFLEXION LOOP (`MEMORY.md`)
+
+Whenever a non-trivial bug, build failure, or architectural gotcha is diagnosed and fixed:
+1. Extract an **Atomic Invariant** (symptom → technical root cause → permanent prevention rule).
+2. Append it to `MEMORY.md`:
+   ```markdown
+   - **[YY-MM-DD · Component]**: <Brief symptom> → **Root Cause**: <Exact technical cause> → **Invariant Rule**: <Permanent rule>.
+   ```
+3. Consult `MEMORY.md` at session start so the swarm never repeats the same mistake twice.
+
+---
+
+## 🏗️ SA-MP/OPEN.MP DEVELOPMENT CONSTITUTION
+
+### Core Principles
+1. **Server-side authority** — Never trust client input. Validate everything server-side.
+2. **Dual-target compile** — Every `.pwn` must compile on BOTH open.mp and legacy SA-MP with 0 warnings.
+3. **Zero-stub policy** — No `// TODO`, no `pass`, no `...` ellipses. Full implementation or nothing.
+4. **Tag safety** — Use strict tags (`Text:`, `PlayerText:`, `Float:`, `bool:`). open.mp enforces these.
+5. **YSI framework** — Use `y_commands`, `y_hooks`, `y_iterate`, `y_timers`, `y_groups` for all modules.
+6. **Streamer plugin** — Use Incognito streamer for objects, areas, pickups, actors beyond native limits.
+7. **MySQL prepared statements** — Never concatenate SQL. Use `%e` or prepared statements.
+8. **Pool management** — PlayerTD ≤ 200, destroy on close/death/disconnect. Global TD ≤ 2048.
+9. **Anti-exploit** — Check jail, event, cooldown, admin level before any sensitive action.
+10. **Logging** — Log all admin actions, economy transactions, and security events.
+
+### SA-MP/open.mp Skill Quick Reference
+
+| Task | Primary Skill | Secondary Skills |
+|---|---|---|
+| TextDraw UI | `samp-textdraw-ui-craft` | `samp-textdraw-fivem-modern-design`, `samp-openmp-modern-guide` |
+| Map/Interior | `samp-mapping-dynamic-objects-pro` | `samp-openmp-modern-guide` |
+| Vehicle System | `samp-vehicle-system` | `samp-fivem-vehicle-tuning-garage` |
+| Economy/Banking | `samp-banking-system` | `samp-economy-simulation` |
+| Job System | `samp-modern-jobs-2026-logic` | `samp-modern-jobs-architect` |
+| Crime/Faction | `samp-gang-faction` | `samp-fivem-heist-crime-gang`, `samp-crime-faction-architect` |
+| Police/EMS | `samp-police-system`, `samp-medical-ems` | `samp-fivem-smartphone-mdt` |
+| Housing/Property | `samp-property-system` | `samp-fivem-housing-business-crafting` |
+| Phone/Chat | `samp-phone-system`, `samp-chat-system` | `samp-fivem-smartphone-mdt` |
+| Spawn/Teleport | `samp-spawn-system`, `samp-teleport-system` | `samp-camera-cinematic` |
+| Admin/Moderation | `samp-admin-moderation` | `samp-anticheat-deep`, `samp-logging-audit` |
+| NPC/AI | `samp-npc-ai-behavior` | `samp-fivem-character-cinema-anim` |
+| Weather/Time | `samp-weather-time` | `samp-sound-audio` |
+| Clothing | `samp-clothing-accessories` | `samp-death-respawn` |
+| Crafting | `samp-crafting-system` | `samp-inventory-item-system` |
+| UCP/Web | `samp-ucp-web-panel-bridge` | `samp-ucp-fullstack-engineer` |
+| Database | `samp-mysql-database` | `samp-persistence-schema`, `samp-database-engineer` |
+| Security | `samp-server-security-hardening` | `samp-security-hardener`, `samp-anticheat-deep` |
+| Performance | `samp-high-performance-tuning` | `samp-streamer-plugin` |
+| Migration | `samp-legacy-openmp-migrator` | `samp-legacy-migrator` |
+| Open.mp Core | `samp-openmp-modern-guide` | `openmp-modern-2026-api`, `samp-vs-openmp-encyclopedia` |
+
+### open.mp v1.6.7.3218 Runtime Reference
+- **Server**: v1.6.7.3218 (Oct 2026)
+- **pawncc**: 3.10.10+ (Community Compiler)
+- **sampctl**: 1.16.0
+- **Streamer**: v2.9.6+ (Incognito) — legacy plugin or native component
+- **MySQL**: R41-4 (BlueG) or native component
+- **YSI**: 5.x (y_commands, y_hooks, y_iterate, y_bit, y_inline, y_timers, y_groups)
+- **ColAndreas**: v1.5.0+ (collision/raycasting)
+- **SA-MP Legacy**: 0.3.7-R2 / 0.3.DL (backward compat)
+
+### Compile Commands
+```bash
+# open.mp target
+pawncc -i. -i/home/aegisx/samp-sdk/omp-stdlib -d3 -o/tmp/test.amx file.pwn
+
+# legacy SA-MP target
+pawncc -i. -i/tmp/sampstdlib -i/home/aegisx/samp-sdk/omp-stdlib -d3 -o/tmp/test.amx file.pwn
+
+# With streamer include
+pawncc -i. -i/home/aegisx/samp-sdk/omp-stdlib -i/home/aegisx/.config/sampctl/packages/github.com/samp-incognito/samp-streamer-plugin/default -d3 -o/tmp/test.amx file.pwn
+```
+
+### TextDraw Design Rules (Modern 2026)
+1. **No boxed text as layout** (`UseBox = 1`) — surfaces are font-4 sprites, text is overlay
+2. **No hand-written TextSize math** — route through `samp_td_kit.inc`
+3. **No unset defaults** — `LetterSize`, `BackgroundColor`, `BoxColor`, `TextSize` always explicit
+4. **No default white on black** — use color palette (charcoal + dodger blue)
+5. **No font 0/1 for UI** — use font 2 (clean) or 3 (bold)
+6. **No outline 1 + shadow 1** — modern = outline 0, shadow 0 or 1
+7. **Use sprites for icons** — `LD_BEAT:chit`, `LD_SPAC:white`, custom TXD
+8. **Glassmorphism** — semi-transparent boxes (alpha < 0xFF)
+9. **Rounded corners** — `LD_BEAT:chit` 4-corner technique
+10. **8 interactive states** — default, hover, focus, active, disabled, loading, error, empty
+
+### Modern TextDraw Color Palette
+```
+Background:  0x1C1C1CFF (charcoal)
+Surface:     0x2D2D2DFF (dark gray)
+Primary:     0x1E90FFFF (dodger blue)
+Success:     0x2ECC71FF (emerald)
+Warning:     0xF39C12FF (orange)
+Error:       0xE74C3CFF (red)
+Text:        0xFFFFFFFF (white) / 0xB0B0B0FF (gray)
+Accent:      0x9B59B6FF (purple)
+Glass:       0x1C1C1C88 (53% opacity)
+```
+
+### Interior IDs Quick Reference
+| ID | Interior | Example |
+|----|----------|---------|
+| 0 | Exterior | Streets |
+| 1 | 24/7 Shop | Convenience store |
+| 2 | Ammu-Nation | Gun shop |
+| 3 | Barber | Hair salon |
+| 5 | Burglary House | Various houses |
+| 6 | LSPD | Police HQ |
+| 7 | Cluckin' Bell | Fast food |
+| 8 | Hospital | Medical |
+| 10 | Gym | Fitness |
+| 12 | Motel Room | Budget inn |
+| 15 | Tattoo Parlor | Tattoos |
+| 16 | Warehouse | Storage |
+
+### PAWN Best Practices (2026)
+1. **Use tags** — `Text:`, `PlayerText:`, `Float:`, `bool:`
+2. **Use YSI** — y_commands, y_hooks, y_iterate, y_timers, y_groups
+3. **Use streamer** — objects, areas, pickups, actors beyond native limits
+4. **Use MySQL prepared statements** — never concatenate SQL
+5. **Use foreach** — instead of for loops over MAX_PLAYERS
+6. **Use stock** — for helper functions (no unused warnings)
+7. **Use const** — for immutable values
+8. **Use enum** — for structured data (not parallel arrays)
+9. **Use timer** — for recurring tasks (not SetTimer with string)
+10. **Use hook** — for callbacks (not direct override)
+11. **Use samp_td_kit.inc** — for all TextDraw creation
+12. **Use ColAndreas** — for collision/raycasting, not manual Z checks
+
+### Naming Convention
+```
+g_ prefix: global variables (gPlayerData)
+s_ prefix: static variables (sTimerCount)
+E_ prefix: enums (E_PLAYER_DATA)
+TD_ prefix: textdraw variables (TD_HealthBar)
+p_ prefix: player-specific (pName, pScore)
+```
+
+### File Structure (SA-MP/open.mp)
+```
+gamemodes/
+  main.pwn          # entry point
+  core/             # core systems (player, vehicle, object)
+  features/         # feature modules (banking, jobs, crime)
+  ui/               # textdraws, dialogs, menus
+  data/             # database, cache, config
+filterscripts/      # hot-reloadable scripts
+include/            # shared includes
+plugins/            # .so/.dll plugins
+scriptfiles/        # runtime data files
+```
 
 ---
 
