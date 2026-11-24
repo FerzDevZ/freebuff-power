@@ -345,6 +345,25 @@ Common base models for retexturing:
 **Restaurant**: Tables + chairs + kitchen + bar + door + windows
 **Garage**: Vehicle spots + tools + lifts + door + lighting
 
+### Interior ID quick reference
+
+`SetPlayerInterior` / `Streamer_UpdateEx` take the GTA SA interior slot, not the
+MLO object id. Wrong slot = correct coordinates, invisible world.
+
+| ID | Interior | ID | Interior |
+|---|---|---|---|
+| 0 | Exterior (streets) | 10 | Gym |
+| 1 | 24/7 / convenience store | 12 | Motel room |
+| 2 | Ammu-Nation | 14 | Stadium |
+| 3 | Barber | 15 | Tattoo parlor |
+| 5 | Burglary house | 16 | Warehouse |
+| 6 | LSPD HQ | 17 | RC battle / arena |
+| 7 | Cluckin' Bell | 18 | Club |
+| 8 | Hospital | 3 (custom shell) | any mapped MLO shell, slot chosen by you |
+
+Custom shells: pick an unused slot per property instance and keep it in the DB
+row, so two players never share a slot with different maps.
+
 ### Common exterior types
 
 **Building facade**: Walls + windows + door + roof + signs + lighting

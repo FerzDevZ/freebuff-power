@@ -136,7 +136,7 @@ client keeps drawing the old width (`TD_BarSet` already does this).
 ## 7. Style rules that keep it from looking 2012
 
 - `SetOutline(0)` + `SetShadow(0)` on flat UI; `SetProportional(1)` on text fonts.
-- Palette in `UI_*`/`TD_C_*` constants only; no raw hex scattered through code.
+- Palette in `UI_*`/`TD_C_*` constants only; no raw hex scattered through code. The canonical 2026 set (surfaces, text tiers, OK/INFO/WARN/DANGER) lives in `samp-textdraw-fivem-modern-design` §2 — do not invent a second palette.
 - RGBA, alpha is the **low** byte (`0xRRGGBBAA`). `TD_WithAlpha()` handles it.
 - Static frames → global `Text:`; only per-player values → `PlayerText:`.
 

@@ -185,9 +185,17 @@ public OnAuthCheck(playerid) {
 | Callbacks (public) | PascalCase | OnPlayerLogin |
 | Stock functions | Namespace_Action | Auth_ShowDialog, Economy_GiveCash |
 | Local variables | camelCase | playerHealth, queryBuffer |
+| Global variables | `g` + PascalCase | gPlayerData, gServerTicks |
+| Static (file-scope) variables | `s` + PascalCase | sTimerCount |
+| Enum **type** | `E_` + UPPER_SNAKE | E_PLAYER_DATA |
 | Enum fields | pPrefix / vPrefix | pCash, vFuel |
+| TextDraw handles | `TD_` (global) / `ptd_` (player) | TD_HealthBar, ptd_Hud[playerid] |
+| Player-scoped variables | `p` + PascalCase | pName, pScore |
 | Constants | UPPER_SNAKE | MAX_FACTIONS, JOB_COOLDOWN |
 | Dialog IDs | DIALOG_CATEGORY_NAME | DIALOG_AUTH_LOGIN |
+
+The prefix must survive the identifier, not replace meaning: `gPlayerData.pCash`
+reads better than `gData.cash` and still tells you the storage class at a glance.
 
 ## Anti-Code-Smell Rules
 - Never magic numbers — `#define` every constant
