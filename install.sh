@@ -12,6 +12,23 @@
 # ==============================================================================
 set -eo pipefail
 
+# Guard: if a previous install left a broken (empty) stealth .so referenced by
+# LD_PRELOAD, drop it so it does not poison every subsequent command.
+if [ -n "${LD_PRELOAD:-}" ]; then
+  case "$LD_PRELOAD" in
+    *libfreebuff-stealth.so*)
+      _broken=0
+      IFS=':' read -ra _parts <<< "$LD_PRELOAD"
+      for _p in "${_parts[@]}"; do
+        if [ -f "$_p" ] && [ ! -s "$_p" ]; then _broken=1; fi
+      done
+      if [ "$_broken" = "1" ]; then
+        unset LD_PRELOAD
+      fi
+      ;;
+  esac
+fi
+
 C_CYAN='\033[0;36m'
 C_GREEN='\033[0;32m'
 C_YELLOW='\033[0;33m'
@@ -24,8 +41,8 @@ C_RESET='\033[0m'
 
 clear 2>/dev/null || true
 echo -e "${C_CYAN}${C_BOLD}========================================================================${C_RESET}"
-echo -e "${C_YELLOW}${C_BOLD}⚡ FREEBUFF-POWER & FREEPI-POWER SUPREME DUAL SUITE (v12.0)${C_RESET}"
-echo -e "${C_DIM}FreePi (freepi.ai) + Multi-Domain Cognitive Swarm (113 Agents & 611 Skills)${C_RESET}"
+echo -e "${C_YELLOW}${C_BOLD}⚡ FREEBUFF-POWER & FREEPI-POWER SUPREME DUAL SUITE (v13.0)${C_RESET}"
+echo -e "${C_DIM}FreePi (freepi.ai) + Multi-Domain Cognitive Swarm (126 Agents & 655 Skills)${C_RESET}"
 echo -e "${C_CYAN}${C_BOLD}========================================================================${C_RESET}\n"
 
 INSTALL_BIN_DIR="$HOME/.local/bin"
@@ -75,8 +92,8 @@ else
   fi
 fi
 
-TOTAL_AGENTS=$(ls -1 "$SOURCE_DIR/superpower/agents" 2>/dev/null | wc -l || echo "94")
-TOTAL_SKILLS=$(ls -1 "$SOURCE_DIR/superpower/skills" 2>/dev/null | wc -l || echo "584")
+TOTAL_AGENTS=$(ls -1 "$SOURCE_DIR/superpower/agents" 2>/dev/null | wc -l || echo "126")
+TOTAL_SKILLS=$(ls -1 "$SOURCE_DIR/superpower/skills" 2>/dev/null | wc -l || echo "655")
 
 # 2. Install All CLI binaries and helpers
 echo -e "${C_BLUE}⚙️  [2/5] Memasang seluruh suite dual CLI binary ke $INSTALL_BIN_DIR...${C_RESET}"
@@ -104,9 +121,18 @@ chmod +x "$INSTALL_BIN_DIR"/freebuff-power \
 chmod -R +x "$INSTALL_BIN_DIR"/shims 2>/dev/null || true
 
 # Compile hardware virtualization stealth hook if gcc is present
+# Remove any broken (empty/corrupt) .so first so LD_PRELOAD does not poison every command
+if [ -f "$INSTALL_BIN_DIR/libfreebuff-stealth.so" ]; then
+  if [ ! -s "$INSTALL_BIN_DIR/libfreebuff-stealth.so" ]; then
+    rm -f "$INSTALL_BIN_DIR/libfreebuff-stealth.so"
+  fi
+fi
 if command -v gcc >/dev/null 2>&1 && [ -f "$SOURCE_DIR/src/stealth/libfreebuff-stealth.c" ]; then
-  gcc -O2 -shared -fPIC -o "$INSTALL_BIN_DIR/libfreebuff-stealth.so" "$SOURCE_DIR/src/stealth/libfreebuff-stealth.c" -ldl 2>/dev/null || true
-  cp -f "$INSTALL_BIN_DIR/libfreebuff-stealth.so" "$SOURCE_DIR/bin/libfreebuff-stealth.so" 2>/dev/null || true
+  if gcc -O2 -shared -fPIC -o "$INSTALL_BIN_DIR/libfreebuff-stealth.so" "$SOURCE_DIR/src/stealth/libfreebuff-stealth.c" -ldl 2>/dev/null; then
+    cp -f "$INSTALL_BIN_DIR/libfreebuff-stealth.so" "$SOURCE_DIR/bin/libfreebuff-stealth.so" 2>/dev/null || true
+  else
+    rm -f "$INSTALL_BIN_DIR/libfreebuff-stealth.so"
+  fi
 fi
 
 # Link universal aliases & shortcuts
