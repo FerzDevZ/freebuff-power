@@ -136,3 +136,24 @@ ApplyDynamicActorAnimation(gTeller, "DEALER", "DEALER_IDLE", 4.1, 1, 0, 0, 0, 0)
 - **Vehicle Props (`AttachDynamicObjectToVehicle`):** Track every attached object ID in a vehicle array and destroy all attachments in `OnVehicleDeath` / `DestroyVehicle`.
 - **Material & Signage:** Always use **ARGB** (`0xAARRGGBB`) in `SetDynamicObjectMaterial` and `SetDynamicObjectMaterialText`, never RGBA!
 - For advanced MLO retexturing, lighting, and in-game furniture editors, pair this skill with **`samp-mapping-dynamic-objects-pro`**.
+
+## Runtime (open.mp)
+
+- **open.mp server**: v1.6.7.3218 (latest stable, Oct 2026)
+- **pawncc**: 3.10.10+ (open.mp compiler, `-Z` for warnings-as-errors)
+- **Streamer Plugin**: v2.9.6+ (Incognito) for dynamic objects/areas/pickups
+- **MySQL Plugin**: R41-4 (BlueG) or `mysql` component (open.mp native)
+- **YSI 5.x**: y_commands, y_hooks, y_iterate, y_bit, y_inline, y_timers, y_groups
+- **ColAndreas**: v1.5.0+ for collision/raycasting
+- **SA-MP Legacy**: 0.3.7-R2 / 0.3.DL (backward compat)
+
+### Compile Check (Gate)
+```bash
+# open.mp
+pawncc -i. -i/home/aegisx/samp-sdk/omp-stdlib -d3 -o/tmp/test.amx file.pwn
+
+# legacy (0.3.7)
+pawncc -i. -i/tmp/sampstdlib -i/home/aegisx/samp-sdk/omp-stdlib -d3 -o/tmp/test.amx file.pwn
+```
+Zero warnings, zero errors required.
+

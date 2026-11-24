@@ -64,3 +64,24 @@ Accessible via **FiveM Radial Menu `[F1]` -> `Emotes`** or quick `/e <name>`:
   - `Handshake`, `Hug`, `Carry / Piggyback` (syncs attached/position offset cleanly), `Take Hostage` (requires melee/pistol + victim `HandsUp` / `LastStand`).
 - **Walkstyles:** Persist preferred gait (`Default`, `Confident`, `Gangster`, `Injured`, `Sneak`, `Woman`).
 - **Mandatory Animation Preload:** Preload common animation libraries (`PED`, `DEALER`, `SWEET`, `ROB_BANK`, `MISC`, `CARRY`, `COP_AMBIENT`) once on first spawn (`ApplyAnimation(playerid, lib, "null", 0.0, 0, 0, 0, 0, 0)`) so emotes NEVER fail on first play!
+
+## Runtime (open.mp)
+
+- **open.mp server**: v1.6.7.3218 (latest stable, Oct 2026)
+- **pawncc**: 3.10.10+ (open.mp compiler, `-Z` for warnings-as-errors)
+- **Streamer Plugin**: v2.9.6+ (Incognito) for dynamic objects/areas/pickups
+- **MySQL Plugin**: R41-4 (BlueG) or `mysql` component (open.mp native)
+- **YSI 5.x**: y_commands, y_hooks, y_iterate, y_bit, y_inline, y_timers, y_groups
+- **ColAndreas**: v1.5.0+ for collision/raycasting
+- **SA-MP Legacy**: 0.3.7-R2 / 0.3.DL (backward compat)
+
+### Compile Check (Gate)
+```bash
+# open.mp
+pawncc -i. -i/home/aegisx/samp-sdk/omp-stdlib -d3 -o/tmp/test.amx file.pwn
+
+# legacy (0.3.7)
+pawncc -i. -i/tmp/sampstdlib -i/home/aegisx/samp-sdk/omp-stdlib -d3 -o/tmp/test.amx file.pwn
+```
+Zero warnings, zero errors required.
+

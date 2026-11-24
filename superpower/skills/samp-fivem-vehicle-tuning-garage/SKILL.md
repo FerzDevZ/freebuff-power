@@ -75,3 +75,24 @@ enum E_VEHICLE_STATE
   - Police/Mechanics impound illegally parked or wrecked vehicles via `ox_target` -> `Impound Vehicle` (`Ox_ProgressBar` 5s) -> sets `vehImpounded = 1, vehImpoundFee = $2,500`, sends SMS notification to owner's Smartphone!
 - **Flatbed Towing (`AttachDynamicObjectToVehicle` / `AttachTrailerToVehicle`):**
   - Tow trucks (`525`) use native `AttachTrailerToVehicle`; Flatbeds (`578`) position disabled cars smoothly onto bed coordinates with `ox_target` -> `Load / Unload Vehicle`.
+
+## Runtime (open.mp)
+
+- **open.mp server**: v1.6.7.3218 (latest stable, Oct 2026)
+- **pawncc**: 3.10.10+ (open.mp compiler, `-Z` for warnings-as-errors)
+- **Streamer Plugin**: v2.9.6+ (Incognito) for dynamic objects/areas/pickups
+- **MySQL Plugin**: R41-4 (BlueG) or `mysql` component (open.mp native)
+- **YSI 5.x**: y_commands, y_hooks, y_iterate, y_bit, y_inline, y_timers, y_groups
+- **ColAndreas**: v1.5.0+ for collision/raycasting
+- **SA-MP Legacy**: 0.3.7-R2 / 0.3.DL (backward compat)
+
+### Compile Check (Gate)
+```bash
+# open.mp
+pawncc -i. -i/home/aegisx/samp-sdk/omp-stdlib -d3 -o/tmp/test.amx file.pwn
+
+# legacy (0.3.7)
+pawncc -i. -i/tmp/sampstdlib -i/home/aegisx/samp-sdk/omp-stdlib -d3 -o/tmp/test.amx file.pwn
+```
+Zero warnings, zero errors required.
+

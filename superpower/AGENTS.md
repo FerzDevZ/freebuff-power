@@ -1,7 +1,7 @@
 # ⚡ Freebuff-Power & FreePi-Power Ultra v12.0 — Autonomous Multi-Domain Cognitive Swarm
 
 > **AUTONOMOUS ACTIVATION DIRECTIVE:**
-> When `AGENTS.md` is loaded (in **FreePi `freepi.ai`**, **Freebuff**, **Claude Code**, **Cursor**, or **Windsurf**), immediately operate as a **Principal Autonomous Engineering Swarm** backed by **120 Specialized Production Agents** (`.agents/agents/`), **621 Curated Modular Skills** (`.agents/skills/<name>/SKILL.md`), and **23 Stack Rules** (`.agents/rules/`).
+> When `AGENTS.md` is loaded (in **FreePi `freepi.ai`**, **Freebuff**, **Claude Code**, **Cursor**, or **Windsurf**), immediately operate as a **Principal Autonomous Engineering Swarm** backed by **126 Specialized Production Agents** (`.agents/agents/`), **630 Curated Modular Skills** (`.agents/skills/<name>/SKILL.md`), and **23 Stack Rules** (`.agents/rules/`).
 > You do NOT wait for micromanagement. Read first, detect the stack, load ONLY the matching skills on demand (JIT), build cleanly, verify with real terminal commands, and ship zero-slop production software.
 
 ---
@@ -59,7 +59,7 @@ graph TD
 
 ---
 
-## 👥 MULTI-DOMAIN AGENT ORCHESTRATION MATRIX (120 Production Agents)
+## 👥 MULTI-DOMAIN AGENT ORCHESTRATION MATRIX (121 Production Agents)
 
 Personas live in `.agents/agents/<name>.md` (and are auto-exposed as `/<name>` slash commands in FreePi `~/.free-pi/agent/prompts/`):
 
@@ -139,6 +139,7 @@ Personas live in `.agents/agents/<name>.md` (and are auto-exposed as `/<name>` s
 | **`@samp-ucp-fullstack-engineer`** | Next.js 15 UCP + Discord Bot + `ucp_delivery_queue` MySQL bridge | Web UCP, whitelist & auto VIP delivery |
 | **`@openmp-plugin-creator`** | C++20 open.mp SDK components, event dispatchers, AMX natives | Native open.mp C++ components |
 | **`@samp-legacy-migrator`** | SA-MP 0.3.7 -> `<open.mp>` migration, error 19, YSI 5 upgrade | Upgrading legacy scripts & removing hacks |
+| **`@samp-syntax-triager`** | `bin/samp-detect.js` classification: LEGACY / MODERN / COMPAT / MIXED / UNKNOWN | Before writing or migrating any Pawn code |
 | **`@samp-textdraw-layout-auditor`** | Diagnoses broken TextDraw layout, fixes engine causes, runs preview + compile gates | "Tulisan/box/bar tidak di tempatnya", UI berantakan |
 | **`@samp-pawn-compile-verifier`** | Dual-target pawncc builds, tag/native/prototype errors, sampctl + CI | Any `.pwn` is called done or fixed |
 | **`@samp-map-pipeline-engineer`** | Texture Studio / MTA / ColAndreas pipeline, streamer deployment, in-game acceptance | Mapping, interiors, MLO, fall-through, artwork |
@@ -149,7 +150,7 @@ Personas live in `.agents/agents/<name>.md` (and are auto-exposed as `/<name>` s
 
 ---
 
-## 🧰 CURATED HIGH-LEVERAGE SKILL DIRECTORY (621 Skills in `.agents/skills/`)
+## 🧰 CURATED HIGH-LEVERAGE SKILL DIRECTORY (630 Skills in `.agents/skills/`)
 
 Load on demand by reading `.agents/skills/<skill-name>/SKILL.md`:
 
@@ -158,7 +159,7 @@ Load on demand by reading `.agents/skills/<skill-name>/SKILL.md`:
 - **Backend, Distributed Systems & Data Engineering:** `distributed-systems-scale-2026`, `data-lakehouse-polars-iceberg`, `bun-runtime-hyper-fast-apis`, `cloudflare-edge-workers-caching`, `duckdb-embedded-olap-sql`, `clickhouse-io`, `postgresql-internals-indexing-master`, `redis-data-structures-streams`, `idempotency-distributed-transactions`, `circuit-breaker-rate-limiter-resilience`, `transactional-outbox-cdc-debezium`, `zero-downtime-migration-expand-contract`, `golang-concurrency-patterns`, `api-designer`.
 - **Cloud, DevOps, SRE, Security & QA:** `devops-sre-kubernetes-iac`, `cybersecurity-appsec-redteam-2026`, `jwt-session-security-passkeys`, `distributed-tracing-opentelemetry`, `secret-management-vault-infisical`, `sast-dast-container-cve-scanner`, `supply-chain-security-sbom`, `e2e-testing`, `playwright-visual-regression-testing`, `k6-spike-soak-breakpoint-testing`, `contract-testing-pact`, `mutation-testing-stryker-mutmut`, `tdd-master`.
 - **Mobile & Low-Level Systems:** `mobile-offline-first-sync-2026`, `systems-rust-tokio-production`, `rust-wasm-systems-engineer`, `cpp-modern-low-latency`, `zig-high-performance-systems`, `ebpf-linux-kernel-observability`, `desktop-app-electron-tauri`, `bottom-sheet-touch-gestures-mobile`.
-- **GTA SA-MP & open.mp FiveM-Style 2026 (48 Skills):** `openmp-modern-2026-api`, `samp-command-processor`, `samp-data-structures-pawn`, `samp-http-json-integration`, `samp-timer-scheduling`, `samp-testing-harness`, `samp-server-security-hardening`, `samp-persistence-schema`, `samp-textdraw-ui-craft`, `samp-textdraw-layout-debugger`, `samp-textdraw-studio-converter`, `samp-textdraw-fivem-modern-design`, `samp-pawn-compile-gate`, `samp-map-pipeline-2026`, `samp-mapping-dynamic-objects-pro`, `samp-fivem-oxlib-target-logic`, `samp-fivem-inventory-metadata`, `samp-fivem-smartphone-mdt`, `samp-fivem-vehicle-tuning-garage`, `samp-fivem-heist-crime-gang`, `samp-fivem-housing-business-crafting`, `samp-fivem-character-cinema-anim`, `samp-ucp-web-panel-bridge`, `samp-textdraw-studio-converter`, `samp-textdraw-fivem-modern-design`, `samp-modern-jobs-2026-logic`, `samp-modern-creator-2026`, `samp-mobile-android-cef-ui`, `samp-vs-openmp-encyclopedia`, `samp-streamer-plugin`, `samp-textdraw-ui-craft`, `samp-mysql-database`, `samp-ysi-framework`.
+- **GTA SA-MP & open.mp FiveM-Style 2026 (53 Skills):** `openmp-modern-2026-api`, `samp-command-processor`, `samp-data-structures-pawn`, `samp-http-json-integration`, `samp-timer-scheduling`, `samp-testing-harness`, `samp-server-security-hardening`, `samp-persistence-schema`, `samp-textdraw-ui-craft`, `samp-textdraw-layout-debugger`, `samp-textdraw-studio-converter`, `samp-textdraw-fivem-modern-design`, `samp-pawn-compile-gate`, `samp-map-pipeline-2026`, `samp-mapping-dynamic-objects-pro`, `samp-fivem-oxlib-target-logic`, `samp-fivem-inventory-metadata`, `samp-fivem-smartphone-mdt`, `samp-fivem-vehicle-tuning-garage`, `samp-fivem-heist-crime-gang`, `samp-fivem-housing-business-crafting`, `samp-fivem-character-cinema-anim`, `samp-ucp-web-panel-bridge`, `samp-textdraw-studio-converter`, `samp-textdraw-fivem-modern-design`, `samp-modern-jobs-2026-logic`, `samp-modern-creator-2026`, `samp-mobile-android-cef-ui`, `samp-vs-openmp-encyclopedia`, `samp-streamer-plugin`, `samp-textdraw-ui-craft`, `samp-mysql-database`, `samp-ysi-framework`.
 
 ---
 
