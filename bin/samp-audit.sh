@@ -141,7 +141,9 @@ done < <(grep -rn -E "SetDynamicObjectMaterial(Text)?\s*\(.*0x[0-9A-Fa-f]{6}FF\b
 
 # 9. Estimator Batas Pool 256 PlayerTextDraw
 echo -e "${C_PURPLE}🔍 [9/10] Menghitung estimasi pool CreatePlayerTextDraw (batas 256/pemain)...${C_RESET}"
-PTD_COUNT=$(grep -rn -E "CreatePlayerTextDraw\s*\(" --include="*.pwn" --include="*.inc" "$TARGET_DIR" 2>/dev/null | wc -l || echo "0")
+# `grep | wc -l` already prints 0 on no-match; the old `|| echo 0` appended a
+# second line under `set -o pipefail`, breaking the integer test below.
+PTD_COUNT=$({ grep -rn -E "CreatePlayerTextDraw\s*\(" --include="*.pwn" --include="*.inc" "$TARGET_DIR" 2>/dev/null || true; } | wc -l)
 if [ "$PTD_COUNT" -gt 200 ]; then
   report_issue "WARNING" "High PlayerTextDraw Count ($PTD_COUNT calls)" "$TARGET_DIR" "1" "CreatePlayerTextDraw total: $PTD_COUNT" \
     "Batas keras engine hanya 256 PlayerTextDraw per pemain! Pindahkan frame statis ke Global TextDraw dan pastikan modal dihancurkan saat ditutup (SafeDestroyPlayerTD)."
@@ -149,7 +151,7 @@ fi
 
 # 10. Pindai CreateObject Statis (Batas 1000 Object)
 echo -e "${C_PURPLE}🔍 [10/10] Memeriksa penggunaan CreateObject statis (limit 1000)...${C_RESET}"
-STATIC_OBJ_COUNT=$(grep -rn -E "\bCreateObject\s*\(" --include="*.pwn" --include="*.inc" "$TARGET_DIR" 2>/dev/null | wc -l || echo "0")
+STATIC_OBJ_COUNT=$({ grep -rn -E "\bCreateObject\s*\(" --include="*.pwn" --include="*.inc" "$TARGET_DIR" 2>/dev/null || true; } | wc -l)
 if [ "$STATIC_OBJ_COUNT" -gt 20 ]; then
   report_issue "WARNING" "Static CreateObject Overflow Risk ($STATIC_OBJ_COUNT calls)" "$TARGET_DIR" "1" "CreateObject total: $STATIC_OBJ_COUNT" \
     "Jalankan 'freepi-power samp map-upgrade <file.pwn> --interior' untuk mengonversi ke CreateDynamicObject ber-priority + Streamer_UpdateEx anti-jatuh!"

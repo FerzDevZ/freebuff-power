@@ -59,7 +59,12 @@ function rgbaHexToCss(tok, fallback = "rgba(248, 250, 252, 1)") {
 }
 
 // 2. Parse CreatePlayerTextDraw and TextDrawCreate
-const elements = new Map();
+/* One entry per create call, in source order. The same variable name is
+ * routinely reused (`pv = CreatePlayerTextDraw(...)` in a mirror block), so
+ * keying by name collapsed N elements into 1; setters now attach to the most
+ * recent create for that name, which matches how the engine binds them. */
+const elements = [];
+const lastByVar = new Map();
 const createRegex = /([A-Za-z0-9_\[\]]+)\s*=\s*(CreatePlayerTextDraw|TextDrawCreate)\s*\(([^;]+)\)\s*;/g;
 while ((m = createRegex.exec(source)) !== null) {
   const varName = m[1].trim();
@@ -70,8 +75,10 @@ while ((m = createRegex.exec(source)) !== null) {
   const x = parseFloatVal(rawArgs[offset], 0);
   const y = parseFloatVal(rawArgs[offset + 1], 0);
   const textRaw = rawArgs.slice(offset + 2).join(",").trim().replace(/^"|"$/g, "");
-  elements.set(varName, {
-    id: varName,
+  const seen = (lastByVar.get(varName)?.seq || 0) + 1;
+  const el = {
+    id: seen > 1 ? `${varName}#${seen}` : varName,
+    seq: seen,
     kind,
     x,
     y,
@@ -91,7 +98,9 @@ while ((m = createRegex.exec(source)) !== null) {
     boxSet: false,
     letterSet: false,
     sizeSet: false
-  });
+  };
+  elements.push(el);
+  lastByVar.set(varName, el);
 }
 
 // 3. Parse property setters
@@ -102,7 +111,7 @@ while ((m = propRegex.exec(source)) !== null) {
   const rawArgs = m[3].split(",").map((s) => s.trim());
   const offset = isPlayer ? 1 : 0;
   const varName = rawArgs[offset];
-  const el = elements.get(varName);
+  const el = lastByVar.get(varName);
   if (!el) continue;
 
   if (prop === "Font") {
@@ -142,7 +151,7 @@ while ((m = propRegex.exec(source)) !== null) {
   }
 }
 
-const list = Array.from(elements.values());
+const list = elements;
 const playerCount = list.filter((e) => e.kind === "player").length;
 const globalCount = list.filter((e) => e.kind === "global").length;
 

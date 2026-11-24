@@ -398,6 +398,34 @@ else
   fail "samp-td-preview.js gagal!"
 fi
 
+# Regresi: preview tadinya mem-key elemen per nama variabel sehingga mirror block
+# yang memakai ulang `pv` hanya tampil 1 elemen; audit pula menambahkan "0" kedua
+# ke hitungan saat grep tidak menemukan match di bawah `set -o pipefail`.
+cat << 'EOF' > "$TMP_DIR/reuse_ui.pwn"
+new PlayerText:pv;
+stock ReuseUI(playerid) {
+    pv = CreatePlayerTextDraw(playerid, 10.0, 10.0, "LD_SPAC:white");
+    pv = CreatePlayerTextDraw(playerid, 20.0, 10.0, "LD_SPAC:white");
+    pv = CreatePlayerTextDraw(playerid, 30.0, 10.0, "Card");
+}
+EOF
+REUSE_OUT=$(node "$SCRIPT_DIR/samp-td-preview.js" "$TMP_DIR/reuse_ui.pwn" "$TMP_DIR/reuse.html" 2>&1 || true)
+if echo "$REUSE_OUT" | grep -q "3 TextDraws"; then
+  pass "samp-td-preview.js menghitung tiap create walau variabel dipakai ulang (3/3)"
+else
+  fail "samp-td-preview.js meng-collapse elemen lagi: $(echo "$REUSE_OUT" | tail -1)"
+fi
+
+mkdir -p "$TMP_DIR/no_matches"
+EMPTY_AUDIT=$("$SCRIPT_DIR/samp-audit.sh" "$TMP_DIR/no_matches" 2>&1 || true)
+if echo "$EMPTY_AUDIT" | grep -q "integer expression expected"; then
+  fail "samp-audit.sh memecah aritmetika saat grep tidak menemukan match"
+elif echo "$EMPTY_AUDIT" | grep -qE "HASIL AUDIT|LUAR BIASA"; then
+  pass "samp-audit.sh selesai bersih pada direktori tanpa match (aritmetika aman)"
+else
+  fail "samp-audit.sh tidak menyelesaikan audit pada direktori tanpa match"
+fi
+
 if node "$SCRIPT_DIR/samp-map-upgrade.js" "$TMP_DIR/sample_ui.pwn" "$TMP_DIR/out_mlo.pwn" --interior >/dev/null && grep -q "MAP_PRIO_STRUCTURE" "$TMP_DIR/out_mlo.pwn" && grep -q "Streamer_UpdateEx" "$TMP_DIR/out_mlo.pwn"; then
   pass "samp-map-upgrade.js berhasil upgrade CreateObject -> MLO Priority + Streamer_UpdateEx"
 else
@@ -495,6 +523,12 @@ fi
    pass "eval keputusan agent: $(grep -m1 'mode=' "$TMP_DIR/evals.log")"
  else
    fail "eval keputusan agent di bawah ambang: $(tail -3 "$TMP_DIR/evals.log" | tr '\n' ' ')"
+ fi
+
+ if node "$SCRIPT_DIR/agents-ref-check.js" "$ROOT_DIR" >"$TMP_DIR/agents-ref.log" 2>"$TMP_DIR/agents-ref.err"; then
+   pass "referensi AGENTS.md valid: $(cat "$TMP_DIR/agents-ref.log" | sed 's/^agents-ref-check: //')"
+ else
+   fail "AGENTS.md menunjuk nama yang tidak ada: $(tr '\n' ' ' < "$TMP_DIR/agents-ref.err")"
  fi
 
  if node "$SCRIPT_DIR/skill-coverage.js" >"$TMP_DIR/coverage.log" 2>&1; then
