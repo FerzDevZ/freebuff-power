@@ -61,7 +61,42 @@ stock Speedo_Update(playerid, Float:speed, Float:fuel) {
 }
 ```
 
+## Design-to-code pipeline (use this for ANY UI request)
+
+When asked to build ANY new TextDraw UI, follow the pipeline in
+`samp-textdraw-fivem-modern-design` §8:
+
+1. **Parse the request** — what UI, who sees it, what data, what interactions, mobile or PC?
+2. **Sketch the layout** (ASCII) — header, body, footer zones
+3. **Choose components** from the blueprint library (A-I) or compose from 5 primitives
+4. **Assign coordinates** using the grid system (640x480, 8-unit padding, 6-unit radius)
+5. **Generate code** using the kit — every element = one kit call, no raw natives
+6. **Verify** — compile both targets, td-preview, pool budget, mobile dead zones, 8 states
+
+### Component system (build ANY UI from 5 primitives)
+| Primitive | Kit function | Use for |
+|-----------|-------------|---------|
+| Rounded card | TD_RoundedCard | Containers, panels, modals |
+| Text label | TD_Text | Titles, values, descriptions |
+| Sprite icon | TD_Sprite | Icons, buttons, badges |
+| Progress bar | TD_Bar | Health, armor, loading, durability |
+| Boxed text | TD_BoxedText | Input fields, highlighted rows |
+
+### Common UI patterns (compose from primitives)
+- **Dialog**: RoundedCard + title + body + 2 buttons
+- **List/menu**: RoundedCard + header + N rows + scroll indicator
+- **Form/input**: RoundedCard + label + input box + submit button
+- **HUD**: Sprites + text at screen edge, minimal footprint
+- **Notification**: Small card + icon + text, auto-dismiss
+- **Tabbed**: Header tabs + swappable content area
+- **Grid**: N×M cells (sprite fill + border + badge)
+- **Settings**: Card + section headers + toggles + sliders
+
 ## Quality Invariants
 - **Always Destroy on Disconnect:** PlayerTextDraws MUST be destroyed in `OnPlayerDisconnect` (`PlayerTextDrawDestroy`) to avoid memory leaks.
 - **ESC Key Handling:** Every interactive TextDraw menu must handle `clickedid == INVALID_TEXT_DRAW` to smoothly restore camera/controls.
 - **Color Contrast:** Ensure textdraw font colors maintain high contrast against their background plates (following WCAG-inspired readability standards).
+- **Pool Budget:** ≤256 PlayerTextDraws per player; check TD_HasBudget before creating.
+- **Mobile Dead Zones:** All tappable targets outside Android dead zones (bottom-left, bottom-right).
+- **Compile Verification:** 0 warnings, 0 errors on both open.mp and legacy targets.
+- **No Raw Natives:** All layout through kit primitives; no hand-written TextDrawTextSize math.

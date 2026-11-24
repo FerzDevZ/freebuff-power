@@ -15,6 +15,14 @@ Use this skill **before** any TextDraw layout work. Pair with
 
 ---
 
+## 0. Runtime (open.mp v1.6.7.3218, Oct 2026)
+
+- **Binary**: `omp-server` (32-bit), config `config.json`
+- **TextDraw editors 2026**: San-Andreas-Online/web-textdraw-editor (web, 449 sprites, layer system), abdulrahman1s/open-mp-ui-editor (web + Rust native component, 640x448), Nexor's TextDraw Editor (in-game), Nickk's TextDraw Editor v5.0 (in-game)
+- **Pool limits**: 2048 global TextDraws, 256 PlayerTextDraws per player
+- **Coordinate space**: 640x480 (16:9 widescreen = 640x448 visible)
+- **Important**: All editors produce raw TextDraw code. Engine TextSize semantics (§1) are NOT applied by any editor. Always re-check with `td-preview`.
+
 ## 1. The four behaviours of `TextDrawTextSize` (the actual root cause)
 
 Verified against open.mp docs and `omp_textdraw.inc`:
@@ -132,7 +140,14 @@ client keeps drawing the old width (`TD_BarSet` already does this).
 - RGBA, alpha is the **low** byte (`0xRRGGBBAA`). `TD_WithAlpha()` handles it.
 - Static frames → global `Text:`; only per-player values → `PlayerText:`.
 
-## 8. Gate (run these, do not eyeball)
+## 8. Compile-verified examples
+
+- `resources/example_radio_ui.pwn` — radio/phone UI (14 PlayerTD, signal bars,
+frequency display, power/refresh/close buttons). Compiles clean on both targets.
+- `resources/fixture_ui.pwn` — basic card + bar + text + close button. The
+  canonical reference for kit usage.
+
+## 9. Gate (run these, do not eyeball)
 
 ```bash
 # 1. geometry + defaults audit of a .pwn (renders HTML + prints Layout gate diagnostics)

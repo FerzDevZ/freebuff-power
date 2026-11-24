@@ -9,6 +9,18 @@ Stop building 2012 servers with flat default GTA textures, spinning yellow picku
 
 ---
 
+## 0. Runtime (open.mp v1.6.7.3218, Oct 2026)
+
+- **Binary**: `omp-server` (32-bit), config `config.json`
+- **NPC**: official NPC component (replaces FCNPC plugin) with vehicle position/rotation natives
+- **Artwork**: `artwork.show_crc_logs` for TXD/DFF CRC logging (disabled by default)
+- **C API**: native C++ SDK for custom components; Pawn natives callable from C++
+- **Build**: Conan 2 support, macOS ARM build support
+- **Launcher**: v1.7.0 with smoother overlay, ENB compat, models cache folder, recently used nicknames
+- **Streamer**: legacy plugin via `legacy_plugins` OR native component port (`OpenSamp/omp-streamer-component`)
+- **Custom models**: `artwork` block in `config.json` (replaces `artconfig.txt`)
+- **Map editors 2026**: SA Map Studio v4.3.0 (all-in-one, AI integration, local test server), Texture Studio Remastered 2.0 (in-game, SQLite persistence), MapTogether (co-op, Claude AI, room generator), SanMap Studio (offline 3D, Three.js)
+
 ## 1. Anti-Fall-Through Floor Preloading (`Streamer_UpdateEx`)
 
 When teleporting a player into a custom mapped MLO interior (or high-altitude custom shell), standard `SetPlayerPos` drops the player into the void before dynamic floor objects stream in.
@@ -232,7 +244,124 @@ hook OnPlayerEditDynamicObject(
 
 ---
 
-## 6. Dynamic Actors Replacing Archaic Spinning Pickups
+## 6. Compile-verified example
+
+`resources/example_retextured_interior.pwn` demonstrates the full modern pattern:
+- Data-table + loop instead of 200-line copy-paste `CreateDynamicObject`
+- `SetDynamicObjectMaterial` retexturing with ARGB color (0xAARRGGBB)
+- `invisible` texture to hide parts of models
+- `grey-X-percent` for alpha/transparency
+- `RemoveBuildingForPlayer` batch in `OnPlayerConnect`
+- `Streamer_UpdateEx` anti-fall-through teleport
+- Priority-tiered streaming (`MAP_PRIO_STRUCTURE = 10`)
+Compiles clean on both open.mp and legacy targets.
+
+## 7. Design-to-code pipeline (general, any interior/exterior)
+
+When asked to build ANY new map (interior or exterior), follow this pipeline.
+Do NOT copy-paste from examples; use the patterns as building blocks.
+
+### Step 1: Parse the request
+- Interior or exterior?
+- What is the space? (shop, house, office, police station, hospital, etc.)
+- Size/scale? (small room, large hall, multi-floor)
+- Style? (modern, rustic, industrial, luxury, etc.)
+- Special features? (doors, windows, lighting, props, vehicles)
+
+### Step 2: Plan the space (ASCII floor plan)
+```
+┌─────────────────────────────────┐
+│  [door]  ─── wall ───  [window] │
+│  │                              │
+│  [desk]   [chair]   [shelf]     │  <- furniture zone
+│  │                              │
+│  ─── wall ───  [door]  ─────── │
+└─────────────────────────────────┘
+```
+- Define zones: entrance, main area, secondary rooms, exits
+- Plan traffic flow: how players move through the space
+- Plan lighting: where lights go, what they illuminate
+- Plan props: what objects fill the space
+
+### Step 3: Choose base models
+Common base models for retexturing:
+- 18765 (wall panel) - retexture for walls, floors, ceilings
+- 18766 (wall panel variant) - different size/shape
+- 18981 (floor tile) - retexture for floors
+- 18762 (corner) - retexture for corners
+- 19379 (window frame) - retexture for windows
+- 19462 (door frame) - retexture for doors
+- 19370 (pillar) - retexture for pillars
+- 19443 (railing) - retexture for railings
+
+### Step 4: Choose materials and textures
+- Walls: `matcolours` grey-X-percent for solid colors, or `airportgnd_sfse` white for clean
+- Floors: `traidman` wood, `airportgnd_sfse` white, or custom
+- Ceilings: `invisible` to hide, or `airportgnd_sfse` white
+- Glass: `grey-80-percent` or `invisible` with alpha
+- Metal: `airportgnd_sfse` white with dark color
+- Wood: `traidman` or `wood` textures
+- Hiding parts: `invisible` texture
+
+### Step 5: Place objects with precise coordinates
+- Use a data table + loop for repeated elements
+- Use precise rotations for diagonal walls (45°, 135°, etc.)
+- Set priority: structures = 10, details = 5, props = 1
+- Use `SetDynamicObjectMaterial` for retexturing
+- Use `RemoveBuildingForPlayer` to clear vanilla
+- Use `Streamer_UpdateEx` for anti-fall-through
+
+### Step 6: Verify
+1. Compile both targets (0 warnings, 0 errors)
+2. Check object count (≤1000 per area)
+3. Check streaming performance (no lag on entry)
+4. Check collision (players can walk, doors open)
+5. Check lighting (no dark spots, no over-bright)
+
+### Interior design principles
+- **Space planning**: Define zones, traffic flow, focal points
+- **Lighting**: Use multiple light sources, avoid dark corners
+- **Props**: Fill space but don't clutter; leave walkways clear
+- **Scale**: Objects should be proportionate to the space
+- **Consistency**: Use the same material palette throughout
+- **Detail**: Add small details (papers, cups, signs) for realism
+
+### Exterior design principles
+- **Terrain**: Use `RemoveBuildingForPlayer` to clear, then add custom terrain
+- **Buildings**: Use base models + retexturing for facades
+- **Landscaping**: Add trees, bushes, fences, roads
+- **Lighting**: Street lights, building lights, signs
+- **Props**: Benches, trash cans, parking meters, etc.
+- **LOD**: Use lower-detail models for distant objects
+
+### Common interior types
+
+**Shop (24/7, clothing, gun, etc.)**: Counter + shelves + products + door + lighting
+**House/apartment**: Living room + kitchen + bedroom + bathroom + door + windows
+**Office**: Desks + chairs + computers + filing cabinets + meeting room + door
+**Police station**: Desks + cells + evidence room + armory + briefing room + door
+**Hospital**: Beds + medical equipment + reception + pharmacy + door + windows
+**Bank**: Counters + vault + ATMs + security + door + windows
+**Restaurant**: Tables + chairs + kitchen + bar + door + windows
+**Garage**: Vehicle spots + tools + lifts + door + lighting
+
+### Common exterior types
+
+**Building facade**: Walls + windows + door + roof + signs + lighting
+**Parking lot**: Asphalt + lines + lights + barriers + vehicles
+**Park**: Grass + trees + benches + paths + lights
+**Street**: Road + sidewalks + buildings + lights + signs + vehicles
+**Compound**: Fence + gate + buildings + parking + security
+
+### Performance optimization
+- **Object count**: ≤500 per streaming area, ≤1000 total
+- **Draw distance**: Set appropriate draw distance per object
+- **LOD**: Use lower-detail models for distant objects
+- **Streaming**: Use priority tiers (structures 10, details 5, props 1)
+- **Collision**: Only add collision where needed
+- **Materials**: Reuse textures, avoid unique materials per object
+
+## 8. Dynamic Actors Replacing Archaic Spinning Pickups
 
 NEVER place floating yellow `1239` info pickups for shops, banks, or job bosses. Spawn living **Dynamic Actors** (`CreateDynamicActor`) with idle animations + `ox_target` / `[E]` interaction:
 ```pawn

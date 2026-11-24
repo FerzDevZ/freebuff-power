@@ -25,18 +25,22 @@ Rule: **do not mix** legacy-plugin streamer and component streamer in the same
 server. Pick one, then keep every `#include <streamer>` native call unchanged —
 the API surface is compatible; only the deployment path differs.
 
-## 2. Tool matrix
+## 2. Tool matrix (updated Nov 2026)
 
 | Task | Tool | Notes |
 |---|---|---|
-| Interior / object placement at scale | **Texture Studio 1.9 (EN) / 2.0 (RU)** | in-game mapper; exports PAWN with materials; 2.0 adds its own workflow, 1.9 is the widely documented one |
+| All-in-one map editor (SP + MP) | **SA Map Studio v4.3.0** (Nov 2026) | builds in real San Andreas world, exports clean Pawn (0 warnings), local test server, AI integration (Claude), room generator, mirror tools, stairs, arrays; reads GTA SA installation, no game files modified |
+| In-game object placement + materials | **Texture Studio Remastered 2.0** (OpenSamp fork) | in-game editor; object placement, material browser, groups/prefabs, vehicle editor, building removal, per-map SQLite persistence; exports CreateDynamicObject code |
+| Co-op mapping + AI | **MapTogether** (Nov 2026) | co-op map with friends, one-button local open.mp test server, Claude AI integration for building, room generator, mirror tools, stairs, arrays, snapping, path placement; imports Pawn/Texture Studio/MTA .map, exports CreateDynamicObject/CreateObject |
 | Texture Studio GUI / QoL | **mtools** (filterscript) | dialog interface on ALT; load **after** `tstudio` in the filterscript list |
-| Re-texture / material text | `SetDynamicObjectMaterial`, `SetDynamicObjectMaterialText` | export from Texture Studio, then refactor into loops |
+| Re-texture / material text | `SetDynamicObjectMaterial`, `SetDynamicObjectMaterialText` | export from Texture Studio/SA Map Studio, then refactor into loops |
 | Full map from an editor | **MTA:SA map editor** → PAWN converter | good for large exteriors; produces `CreateObject`/`createObject` that must become streamer objects |
+| Visual 3D map editor (offline) | **SanMap Studio** | standalone Windows desktop editor, Three.js viewport, DFF/TXD browser, material editing, import/export Pawn, IPL streaming preview, RemoveBuildingForPlayer export |
 | TextDraw layout | **Nexor's TextDraw Editor** or `td-preview` | editor canvas does **not** apply engine TextSize semantics — always re-check with `td-preview` |
 | Collision / line of sight / ground Z | **ColAndreas** | raycast + `CA_FindZ_For2DCoord`; do not hardcode Z from the editor |
 | HUD/UI art | custom TXD via `artconfig.txt` / open.mp `artwork` + CDN | 0.3.DL models only; CRC must match the client download |
 | Texture bugs on stock GTA map | **MapFix** filterscript | fixes broken stock textures |
+| **NEW: open.mp UI editor** | **abdulrahman1s/open-mp-ui-editor** (Oct 2026) | visual browser UI editor + Rust native TextDraw component for open.mp; Pawn callbacks; 449 sprite previews; 640x448 coordinate space; Login/HUD/Inventory/Menu examples; independent per-player UI instances |
 
 ## 3. Workflow (in order, no skipping)
 
