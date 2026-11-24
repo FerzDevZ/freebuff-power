@@ -17,7 +17,10 @@ const skillsDir = fs.existsSync(localSuperpower + "/skills")
   : homeSuperpower + "/skills";
 
 const agents = fs.existsSync(agentsDir) ? fs.readdirSync(agentsDir).filter(f => f.endsWith(".md")) : [];
-const skills = fs.existsSync(skillsDir) ? fs.readdirSync(skillsDir).filter(f => f.endsWith(".md")) : [];
+// Skills are directories holding a SKILL.md, not loose .md files.
+const skills = fs.existsSync(skillsDir)
+  ? fs.readdirSync(skillsDir).filter((d) => fs.existsSync(path.join(skillsDir, d, "SKILL.md")))
+  : [];
 
 console.log("\x1b[36m\x1b[1m========================================================================\x1b[0m");
 console.log("\x1b[33m\x1b[1m🧪 [FREEBUFF-POWER EVAL] Autonomous Swarm Benchmark & Verification (v8.5)\x1b[0m");
