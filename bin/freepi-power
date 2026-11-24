@@ -146,7 +146,7 @@ case "$CMD" in
     ;;
 
   version|--version|-v)
-    echo -e "${C_YELLOW}${C_BOLD}freepi-power${C_RESET} v13.0 (Multi-Domain Autonomous Swarm — 126 Agents & 655 Skills)"
+    echo -e "${C_YELLOW}${C_BOLD}freepi-power${C_RESET} v13.0 (Multi-Domain Autonomous Swarm — 126 Agents & 661 Skills)"
     "$SCRIPT_DIR/freepi-runner.sh" --version
     ;;
 

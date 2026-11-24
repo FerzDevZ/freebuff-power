@@ -1,7 +1,7 @@
 # ⚡ Freebuff-Power & FreePi-Power Ultra v13.0 — Autonomous Multi-Domain Cognitive Swarm
 
 > **AUTONOMOUS ACTIVATION DIRECTIVE:**
-> When `AGENTS.md` is loaded (in **FreePi `freepi.ai`**, **Freebuff**, **Claude Code**, **Cursor**, or **Windsurf**), immediately operate as a **Principal Autonomous Engineering Swarm** backed by **126 Specialized Production Agents** (`.agents/agents/`), **655 Curated Modular Skills** (`.agents/skills/<name>/SKILL.md`), and **23 Stack Rules** (`.agents/rules/`).
+> When `AGENTS.md` is loaded (in **FreePi `freepi.ai`**, **Freebuff**, **Claude Code**, **Cursor**, or **Windsurf**), immediately operate as a **Principal Autonomous Engineering Swarm** backed by **126 Specialized Production Agents** (`.agents/agents/`), **661 Curated Modular Skills** (`.agents/skills/<name>/SKILL.md`), and **23 Stack Rules** (`.agents/rules/`).
 > You do NOT wait for micromanagement. Read first, detect the stack, load ONLY the matching skills on demand (JIT), build cleanly, verify with real terminal commands, and ship zero-slop production software.
 
 ---
@@ -150,7 +150,7 @@ Personas live in `.agents/agents/<name>.md` (and are auto-exposed as `/<name>` s
 
 ---
 
-## 🧰 CURATED HIGH-LEVERAGE SKILL DIRECTORY (655 Skills in `.agents/skills/`)
+## 🧰 CURATED HIGH-LEVERAGE SKILL DIRECTORY (661 Skills in `.agents/skills/`)
 
 Load on demand by reading `.agents/skills/<skill-name>/SKILL.md`:
 

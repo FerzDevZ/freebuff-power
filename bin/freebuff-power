@@ -41,7 +41,7 @@ show_help() {
 
   echo -e "${C_PURPLE}${C_BOLD}🔥 PERINTAH UTAMA & PELUNCURAN KODING:${C_RESET}"
   echo -e "  ${C_GREEN}start / go / full${C_RESET}     ${C_BOLD}[REKOMENDASI] One-Shot Launch:${C_RESET}"
-  echo -e "                        Reset Telemetry (Anti-Ban) + Injeksi 126 Production Agents & 655 Skills"
+  echo -e "                        Reset Telemetry (Anti-Ban) + Injeksi 126 Production Agents & 661 Skills"
   echo -e "                        + Langsung buka sesi interaktif Freebuff siap koding!"
   echo -e "  ${C_GREEN}pi / freepi [args]${C_RESET}    ${C_BOLD}[FREEPI.AI]${C_RESET} Luncurkan FreePi CLI (free ad-supported terminal agent)."
   echo -e "  ${C_GREEN}local [model]${C_RESET}         ${C_BOLD}[ZERO-TOKEN]${C_RESET} Koding offline 100% gratis via Ollama lokal (kebal ban)."
@@ -53,7 +53,7 @@ show_help() {
   echo -e "  ${C_GREEN}run [args]${C_RESET}            Jalankan sesi Freebuff biasa dengan proteksi Anti-Ban aktif."
   echo -e "  ${C_GREEN}run proxy [model]${C_RESET}     ${C_BOLD}[FREE MODELS]${C_RESET} Pilih model FREE Freebuff & buka sesi koding."
   echo -e "  ${C_GREEN}proxy [cmd]${C_RESET}           ${C_BOLD}[PROXY ENGINE]${C_RESET} Kelola Proxy (start/stop/restart/status/models/acc/add)."
-  echo -e "  ${C_GREEN}sync / export${C_RESET}         ${C_BOLD}[IDE MATRIX]${C_RESET} Ekspor 126 Agents & 655 Skills ke Cursor, Windsurf, Claude."
+  echo -e "  ${C_GREEN}sync / export${C_RESET}         ${C_BOLD}[IDE MATRIX]${C_RESET} Ekspor 126 Agents & 661 Skills ke Cursor, Windsurf, Claude."
   echo -e "  ${C_GREEN}pentest [dir]${C_RESET}         ${C_BOLD}[APPSEC AUDIT]${C_RESET} Pindai celah OWASP, kebocoran secret, & CVE dependensi."
   echo -e "  ${C_GREEN}update${C_RESET}                ${C_BOLD}[AUTO UPDATER]${C_RESET} Perbarui library superpower, CLI, dan proxy engine.\n"
 
@@ -100,7 +100,7 @@ show_help() {
   echo -e "  ${C_GREEN}snapshot restore [id]${C_RESET} Pulihkan seluruh file proyek ke checkpoint snapshot pilihan."
   echo -e "  ${C_GREEN}rollback${C_RESET}              Shortcut instan: Pulihkan proyek ke snapshot terakhir (1 detik)."
   echo -e "  ${C_GREEN}export [--cursor|--claude|--windsurf|--all]${C_RESET}"
-  echo -e "                        Ekspor 126 Production Agents & 655 Skills ke semua format AI IDE."
+  echo -e "                        Ekspor 126 Production Agents & 661 Skills ke semua format AI IDE."
   echo -e "  ${C_GREEN}eval${C_RESET}                  Jalankan Autonomous SWE-Bench Swarm Evaluator (Scorecard A+).\n"
 
   echo -e "${C_PURPLE}${C_BOLD}💬 MANAJEMEN SESI & CHAT:${C_RESET}"

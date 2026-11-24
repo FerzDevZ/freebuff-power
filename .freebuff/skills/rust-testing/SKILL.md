@@ -478,24 +478,9 @@ cargo test -- --ignored           # Run ignored tests
 test:
   runs-on: ubuntu-latest
   steps:
-    - uses: actions/checkout@v4
-    - uses: dtolnay/rust-toolchain@stable
-      with:
-        components: clippy, rustfmt
 
-    - name: Check formatting
-      run: cargo fmt --check
+---
 
-    - name: Clippy
-      run: cargo clippy -- -D warnings
+## Detailed Reference
 
-    - name: Run tests
-      run: cargo test
-
-    - uses: taiki-e/install-action@cargo-llvm-cov
-
-    - name: Coverage
-      run: cargo llvm-cov --fail-under-lines 80
-```
-
-**Remember**: Tests are documentation. They show how your code is meant to be used. Write them clearly and keep them up to date.
+For the full detailed guide (code examples, patterns, checklists), see [references/full-guide.md](references/full-guide.md).

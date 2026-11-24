@@ -42,7 +42,7 @@ C_RESET='\033[0m'
 clear 2>/dev/null || true
 echo -e "${C_CYAN}${C_BOLD}========================================================================${C_RESET}"
 echo -e "${C_YELLOW}${C_BOLD}⚡ FREEBUFF-POWER & FREEPI-POWER SUPREME DUAL SUITE (v13.0)${C_RESET}"
-echo -e "${C_DIM}FreePi (freepi.ai) + Multi-Domain Cognitive Swarm (126 Agents & 655 Skills)${C_RESET}"
+echo -e "${C_DIM}FreePi (freepi.ai) + Multi-Domain Cognitive Swarm (126 Agents & 661 Skills)${C_RESET}"
 echo -e "${C_CYAN}${C_BOLD}========================================================================${C_RESET}\n"
 
 INSTALL_BIN_DIR="$HOME/.local/bin"
@@ -93,7 +93,7 @@ else
 fi
 
 TOTAL_AGENTS=$(ls -1 "$SOURCE_DIR/superpower/agents" 2>/dev/null | wc -l || echo "126")
-TOTAL_SKILLS=$(ls -1 "$SOURCE_DIR/superpower/skills" 2>/dev/null | wc -l || echo "655")
+TOTAL_SKILLS=$(ls -1 "$SOURCE_DIR/superpower/skills" 2>/dev/null | wc -l || echo "661")
 
 # 2. Install All CLI binaries and helpers
 echo -e "${C_BLUE}⚙️  [2/5] Memasang seluruh suite dual CLI binary ke $INSTALL_BIN_DIR...${C_RESET}"
