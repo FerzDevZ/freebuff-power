@@ -62,6 +62,21 @@ rm -rf "$TARGET_DIR"
 mkdir -p "$(dirname "$TARGET_DIR")"
 cp -r "$SOURCE_DIR" "$TARGET_DIR"
 
+# YSI's pawn.json pulls code-parse, indirection, md-sort, amx_assembly.
+# Without them the hooks/timers/groups/commands headers fail to compile.
+if [ -f "$TARGET_DIR/pawn.json" ]; then
+  (cd "$TARGET_DIR" && sampctl ensure --no-lock --bare) >/dev/null 2>&1 || true
+fi
+# Flatten dependency folders so YSI's relative tryincludes resolve.
+if [ -d "$TARGET_DIR/dependencies" ]; then
+  for dep in "$TARGET_DIR"/dependencies/*/; do
+    [ -d "$dep" ] || continue
+    name="$(basename "$dep")"
+    mkdir -p "$TARGET_DIR/$name"
+    cp -rn "$dep". "$TARGET_DIR/$name"/ 2>/dev/null || true
+  done
+fi
+
 # Only the delimiter interior is rewritten, so trailing comments and any
 # backslash outside an include path are left exactly as upstream wrote them.
 patched=0
@@ -76,7 +91,7 @@ while IFS= read -r -d '' inc; do
   ' "$inc"
   after="$(md5sum "$inc")"
   [ "$before" = "$after" ] || patched=$((patched + 1))
-done < <(find "$TARGET_DIR" -name '*.inc' -print0)
+done < <(find "$TARGET_DIR" -type f -name '*.inc' -print0)
 
 echo "patched: $patched .inc file(s)"
 
@@ -132,19 +147,37 @@ trap 'rm -rf "$probe_dir"' EXIT
 cat > "$probe_dir/ysi_probe.pwn" <<'PAWN'
 #include <open.mp>
 #include <YSI_Data/y_iterate>
+#include <YSI_Coding/y_hooks>
+#include <YSI_Coding/y_timers>
+#include <YSI_Players/y_groups>
+#include <YSI_Visual/y_commands>
 
 new Iterator:ProbePlayers<MAX_PLAYERS>;
 
-public OnGameModeInit()
+hook OnGameModeInit()
 {
     Iter_Add(ProbePlayers, 0);
-    Iter_Add(ProbePlayers, 1);
-    foreach (new playerid : ProbePlayers)
-    {
-        printf("probe player %d", playerid);
-    }
+    foreach (new playerid : ProbePlayers) printf("probe %d", playerid);
+    new Group:g = Group_Create("probe");
+    #pragma unused g
+    defer ProbeTick(0);
     return 1;
 }
+
+timer ProbeTick[1000](playerid)
+{
+    #pragma unused playerid
+    printf("tick");
+}
+
+YCMD:probe(playerid, params[], help)
+{
+    #pragma unused params, help
+    printf("cmd %d", playerid);
+    return 1;
+}
+
+public OnGameModeInit() { return 1; }
 PAWN
 
 log="$probe_dir/probe.log"
@@ -166,4 +199,4 @@ if [ ! -s "$probe_dir/ysi_probe.amx" ]; then
   exit 1
 fi
 
-echo "verify : y_iterate probe compiled clean ($(wc -c < "$probe_dir/ysi_probe.amx") bytes, 0 warning)"
+echo "verify : YSI probe compiled clean ($(wc -c < "$probe_dir/ysi_probe.amx") bytes, 0 warning) — y_iterate, y_hooks, y_timers, y_groups, y_commands"

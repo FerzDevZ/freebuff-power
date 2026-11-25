@@ -100,6 +100,12 @@ fi
 
 # 6. Pawn fixture compile gate — proves the shipped .inc files still build.
 # Skips loudly (never silently passes) when the toolchain is absent.
+# SKIP AUDIT (every skip is a `pass "SKIP: ..."` with the reason + how to enable):
+#   - pawncc missing / no stdlib           -> fixtures not compiled
+#   - TD/YSI/HUD example missing deps       -> example not compiled
+#   - omp-server missing                   -> runtime suite not run
+#   - legacy stdlib missing                -> legacy matrix not computed
+# No compile result is ever reported as green without an actual .amx artifact.
 echo -e "${C_BOLD}[6/9] Mengompilasi seluruh fixture Pawn (.inc) di dua target...${C_RESET}"
 TMP_DIR="$(mktemp -d)"
 trap 'rm -rf "$TMP_DIR"' EXIT
@@ -127,6 +133,24 @@ if [ -z "$STREAMER_INCLUDE" ]; then
     "$HOME/.config/sampctl/packages/github.com/samp-incognito/samp-streamer-plugin/default" \
     "$HOME/samp-sdk/streamer"; do
     if [ -f "$candidate/streamer.inc" ]; then STREAMER_INCLUDE="$candidate"; break; fi
+  done
+fi
+# YSI include root (patched tree or global sampctl cache). Needed for the
+# YSI example gate; also used by pawn_build when a fixture includes YSI.
+YSI_INCLUDE="${YSI_INCLUDE:-}"
+if [ -z "$YSI_INCLUDE" ]; then
+  for candidate in \
+    "$ROOT_DIR/.sdk/ysi" \
+    "$HOME/.config/sampctl/packages/github.com/pawn-lang/YSI-Includes/default"; do
+    if [ -f "$candidate/YSI_Data/y_iterate.inc" ]; then YSI_INCLUDE="$candidate"; break; fi
+  done
+fi
+AMX_INCLUDE="${AMX_INCLUDE:-}"
+if [ -z "$AMX_INCLUDE" ]; then
+  for candidate in \
+    "$ROOT_DIR/.sdk/amx_assembly" \
+    "$HOME/.config/sampctl/packages/github.com/Zeex/amx_assembly/default"; do
+    if [ -f "$candidate/addressof_light.inc" ]; then AMX_INCLUDE="$candidate"; break; fi
   done
 fi
 
@@ -174,7 +198,9 @@ else
   while IFS= read -r fixture; do
     [ -f "$fixture" ] || continue
     name="$(basename "$fixture" .pwn)"
-    case "$name" in *_omp) continue ;; esac
+    # example_ysi_modules needs YSI includes the loop does not provide; it has
+    # its own explicit dual-target gate above, so skip it here.
+    case "$name" in *_omp|example_ysi_modules) continue ;; esac
 
     omp_src="${fixture%.pwn}_omp.pwn"
     [ -f "$omp_src" ] || omp_src="$fixture"
@@ -251,6 +277,79 @@ else
     pass "SKIP: paket YSI tidak terpasang — patch Linux TIDAK diverifikasi"
   fi
 
+  # YSI example gate — YSI only resolves after ysi-linux-patch.sh, so it is
+  # gated explicitly (skip loudly without the package) instead of being excused.
+  YSI_EXAMPLE="$ROOT_DIR/.agents/skills/samp-ysi-framework/resources/example_ysi_modules.pwn"
+  if [ -f "$YSI_EXAMPLE" ]; then
+    if [ -z "$YSI_INCLUDE" ] || [ -z "$AMX_INCLUDE" ]; then
+      pass "SKIP: contoh YSI tidak dikompilasi — YSI/amx_assembly tidak terpasang"
+    elif [ -z "$OMP_STDLIB" ] || [ -z "$SAMP_STDLIB" ]; then
+      pass "SKIP: contoh YSI tidak dikompilasi — butuh stdlib open.mp dan legacy"
+    else
+      ysi_failed=0
+      for tgt in omp legacy; do
+        if [ "$tgt" = "legacy" ]; then
+          incs="-i$(dirname "$YSI_EXAMPLE") -i$YSI_INCLUDE -i$AMX_INCLUDE -i/tmp/sampstdlib -i$OMP_STDLIB"
+        else
+          incs="-i$(dirname "$YSI_EXAMPLE") -i$YSI_INCLUDE -i$AMX_INCLUDE -i$OMP_STDLIB"
+        fi
+        out="$TMP_DIR/ysi_example.$tgt.amx"; log="$TMP_DIR/ysi_example.$tgt.log"
+        if ! $PAWNCC_BIN "$YSI_EXAMPLE" $incs -d3 '-;+' -o"$out" >"$log" 2>&1; then
+          fail "contoh YSI example_ysi_modules.pwn [$tgt]: $(grep -m1 -iE 'error' "$log" | sed 's/^\.\///')"
+          ysi_failed=1
+        elif [ ! -s "$out" ]; then
+          fail "contoh YSI example_ysi_modules.pwn [$tgt]: .amx tidak dihasilkan"
+          ysi_failed=1
+        else
+          warns="$(grep -v 'ld\.so' "$log" | grep -c 'warning' || true)"
+          warns="${warns:-0}"
+          if [ "$warns" -gt 0 ]; then
+            fail "contoh YSI example_ysi_modules.pwn [$tgt]: $warns warning"
+            ysi_failed=1
+          fi
+        fi
+      done
+      if [ "$ysi_failed" -eq 0 ]; then
+        pass "contoh YSI example_ysi_modules.pwn terkompilasi di open.mp + legacy 0.3.7 (0 warning)"
+      fi
+    fi
+  fi
+
+  # HUD example gate — explicit dual-target (the fixture loop excuses <open.mp>-only files).
+  HUD_EXAMPLE="$ROOT_DIR/.agents/skills/samp-textdraw-ui-craft/resources/example_hud_overlay.pwn"
+  if [ -f "$HUD_EXAMPLE" ]; then
+    if [ -z "$OMP_STDLIB" ] || [ -z "$SAMP_STDLIB" ]; then
+      pass "SKIP: contoh HUD tidak dikompilasi — butuh stdlib open.mp dan legacy"
+    else
+      hud_failed=0
+      for tgt in omp legacy; do
+        if [ "$tgt" = "legacy" ]; then
+          incs="-i$(dirname "$HUD_EXAMPLE") -i/tmp/sampstdlib -i$OMP_STDLIB"
+        else
+          incs="-i$(dirname "$HUD_EXAMPLE") -i$OMP_STDLIB"
+        fi
+        out="$TMP_DIR/hud_example.$tgt.amx"; log="$TMP_DIR/hud_example.$tgt.log"
+        if ! $PAWNCC_BIN "$HUD_EXAMPLE" $incs -d3 -o"$out" >"$log" 2>&1; then
+          fail "contoh HUD example_hud_overlay.pwn [$tgt]: $(grep -m1 -iE 'error' "$log" | sed 's/^\.\///')"
+          hud_failed=1
+        elif [ ! -s "$out" ]; then
+          fail "contoh HUD example_hud_overlay.pwn [$tgt]: .amx tidak dihasilkan"
+          hud_failed=1
+        else
+          warns="$(grep -v 'ld\.so' "$log" | grep -c 'warning' || true)"
+          warns="${warns:-0}"
+          if [ "$warns" -gt 0 ]; then
+            fail "contoh HUD example_hud_overlay.pwn [$tgt]: $warns warning"
+            hud_failed=1
+          fi
+        fi
+      done
+      if [ "$hud_failed" -eq 0 ]; then
+        pass "contoh HUD example_hud_overlay.pwn terkompilasi di open.mp + legacy 0.3.7 (0 warning)"
+      fi
+    fi
+  fi
+
   if [ -z "$PAWN_SUMMARY" ]; then
     fail "Tidak ada fixture Pawn yang ditemukan — gate tidak membuktikan apa pun"
   elif [ "$PAWN_FAILED" -eq 0 ]; then
@@ -261,6 +360,20 @@ else
       pass "Semua fixture Pawn terkompilasi dengan 0 warning di target yang tersedia (${LEGACY_OK} benar-benar legacy)"
     fi
   fi
+fi
+
+# Web tooling gate — the repo ships Node scripts; a syntax error there breaks every lane.
+echo -e "${C_BOLD}[6b/9] Node tooling (node --check bin/*.js)...${C_RESET}"
+NODE_FAILED=0
+for js in "$ROOT_DIR"/bin/*.js; do
+  [ -f "$js" ] || continue
+  if ! node --check "$js" >/dev/null 2>&1; then
+    fail "$(basename "$js"): node --check gagal"
+    NODE_FAILED=1
+  fi
+done
+if [ "$NODE_FAILED" -eq 0 ]; then
+  pass "semua bin/*.js lolos node --check"
 fi
 
 # 7. Runtime suite gate — actually executes the compiled assertion scripts.
