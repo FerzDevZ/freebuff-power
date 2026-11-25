@@ -1,6 +1,6 @@
 # AGENTS.md — Freebuff-Power v13.0 · Multi-domain engineering manual
 
-This repo carries **661 skills** across several domains. The deepest lane is **GTA SA-MP / open.mp 2026** (77 skills, 27 agents, a compile gate, a TextDraw engine reference). The others — web, ML, security, data, mobile, systems — are **first-class lanes**, opened on demand (JIT), never bulk-loaded, and their rules never leak into Pawn or vice versa.
+This repo carries a large skill library (see `.agents/skills/`) across several domains. The deepest lane is **GTA SA-MP / open.mp 2026** (its own compile gate, TextDraw engine reference, and agent roster). The others — web, ML, security, data, mobile, systems — are **first-class lanes**, opened on demand (JIT), never bulk-loaded, and their rules never leak into Pawn or vice versa.
 
 Default stance: **detect the stack from the task and project markers first**, then load only the matching lane. Short by design; this file is read every session. Depth lives in `.agents/skills/<name>/SKILL.md`, `.agents/agents/<name>.md`, `.agents/rules/`.
 
@@ -63,7 +63,7 @@ Switch is one-way per task: load the lane's skills, drop the others. If a task t
 
 **Precedence when skills disagree:** `samp-textdraw-ui-craft` owns engine behaviour (compile-verified) · `samp-textdraw-layout-debugger` owns "what is broken" · `samp-vs-openmp-encyclopedia` owns "does this native exist on my target" · one owner per screen or module.
 
-**Before using a native, know your target.** 485 open.mp-only, 49 legacy-only, 330 changed signature, 96 unverified. Run `bin/samp-detect.js` / `bin/samp-claim-audit.js` instead of assuming.
+**Before using a native, know your target.** Counts drift; see `docs/NATIVE-PARITY.md` for the live matrix (open.mp-only / legacy-only / reshaped / unverified). Run `bin/samp-detect.js` / `bin/samp-claim-audit.js` instead of assuming.
 
 ## 4. Other lanes (explicit switch, not drift)
 

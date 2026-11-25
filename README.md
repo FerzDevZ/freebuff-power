@@ -285,6 +285,62 @@ Seluruh skill tersimpan rapi mengikuti standar resmi **AgentSkills** di `.agents
 
 ---
 
+## 🔍 Native Parity: SA-MP 0.3.7 vs open.mp
+
+Data dihasilkan dari `/tmp/sampstdlib` (legacy) dan `/home/aegisx/samp-sdk/omp-stdlib` (open.mp). Ringkasan lengkap: `docs/NATIVE-PARITY.md`.
+
+| Metrik | Legacy 0.3.7 | open.mp |
+|---|---:|---:|
+| Natives | 512 | 1044 |
+| Shared | 463 | 463 |
+| Only in this target | 49 | 485 |
+| Unverifiable (modul legacy absen) | — | 96 |
+| Shared tapi reshaped | 330 | 330 |
+
+**Implikasi:**
+- **485 native** hanya ada di open.mp (NPC, gang zone, DB R41-4, object material, dll.) — tidak akan compile di 0.3.7.
+- **49 native** legacy dihapus/diganti di open.mp (`GetPlayerPoolSize`, `GetVehiclePoolSize`, `GetActorPoolSize` → deprecated stock shim; `db_*` → `DB_*`).
+- **330 shared** memiliki signature yang tidak interchangeable (cek `docs/NATIVE-PARITY.md`).
+- **96 unverifiable** (args/core/console/file/float/string/time) tidak ada di copy stdlib legacy — bukan berarti tidak ada di 0.3.7.
+
+**Kompatibilitas fixture:** seluruh 11 fixture `resources/*.pwn` di repo ini terbukti compile di **kedua** target (0 error, 0 warning) — jangan simpulkan kompatibilitas dari nama include (`<open.mp>` vs `<a_samp>`); compile artefaknya.
+
+### Mini panduan migrasi native legacy → open.mp
+
+1. **Cek paritas dulu.** Lihat `docs/NATIVE-PARITY.md`:
+   - Jika native ada di kolom *0.3.7 only* → cari pengganti di kolom *open.mp only* (contoh: `GetPlayerPoolSize()` → loop `foreach (new i : Player)` atau `GetPlayers()`; `db_query()` → `DB_ExecuteQuery()`).
+   - Jika native *shared tapi reshaped* → sesuaikan signature (contoh: `db_get_field_int(result, field)` → `DB_GetFieldInt(result, field)`; `AddCharModel(base, new, dff, txd)` tetap nama tapi tipe parameter berubah).
+2. **Branching lintas target** dengan `#if defined _INC_open_mp` (bukan satu heading global):
+   ```pawn
+   #if defined _INC_open_mp
+       DB_ExecuteQuery(db, query)
+   #else
+       db_query(db, query)
+   #endif
+   ```
+3. **Jangan pakai shim deprecated** (`GetPlayerPoolSize` ada stock shim di open.mp → warning 234) — ganti dengan API modern.
+4. **Verifikasi dual-target wajib:** compile artefaknya di kedua target, jangan andalkan nama include. Perintah:
+   ```bash
+   # legacy
+   pawncc file.pwn -i/tmp/sampstdlib -i/home/aegisx/samp-sdk/omp-stdlib -d3 -o/tmp/out.amx
+   # open.mp
+   pawncc file.pwn -i. -i/home/aegisx/samp-sdk/omp-stdlib -d3 -o/tmp/out.amx
+   ```
+5. **YSI:** probe dulu (`./bin/ysi-ensure.sh`), lalu pakai — jangan loop `MAX_PLAYERS`; gunakan `foreach (new i : Player)` atau `SetTimerEx` per-player.
+
+Verifikasi:
+```bash
+# Legacy 0.3.7
+pawncc file.pwn -i/tmp/sampstdlib -i/home/aegisx/samp-sdk/omp-stdlib -d3 -o/tmp/out.amx
+# open.mp
+pawncc file.pwn -i. -i/home/aegisx/samp-sdk/omp-stdlib -d3 -o/tmp/out.amx
+# YSI probe (5 modul) dari .sdk bersih
+./bin/ysi-ensure.sh   # exit 0, 0 warning
+./bin/self-test.sh    # 28/28 GREEN
+```
+
+---
+
 ## 📄 Lisensi
 
 Didistribusikan di bawah lisensi terbuka [MIT License](LICENSE). Bebas digunakan, dimodifikasi, dan didistribusikan untuk proyek komersial maupun personal.

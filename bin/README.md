@@ -16,3 +16,17 @@
 | `agents-ref-check.js` | Validates every `@agent`, skill and `bin/*` reference in `AGENTS.md`. |
 
 All scripts are invoked from the repo root. `sampctl` and `pawncc` are required for the Pawn gates; missing toolchains skip loudly (never silently pass).
+
+## Dual-target example gates (YSI + HUD)
+
+`bin/self-test.sh` (checks 28+) compiles two official examples on **both** targets with 0 warnings and a non-empty `.amx`. They are gated explicitly because the fixture loop excuses `<open.mp>`-only files:
+
+| Example | Path | Legacy incs | open.mp incs | Notes |
+|---|---|---|---|---|
+| YSI modules | `.agents/skills/samp-ysi-framework/resources/example_ysi_modules.pwn` | `-i<dir> -i.sdk/ysi -i<amx_assembly> -i/tmp/sampstdlib -i$OMP_STDLIB -d3 '-;+'` | `-i<dir> -i.sdk/ysi -i<amx_assembly> -i$OMP_STDLIB -d3 '-;+'` | needs YSI + amx_assembly; `'-;+'` avoids warning 237 |
+| HUD overlay | `.agents/skills/samp-textdraw-ui-craft/resources/example_hud_overlay.pwn` | `-i<dir> -i/tmp/sampstdlib -i$OMP_STDLIB -d3` | `-i<dir> -i$OMP_STDLIB -d3` | no YSI dependency |
+
+Skip behaviour (never silent pass):
+- YSI example: skipped with `SKIP:` if YSI/amx_assembly or either stdlib is missing.
+- HUD example: skipped with `SKIP:` if either stdlib is missing.
+- Missing toolchain (`pawncc`/`sampctl`) is reported loudly; the gate never turns a skip into green.

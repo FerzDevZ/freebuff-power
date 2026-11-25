@@ -2961,3 +2961,32 @@ Generated from `/tmp/sampstdlib` and `/home/aegisx/samp-sdk/omp-stdlib`.
 | 0.3.7 | ` UsePlayerPedAnims()` |
 | open.mp | `void: UsePlayerPedAnims()` |
 
+
+## Migrating legacy natives to open.mp — top 10
+
+Branch on `_INC_open_mp` when a native is legacy-only or reshaped; never rely on include names. Compile both targets to confirm.
+
+| # | Legacy (0.3.7) | open.mp equivalent | Notes |
+|---|---|---|---|
+| 1 | `GetPlayerPoolSize()` | `foreach (new i : Player)` / `GetPlayers(players, size)` | legacy shim warns 234 on open.mp; do not use shim |
+| 2 | `GetVehiclePoolSize()` / `GetActorPoolSize()` | `GetVehicles()` / `GetActors()` (or manual index loop) | same warning 234 trap |
+| 3 | `db_query(db, query)` | `DB_ExecuteQuery(db, query)` | return type `DBResult:`; free with `DB_FreeResultSet` |
+| 4 | `db_get_field_int(result, field)` | `DB_GetFieldInt(result, field = 0)` | open.mp uses named params + default |
+| 5 | `db_get_field(result, field, buf, len)` | `DB_GetFieldString(result, field, buf, size)` | renamed + size param |
+| 6 | `db_next_row(result)` | `DB_SelectNextRow(result)` | renamed |
+| 7 | `EditObject(playerid, objectid)` / `EditPlayerObject(...)` | `BeginObjectEditing(playerid, objectid)` / `BeginPlayerObjectEditing(...)` | renamed + bool return |
+| 8 | `CancelEdit(playerid)` | `EndObjectEditing(playerid)` | renamed |
+| 9 | `SelectObject(playerid)` | `BeginObjectSelecting(playerid)` | renamed |
+| 10 | `OnPlayerDeath(playerid, killerid, reason)` third param | branch: `WEAPON:reason` on open.mp, untagged on 0.3.7 | tag differs by target |
+
+Pattern:
+
+```pawn
+#if defined _INC_open_mp
+    DB_ExecuteQuery(db, query);
+#else
+    db_query(db, query);
+#endif
+```
+
+See `bin/samp-detect.js` and `bin/samp-claim-audit.js` for automated checks.
