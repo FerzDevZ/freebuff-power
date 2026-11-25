@@ -1,28 +1,46 @@
-# AGENTS.md — Freebuff-Power v13.0 · SA-MP & open.mp first
+# AGENTS.md — Freebuff-Power v13.0 · Multi-domain engineering manual
 
-This repo is a **GTA SA-MP / open.mp 2026 studio** with 77 SA-MP skills and 27 SA-MP agents, plus 661 skills across web, ML, security and design. Default stance: you are a SA-MP engineer. The other domains are a **secondary lane** you open on demand (JIT) when the task actually is one of them — never bulk-load, never let a web rule leak into Pawn.
+This repo carries **661 skills** across several domains. The deepest lane is **GTA SA-MP / open.mp 2026** (77 skills, 27 agents, a compile gate, a TextDraw engine reference). The others — web, ML, security, data, mobile, systems — are **first-class lanes**, opened on demand (JIT), never bulk-loaded, and their rules never leak into Pawn or vice versa.
 
-Short by design; this is read every session. Depth: `.agents/skills/<name>/SKILL.md`, personas `.agents/agents/<name>.md`, rules `.agents/rules/`.
+Default stance: **detect the stack from the task and project markers first**, then load only the matching lane. Short by design; this file is read every session. Depth lives in `.agents/skills/<name>/SKILL.md`, `.agents/agents/<name>.md`, `.agents/rules/`.
 
-## 1. Non-negotiables for every SA-MP change
+## 1. Non-negotiables (every change, every stack)
 
-1. **Server-side authority** — the client is hostile. Validate jail/event/cooldown/admin on the server for every action.
-2. **Dual target** — compile on open.mp *and* legacy 0.3.7, 0 warnings, `.amx` emitted. A build without the artifact is not green.
-3. **Zero stubs** — no `// TODO`, no `pass`, no `...`. Full implementation or say it is missing.
-4. **Strict tags** — `Text:`, `PlayerText:`, `Float:`, `bool:`. Never compare a `Text:` sentinel against a `PlayerText:`.
-5. **Structure, without a dependency that may not build** — YSI 5 ships backslash includes (`<YSI_Data\y_foreach\...>`) that the Linux `pawncc` cannot resolve. Run `bin/ysi-linux-patch.sh --verify` once: it rewrites the include graph into `.sdk/ysi` and compiles a `y_iterate` probe. Once that passes, use `y_commands`, `y_hooks`, `y_iterate`, `y_timers`, `y_groups` with `-i.sdk/ysi -;+`. If the probe still fails, one `SetTimerEx` per player (or your own player array) — never `for (MAX_PLAYERS)`, never `GetPlayerPoolSize` (open.mp flags it warning 234: *this function is broken*), and never hand-rolled command parsing.
-6. **Streamer for volume** — objects, areas, pickups, actors, 3D labels beyond native limits.
-7. **Prepared SQL only** — `%e` binding or prepared statements. Never concatenate player input.
-8. **Pool budget** — PlayerTD ≤ 200 live, 256 hard cap; global TD ≤ 2048. Destroy on close, death, disconnect.
-9. **Log what matters** — admin actions, economy transactions, security events.
-10. **Measured, not guessed** — a perf claim needs a number; `OnPlayerUpdate` per tick is the usual culprit.
+1. **Server-side authority** — the client is hostile. Validate jail/event/cooldown/admin and every game-state mutation on the server.
+2. **Zero stubs** — no `// TODO`, no `pass`, no `...`. Full implementation or say it is missing.
+3. **Strict typing** — no `any`, no bare `except:`, no force-unwrap `!`, no `.unwrap()` in handlers. Discriminated unions / Pydantic / Zod at every boundary.
+4. **Prepared SQL only** — `%e` binding or prepared statements. Never concatenate user input.
+5. **Measured, not guessed** — a perf claim needs a number; `OnPlayerUpdate` per tick is the usual culprit.
+6. **Log what matters** — admin actions, economy transactions, security events; never secrets or PII.
+7. **No silent failures** — propagate typed errors / RFC 7807; never swallow in empty `catch`.
 
-## 2. SA-MP routing — match the input you actually have
+### Pawn lane (SA-MP / open.mp) only
+8. **Dual target** — compile on open.mp *and* legacy 0.3.7, 0 warnings, `.amx` emitted. A build without the artifact is not green.
+9. **Strict tags** — `Text:`, `PlayerText:`, `Float:`, `bool:`. Never compare a `Text:` sentinel against a `PlayerText:`.
+10. **Streamer for volume** — objects, areas, pickups, actors, 3D labels beyond native limits.
+11. **Pool budget** — PlayerTD ≤ 200 live, 256 hard cap; global TD ≤ 2048. Destroy on close, death, disconnect.
+12. **YSI structure** — YSI 5 ships backslash includes (`<YSI_Data\y_foreach\...>`) that Linux `pawncc` cannot resolve. Run `bin/ysi-ensure.sh` first (sampctl get + patch + probe). Once green, use `y_commands`, `y_hooks`, `y_iterate`, `y_timers`, `y_groups` with `-i.sdk/ysi -;+`. If the probe fails, one `SetTimerEx` per player — never `for (MAX_PLAYERS)`, never `GetPlayerPoolSize` (open.mp flags it warning 234: *this function is broken*), never hand-rolled command parsing.
+
+## 2. Route by stack (detect first, then lane)
+
+| Detected signal | Lead agent | Skills in order | Done means |
+|---|---|---|---|
+| `*.pwn`, `pawn.json`, `config.json` (SA-MP / open.mp) | `@samp-gamemode-architect` | lane below | dual compile + gate green |
+| `package.json` with next/react/vite | `@fullstack-web-2026-architect` | `fullstack-saas-2026-blueprint`, `tailwind-v4-shadcn-system` | `npm run build` green |
+| `pyproject.toml`, `requirements.txt`, notebooks | `@ml-ai-architect` | `deep-learning-pytorch-2026`, `mlops-production-pipelines` | ruff + mypy + pytest green |
+| Auth / payments / pentest scope | `@cybersecurity-redteam-pro` | `cybersecurity-appsec-redteam-2026`, `jwt-session-security-passkeys` | threat model + scan clean |
+| `*.tf`, `Dockerfile`, K8s manifests | `@devops-sre-architect` | `devops-sre-kubernetes-iac` | validate + plan clean |
+| `pubspec.yaml`, `*.swift`, `*.kt` | `@mobile-crossplatform-architect` | `mobile-offline-first-sync-2026` | analyze + tests green |
+| `Cargo.toml`, `go.mod`, `*.rs`/`*.go` | `@systems-rust-cpp-engineer` / `@distributed-systems-architect` | `systems-rust-tokio-production` / `golang-concurrency-patterns` | clippy/vet + tests green |
+
+Switch is one-way per task: load the lane's skills, drop the others. If a task touches two lanes (UCP + shared DB), own the boundary explicitly in the plan.
+
+## 3. SA-MP routing — match the input you actually have
 
 | Input you have | Agent | Skills in order | Done means |
 |---|---|---|---|
 | Only a visual idea (HUD, inventory grid, speedo, radial, toast) | `@samp-textdraw-fivem-master` | `samp-textdraw-fivem-modern-design` → `samp-textdraw-ui-craft` | `td-preview` 0 ERROR/0 WARN + dual compile |
-| Design still undecided (hierarchy, palette, which elements) | `@samp-textdraw-ui-designer` | `samp-textdraw-ui-craft` → `samp-textdraw-fivem-modern-design` | element list (surface/text/hitbox) written before code |
+| Design still undecided | `@samp-textdraw-ui-designer` | `samp-textdraw-ui-craft` → `samp-textdraw-fivem-modern-design` | element list written before code |
 | Figma 1920×1080, FiveM screenshot, TDEditor/iTD/TDW dump | `@samp-textdraw-fivem-master` | `samp-textdraw-studio-converter` → `samp-textdraw-ui-craft` | converted module renders + compiles both targets |
 | UI renders wrong (huge box, misplaced bar, invisible text, dead click) | `@samp-textdraw-layout-auditor` | `samp-textdraw-layout-debugger` → `samp-textdraw-ui-craft` | cause named, one minimal patch, preview clean |
 | `INVALID_PLAYER_TEXT_DRAW`, ~256 hit, UI survives death | `@samp-textdraw-layout-auditor` | `samp-textdraw-ui-craft` → `samp-textdraw-fivem-modern-design` | PlayerTD ≤ 200 with every screen open |
@@ -43,30 +61,29 @@ Short by design; this is read every session. Depth: `.agents/skills/<name>/SKILL
 | Native C++ component / plugin | `@openmp-plugin-creator` | `openmp-cpp-component-sdk` → `openmp-modern-2026-api` | builds, native registered, 0 warnings |
 | Anything, before you call it done | `@samp-pawn-compile-verifier` | `samp-pawn-compile-gate` → `samp-testing-harness` | `bin/self-test.sh` all green |
 
-**Precedence when skills disagree:** `samp-textdraw-ui-craft` owns engine behaviour (it is compile-verified) · `samp-textdraw-layout-debugger` owns "what is broken" · `samp-vs-openmp-encyclopedia` owns "does this native exist on my target" · one owner per screen or module — never build and repair in the same pass, you lose the ability to tell which change fixed it.
+**Precedence when skills disagree:** `samp-textdraw-ui-craft` owns engine behaviour (compile-verified) · `samp-textdraw-layout-debugger` owns "what is broken" · `samp-vs-openmp-encyclopedia` owns "does this native exist on my target" · one owner per screen or module.
 
-**Before using a native, know your target.** The committed parity matrix is not 1:1: 485 open.mp-only, 49 legacy-only, 330 changed signature, 96 unverified. Run `bin/samp-detect.js` / `bin/samp-claim-audit.js` instead of assuming.
+**Before using a native, know your target.** 485 open.mp-only, 49 legacy-only, 330 changed signature, 96 unverified. Run `bin/samp-detect.js` / `bin/samp-claim-audit.js` instead of assuming.
 
-## 3. Secondary lanes (explicit switch, not drift)
+## 4. Other lanes (explicit switch, not drift)
 
 | The task really is | Agent | Skills |
 |---|---|---|
 | Next.js / React / SaaS / UCP frontend | `@fullstack-web-2026-architect` | `fullstack-saas-2026-blueprint`, `tailwind-v4-shadcn-system` |
 | UI quality / anti-ai-slop pass | `@antislop-auditor` | `antislop`, `antislop-ui`, `antislop-code`, `antislop-copywriting` |
-| Legacy debt, scope reduction, "is this worth keeping" | `@code-simplifier` | `ponytail-audit`, `ponytail-debt`, `ponytail-gain`, `ponytail-review` |
+| Legacy debt, scope reduction | `@code-simplifier` | `ponytail-audit`, `ponytail-debt`, `ponytail-gain`, `ponytail-review` |
 | PyTorch / fine-tune / ML serving | `@ml-ai-architect` | `deep-learning-pytorch-2026`, `mlops-production-pipelines` |
 | Pentest / threat model / auth hardening | `@cybersecurity-redteam-pro` | `cybersecurity-appsec-redteam-2026`, `jwt-session-security-passkeys` |
 | E2E / load / contract tests | `@qa-automation-architect` | `e2e-testing`, `k6-spike-soak-breakpoint-testing` |
+| Data / lakehouse / analytics | `@data-engineer-pro` | `data-lakehouse-polars-iceberg`, `clickhouse-io` |
 
-Switch is one-way per task: load the lane's skills, drop the SA-MP ones, do not carry Pawn invariants into JS or Python. If a task touches both (UCP + shared DB), own the boundary explicitly in the plan.
-
-## 4. DUAL-GATE — verification is executable or it did not happen
+## 5. DUAL-GATE — verification is executable or it did not happen
 
 **Gate 1.** Run the command, read the exit code, look at the output.
 
 | Stack | Command |
 |---|---|
-| Pawn (SA-MP / open.mp) | `bin/self-test.sh`, or `pawncc` on both targets with 0 warnings + `.amx`. A warning is a failure — open.mp promotes deprecated natives to warning 234, and a deprecated native is a broken native |
+| Pawn (SA-MP / open.mp) | `bin/self-test.sh`, or `pawncc` on both targets with 0 warnings + `.amx`. A warning is a failure — open.mp promotes deprecated natives to warning 234 |
 | Audit / lint | `bin/samp-audit.sh .` · `node bin/samp-lint.js` |
 | TS / Node | `npx tsc --noEmit` + test runner |
 | Python | `ruff check . && mypy . && pytest -q` |
@@ -75,20 +92,20 @@ Switch is one-way per task: load the lane's skills, drop the SA-MP ones, do not 
 
 **Gate 2. Code and security — banned:** stubs; `any`, bare `except:`, force-unwrap `!`, `.unwrap()` in handlers; empty `catch`; unscoped queries (BOLA/IDOR); string-concatenated SQL; committed secrets; client-trusted game state.
 
-**Gate 2. anti-ai-slop — banned in UI and TextDraw:** violet/indigo gradient heroes and `bg-clip-text`; centered-everything and 3-equal-card rows; `transition-all` and uniform `hover:scale-105` (declare `transform`/`opacity` + `motion-reduce`); emoji as feature icons; boxed text used as layout; default white-on-black with no palette. Required: OKLCH or `UI_*` constants, WCAG 2.2 AA ≥ 4.5:1, all 8 states (default, hover, focus-visible, active, disabled, loading, error, empty).
+**Gate 2. anti-ai-slop — banned in UI and TextDraw:** violet/indigo gradient heroes and `bg-clip-text`; centered-everything and 3-equal-card rows; `transition-all` and uniform `hover:scale-105` (declare `transform`/`opacity` + `motion-reduce`); emoji as feature icons; boxed text used as layout. Required: OKLCH or `UI_*` constants, WCAG 2.2 AA ≥ 4.5:1, all 8 states (default, hover, focus-visible, active, disabled, loading, error, empty).
 
-## 5. Baselines 2026
+## 6. Baselines 2026
 
 | Domain | Baseline |
 |---|---|
 | open.mp | v1.6.7.3218 · pawncc 3.10.10+ · sampctl 1.16.0 |
-| Plugins | Streamer v2.9.6+ · MySQL BlueG R41-4 or native component · ColAndreas v1.5.0+ · YSI 5.x *via `bin/ysi-linux-patch.sh`* |
+| Plugins | Streamer v2.9.6+ · MySQL BlueG R41-4 or native component · ColAndreas v1.5.0+ · YSI 5.x *via `bin/ysi-ensure.sh`* |
 | Legacy | SA-MP 0.3.7-R2 / 0.3.DL for backward compat only |
-| Linux toolchain truth | `pawncc` cannot resolve `\` inside `#include`, so YSI 5 needs `bin/ysi-linux-patch.sh` plus `-i<amx_assembly>` and `-;+` (else warning 237) · `GetPlayerPoolSize` = warning 234 · `OnPlayerDeath` third param is `WEAPON:` on open.mp, untagged on 0.3.7 (branch on `_INC_open_mp`) |
+| Linux toolchain truth | `pawncc` cannot resolve `\` inside `#include`, so YSI 5 needs `bin/ysi-ensure.sh` plus `-i<amx_assembly>` and `-;+` (else warning 237) · `GetPlayerPoolSize` = warning 234 · `OnPlayerDeath` third param is `WEAPON:` on open.mp, untagged on 0.3.7 (branch on `_INC_open_mp`) |
 | Web | Next.js 15/16 App Router · React 19 · Tailwind v4 · strict TS + Zod |
 | Scripting | Python 3.11+ · Node 20+ LTS · Ruff + mypy strict |
 
-## 6. TextDraw engine truth (compile-verified against `omp_textdraw.inc`)
+## 7. TextDraw engine truth (compile-verified against `omp_textdraw.inc`, SA-MP lane)
 
 `TextDrawTextSize` causes the layout bugs people "fix" by nudging coordinates.
 
@@ -116,11 +133,11 @@ Order matters: `Font` → `Alignment` → `TextSize`. A `UseBox` box is inset (�
 
 Rounded corners: `LD_BEAT:chit` 4-corner technique. Surfaces are font-4 sprites, text is overlay. Canonical palette: `samp-textdraw-fivem-modern-design` §2.
 
-## 7. Repo tools
+## 8. Repo tools
 
-`bin/samp-detect.js` target verdict · `bin/samp-audit.sh` anti-pattern v2 · `bin/samp-lint.js` security lint · `bin/samp-td-preview.js` 16:9 HTML render (fails on 0 parsed elements) · `bin/samp-map-upgrade.js` `CreateObject` → dynamic + `Streamer_UpdateEx` · `bin/samp-heal.sh` compile→fix loop · `bin/samp-claim-audit.js` native claim audit · `bin/samp-agent-evals.js` decision evals (toolchain or graded answers) · `bin/self-test.sh` the repo gate.
+`bin/samp-detect.js` target verdict · `bin/samp-audit.sh` anti-pattern v2 · `bin/samp-lint.js` security lint · `bin/samp-td-preview.js` 16:9 HTML render (fails on 0 parsed elements) · `bin/samp-map-upgrade.js` `CreateObject` → dynamic + `Streamer_UpdateEx` · `bin/samp-heal.sh` compile→fix loop · `bin/samp-claim-audit.js` native claim audit · `bin/samp-agent-evals.js` decision evals · `bin/self-test.sh` the repo gate · `bin/ysi-ensure.sh` / `bin/ysi-linux-patch.sh` YSI on Linux.
 
-## 8. Remember (Gate 3)
+## 9. Remember (Gate 3)
 
 Every non-trivial bug or gotcha fixed earns one atomic invariant in `MEMORY.md`:
 
@@ -130,7 +147,7 @@ Every non-trivial bug or gotcha fixed earns one atomic invariant in `MEMORY.md`:
 
 Read `MEMORY.md` at session start. Never fix the same class of bug twice.
 
-## 9. Build
+## 10. Build
 
 ```bash
 pawncc -i. -i$HOME/samp-sdk/omp-stdlib -d3 -o/tmp/out.amx file.pwn                    # open.mp
