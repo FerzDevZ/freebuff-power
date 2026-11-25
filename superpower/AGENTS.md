@@ -136,8 +136,8 @@ Read `MEMORY.md` at session start. Never fix the same class of bug twice.
 pawncc -i. -i$HOME/samp-sdk/omp-stdlib -d3 -o/tmp/out.amx file.pwn                    # open.mp
 pawncc -i. -i/tmp/sampstdlib -i$HOME/samp-sdk/omp-stdlib -d3 -o/tmp/out.amx file.pwn   # legacy
 
-# YSI on Linux — run once before any y_* code; patches .sdk/ysi and proves it
-./bin/ysi-linux-patch.sh --verify                    # 0 warning => YSI is usable here
+# YSI on Linux — install if missing, then patch and prove it
+./bin/ysi-ensure.sh                                  # sampctl get + patch + probe (0 warning)
 pawncc -i.sdk/ysi -i$HOME/.config/sampctl/packages/github.com/Zeex/amx_assembly/default \
   -i$HOME/samp-sdk/omp-stdlib -d3 '-;+' -o/tmp/out.amx file.pwn
 ```
